@@ -75,10 +75,10 @@ $(document).ready(function() {
 			});
 	});
 	
-	$("body").on("keypress",(".quick-comment-input"), function(event) {
-		if (event.keyCode == 13) { 
+	$("body").on("keyup",(".quick-comment-input"), function(event) {
+		/*if (event.keyCode == 13) { 
 			event.preventDefault(); 
-		}
+		}*/
 		 var chars = $(this).val();
 		 var charLength = 160 - chars.length - 1;
 		 if(charLength <= 0) {
@@ -166,8 +166,12 @@ $(document).ready(function() {
 	
 	var link = 0;
 	var charLengthGrumble = 0;
-	$('#quick-compose-textarea').keyup(function() {
-		 var chars = $(this).val();
+	$('#quick-compose-textarea').keypress(function(event) {
+		if (event.keyCode == 13) { 
+			event.preventDefault(); 
+		}
+	}).on("keyup", function() {
+		var chars = $(this).val();
 		 link = findLink(chars);
 		
 		 if(link > 0 && $("#link-present").is(":visible") == false) {
@@ -201,8 +205,12 @@ $(document).ready(function() {
 	});
 	
 	var charLengthThread;
-	$('#quick-description-textarea').keyup(function() {
-		 var chars = $(this).val();
+	$('#quick-description-textarea').keypress(function(event) {
+		if (event.keyCode == 13) { 
+			event.preventDefault(); 
+		}
+	}).on("keyup", function() {
+		var chars = $(this).val();
 		 link = findLink(chars);
 		
 		 if(link > 0 && $("#link-present").is(":visible") == false) {
@@ -230,7 +238,6 @@ $(document).ready(function() {
 	});
 	
 	$("#quick-description-submit").click(function(event) {
-		alert(charLengthThread);
 		if($("#quick-description-threadname").val().length > 40 || charLengthThread < 0 || $("#quick-description-threadname").val().length == 0 || $("#quick-description-textarea").val().length == 0) {
 			event.preventDefault();
 		}

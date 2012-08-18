@@ -1,5 +1,3 @@
-<div id="lightbox-container">
-</div>
 <div id="grumble-status-lightbox">
 <h3 class="quick-compose-header">Compose Grumble</h3>
 <img src="/images/exit.png" width="15" height="15" class="close-quick-submit"/>
