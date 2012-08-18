@@ -5,7 +5,7 @@
 		$username = mysql_real_escape_string($_POST["username"]);
 		
 		//send a request to the database
-		$sql = "SELECT username FROM users_grumble WHERE username = '" . $username . "'";
+		$sql = "SELECT username FROM users_grumble WHERE LOWER(username) = '" . strtolower($username) . "'";
 		$result = mysql_query($sql, $conn) or die("Could not get username: " . mysql_error());
 		
 		if(mysql_num_rows($result) > 0) {
