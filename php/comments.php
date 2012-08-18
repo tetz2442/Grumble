@@ -27,7 +27,7 @@ function retrieveComments($voteid, $amount) {
 		while($row = mysql_fetch_array($result)) {
 			echo '<div class="ind-comment">';
 			echo '<div class="comment-padding">';
-			echo '<a class="comment-username username" href="profile/' . $row["username"] . '">' . $row["username"] . '</a>';
+			echo '<a class="comment-username username" href="/profile/' . $row["username"] . '">' . $row["username"] . '</a>';
 			echo '<p class="comment-text">' . stripslashes($row["comment_text"]) . '</p>';
 			echo '<small class="comment-time">' . $row["comment_date"] . '</small>';
 			echo '</div>';
