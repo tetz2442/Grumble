@@ -1122,11 +1122,11 @@ html { overflow-y: scroll; }
 
 #notification-bar {
 	position:fixed;
-	top:55px;
-	padding:7px;
-	left:0;
-	right:0;
-	margin:0 auto;	
+	z-index:6010;
+	display:none;
+	top:45px;
+	padding:5px;
+	left:50%;
 	background-color:#fff;
 	box-shadow:0 2px 4px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);
@@ -1134,6 +1134,10 @@ html { overflow-y: scroll; }
 	border-radius:3px;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
+	border:1px solid #CCC;
+}
+#notification-bar p{
+	margin:0 !important;
 }
 /********
 *forgetpass

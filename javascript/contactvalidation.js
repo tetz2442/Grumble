@@ -9,26 +9,22 @@ $(document).ready(function() {
 			if(!sending) {
 				if($("#fullname-contact").val() == "" || $("#email-contact").val() == "" || $("#contact-textarea").val() == "") {
 					//field not filled in
-					$("#contact-error").html("Cannot leave a field blank");
-					$("#contact-error").addClass("error");
-					$("#contact-error").removeClass("available");
+					$("#notification-bar p").html("Cannot leave a field blank.").addClass("error").removeClass("available");
+					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 				}
 				else if($("#contact-textarea").val().length > 255) {
-					$("#contact-error").html("Message has to be less than 255 characters");
-					$("#contact-error").addClass("error");
-					$("#contact-error").removeClass("available");
+					$("#notification-bar p").html("Message has to be less than 255 characters.").addClass("error").removeClass("available");
+					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 				}
 				else if(!checkEmail($("#email-contact"))) {
 					//email not valid
-					$("#contact-error").html("Email not valid");
-					$("#contact-error").addClass("error");
-					$("#contact-error").removeClass("available");
+					$("#notification-bar p").html("Email not valid.").addClass("error").removeClass("available");
+					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 				}
 				else {
 					sending = true;
-					$("#contact-error").html("Sending...");
-					$("#contact-error").removeClass("error");
-					$("#contact-error").addClass("available");
+					$("#notification-bar p").html("Sending...").removeClass("error").addClass("available");
+					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(1000).fadeOut("slow");
 					
 					var name = $("#fullname-contact").val();
 					var email = $("#email-contact").val();
@@ -42,9 +38,8 @@ $(document).ready(function() {
 							$("#contact-form").addClass("text-align-center");
 						  }
 						  else {
-							$("#contact-error").html("Message could not send. Please Retry.");
-							$("#contact-error").addClass("error");
-							$("#contact-error").removeClass("available");
+							$("#notification-bar p").html("Message could not send. Please Retry.").addClass("error").removeClass("available");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 						  }
 					});
 				}
@@ -55,20 +50,17 @@ $(document).ready(function() {
 			if(!sending) {
 				if($("#contact-textarea").val() == "") {
 					//field not filled in
-					$("#contact-error").html("Message cannot be blank");
-					$("#contact-error").addClass("error");
-					$("#contact-error").removeClass("available");
+					$("#notification-bar p").html("Cannot leave a field blank.").addClass("error").removeClass("available");
+					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 				}
 				else if($("#contact-textarea").val().length > 255) {
-					$("#contact-error").html("Message has to be less than 255 characters");
-					$("#contact-error").addClass("error");
-					$("#contact-error").removeClass("available");
+					$("#notification-bar p").html("Message has to be less than 255 characters.").addClass("error").removeClass("available");
+					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 				}
 				else {
 					sending = true;
-					$("#contact-error").html("Sending...");
-					$("#contact-error").removeClass("error");
-					$("#contact-error").addClass("available");
+					$("#notification-bar p").html("Sending...").removeClass("error").addClass("available");
+					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(1000).fadeOut("slow");
 					
 					var username = $("#contact-username").val();
 					var message = $("#contact-textarea").val();
@@ -81,9 +73,8 @@ $(document).ready(function() {
 							$("#contact-form").addClass("text-align-center");
 						  }
 						  else {
-							$("#contact-error").html("Message could not send. Please Retry.");
-							$("#contact-error").addClass("error");
-							$("#contact-error").removeClass("available");
+							$("#notification-bar p").html("Message could not send. Please Retry.").addClass("error").removeClass("available");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 						  }
 					});
 				}
