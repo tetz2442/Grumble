@@ -12,7 +12,8 @@
 				if(isset($_POST["grumble"]) && strlen($_POST["grumble"]) > 0 && strlen($_POST["grumble"]) <= 400 && isset($_POST["category"])) {
 					if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token4'] ) 
 						redirect("../");
-					
+					$grumble = str_replace("\r", "", $grumble);
+					$grumble = str_replace("\n", "", $grumble);
 					$grumble = mysql_real_escape_string(strip_tags($_POST["grumble"]));
 					$category = mysql_real_escape_string(strip_tags($_POST["category"]));
 					
@@ -51,7 +52,11 @@
 				isset($_POST["description"]) && strlen($_POST["description"]) > 0 && strlen($_POST["description"]) <= 400) {
 					if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token4'] ) 
 						redirect("../");
-						
+					
+					$description = str_replace("\r", "", $description);
+					$description = str_replace("\n", "", $description);
+					$thread = str_replace("\r", "", $thread);
+					$thread = str_replace("\n", "", $thread);
 					$thread = mysql_real_escape_string(strip_tags($_POST["thread"]));
 					$category = mysql_real_escape_string(strip_tags($_POST["category"]));
 					$description = mysql_real_escape_string(strip_tags($_POST["description"]));
