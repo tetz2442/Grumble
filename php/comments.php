@@ -6,7 +6,7 @@ if(isset($_POST["comment"]) && isset($_POST["type"]) && $_POST["type"] == "load"
 	retrieveComments(mysql_real_escape_string($_POST["comment"]), mysql_real_escape_string($_POST["amount"]));
 }
 else if(isset($_POST["comment"]) && isset($_POST["type"]) && $_POST["type"] == "enter" && isset($_POST["text"]) && strlen($_POST["text"]) > 0 && strlen($_POST["text"]) < 160 && $_SERVER['REQUEST_METHOD'] == "POST") {
-	enterComment(mysql_real_escape_string(strip_tags($_POST["comment"])), mysql_real_escape_string(strip_tags($_POST["text"])));
+	enterComment(mysql_real_escape_string(strip_tags($_POST["comment"])), $_POST["text"]);
 }
 
 function retrieveComments($voteid, $amount) {
@@ -40,6 +40,9 @@ function retrieveComments($voteid, $amount) {
 
 function enterComment($id, $text) {
 	global $conn;
+	$text = str_replace("\r", "", $text);
+	$text = str_replace("\n", "", $text);
+	$text = mysql_real_escape_string(strip_tags($text));
 	$sql = "INSERT INTO comments_grumble (status_id, comment_date, comment_user, comment_text) " . 
 		"VALUES(" . intval($id) . ",'" . date("Y-m-d H:i:s", time()) . "'," . $_SESSION["user_id"] . ",'" . $text . "')";
 	$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());

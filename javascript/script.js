@@ -75,9 +75,12 @@ $(document).ready(function() {
 			});
 	});
 	
-	$("body").on("keydown",(".quick-comment-input"), function() {
+	$("body").on("keypress",(".quick-comment-input"), function(event) {
+		if (event.keyCode == 13) { 
+			event.preventDefault(); 
+		}
 		 var chars = $(this).val();
-		 var charLength = 160 - chars.length;
+		 var charLength = 160 - chars.length - 1;
 		 if(charLength <= 0) {
 			 $(this).parent().find(".comment-character-count").html(charLength);
 			 $(this).parent().find(".comment-character-count").css("color", "red");
