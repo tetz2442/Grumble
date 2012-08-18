@@ -508,14 +508,17 @@ $(document).ready(function() {
 							else 
 								canLoad = true;
 							pageNumber++;
-							
-							$.each($(result).find(".grumble-text"), function() {
-								var newText = linkify($(this).html());
-								$(this).html(newText);
-							});
 		
 							//insert
 							$(result).insertAfter($(".grumble-holder:last"));
+							
+							$.each($(".grumble-text"), function() {
+								if(!$(this).hasClass("linked")) {
+									var newText = linkify($(this).html());
+									$(this).addClass("linked").html(newText);
+								}
+							});
+							
 							shortenLink(".grumble-text a");
 						}
 				});
@@ -682,7 +685,7 @@ $(document).ready(function() {
 	if($(".grumble-text").length > 0) {
 		$.each($(".grumble-text"), function() {
 			var newText = linkify($(this).html());
-			$(this).html(newText);
+			$(this).addClass("linked").html(newText);
 		});
 		
 		shortenLink(".grumble-text a");
