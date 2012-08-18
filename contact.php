@@ -15,9 +15,6 @@ $contactvalidation = true;
 	?>
         <table width="100%">
             <tr>
-                <td colspan="2" id="contact-error"></td>
-            </tr>
-            <tr>
                 <td colspan="2"><textarea id="contact-textarea" class="textArea" title="Message" rows="10" placeholder="Message"></textarea></td>
             </tr>
             <tr>
@@ -69,5 +66,6 @@ $contactvalidation = true;
 </div>
 <?php	
 require_once "php/lightboxthread.php";
+require_once "php/notificationbar.php";
 require_once "php/footer.php"; 
 ?>

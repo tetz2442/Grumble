@@ -80,7 +80,7 @@ $(document).ready(function() {
 			event.preventDefault(); 
 		}*/
 		 var chars = $(this).val();
-		 var charLength = 160 - chars.length - 1;
+		 var charLength = 160 - chars.length;
 		 if(charLength <= 0) {
 			 $(this).parent().find(".comment-character-count").html(charLength);
 			 $(this).parent().find(".comment-character-count").css("color", "red");
@@ -232,14 +232,32 @@ $(document).ready(function() {
 	});
 	
 	$("#quick-compose-submit").click(function(event) {
-		if(charLengthGrumble < 0 || $(this).parent().find("#quick-compose-textarea").val().length == 0) {
+		if(charLengthGrumble < 0) {
 			event.preventDefault();
+			
+			$("#notification-bar p").html("Too many characters to submit.").addClass("error");
+			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+		}
+		else if($(this).parents("#grumble-status-lightbox").find("#quick-compose-textarea").val().length == 0) {
+			event.preventDefault();
+			
+			$("#notification-bar p").html("Grumble cannot be empty.").addClass("error");
+			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
 	});
 	
 	$("#quick-description-submit").click(function(event) {
-		if($("#quick-description-threadname").val().length > 40 || charLengthThread < 0 || $("#quick-description-threadname").val().length == 0 || $("#quick-description-textarea").val().length == 0) {
+		if($("#quick-description-threadname").val().length > 40 || charLengthThread < 0) {
 			event.preventDefault();
+			
+			$("#notification-bar p").html("Too many characters to submit.").addClass("error");
+			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+		}
+		else if($("#quick-description-threadname").val().length == 0 || $("#quick-description-textarea").val().length == 0) {
+			event.preventDefault();
+			
+			$("#notification-bar p").html("Thread name/description cannot be empty.").addClass("error");
+			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
 	});
 	

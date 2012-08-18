@@ -68,6 +68,7 @@ if($exist) {
         if(isset($_SESSION["username"])) {
             //grumbleOfTheDay();
             require_once "php/lightbox.php";
+			require_once "php/notificationbar.php";
         }
         echo " <br/>\n";
         echo "<p class='text-align-center content-padding'><b>There are currently no grumbles to view.</b></p>";	
@@ -83,6 +84,7 @@ if($exist) {
         if(isset($_SESSION["username"])) {
             //grumbleOfTheDay();
             require_once "php/lightbox.php";
+			require_once "php/notificationbar.php";
         }
         while($row = mysql_fetch_array($result)) {
             outputGrumbles($row["status_id"], false, $loggedin);	
