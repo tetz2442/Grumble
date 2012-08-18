@@ -1,0 +1,38 @@
+<!DOCTYPE html>  
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="Shortcut Icon" href="/images/favicon.ico">
+<link type="text/css" href="/css/styles.css" rel="stylesheet">
+<title>Grumble | 404 Error!</title>
+<meta name="robots" content="noindex, nofollow" />
+</head>
+
+<body>
+<div id="user-navigation">
+	<div id="nav-container">
+		<a href="http://grumbleonline.com"><img id="logo" src="/images/logo.png" height="51" width="275" alt="Grumble logo" title="Grumble home" onmouseover="this.src='/images/logo-hover.png'" onmouseout="this.src='/images/logo.png'"></a>
+    </div>
+</div>
+<div id="maincolumn">
+	<div id="grumble-wide-container" class="content-padding">
+    	<div class="text-align-center" id="page-four">
+            <h1>404 Error!</h1>
+            <p>The page you are trying to reach doesn't exist. <br/>Try checking the URL for errors, or let us guide you to our homepage.</p>
+            <a href="http://wiki.zeldalegends.net/index.php?title=Bait" target="_blank"><img src="/images/legend-of-zelda-grumble-guy.png"  height="528" width="768"/></a>
+            <a href="http://grumbleonline.com" class=""><button class="push_button orange">Go Home</button></a>
+        </div>
+    </div>
+</div>
+<div id="footer">
+	<div id="footer-links">
+    	<div id="footer-copyright">© 2012 Grumble</div>
+    	<a class="colored-link-1" href="about">About</a>|
+        <a class="colored-link-1" href="privacy">Privacy</a>|
+        <a class="colored-link-1" href="terms-of-service">Terms</a>|
+        <a class="colored-link-1" href="contact">Contact Us</a>
+    </div>
+</div>
+</div>
+</body>
+</html>
