@@ -336,6 +336,15 @@ $(document).ready(function() {
 							topDone = "true";
 							$(".view-more").slideUp("fast");
 						}
+						
+						$.each($(".thread-description"), function() {
+							if(!$(this).hasClass("linked")) {
+								var newText = linkify($(this).html());
+								$(this).addClass("linked").html(newText);
+							}
+						});
+						
+						shortenLink(".thread-description a");
 					}
 					else if(result != "none" && type =="recent") {
 						$(result).insertAfter($("#tab2 .thread-holder:last"));
@@ -343,6 +352,15 @@ $(document).ready(function() {
 							resultDone = "true";
 							$(".view-more").slideUp("fast");
 						}
+						
+						$.each($(".thread-description"), function() {
+							if(!$(this).hasClass("linked")) {
+								var newText = linkify($(this).html());
+								$(this).addClass("linked").html(newText);
+							}
+						});
+						
+						shortenLink(".thread-description a");
 					}
 					else if(result == "none" && type == "top") {
 						topDone == "true";
@@ -409,6 +427,15 @@ $(document).ready(function() {
 								topDone = "true";
 								$(".view-more").slideUp("fast");
 							}
+							
+							$.each($(".thread-description"), function() {
+								if(!$(this).hasClass("linked")) {
+									var newText = linkify($(this).html());
+									$(this).addClass("linked").html(newText);
+								}
+							});
+							
+							shortenLink(".thread-description a");
 						}
 						else if(result != "none" && type =="recent") {
 							$(result).insertAfter($("#tab2 .thread-holder:last"));
@@ -416,6 +443,15 @@ $(document).ready(function() {
 								resultDone = "true";
 								$(".view-more").slideUp("fast");
 							}
+							
+							$.each($(".thread-description"), function() {
+								if(!$(this).hasClass("linked")) {
+									var newText = linkify($(this).html());
+									$(this).addClass("linked").html(newText);
+								}
+							});
+							
+							shortenLink(".thread-description a");
 						}
 						else if(result == "none" && type == "top") {
 							topDone == "true";
@@ -438,6 +474,15 @@ $(document).ready(function() {
 								topGDone = "true";
 								$(".view-more").slideUp("fast");
 							}
+							
+							$.each($(".grumble-text"), function() {
+								if(!$(this).hasClass("linked")) {
+									var newText = linkify($(this).html());
+									$(this).addClass("linked").html(newText);
+								}
+							});
+							
+							shortenLink(".grumble-text a");
 						}
 						else if(result != "none" && type =="recent-grumble") {
 							$(result).insertAfter($("#tab4 .grumble-holder:last"));
@@ -445,6 +490,15 @@ $(document).ready(function() {
 								resultGDone = "true";
 								$(".view-more").slideUp("fast");
 							}
+							
+							$.each($(".grumble-text"), function() {
+								if(!$(this).hasClass("linked")) {
+									var newText = linkify($(this).html());
+									$(this).addClass("linked").html(newText);
+								}
+							});
+							
+							shortenLink(".grumble-text a");
 						}
 						else if(result == "none" && type == "top-grumble") {
 							topGDone == "true";
@@ -699,7 +753,7 @@ $(document).ready(function() {
 	if($(".thread-description").length > 0) {
 		$.each($(".thread-description"), function() {
 			var newText = linkify($(this).html());
-			$(this).html(newText);
+			$(this).addClass("linked").html(newText);
 		});
 		
 		shortenLink(".thread-description a");
