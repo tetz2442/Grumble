@@ -24,7 +24,7 @@ function outputGrumbles($grumble, $comments = false, $loggedin = false) {
 				echo '<div class="grumble-inner-holder">';
 					echo '<div class="grumble-header">';
 						echo '<a href="/profile/' . $row["username"] . '" rel="' . $row["status_id"] . '" class="username" title="Visit profile"><strong>' . $row["username"] . '</strong></a>';
-						echo '<span class="grumble-time">' . time_ago($row["date_submitted"]) . '</span>';
+						echo '<span class="grumble-time" title="' . $row["date_submitted"] . '">' . time_ago($row["date_submitted"]) . '</span>';
 					echo '</div>';
 					echo '<div class="grumble-text-holder">';
 						echo '<p class="grumble-text">' . stripslashes($row["status_text"]) . '</p>';
@@ -46,7 +46,7 @@ function outputGrumbles($grumble, $comments = false, $loggedin = false) {
 				echo '<p class="votes-up" title="You have already voted up">Vote up<span class="votes-up-number">(' . $row["votes_up_count"] . ')</span></p>';
 			}
 			else if(!isset($_SESSION["user_id"])) {
-				echo '<p class="votes-up" title="You must log in to vote up">Vote up<span class="votes-up-number">(' . $row["votes_up_count"] . ')</span></p>';
+				echo '<p class="votes-up" title="You must log in to vote up">' . $row["votes_up_count"] . ' Vote(s) up</p>';
 			}
 			else {
 				echo '<p class="votes-up" title="Vote this grumble up"><a rel="' . $row["status_id"] . '" href="#">Vote up</a>(<span class="votes-up-number">' . $row["votes_up_count"] . '</span>)</p>';
