@@ -1,0 +1,14 @@
+#Options +FollowSymlinks
+RewriteEngine Off
+RewriteEngine on
+
+RewriteRule ^profile/([a-zA-Z0-9_-]+) profile.php?id=$1
+RewriteRule ^create-account create-account.php
+RewriteRule ^forgot-password forgot-password.php
+RewriteRule ^about about.php
+RewriteRule ^privacy privacy.php
+RewriteRule ^terms-of-service terms-of-service.php
+RewriteRule ^contact contact.php
+RewriteRule ^login login.php
+RewriteRule ^([a-z_-]+)/([a-z0-9_-]+)/([0-9]+) grumbles.php?subcat=$3
+RewriteRule ^category/([a-z_-]+) category.php?cat=$1

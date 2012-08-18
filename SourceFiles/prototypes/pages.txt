@@ -1,0 +1,6 @@
+home
+about (before login)
+category page
+privacy
+terms
+contact us
