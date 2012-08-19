@@ -1,45 +1,33 @@
 <?php 
 require_once "php/conn.php";
 require_once "php/header.php";
-require_once "php/containerStatus.php";
+require_once "php/containerGrumbles.php";
+require_once "php/timeago.php";
 require_once "php/outputgrumbles.php";
 $grumble = true;
 ?>
-<div id="view-comments-header">
-<h1>View All Comments</h1>
-</div>
+<div id="grumbles-left">
 <?php
-if(isset($_GET["c"]) && $_GET["c"] == "comment" && isset($_GET["s"])) {
+if(isset($_GET["user"]) && isset($_GET["s"])) {
 	outputGrumbles(mysql_real_escape_string($_GET["s"]), true, $loggedin);	
 }
-else if(!isset($_GET["c"]) && isset($_GET["s"])) {
-	outputGrumbles(mysql_real_escape_string($_GET["s"]), false, $loggedin);	
-}
 ?>
+</div>
  <script type="text/javascript">
- function getUrlVars()
-{
-    var vars = [], hash;
-    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
-    for(var i = 0; i < hashes.length; i++)
-    {
-        hash = hashes[i].split('=');
-        vars.push(hash[0]);
-        vars[hash[0]] = hash[1];
-    }
-    return vars;
-}
-
+ var loggedin = <?php echo $loggedin; ?>;
+ var statusid = <?php echo strip_tags($_GET["s"]); ?>;
 window.onload = function(){
-var id = getUrlVars()["s"];
-$.post("php/comments.php", {comment:id, type:"load", amount:"all"},
-		function(result) {
-			if(result != "") {
-				$(".comments").html(result);
-				$(".comments").slideDown("fast");
-				$(".comments").find(".ind-comment:last").hide();
-			}
-});
+	if(loggedin) {
+		$(".grumble-holder").find(".gif-loader-comments").show();
+		$.post("/php/comments.php", {comment:statusid, type:"load", amount:"all"},
+				function(result) {
+					$(".grumble-holder").find(".gif-loader-comments").hide();
+					if(result != "") {
+						$(result).insertBefore(".quick-comment");
+						$(".comments").slideDown("fast");
+					}
+		});
+	}
 }
  
 </script>
