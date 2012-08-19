@@ -4,6 +4,9 @@
 	require_once "http.php";
 	require_once "seofriendlyurls.php";
 	require_once "parselinks.php";
+	require_once "timezoneset.php";
+	
+	date_default_timezone_set(getLocalTimezone());
 	
 	if(isset($_REQUEST["action"]) &&
 		isset($_SESSION["username"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
