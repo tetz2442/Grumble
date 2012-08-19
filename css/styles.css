@@ -302,7 +302,6 @@ html { overflow-y: scroll; }
 #dropdown-sub-nav {
 	list-style:none;
 	font-size:1.1em;
-	text-align:center;
 }
 
 #dropdown-sub-nav a {
