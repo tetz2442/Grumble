@@ -77,7 +77,7 @@
                             </td>
                         </tr>
                          <tr>
-                        	<td class="padding-top"><a class="colored-link-1" href="create-account">Create an account</a> | <a class="colored-link-1" href="forgot-password">Forget password?</a></td>
+                        	<td class="padding-top"><a class="colored-link-1" href="/create-account">Create an account</a> | <a class="colored-link-1" href="/forgot-password">Forget password?</a></td>
                         </tr>
                     </table>
             <?php
