@@ -69,11 +69,14 @@
 						redirect("../");
 				
 					// Unset the token, so that it cannot be used again.
-					unset($_SESSION['token']);
+					unset($_SESSION['token2']);
 
 					$firstname = mysql_real_escape_string($_POST["firstname"]);
 					$lastname = mysql_real_escape_string($_POST["lastname"]);
+					
 					$username = mysql_real_escape_string($_POST["username"]);
+					$username = str_replace(" ", "", $username);
+					
 					$pass1 = mysql_real_escape_string($_POST["password"]);
 					$pass2 = mysql_real_escape_string($_POST["password2"]);
 					$email = mysql_real_escape_string($_POST["email"]);
@@ -117,6 +120,9 @@
 				if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token3'] ) {
 						redirect("../");
 				}
+				
+				// Unset the token, so that it cannot be used again.
+				unset($_SESSION['token3']);
 				
 				$email = mysql_real_escape_string($_POST["email"]);
 				
@@ -172,6 +178,9 @@
 				if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token3'] ) 
 						redirect("../");
 				
+				// Unset the token, so that it cannot be used again.
+				unset($_SESSION['token3']);
+					
 				$email = mysql_real_escape_string($_POST["email"]);
 				$password = mysql_real_escape_string($_POST["password"]);
 				

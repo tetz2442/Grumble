@@ -125,31 +125,40 @@ $(document).ready(function() {
 		if(checkLength($('#username'), 3)) {
 			if(checkSC($('#username'))) {
 				chars = $('#username').val();
-				$('#username').parents("tr").find(".gif-loader").show();
-				$.post("/php/checkavail.php", {username:chars},
-					  function(result) {
-						  $('#username').parents("tr").find(".gif-loader").hide();
-						  if(result == 1) {
-							  //success
-							  $("#usernameError").html("Username available");
-							  $("#usernameError").addClass("available");
-							  $("#usernameError").removeClass("error");
-							  username = true;
-						  }
-						  else if(result == 0) {
-							  //not available
-							  $("#usernameError").html("Username not available");
-							  $("#usernameError").removeClass("available");
-							  $("#usernameError").addClass("error");
-							  username = false;
-						  }
-						  else {
-							  $("#usernameError").html("Username not available");
-							  $("#usernameError").removeClass("available");
-							  $("#usernameError").addClass("error");
-							  username = false;
-						  }
-				});
+				if(!chars.match(/\s/g)) {
+					$('#username').parents("tr").find(".gif-loader").show();
+					$.post("/php/checkavail.php", {username:chars},
+						  function(result) {
+							  $('#username').parents("tr").find(".gif-loader").hide();
+							  if(result == 1) {
+								  //success
+								  $("#usernameError").html("Username available");
+								  $("#usernameError").addClass("available");
+								  $("#usernameError").removeClass("error");
+								  username = true;
+							  }
+							  else if(result == 0) {
+								  //not available
+								  $("#usernameError").html("Username not available");
+								  $("#usernameError").removeClass("available");
+								  $("#usernameError").addClass("error");
+								  username = false;
+							  }
+							  else {
+								  $("#usernameError").html("Username not available");
+								  $("#usernameError").removeClass("available");
+								  $("#usernameError").addClass("error");
+								  username = false;
+							  }
+					});
+				}
+				else {
+					usernameVal = 0;
+					$("#usernameError").html("No spaces allowed in username");
+					$("#usernameError").removeClass("available");
+					$("#usernameError").addClass("error");
+					username = false;
+				}
 			}
 			else {
 				usernameVal = 0;

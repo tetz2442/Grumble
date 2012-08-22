@@ -3,6 +3,7 @@
 	if(isset($_POST["username"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		//get the passed parameter
 		$username = mysql_real_escape_string($_POST["username"]);
+		$username = str_replace(" ", "", $username);
 		
 		//send a request to the database
 		$sql = "SELECT username FROM users_grumble WHERE LOWER(username) = '" . strtolower($username) . "'";
