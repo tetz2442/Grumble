@@ -3,10 +3,10 @@
 <div id="footer">
 	<div id="footer-links">
     	<div id="footer-copyright">© 2012 Grumble</div>
-    	<a class="colored-link-1" href="about">About</a>|
-        <a class="colored-link-1" href="privacy">Privacy</a>|
-        <a class="colored-link-1" href="terms-of-service">Terms</a>|
-        <a class="colored-link-1" href="contact">Contact Us</a>
+    	<a class="colored-link-1" href="/about">About</a>|
+        <a class="colored-link-1" href="/privacy">Privacy</a>|
+        <a class="colored-link-1" href="/terms-of-service">Terms</a>|
+        <a class="colored-link-1" href="/contact">Contact Us</a>
     </div>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
 	<script>!window.jQuery && document.write('<script src="/javascript/jquery-1.7.2.min.js"><\/script>')</script>
