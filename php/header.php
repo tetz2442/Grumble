@@ -60,9 +60,9 @@ else {
 <meta name="description" content="<?php
 if(isset($_GET["subcat"])) {
 	if(strlen($row["sub_category_description"]) > 50)
-		echo stripcslashes($row["sub_category_description"]);
+		echo stripslashes($row["sub_category_description"]);
 	else
-		echo stripcslashes($row["sub_category_description"]) . " | Grumble is a place where you can discuss the topics that you feel are important and need attention. It's simple. Grumble for you. Grumble for change.";
+		echo stripslashes($row["sub_category_description"]) . " | Grumble is a place where you can discuss the topics that you feel are important and need attention. It's simple. Grumble for you. Grumble for change.";
 }
 else if(basename($_SERVER['PHP_SELF']) == "create-account.php") {
 	echo "Create Account an account on Grumble to access its many features. Join today and inspire an action for change or simply get something off of your chest. ";
