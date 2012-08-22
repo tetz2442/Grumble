@@ -15,6 +15,10 @@
 				if(isset($_POST["grumble"]) && strlen($_POST["grumble"]) > 0 && strlen($_POST["grumble"]) <= 400 && isset($_POST["category"])) {
 					if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token4'] ) 
 						redirect("../");
+						
+					// Unset the token, so that it cannot be used again.
+					unset($_SESSION['token4']);
+					
 					$grumble = str_replace("\r", "", $grumble);
 					$grumble = str_replace("\n", "", $grumble);
 					$grumble = mysql_real_escape_string(strip_tags($_POST["grumble"]));
@@ -56,6 +60,9 @@
 					if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token4'] ) 
 						redirect("../");
 					
+					// Unset the token, so that it cannot be used again.
+					unset($_SESSION['token4']);
+					
 					$description = str_replace("\r", "", $description);
 					$description = str_replace("\n", "", $description);
 					$thread = str_replace("\r", "", $thread);
@@ -68,8 +75,8 @@
 					$result = mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
 					$row = mysql_fetch_array($result);
 					
-					$bad_words = array('a','and','the','an','it','is','with','can','of','why','not');
-					$seo = generate_seo_link($thread,'-',true,$bad_words);
+					$bad_words = array('a','and','the','an','it','is','with','can','of','not');
+					$seo = generate_seo_link($thread,'-',false);
 					
 					$sql = "INSERT INTO sub_category_grumble " .
 						"(category_id, sub_category_name, sub_category_description, sub_category_created, sub_category_url, user_id) " .

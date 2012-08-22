@@ -96,7 +96,11 @@ if($exist) {
     if(preg_match("/\?create=new/", $_SERVER['REQUEST_URI']) == 1) {
         require_once "php/lightboxsharethread.php"; 
     }
-	require_once "php/min-footer.php"; 
+	
+	if(mysql_num_rows($result) < 10)
+		require_once "php/footer.php"; 
+	else
+		require_once "php/min-footer.php"; 
 }
 //subcat doesnt exist
 else {

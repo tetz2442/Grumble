@@ -23,7 +23,7 @@ window.onload = function(){
 				function(result) {
 					$(".grumble-holder").find(".gif-loader-comments").hide();
 					if(result != "") {
-						$(result).insertBefore(".quick-comment");
+						$(result).insertBefore(".quick-comment-input");
 						$(".comments").slideDown("fast");
 					}
 		});
