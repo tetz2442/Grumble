@@ -1171,6 +1171,8 @@ html { overflow-y: scroll; }
 
 #contact-textarea {
 	width:100%;	
+	max-width:445px;
+	max-height:350px;
 	font-size:1.1em;
 	border-radius:3px;
 	-webkit-border-radius:3px;
