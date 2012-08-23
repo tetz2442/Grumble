@@ -14,13 +14,13 @@
         <label for="description">Thread Description</label> (<span class="help-callout colored-link-1" data-id="2" title="How to write a good thread description."><b>?</b></span>)<br/>
         <textarea id="quick-description-textarea" class="textArea" title="Compose grumble" rows="3" name="description" placeholder="Thread Description..."></textarea>
         <div id="lightbox-submit-padding">
-        <select name="category">
-        	<option>Choose a Category</option>
+        <select name="category" id="thread-dropdown">
+        	<option selected="selected" value="0">Choose a Category</option>
             <?php
-				$sql = "SELECT category_id, category_name FROM categories_grumble";
+				$sql = "SELECT category_id, category_name, category_url FROM categories_grumble";
 				$result = mysql_query($sql, $conn);
 				while($row = mysql_fetch_array($result)) {
-					if(isset($_GET["cat"]) && $row["category_name"] == $_GET["cat"])
+					if(isset($_GET["cat"]) && $row["category_url"] == $_GET["cat"])
 						echo '<option selected="selected" value="' . $row["category_id"] . '">' . $row["category_name"] . '</option>';
 					else 
 						echo '<option value="' . $row["category_id"] . '">' . $row["category_name"] . '</option>';
