@@ -259,6 +259,12 @@ $(document).ready(function() {
 			$("#notification-bar p").html("Thread name/description cannot be empty.").addClass("error");
 			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
+		else if($("#thread-dropdown").val() == 0) {
+			event.preventDefault();
+			
+			$("#notification-bar p").html("A category must be selected.").addClass("error");
+			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+		}
 	});
 	
 	$("#open-quick-compose").mousedown(function() {
