@@ -604,7 +604,7 @@ html { overflow-y: scroll; }
 	width:100%;
 	overflow:auto;
 	margin:3px 5px 0px 0px;
-	background-color:#f7f7f7;
+	background-color:#EDEFF4;
 	border-radius:3px;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
@@ -620,7 +620,7 @@ html { overflow-y: scroll; }
 }
 
 .ind-comment {
-	padding:3px 0px 3px 0px;
+	padding:3px 0px 3px 10px;
 	border-bottom:1px solid #e8e8e8;
 }
 
@@ -631,7 +631,7 @@ html { overflow-y: scroll; }
 }
 
 .comment-padding {
-	padding-left: 10px;	
+	
 }
 
 .quick-comment {
