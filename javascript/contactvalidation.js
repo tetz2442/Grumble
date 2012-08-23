@@ -30,7 +30,7 @@ $(document).ready(function() {
 					var email = $("#email-contact").val();
 					var message = $("#contact-textarea").val();
 					var type = $(".contact-dropdown").val();
-					$.post("/php/contactajax.php", {name:name, email:email, message:message, type:type},
+					$.post("/php/ajaxcontact.php", {name:name, email:email, message:message, type:type},
 					  function(result) {
 						  sending = false;
 						  if(result == 1) {
@@ -65,7 +65,7 @@ $(document).ready(function() {
 					var username = $("#contact-username").val();
 					var message = $("#contact-textarea").val();
 					var type = $(".contact-dropdown").val();
-					$.post("/php/contactajax.php", {username:username, message:message, type:type},
+					$.post("/php/ajaxcontact.php", {username:username, message:message, type:type},
 					  function(result) {
 						  sending = false;
 						  if(result == 1) {

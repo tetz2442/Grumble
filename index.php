@@ -116,7 +116,7 @@ else {
         <div id="gif-loader"><img src="images/ajax-loader2.gif" width="32" height="32"/></div>
         <div id="view-more-holder">
         <?php
-        if($topnumber < 5) 
+        if($topnumber < 10) 
 			echo '<input type="button" class="button view-more" value="View More" style="display:none;"/>';
 		else 
 			echo '<input type="button" class="button view-more" value="View More"/>';
