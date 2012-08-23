@@ -9,9 +9,9 @@
 	$_SESSION['token4'] = $token;
 ?>
     <form action="/php/transact-grumble.php" method="post"><br/>
-    	<label for="thread">Thread Name</label> (<span class="help-callout colored-link-1" data-id="1"><b>?</b></span>)<br/>
+    	<label for="thread">Thread Name</label> (<span class="help-callout colored-link-1" data-id="1" title="How to write a good thread name."><b>?</b></span>)<br/>
         <input type="text" name="thread" id="quick-description-threadname" class="textInput"/><br/>
-        <label for="description">Thread Description</label> (<span class="help-callout colored-link-1" data-id="2"><b>?</b></span>)<br/>
+        <label for="description">Thread Description</label> (<span class="help-callout colored-link-1" data-id="2" title="How to write a good thread description."><b>?</b></span>)<br/>
         <textarea id="quick-description-textarea" class="textArea" title="Compose grumble" rows="3" name="description" placeholder="Thread Description..."></textarea>
         <div id="lightbox-submit-padding">
         <select name="category">
