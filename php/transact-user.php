@@ -8,21 +8,23 @@
 			if(isset($_POST["email"]) && strlen($_POST["email"]) > 0 && isset($_POST["password"]) && strlen($_POST["password"]) > 0 && isset($_POST["referrer"])) {
 				if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token'] ) 
 					redirect("../");
-			
 				// Unset the token, so that it cannot be used again.
 				unset($_SESSION['token']);
+				
+				$email = mysql_real_escape_string(strip_tags($_POST["email"]));
+				$password = mysql_real_escape_string(strip_tags($_POST["password"]));
 					
 				$sql = "SELECT user_id, access_lvl, username, user_password, user_salt " .
 					"FROM users_grumble " .
-					"WHERE user_email='" . mysql_real_escape_string(strip_tags($_POST["email"])) . "' ";
+					"WHERE user_email='" . $email . "' LIMIT 0,1";
 				$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
 				$row = mysql_fetch_array($result);
-				$hashed_pass = crypt(mysql_real_escape_string(strip_tags($_POST["password"])), $row['user_salt']) . $row["user_salt"];
+				$hashed_pass = crypt($password, $row['user_salt']) . $row["user_salt"];
 				
 				$refer = strip_tags($_POST["referrer"]);
 				//email was entered wrong
-				if(mysql_num_rows($result) < 1) {
-					redirect("../login?login=failed&email=" . strip_tags($_POST["email"]));
+				if(mysql_num_rows($result) == 0) {
+					redirect("../login?login=failed&email=" . $email);
 				}
 				else if($hashed_pass == $row["user_password"]) {
 					session_start();
@@ -30,8 +32,30 @@
 					$_SESSION["access_lvl"] = $row["access_lvl"];
 					$_SESSION["username"] = $row["username"];	
 					if(isset($_POST["remember-box"])) {
-						//CHANGE THIS WHEN TRANSFERING TO GRUMBLEONLINE.COM
-						//setcookie("user", $row["username"], time()+7*24*60*60, '/', 'test.grumbleonline.com');
+						$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+						$Chars_Len = 63;
+						$Salt_Length = 25;
+						
+						$salt = "";
+	
+						for($i=0; $i<$Salt_Length; $i++)
+						{
+							$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+						}
+					
+						$cookie_text = crypt($salt);
+						$sql = "SELECT user_id FROM cookies_grumble WHERE user_id=" . $_SESSION["user_id"] . " LIMIT 0,1";
+						$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+						if(mysql_num_rows($result) == 0) {
+							$sql = "INSERT INTO cookies_grumble(cookie_text, cookie_expire, user_id) VALUES('" . $cookie_text . "','" . date("Y-m-d H:i:s", time()+7*24*60*60) . "'," . $_SESSION["user_id"] . ")";
+							mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+						}
+						else {
+							$sql = "UPDATE cookies_grumble SET cookie_text='" . $cookie_text . "', cookie_expire = '" . date("Y-m-d H:i:s", time()+7*24*60*60) . "' WHERE user_id = " . $_SESSION["user_id"];
+							mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+						}
+						
+						setcookie("user_grumble", $cookie_text, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
 					}
 					if(strpos($refer, "login.php") || strpos($refer, "index.php"))
 						redirect("../");
@@ -39,7 +63,7 @@
 						redirect($refer);
 				}
 				else if($hashed_pass != $row["user_password"]) {
-					redirect("../login?login=failed&email=" . strip_tags($_POST["email"]));	
+					redirect("../login?login=failed&email=" . $email);	
 				}
 				else {
 					redirect($refer . "?login=1");	
@@ -51,9 +75,9 @@
 		break;
 		
 		case "Logout" :
+			setcookie("user_grumble","", time()-7*24*60*60, "/", $_SERVER['HTTP_HOST']);
 			session_unset();
 			session_destroy();
-			//setcookie("user","", time()-15);
 			redirect("../");
 			break;
 			

@@ -1196,6 +1196,9 @@ terms of service / privacy
 #terms-privacy-holder p {
 	margin:5px 0 15px 15px;
 }
+#terms-privacy-holder ul {
+	margin:5px 0 15px 30px;
+}
 
 /********
 no script
