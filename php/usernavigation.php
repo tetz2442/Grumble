@@ -72,7 +72,7 @@
                         <tr>
                         	<td class="padding-top">
                             	<input type="hidden" name="token" value="<?php echo $token; ?>" />
-                               <?php // <input type="checkbox" name="remember-box" id="remember-checkbox"/><label for="remember-checkbox" class="colored-link-1">Remember me</label>?>
+                                <input type="checkbox" name="remember-box" id="remember-checkbox"/><label for="remember-checkbox" class="colored-link-1">Remember me</label>
                                 <input type="submit" name="action" class="submit-login button" value="Sign In"/>
                             </td>
                         </tr>

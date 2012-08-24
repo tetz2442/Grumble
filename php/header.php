@@ -1,17 +1,20 @@
 <?php 
 session_start(); 
 //if cookie is set, set session variables
-/*if(isset($_COOKIE["user"]) && !isset($_SESSION["user_id"])) {
+if(isset($_COOKIE["user_grumble"]) && !isset($_SESSION["user_id"])) {
 	require_once "conn.php";
-	$sql = "SELECT user_id, access_lvl, username " .
-			"FROM users_grumble " .
-			"WHERE username='" . $_COOKIE["user"] . "' ";
+	$sql = "SELECT cg.cookie_id, ug.user_id, ug.access_lvl, ug.username " .
+			"FROM cookies_grumble AS cg " .
+			"LEFT OUTER JOIN users_grumble AS ug ON cg.user_id = ug.user_id " .
+			"WHERE cg.cookie_text='" . $_COOKIE["user_grumble"] . "' AND cg.cookie_expire >= '" . date("Y-m-d H:i:s", time()) . "' LIMIT 0,1";
 	$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
-	$row = mysql_fetch_array($result);
-	$_SESSION["user_id"] = $row["user_id"];
-	$_SESSION["access_lvl"] = $row["access_lvl"];
-	$_SESSION["username"] = $row["username"];	
-}*/
+	if(mysql_num_rows($result) != 0) {
+		$row = mysql_fetch_array($result);
+		$_SESSION["user_id"] = $row["user_id"];
+		$_SESSION["access_lvl"] = $row["access_lvl"];
+		$_SESSION["username"] = $row["username"];
+	}	
+}
 ?>
 <!DOCTYPE html>  
 <html>
