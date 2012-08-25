@@ -31,7 +31,7 @@ else {
     	<h2 class="user-name" rel="<?php echo $row["user_id"]; ?>"><?php echo $row["username"] . "'s Grumbles"; ?></h2>
         <p class="user-bio"></p>
         <?php if($userprofile) {?>
-        <button class="button large"/>Settings</button>
+        <button class="button large" disabled="disabled"/>Settings</button>
         <?php }?>
     </div>
     <ul class="tabs-profile">
@@ -97,6 +97,8 @@ else {
 }
 if($userprofile) {
 	require_once "php/settings.php"; 
+	require_once "php/notificationbar.php";
+	$settings = true;
 }
 require_once "php/footer.php"; 
 ?>

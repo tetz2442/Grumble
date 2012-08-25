@@ -520,11 +520,20 @@ $(document).ready(function() {
 		}
 		else if($(this).text() == "Settings") {
 			$("#settings-holder").stop().animate({"top":"48px"}, "normal");
+			$("#settings-background").stop().fadeIn("normal");
+			
+			$("#settings-background").click(function() {
+				$("#settings-holder").stop().animate({"top":"-500px"}, "normal");
+				$("#settings-background").stop().fadeOut("normal");
+			});
 		}
 		else if($(this).text() == "Close") {
 			$("#settings-holder").stop().animate({"top":"-500px"}, "normal");
+			$("#settings-background").stop().fadeOut("normal");
 		}
 	});
+	
+	$("button").removeAttr("disabled");
 	
 	$("#start-new-thread").mousedown(function() {
 		$("#lightbox-container").fadeIn(100);

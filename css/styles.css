@@ -998,6 +998,17 @@ html { overflow-y: scroll; }
 /********
 *settings
 *******/
+#settings-background {
+	position:fixed;
+	top:0;
+	left:0;
+	right:0;
+	bottom:0;
+	z-index:1998;
+	background-color:#000;
+	opacity:.5;
+	display:none;
+}
 #settings-holder {
 	position:fixed;
 	top:-500px;
@@ -1022,13 +1033,31 @@ html { overflow-y: scroll; }
 	width:100%;
 	border-bottom:1px solid #e8e8e8;
 }
+#settings-holder h4 {
+	margin-bottom:10px;
+}
+#settings-holder input  {
+	margin-bottom:5px;
+	margin-top:3px;
+}
+#settings-holder input[type=text] {
+	display:block;
+	width:90%;
+}
 #username-change {
 	float:left;	
 	width:50%;
 }
 #password-change {
 	float:left;	
-	width:50%;
+	width:45%;
+	margin-left:5%;
+}
+#password-change label{
+	display:block;
+}
+#pass-current {
+	margin-bottom:15px !important;	
 }
 #email-change {
 	margin-top:15px;
@@ -1040,8 +1069,14 @@ html { overflow-y: scroll; }
 }
 #button-controls button {
 	float:right;
+	margin-right:10px;
 }
-#button-controls div{
+#button-controls img {
+	float:right;
+	margin:5px 10px 0 0;
+	display:none;
+}
+#button-controls div {
 	margin:5px 0 15px;
 }
 
@@ -1391,6 +1426,9 @@ button css
     box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 4px 0px rgba(0,0,0,.2);
     -webkit-user-select: none;
     -moz-user-select: none;
+}
+button[disabled] {
+	opacity:.5;
 }
 .button::-moz-focus-inner {
     margin: 0;

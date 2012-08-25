@@ -10,6 +10,9 @@ if($validation == true) {
 if($contactvalidation == true) {
  echo '<script type="text/javascript" src="/javascript/contactvalidation.js"></script>';	
 }
+if($settings == true) {
+ echo '<script type="text/javascript" src="/javascript/settingsvalidation.js"></script>';	
+}
 ?>
 <div id="fb-root"></div>
 </body>
