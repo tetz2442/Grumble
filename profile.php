@@ -20,11 +20,19 @@ if(mysql_num_rows($result) == 0) {
 <?php		
 }
 else {
+if($row["username"] == $_SESSION["username"])
+	$userprofile = true;
+else {
+	$userprofile = false;
+}
 ?>
 <div id="user-info-holder">
     <div class="profile-user-info">
     	<h2 class="user-name" rel="<?php echo $row["user_id"]; ?>"><?php echo $row["username"] . "'s Grumbles"; ?></h2>
         <p class="user-bio"></p>
+        <?php if($userprofile) {?>
+        <button class="button large"/>Settings</button>
+        <?php }?>
     </div>
     <ul class="tabs-profile">
         <li><a href='#tab1' class="active">Grumbles</a></li>
@@ -86,6 +94,9 @@ else {
     </div>
 </div>
 <?php 
+}
+if($userprofile) {
+	require_once "php/settings.php"; 
 }
 require_once "php/footer.php"; 
 ?>
