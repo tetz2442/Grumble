@@ -518,6 +518,12 @@ $(document).ready(function() {
 				}
 			}
 		}
+		else if($(this).text() == "Settings") {
+			$("#settings-holder").stop().animate({"top":"48px"}, "normal");
+		}
+		else if($(this).text() == "Close") {
+			$("#settings-holder").stop().animate({"top":"-500px"}, "normal");
+		}
 	});
 	
 	$("#start-new-thread").mousedown(function() {
@@ -736,7 +742,7 @@ $(document).ready(function() {
 	});
 	
 	/*
-	Tese next three ifs linkify text blocks
+	These next three ifs linkify text blocks
 	*/
 	if($(".grumble-text").length > 0) {
 		$.each($(".grumble-text"), function() {
