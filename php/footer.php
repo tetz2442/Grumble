@@ -12,11 +12,14 @@
 	<script>!window.jQuery && document.write('<script src="/javascript/jquery-1.7.2.min.js"><\/script>')</script>
     <script type="text/javascript" src="/javascript/script.js"></script>
     <?php
-    if($validation == true) {
+    if($validation) {
      echo '<script type="text/javascript" src="/javascript/formValidation.js"></script>';	
     }
-    if($contactvalidation == true) {
+    if($contactvalidation) {
      echo '<script type="text/javascript" src="/javascript/contactvalidation.js"></script>';	
+    }
+	if($settings) {
+     echo '<script type="text/javascript" src="/javascript/settingsvalidation.js"></script>';	
     }
     ?>
 </div>
