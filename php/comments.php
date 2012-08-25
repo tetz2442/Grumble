@@ -23,7 +23,7 @@ function retrieveComments($voteid, $amount) {
 			" WHERE status_id = " . intval($voteid) . " ORDER BY cg.comment_id";
 	}
 	$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
-	if(mysql_num_rows($result) > 0) {
+	if(mysql_num_rows($result) != 0) {
 		while($row = mysql_fetch_array($result)) {
 			echo '<div class="ind-comment">';
 			echo '<div class="comment-padding">';

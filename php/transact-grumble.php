@@ -40,10 +40,10 @@
 					mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 					$last_id_vote = mysql_insert_id();
 					
-					$sql = "UPDATE status_grumble SET " .
+					/*$sql = "UPDATE status_grumble SET " .
 						"votes_up_id=" . $last_id_vote . 
 						" WHERE status_id = " . $last_id_status;
-					mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
+					mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());*/
 					
 					redirect("../grumbles.php?subcat=" . $category);
 				}

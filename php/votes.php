@@ -1,16 +1,12 @@
 <?php
 require_once "conn.php";
-
-if(isset($_POST["vote_up"])) {
+session_start();
+if(isset($_POST["vote_up"]) && $_SERVER['REQUEST_METHOD'] == "POST" && isset($_SESSION["user_id"])) {
 	catchUpVote(mysql_real_escape_string(strip_tags($_POST["vote_up"])));
-}
-else {
-	echo 0;	
 }
 
 function catchUpVote($voteid) {
 	global $conn;
-	session_start();
 	if(isset($_SESSION["user_id"])) {
 		$sql = "UPDATE votes_up_grumble SET " . 
 			"votes_up_count = votes_up_count + 1" . 

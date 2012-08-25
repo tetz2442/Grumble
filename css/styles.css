@@ -447,7 +447,9 @@ html { overflow-y: scroll; }
 	width:500px;
 	padding:0px 20px 10px 15px;
 }
-
+#category-header h4 {
+	margin-top:3px;
+}
 #share-category {
 	float:left;
 	width:300px;
@@ -639,11 +641,11 @@ html { overflow-y: scroll; }
 }
 
 .quick-comment-input {
-	width:88%;
-	max-width:88%;
+	width:86%;
+	max-width:86%;
 	max-height:100px;
 	float:left;
-	margin-bottom:4px;
+	margin:3px 0 4px 10px;
 	border-radius:3px;
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
@@ -1090,7 +1092,7 @@ html { overflow-y: scroll; }
 	border-radius:5px;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
-	margin-bottom:10px;
+	margin:3px 0 10px;
 }
 
 #quick-description-textarea {
@@ -1099,6 +1101,7 @@ html { overflow-y: scroll; }
 	border-radius:5px;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
+	margin-top:3px;
 }
 
 #quick-description-submit {
@@ -1371,3 +1374,7 @@ a.button { outline: 0 }
 }
 .button.orange { background-color: #FF5C00; }
 .button.orange:hover, .button.orange:active { background-color: #FF782F; }​
+
+.fb_like {
+	margin-top:-9px;	
+}
