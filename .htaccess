@@ -2,7 +2,7 @@
 RewriteEngine Off
 RewriteEngine on
 
-RewriteRule ^profile/([a-zA-Z0-9_-]+)/grumble/([0-9]+) statusview.php?s=$2&user=&1
+RewriteRule ^profile/([a-zA-Z0-9_-]+)/grumble/([0-9]+) statusview.php?s=$2&user=$1
 RewriteRule ^profile/([a-zA-Z0-9_-]+) profile.php?id=$1
 RewriteRule ^create-account create-account.php
 RewriteRule ^forgot-password forgot-password.php

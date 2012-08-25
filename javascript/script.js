@@ -167,7 +167,7 @@ $(document).ready(function() {
 	var link = 0;
 	var charLengthGrumble = 0;
 	$('#quick-compose-textarea').keypress(function(event) {
-		if (event.keyCode == 13) { 
+		if (event.keyCode == 13 && $("#quick-compose-textarea").is(":focus")) { 
 			event.preventDefault(); 
 		}
 	}).on("keyup", function() {
@@ -561,12 +561,8 @@ $(document).ready(function() {
 							canLoad = false;
 						}
 						else if(result != "") {
-							if($(result).find(".grumble-holder").length < 10) {
-								loadMore = false;
-								canLoad= false;
-							}
-							else 
-								canLoad = true;
+							canLoad = true;
+							loadMore = true;
 							pageNumber++;
 		
 							//insert
