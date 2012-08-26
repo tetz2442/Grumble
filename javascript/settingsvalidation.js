@@ -106,25 +106,52 @@ $(document).ready(function() {
 						function(result) {
 						if(result == 1) {
 							$("#notification-bar p").html("Success. Redirecting to homepage...").removeClass("error").addClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(1000, function() {
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(2000, function() {
 								location = "http://" + window.location.hostname;
 							});
 						}
 						else if(result == 2) {
-							$("#notification-bar p").html("Success.").removeClass("error").addClass("available");
+							saving = false;
+							$("#notification-bar p").html("Success. Password has been Changed.").removeClass("error").addClass("available");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						}
+						else if(result == 3) {
+							saving = false;
+							$("#notification-bar p").html("Success. Email settings changed.").removeClass("error").addClass("available");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						}
+						else if(result == 4) {
+							saving = false;
+							$("#notification-bar p").html("Success. Email settings and Username changed. Redireting to homepage...").removeClass("error").addClass("available");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(2000, function() {
+								location = "http://" + window.location.hostname;
+							});
+						}
+						else if(result == 5) {
+							saving = false;
+							$("#notification-bar p").html("Current password did not match. Settings not changed.").addClass("error").removeClass("available");
 							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 						}
 						else if(result == 0) {
+							saving = false;
 							$("#notification-bar p").html("Something went wrong. Please check your entries.").addClass("error").removeClass("available");
 							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 						}
+						else {
+							saving = false;
+							$("#notification-bar p").html("Error. Please contact us with details.").addClass("error").removeClass("available");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						}
 						$("#gif-loader-settings").fadeOut("fast");
-						//$("#settings-holder").stop().animate({"top":"-500px"}, "slow");
-						//$("#settings-background").stop().fadeOut("slow");
 						//clear fields
-						$("#pass-current").val();
-						$("#pass-change").val();
-						$("#pass-change2").val();
+						$("#pass-current").val("");
+						$("#pass-change").val("");
+						$("#pass-change2").val("");
+						$("#pass-change").parent().find(".validation-settings:eq(0)").fadeOut(500);
+						$("#pass-change2").parent().find(".validation-settings:eq(1)").fadeOut(500);
+						username = false;
+						passwords = false;
+						changes = false;
 					});
 				}
 			}

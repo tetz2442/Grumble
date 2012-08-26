@@ -30,6 +30,10 @@ require_once "php/containerWide.php";
     <td class="table-padding"><input type="password" class="textInput" name="password" maxlength="50"/></td>
 </tr>
 <tr>
+<td><input type="hidden" name="token" value="<?php echo $token; ?>" /></td>
+    <td><input type="checkbox" name="remember-box" id="remember-checkbox2"/><label for="remember-checkbox2" class="colored-link-1">Remember me</label></td>
+</tr>
+<tr>
     <td rowspan="2" align="right"><a href="forgot-password" class="colored-link-1">Forgot your password?</a></td>
 </tr>
 <tr>
