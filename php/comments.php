@@ -2,10 +2,10 @@
 require_once "conn.php";
 require_once "http.php";
 session_start();
-if(isset($_POST["comment"]) && isset($_POST["type"]) && $_POST["type"] == "load" && isset($_POST["amount"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+if(isset($_POST["comment"]) && isset($_POST["type"]) && $_POST["type"] == "load" && isset($_POST["amount"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	retrieveComments(mysql_real_escape_string($_POST["comment"]), mysql_real_escape_string($_POST["amount"]));
 }
-else if(isset($_POST["comment"]) && isset($_POST["type"]) && $_POST["type"] == "enter" && isset($_POST["text"]) && strlen($_POST["text"]) > 0 && strlen($_POST["text"]) < 160 && $_SERVER['REQUEST_METHOD'] == "POST") {
+else if(isset($_POST["comment"]) && isset($_POST["type"]) && $_POST["type"] == "enter" && isset($_POST["text"]) && strlen($_POST["text"]) > 0 && strlen($_POST["text"]) < 160 && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	enterComment(mysql_real_escape_string(strip_tags($_POST["comment"])), $_POST["text"]);
 }
 
