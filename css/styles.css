@@ -1040,7 +1040,7 @@ html { overflow-y: scroll; }
 	margin-bottom:5px;
 	margin-top:3px;
 }
-#settings-holder input[type=text] {
+#settings-holder input[type=text],#settings-holder input[type=password]  {
 	display:block;
 	width:90%;
 }
@@ -1052,9 +1052,6 @@ html { overflow-y: scroll; }
 	float:left;	
 	width:45%;
 	margin-left:5%;
-}
-#password-change label{
-	display:block;
 }
 #pass-current {
 	margin-bottom:15px !important;	
@@ -1071,9 +1068,13 @@ html { overflow-y: scroll; }
 	float:right;
 	margin-right:10px;
 }
-#button-controls img {
+#gif-loader-settings {
 	float:right;
 	margin:5px 10px 0 0;
+	display:none;
+}
+.validation-settings {
+	margin-left:5px;
 	display:none;
 }
 #button-controls div {
