@@ -17,10 +17,11 @@
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token4']);
 					
-					$grumble = str_replace("\r", "", $grumble);
-					$grumble = str_replace("\n", "", $grumble);
 					$grumble = mysql_real_escape_string(strip_tags($_POST["grumble"]));
 					$category = mysql_real_escape_string(strip_tags($_POST["category"]));
+					//remove spaces
+					$grumble = str_replace("\r", "", $grumble);
+					$grumble = str_replace("\n", "", $grumble);
 					
 					//$grumble = parseLinks($grumble);
 					
@@ -61,13 +62,14 @@
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token4']);
 					
+					$thread = mysql_real_escape_string(strip_tags($_POST["thread"]));
+					$category = mysql_real_escape_string(strip_tags($_POST["category"]));
+					$description = mysql_real_escape_string(strip_tags($_POST["description"]));
+					//remove spaces
 					$description = str_replace("\r", "", $description);
 					$description = str_replace("\n", "", $description);
 					$thread = str_replace("\r", "", $thread);
 					$thread = str_replace("\n", "", $thread);
-					$thread = mysql_real_escape_string(strip_tags($_POST["thread"]));
-					$category = mysql_real_escape_string(strip_tags($_POST["category"]));
-					$description = mysql_real_escape_string(strip_tags($_POST["description"]));
 					
 					$sql = "SELECT category_url FROM categories_grumble WHERE category_id = " . $category;
 					$result = mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
