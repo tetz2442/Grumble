@@ -37,9 +37,10 @@
 			echo '<img id="dropdown-arrow-short" src="/images/dropdown-arrow.png" width="15" height="8"/>';
             echo '<ul id="dropdown-sub-nav">';
             echo "<a href='/profile/" . $_SESSION["username"] . "'><li>Profile</li></a>";
-			echo "<a href='/profile/" . $_SESSION["username"] . "#settings'><li>Settings</li></a>";
+			echo '<li class="divider light"></li>';
 			echo "<a href='/contact'><li>Contact Us</li></a>";
             echo '<li class="divider light"></li>';
+			echo "<a href='/profile/" . $_SESSION["username"] . "#settings' id='settings-dropdown'><li>Settings</li></a>";
             echo "<a href='/php/transact-user.php?action=Logout'><li>Logout</li></a>";
             echo '</ul>';
             echo '</li>';
