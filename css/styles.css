@@ -237,11 +237,11 @@ html { overflow-y: scroll; }
 	width:820px;
 	margin:auto;
 	height:48px;	
-	overflow:auto;
 }
 
 #user-info {
 	float:right;
+	position:relative;
 }
 
 .input-user-nav {
@@ -277,13 +277,13 @@ html { overflow-y: scroll; }
 
 #dropdown-form {
 	padding:5px 0;
-	margin-left:-40px;
+	right: 20px;
 }
 
 #dropdown-form-login {
 	width:275px;
 	padding:5px 10px;	
-	margin-left:-213px;
+	right: 0px;
 }
 #dropdown-form-login .colored-link-1 {
 	font-size:.9em;	
@@ -330,7 +330,6 @@ html { overflow-y: scroll; }
 #dropdown-sub-nav li {
 	padding:5px 35px 5px 15px;
 	font-size:.9em;
-	font-weight:600;
 }
 
 #dropdown-sub-nav a:hover li {
@@ -1029,6 +1028,8 @@ html { overflow-y: scroll; }
 #settings-holder {
 	position:fixed;
 	top:-500px;
+	left:50%;
+	margin-left:-325px;
 	width:650px;
 	z-index:1999;
 	background-color:#FAF7F7;

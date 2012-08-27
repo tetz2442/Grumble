@@ -153,9 +153,10 @@ $(document).ready(function() {
 		var $element = $(this);
 		var $commentText = $(this).parent().find(".quick-comment-input").val();
 		var id = $(this).parents(".grumble-holder").find(".comments-view").attr("rel");
+		var statususername = $(this).parents(".grumble-holder").find(".username:first").text();
 		if($commentText != "" && $commentText.length <= 160) {
 			$element.parents(".grumble-holder").find(".gif-loader-comments").show();
-			$.post("/php/comments.php", {comment:id, type:"enter", text:$commentText},
+			$.post("/php/comments.php", {comment:id, type:"enter", text:$commentText, statususername:statususername},
 			function(result) {
 				$element.parents(".grumble-holder").find(".gif-loader-comments").hide();
 				if(result != "") {
