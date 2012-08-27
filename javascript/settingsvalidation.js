@@ -106,7 +106,7 @@ $(document).ready(function() {
 						function(result) {
 						if(result == 1) {
 							$("#notification-bar p").html("Success. Redirecting to homepage...").removeClass("error").addClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(2000, function() {
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(1000).queue(function() {
 								location = "http://" + window.location.hostname;
 							});
 						}
@@ -123,7 +123,7 @@ $(document).ready(function() {
 						else if(result == 4) {
 							saving = false;
 							$("#notification-bar p").html("Success. Email settings and Username changed. Redireting to homepage...").removeClass("error").addClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(2000, function() {
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(1000).queue(function() {
 								location = "http://" + window.location.hostname;
 							});
 						}
@@ -161,6 +161,31 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	$("#settings-dropdown").click(function () {
+		$("#settings-holder").css("top","48px");
+		$("#settings-background").stop().fadeIn("normal");
+		
+		$("#dropdown-form").fadeOut(50, function() {
+			$("#dropdown-form").parents("body").find(".login-drop-image").attr("src", "/images/arrow.png");
+		});
+		
+		$("#settings-background").click(function() {
+			$("#settings-holder").stop().animate({"top":"-500px"}, "normal");
+			$("#settings-background").stop().fadeOut("normal");
+		});
+	});
+	
+	var cururl = window.location.href;
+	if(cururl.indexOf("#settings") != -1) {
+		$("#settings-holder").css("top","48px");
+		$("#settings-background").stop().fadeIn("normal");
+		
+		$("#settings-background").click(function() {
+			$("#settings-holder").stop().animate({"top":"-500px"}, "normal");
+			$("#settings-background").stop().fadeOut("normal");
+		});
+	}
 });
 
 function showBar() {
