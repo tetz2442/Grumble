@@ -3,8 +3,8 @@ function outputGrumbles($grumble, $comments = false, $loggedin = false) {
 	global $conn;
 	if($grumble) {
 		$sql = "SELECT sg.status_id, sg.status_text, ug.username, DATE_FORMAT(sg.date_submitted, '%b %e, %Y %l:%i %p') AS date_submitted, " . 
-			"ug.user_id, ug.username, vg.votes_up_count FROM status_grumble AS sg " . 
-			"LEFT OUTER JOIN votes_up_grumble AS vg ON sg.status_id = vg.status_id " .
+			"ug.user_id, ug.username, COUNT(user_like_id) AS votes_up_count FROM status_grumble AS sg " . 
+			"LEFT OUTER JOIN user_likes_grumble AS vg ON sg.status_id = vg.status_id " .
 			"LEFT OUTER JOIN users_grumble AS ug ON " .
 			"sg.user_id = ug.user_id " . 
 			"WHERE sg.status_id = " . $grumble . 

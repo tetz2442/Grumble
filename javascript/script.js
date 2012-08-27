@@ -554,6 +554,9 @@ $(document).ready(function() {
 							//no more are available
 							loadMore = false;
 							canLoad = false;
+							
+							$("#notification-bar p").html("No more Grumbles to load.").addClass("error").removeClass("available");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 						}
 						else if(result != "") {
 							canLoad = true;

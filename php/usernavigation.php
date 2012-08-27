@@ -1,6 +1,5 @@
 <div id="user-navigation">
 	<div id="nav-container">
-        <div id="header-grumble">
         	<ul id="navigation">
                 <a href="<?php echo "http://" . $_SERVER["HTTP_HOST"];?>"><li>Home</li></a>
                 <li id="nav-category" class="last">Categories<img src="/images/arrow.png" class="drop-image" width="10" height="10"/>
@@ -19,7 +18,7 @@
             </ul>
             <?php
                 $loggedin = false;
-                //if $_SESSION['username'] is false, we know the user us not logged in
+                //if $_SESSION['username'] is false, we know the user is not logged in
                 if(isset($_SESSION['username'])) {
                     $loggedin = true;
                 }
@@ -27,7 +26,6 @@
                     $loggedin = false;	
                 }
             ?>
-        </div>
         <a id="logo" href="<?php echo "http://" . $_SERVER["HTTP_HOST"]; ?>"><img src="/images/logo.png" height="51" width="275" alt="Grumble logo" title="Grumble home" onmouseover="this.src='/images/logo-hover.png'" onmouseout="this.src='/images/logo.png'"></a>
         <div id="user-info">
         <?php
