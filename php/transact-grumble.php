@@ -66,22 +66,27 @@
 					
 					$sql = "SELECT category_url FROM categories_grumble WHERE category_id = " . $category;
 					$result = mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
-					$row = mysql_fetch_array($result);
+					//check if the entered category is valid
+					if(mysql_num_rows($result) != 0) {
+						$row = mysql_fetch_array($result);
 					
-					$bad_words = array('a','and','the','an','it','is','with','can','of','not');
-					$seo = generate_seo_link($thread,'-',false);
-					
-					$sql = "INSERT INTO sub_category_grumble " .
-						"(category_id, sub_category_name, sub_category_description, sub_category_created, sub_category_url, user_id) " .
-						"VALUES (" . $category . ",'" . $thread . 
-						"','" . $description . "','" . date("Y-m-d H:i:s", time()) . "','" . $seo . "'," . $_SESSION["user_id"] . ")";
-					mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
-					$id = mysql_insert_id();
-					
-					$sql = "UPDATE categories_grumble SET thread_number = thread_number + 1 WHERE category_id = " . $category;
-					mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
-					
-					redirect("../" . $row["category_url"] . "/" . $seo . "/" . $id . "?create=new");
+						$bad_words = array('a','and','the','an','it','is','with','can','of','not');
+						$seo = generate_seo_link($thread,'-',false);
+						
+						$sql = "INSERT INTO sub_category_grumble " .
+							"(category_id, sub_category_name, sub_category_description, sub_category_created, sub_category_url, user_id) " .
+							"VALUES (" . $category . ",'" . $thread . 
+							"','" . $description . "','" . date("Y-m-d H:i:s", time()) . "','" . $seo . "'," . $_SESSION["user_id"] . ")";
+						mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
+						$id = mysql_insert_id();
+						
+						$sql = "UPDATE categories_grumble SET thread_number = thread_number + 1 WHERE category_id = " . $category;
+						mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
+						
+						redirect("../" . $row["category_url"] . "/" . $seo . "/" . $id . "?create=new");
+					}
+					else
+						redirect("../");
 				}
 				else {
 					redirect("../");
