@@ -24,6 +24,7 @@ body {
 	background-color:#f7ffff;
 	min-width:900px;
 	font-family:"OpenSansLight";
+	color:#333;
 }
 
 a {
@@ -130,17 +131,17 @@ html { overflow-y: scroll; }
 /********
 *header css
 ******/
-#header-grumble {
-	margin-top:0px;
-}
-
 #navigation {	
 	list-style:none;
 }
 
+#nav-container {
+	margin-top:0px;	
+}
+
 #navigation a {	
 	text-decoration:none;
-	color:#240d03;
+	color:#333;
 }
 
 #navigation a:hover {	
@@ -176,7 +177,7 @@ html { overflow-y: scroll; }
 }
 
 #nav-category:hover {
-	color:#240d03S;		
+	color:#333;		
 }
 
 .drop-image {
@@ -229,7 +230,6 @@ html { overflow-y: scroll; }
 	position:fixed;
 	top:0;
 	font-size:1.1em;
-	color: #240d03;
 	box-shadow: inset 0 2px #fff, 0 2px 3px rgba(34,25,25,0.4);
 }
 
@@ -301,7 +301,7 @@ html { overflow-y: scroll; }
 #dropdown-arrow-short {
 	position:absolute;
 	margin-top:-12px;
-	margin-left:95px;	
+	margin-left:85px;	
 }
 
 .dropdown-login {
@@ -320,7 +320,7 @@ html { overflow-y: scroll; }
 
 #dropdown-sub-nav a {
 	text-decoration:none;
-	color:#240D03;
+	color:#333;
 }
 
 #dropdown-sub-nav a:hover {
@@ -766,7 +766,7 @@ html { overflow-y: scroll; }
 	padding:5px 0;
 	display:inline-block;
 	text-decoration:none;
-	color:#000;
+	color:#333;
 	font-size:1.1em;
 	width:160px;
 	text-align:center;
@@ -1396,9 +1396,9 @@ button css
     content: "";
 }
 .orange {
-    text-shadow:-1px -1px 0 #A84155;
-    background: #D25068;
-    border:1px solid #D25068;
+    text-shadow:-1px -1px 0 #DE6B28;
+    background: #F59A38;
+    border:1px solid #DE6B28;
     
     background-image:-webkit-linear-gradient(top, #F59A38, #DC8A32);
     background-image:-moz-linear-gradient(top, #F59A38, #DC8A32);

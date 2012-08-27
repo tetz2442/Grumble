@@ -41,16 +41,17 @@ function retrieveComments($voteid, $amount) {
 
 function enterComment($id, $text, $statususername) {
 	global $conn;
-	$text = str_replace("\r", "", $text);
-	$text = str_replace("\n", "", $text);
-	$text = mysql_real_escape_string(strip_tags($text));
+	$commenttext = str_replace("\r", "", $text);
+	$commenttext = str_replace("\n", "", $commenttext);
+	$commenttext = mysql_real_escape_string(strip_tags($commenttext));
 	$sql = "INSERT INTO comments_grumble (status_id, comment_date, comment_user, comment_text) " . 
-		"VALUES(" . intval($id) . ",'" . date("Y-m-d H:i:s", time()) . "'," . $_SESSION["user_id"] . ",'" . $text . "')";
+		"VALUES(" . intval($id) . ",'" . date("Y-m-d H:i:s", time()) . "'," . $_SESSION["user_id"] . ",'" . $commenttext . "')";
 	mysql_query($sql, $conn) or die("Error: " . mysql_error());
+	$commenttext = stripslashes(stripslashes($commenttext));
 	echo '<div class="ind-comment">';
 	echo '<div class="comment-padding">';
 	echo '<a class="comment-username username" href="/profile/' . $_SESSION["username"] . '">' . $_SESSION["username"] . '</a>';
-	echo '<p class="comment-text">' . stripslashes(stripslashes($text)) . '</p>';
+	echo '<p class="comment-text">' . $commenttext . '</p>';
 	echo '<small class="comment-time">' . date("M d, o g:i A", time()) . '</small>';
 	echo '</div>';
 	echo '</div>';
@@ -61,7 +62,8 @@ function enterComment($id, $text, $statususername) {
 		$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
 		if(mysql_num_rows($result) != 0) {
 			$row = mysql_fetch_array($result);
-			sendEmail($row["user_email"], "From: no-reply@grumbleonline.com", "comment", "http://" . $_SERVER["HTTP_HOST"] . "/profile/" . $row["username"] . "/grumble/" . $row["status_id"], $statususername);
+			$parameters = array("http://" . $_SERVER["HTTP_HOST"] . "/profile/" . $row["username"] . "/grumble/" . $row["status_id"], $statususername, $_SESSION["username"], $commenttext);
+			sendEmail($row["user_email"], "From: no-reply@grumbleonline.com", "comment", $parameters);
 		}
 	}
 }
