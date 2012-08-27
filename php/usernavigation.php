@@ -28,7 +28,7 @@
                 }
             ?>
         </div>
-        <a href="<?php echo "http://" . $_SERVER["HTTP_HOST"]; ?>"><img id="logo" src="/images/logo.png" height="51" width="275" alt="Grumble logo" title="Grumble home" onmouseover="this.src='/images/logo-hover.png'" onmouseout="this.src='/images/logo.png'"></a>
+        <a id="logo" href="<?php echo "http://" . $_SERVER["HTTP_HOST"]; ?>"><img src="/images/logo.png" height="51" width="275" alt="Grumble logo" title="Grumble home" onmouseover="this.src='/images/logo-hover.png'" onmouseout="this.src='/images/logo.png'"></a>
         <div id="user-info">
         <?php
         if(isset($_SESSION["username"])) {
