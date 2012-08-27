@@ -75,10 +75,15 @@
 		break;
 		
 		case "Logout" :
-			setcookie("user_grumble","", time()-7*24*60*60, "/", $_SERVER['HTTP_HOST']);
-			session_unset();
-			session_destroy();
-			redirect("../");
+			if(isset($_SESSION["user_id"])) {
+				setcookie("user_grumble","", time()-7*24*60*60, "/", $_SERVER['HTTP_HOST']);
+				session_unset();
+				session_destroy();
+				redirect("../");
+			}
+			else {
+				redirect("../");
+			}
 			break;
 			
 		case "Create Account" :
@@ -89,50 +94,56 @@
 				&& isset($_POST["password"]) && strlen($_POST["password"]) > 5
 				&& isset($_POST["password2"])
 				&& ($_POST["password"]) == $_POST["password2"] && isset($_POST["terms"])) {
-					if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token2'] ) 
+					if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token2']) 
 						redirect("../");
 				
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token2']);
-
-					$firstname = mysql_real_escape_string($_POST["firstname"]);
-					$lastname = mysql_real_escape_string($_POST["lastname"]);
 					
 					$username = mysql_real_escape_string($_POST["username"]);
 					$username = str_replace(" ", "", $username);
-					
-					$pass1 = mysql_real_escape_string($_POST["password"]);
-					$pass2 = mysql_real_escape_string($_POST["password2"]);
-					$email = mysql_real_escape_string($_POST["email"]);
-					
-					$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
-					$Chars_Len = 63;
-					$Salt_Length = 21;
-					
-					$salt = "";
+					//validate username further
+					if(strlen($username) >= 4 && strlen($username) <= 15 && !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬-]/', $username)) {
 
-					for($i=0; $i<$Salt_Length; $i++)
-					{
-						$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+						$firstname = mysql_real_escape_string($_POST["firstname"]);
+						$lastname = mysql_real_escape_string($_POST["lastname"]);
+						
+						$pass1 = mysql_real_escape_string($_POST["password"]);
+						$pass2 = mysql_real_escape_string($_POST["password2"]);
+						$email = mysql_real_escape_string($_POST["email"]);
+						
+						$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+						$Chars_Len = 63;
+						$Salt_Length = 21;
+						
+						$salt = "";
+	
+						for($i=0; $i<$Salt_Length; $i++)
+						{
+							$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+						}
+						
+						$hashed_password = crypt($pass1, $salt) . $salt;
+						
+						$sql = "INSERT INTO users_grumble(username, user_firstname, user_lastname, user_password, user_salt, user_email, user_create_date) " . 
+							"VALUES('" . $username . "','" . $firstname . "','" . $lastname . "','" . $hashed_password . "','" . $salt . "','" . $email . "','" . date("Y-m-d H:i:s", time()) . "')";
+						mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
+						
+						$id = mysql_insert_id();
+						
+						$sql = "INSERT INTO settings_user_grumble(user_id) " . 
+							"VALUES(" . $id . ")";
+						mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
+						
+						session_start();
+						$_SESSION["user_id"] = $id;
+						$_SESSION["access_lvl"] = 1;
+						$_SESSION["username"] = $username;
+						redirect("../");
 					}
-					
-					$hashed_password = crypt($pass1, $salt) . $salt;
-					
-					$sql = "INSERT INTO users_grumble(username, user_firstname, user_lastname, user_password, user_salt, user_email, user_create_date) " . 
-						"VALUES('" . $username . "','" . $firstname . "','" . $lastname . "','" . $hashed_password . "','" . $salt . "','" . $email . "','" . date("Y-m-d H:i:s", time()) . "')";
-					mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
-					
-					$id = mysql_insert_id();
-					
-					$sql = "INSERT INTO settings_user_grumble(user_id) " . 
-						"VALUES(" . $id . ")";
-					mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
-					
-					session_start();
-					$_SESSION["user_id"] = $id;
-					$_SESSION["access_lvl"] = 1;
-					$_SESSION["username"] = $username;
-					redirect("../");
+					else {
+						redirect("../create-account?create=fail");
+					}
 			}
 			else {
 				redirect("../create-account?create=fail");

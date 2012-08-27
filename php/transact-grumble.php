@@ -23,8 +23,6 @@
 					$grumble = str_replace("\r", "", $grumble);
 					$grumble = str_replace("\n", "", $grumble);
 					
-					//$grumble = parseLinks($grumble);
-					
 					$sql = "INSERT INTO status_grumble " .
 						"(status_text, sub_category_id, date_submitted, user_id) " .
 						"VALUES ('" . $grumble . "'," . $category . 
@@ -39,14 +37,9 @@
 					$sql = "INSERT INTO votes_up_grumble " . 
 						"(status_id) VALUES (" . $last_id_status . ")";
 					mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
-					$last_id_vote = mysql_insert_id();
 					
-					/*$sql = "UPDATE status_grumble SET " .
-						"votes_up_id=" . $last_id_vote . 
-						" WHERE status_id = " . $last_id_status;
-					mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());*/
-					
-					redirect("../grumbles.php?subcat=" . $category);
+					$refer = strip_tags($_POST["referrer"]);
+					redirect(".." . $referrer);
 				}
 				else {
 					redirect("../");	
