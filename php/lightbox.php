@@ -8,8 +8,9 @@
     	<form action="/php/transact-grumble.php" method="post">
             <textarea id="quick-compose-textarea" class="textArea" title="Compose grumble" rows="4" name="grumble" placeholder="Compose new Grumble..."></textarea>
             <br/>
+            <input type="hidden" name="referrer" value="" id="referrer"/>
             <input type="hidden" name="token" value="<?php echo $token; ?>" />
-            <input type="hidden" name="category" id="lightbox-category" value="<?php echo mysql_real_escape_string(strip_tags($_GET["subcat"])); ?>"/>
+            <input type="hidden" name="category" id="lightbox-category" value="<?php echo strip_tags($_GET["subcat"]); ?>"/>
             <div>
                 <input type="submit" value="Submit Grumble" name="action" id="quick-compose-submit" class="button"/>
                 <span id="character-count">160</span>

@@ -17,7 +17,7 @@
         <select name="category" id="thread-dropdown">
         	<option selected="selected" value="0">Choose a Category</option>
             <?php
-				$sql = "SELECT category_id, category_name, category_url FROM categories_grumble";
+				$sql = "SELECT category_id, category_name, category_url FROM categories_grumble ORDER BY category_name ASC";
 				$result = mysql_query($sql, $conn);
 				while($row = mysql_fetch_array($result)) {
 					if(isset($_GET["cat"]) && $row["category_url"] == $_GET["cat"])

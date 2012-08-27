@@ -186,29 +186,31 @@ html { overflow-y: scroll; }
 #sub-nav {
 	display:none;	
 	position:absolute;
+	list-style:none;
 	z-index:1000;
 	top:50px;
+	padding:5px 0;
 	background-color:#fffaf5;
 	border-radius:5px;
 	border-radius:5px;
 	box-shadow: inset 0 1px #fff, 0 1px 3px rgba(34,25,25,0.4);
+	border:1px solid #e8e8e8;
 }
-
 #sub-nav-dropdown-arrow {
 	position:absolute;
-	margin-top:-8px;
+	margin-top:-13px;
 	margin-left:35px;	
 }
-
 #sub-nav a {
-	display:block;
+	display:block;	
 }
-
 #sub-nav li {
 	padding:5px 16px 6px 10px;
-	border:none;
 	font-size:.9em;
-	list-style:none;
+	width:115px;
+}
+#sub-nav li:hover {
+	background-color:#FCA954;
 }
 
 .display-list {
@@ -256,7 +258,7 @@ html { overflow-y: scroll; }
 	margin-left:5px;
 }
 
-#dropdown-form {
+#dropdown-form, #dropdown-form-login {
 	display:none;	
 	list-style:none;
 	background-color:#fffaf5;
@@ -264,29 +266,42 @@ html { overflow-y: scroll; }
 	position:absolute;
 	z-index:1000;
 	top:50px;
-	padding:5px 10px;
 	border-radius:5px;
 	border-radius:5px;
 	box-shadow: 0 5px 10px rgba(0,0,0,.2);
 	-webkit-box-shadow:0 5px 10px rgba(0,0,0,.2);
 	-moz-box-shadow:0 5px 10px rgba(0,0,0,.2);
 	font-size:1em;
+	border:1px solid #e8e8e8;
+}
+
+#dropdown-form {
+	padding:5px 0;
+	margin-left:-40px;
+}
+
+#dropdown-form-login {
+	width:275px;
+	padding:5px 10px;	
+	margin-left:-213px;
+}
+#dropdown-form-login .colored-link-1 {
+	font-size:.9em;	
+}
+#dropdown-form-login #dropdown-arrow {
+	position:absolute;
+	margin-top:-13px;
+	margin-left:240px;	
 }
 
 .table-padding {
 	padding:5px 0 5px 0;	
 }
 
-#dropdown-arrow {
-	position:absolute;
-	margin-top:-13px;
-	margin-left:180px;	
-}
-
 #dropdown-arrow-short {
 	position:absolute;
 	margin-top:-12px;
-	margin-left:25px;	
+	margin-left:95px;	
 }
 
 .dropdown-login {
@@ -301,7 +316,6 @@ html { overflow-y: scroll; }
 
 #dropdown-sub-nav {
 	list-style:none;
-	font-size:1.1em;
 }
 
 #dropdown-sub-nav a {
@@ -314,11 +328,14 @@ html { overflow-y: scroll; }
 }
 
 #dropdown-sub-nav li {
-	padding:5px 5px 5px 5px;
+	padding:5px 35px 5px 15px;
+	font-size:.9em;
+	font-weight:600;
 }
 
 #dropdown-sub-nav a:hover li {
-	color:#6a402e;
+	color:#fff;
+	background-color:#FCA954;
 }
 .divider {
 	height:1px;

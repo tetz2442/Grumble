@@ -6,7 +6,7 @@
                 <li id="nav-category" class="last">Categories<img src="/images/arrow.png" class="drop-image" width="10" height="10"/>
                 <ul id="sub-nav">
                 <?php
-					$sql = "SELECT category_id, category_name, category_url FROM categories_grumble";
+					$sql = "SELECT category_id, category_name, category_url FROM categories_grumble ORDER BY category_name ASC";
 					$result = mysql_query($sql, $conn);
 					echo '<img id="sub-nav-dropdown-arrow" src="/images/dropdown-arrow.png" width="15" height="8"/>';
 					while($row = mysql_fetch_array($result)) {
@@ -37,9 +37,9 @@
 			echo '<img id="dropdown-arrow-short" src="/images/dropdown-arrow.png" width="15" height="8"/>';
             echo '<ul id="dropdown-sub-nav">';
             echo "<a href='/profile/" . $_SESSION["username"] . "'><li>Profile</li></a>";
+			echo "<a href='/profile/" . $_SESSION["username"] . "#settings'><li>Settings</li></a>";
 			echo "<a href='/contact'><li>Contact Us</li></a>";
-            //echo "<a href='composegrumble.php'><li>Compose</li></a>";
-            echo '<li class="divider"></li>';
+            echo '<li class="divider light"></li>';
             echo "<a href='/php/transact-user.php?action=Logout'><li>Logout</li></a>";
             echo '</ul>';
             echo '</li>';
@@ -47,7 +47,7 @@
         }
         else {
             echo '<ul><span class="dropdown-shortlink dropdown-login" title="Login/Register">Login<img src="/images/arrow.png" class="login-drop-image" width="10" height="10"/></span>';
-            echo '<li id="dropdown-form"><form action="/php/transact-user.php" method="post">';
+            echo '<li id="dropdown-form-login"><form action="/php/transact-user.php" method="post">';
 			$token = md5(uniqid(rand(), true));
 			$_SESSION['token'] = $token;
             ?>
