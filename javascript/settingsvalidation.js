@@ -142,6 +142,10 @@ $(document).ready(function() {
 							$("#notification-bar p").html("Error. Please contact us with details.").addClass("error").removeClass("available");
 							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 						}
+						
+						if(newuser) {
+							location = "http://" + window.location.hostname;
+						}
 						$("#gif-loader-settings").fadeOut("fast");
 						//clear fields
 						$("#pass-current").val("");
@@ -177,6 +181,7 @@ $(document).ready(function() {
 	});
 	
 	var cururl = window.location.href;
+	var newuser = false;
 	if(cururl.indexOf("#settings") != -1) {
 		$("#settings-holder").css("top","48px");
 		$("#settings-background").stop().fadeIn("normal");

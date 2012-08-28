@@ -12,10 +12,10 @@ html, body, div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, em
 }
 body{
   line-height:1.2;
-  background: url(../images/backgrounds/white_noise.png) repeat #f7ffff ;
+  background-color:#f7ffff ;
   min-width:900px;
-  font-family:"LondonMMRegular", Helvetica;
-  font-size:1em;
+  font-family:"OpenSansLight", Helvetica;
+  font-size:.9em;
 }
 a{
   margin:0;
@@ -43,15 +43,16 @@ input, select{
 /* hand cursor on clickable input elements */
 label, input[type=button], input[type=submit], button{cursor: pointer;}
 html{overflow-y: scroll;}
-@font-face{
-  font-family: 'LondonMMRegular';
-  src: url('londonmm/londonmm-webfont.eot');
-  src: url('londonmm/londonmm-webfont.eot?#iefix') format('embedded-opentype'),
-	   url('londonmm/londonmm-webfont.woff') format('woff'),
-	   url('londonmm/londonmm-webfont.ttf') format('truetype'),
-	   url('londonmm/londonmm-webfont.svg#LondonMMRegular') format('svg');
-  font-weight: normal;
-  font-style: normal;
+@font-face {
+    font-family: 'OpenSansLight';
+    src: url('opensans/OpenSans-Light-webfont.eot');
+    src: url('opensans/OpenSans-Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('opensans/OpenSans-Light-webfont.woff') format('woff'),
+         url('opensans/OpenSans-Light-webfont.ttf') format('truetype'),
+         url('opensans/OpenSans-Light-webfont.svg#OpenSansLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
 }
 /*header container for smaller size pages*/
 #grumbles-container{
@@ -88,7 +89,7 @@ html{overflow-y: scroll;}
 }
 #social-share {
 	position:absolute;
-	right:0px;
+	right:10px;
 	top:55px;
 }
 #coming-soon-header{
@@ -171,7 +172,7 @@ html{overflow-y: scroll;}
   color:#61574b;
   text-decoration:none;
   line-height:38px;
-  font-family:'LondonMMRegular', Helvetica;
+  font-family:'OpenSansLight', Helvetica;
   font-size:1em;
   display: block;
   margin:16px auto 8px auto !important;

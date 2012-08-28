@@ -27,6 +27,7 @@
 				}
 			?>
         </select>
+        <input type="hidden" name="token" value="<?php echo $token; ?>" />
         <input type="submit" id="quick-description-submit" class="btn-normal button" value="Submit Grumble Thread" name="action"/>
         <span id="character-count">40</span>
         </div>

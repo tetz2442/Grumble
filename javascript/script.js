@@ -686,26 +686,19 @@ $(document).ready(function() {
 	$("#forg-submit").click(function(event) {
 		if($("#pass-forg").val() == "" || $("#pass-forg2").val() == "") {
 			event.preventDefault();
-			$("#forg-pass-error").html("Cannot leave a field blank");
-			$("#forg-pass-error").addClass("error");
-			$("#forg-pass-error").removeClass("available");
+			$("#notification-bar p").html("Cannot leave a field blank.").addClass("error");
+			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
-		else if($("#pass-forg").val().length <= 5 ) {
+		else if($("#pass-forg").val().length <= 5) {
 			event.preventDefault();
-			$("#forg-pass-error").html("Password has to be longer than 5 characters");
-			$("#forg-pass-error").addClass("error");
-			$("#forg-pass-error").removeClass("available");
+			$("#notification-bar p").html("Password has to be longer than 5 characters.").addClass("error");
+			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
 		else if($("#pass-forg").val() != $("#pass-forg2").val()) {
+			alert($("#pass-forg").val() + "," + $("#pass-forg2").val());
 			event.preventDefault();
-			$("#forg-pass-error").html("Passwords have to match");
-			$("#forg-pass-error").addClass("error");
-			$("#forg-pass-error").removeClass("available");
-		}
-		else {
-			$("#forg-pass-error").html("");
-			$("#forg-pass-error").removeClass("error");
-			$("#forg-pass-error").addClass("available");
+			$("#notification-bar p").html("Passwords have to match.").addClass("error");
+			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
 	});
 	

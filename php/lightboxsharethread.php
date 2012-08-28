@@ -13,8 +13,8 @@
        <div id="share-category">
             <div>
                 <div class="g-plusone" data-href="<?php echo $new_url;?>" data-size="medium"></div>
-                <div class="fb-like" data-href="<?php echo $new_url;?>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-action="like"></div>
                 <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $new_url;?>" data-via="grumbleonline" data-text="I just create a new thread on Grumble!" data-related="grumbleonline" data-hashtags="grumble">Tweet</a>
+                <div class="fb-like" data-href="<?php echo $new_url;?>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-action="like"></div>
             </div>
        </div>
      </div>
