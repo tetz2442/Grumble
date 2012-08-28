@@ -1,6 +1,7 @@
 <?php
 	require_once "conn.php";
 	require_once "http.php";
+	require_once "sendemail.php";
 	session_start();
 	if(isset($_REQUEST["action"])) {
 		switch ($_REQUEST["action"]) {
@@ -151,19 +152,15 @@
 			break;
 			
 		case "Send Email" :
-			if(isset($_POST["email"]) && isset($_POST["token"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
-				if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token3'] ) {
-						redirect("../");
-				}
-				
+			if(isset($_POST["email"]) && isset($_POST["token"]) && $_SERVER['REQUEST_METHOD'] == "POST" && (!empty($_POST['token']) || $_POST['token'] == $_SESSION['token3']) ) {
 				// Unset the token, so that it cannot be used again.
 				unset($_SESSION['token3']);
 				
 				$email = mysql_real_escape_string($_POST["email"]);
 				
-				$sql = "SELECT user_password FROM users_grumble " . 
-					"WHERE user_email='" . $email . "'";
-				$result = mysql_query($sql, $conn) or die("Could not lookup password: " . mysql_error());
+				$sql = "SELECT user_email FROM users_grumble " . 
+					"WHERE user_email='" . $email . "' LIMIT 0,1";
+				$result = mysql_query($sql, $conn) or die("Could not lookup email: " . mysql_error());
 				if(mysql_num_rows($result) > 0) {
 					$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.';
 					$Chars_Len = 63;
@@ -177,25 +174,25 @@
 					}
 					
 					$row = mysql_fetch_array($result);
-					$subject = "Grumble password change";
-					$body = "Change your password by following the link below.\n\nPaste the link below in your browser to reset your password:\n\n" . 
-					"http://" . $_SERVER["HTTP_HOST"] . "/" . "forgot-password.php?hash=" . $salt . "&email=" . $email;
+					$subject = "[Grumble] password change";
+					$body = "Change your password by following the link below.\n\nClick the link or paste it in your browser to reset your password:\n\n" . 
+					"http://" . $_SERVER["HTTP_HOST"] . "/" . "forgot-password?hash=" . $salt . "&email=" . $email;
 					
 					$sql = "SELECT user_email FROM temp_password_grumble " . 
-						"WHERE user_email='" . $email . "'";
+						"WHERE user_email='" . $email . "' LIMIT 0,1";
 					$result = mysql_query($sql, $conn) or die("Could not lookup email: " . mysql_error());
 					if(mysql_num_rows($result) > 0) {
-						$sql = "UPDATE temp_password_grumble SET temp_password = '" . $salt . "', temp_create = '" . date("Y-m-d H:i:s", time()) . "' WHERE user_email = '" . 
+						$sql = "UPDATE temp_password_grumble SET temp_password = '" . $salt . "', temp_create = '" . date("Y-m-d H:i:s", time()+3*24*60*60) . "' WHERE user_email = '" . 
 						$email . "'";
 						mysql_query($sql, $conn) or die("Could not update: " . mysql_error());
 					}
 					else {
 						$sql = "INSERT INTO temp_password_grumble (user_email, temp_password, temp_create) VALUES('" . 
-							$email . "','" . $salt . "','" . date("Y-m-d H:i:s", time()) . "')";
+							$email . "','" . $salt . "','" . date("Y-m-d H:i:s", time()+3*24*60*60) . "')";
 						mysql_query($sql, $conn) or die("Could not insert: " . mysql_error());
 					}
 					
-					mail($_POST["email"], $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send reminder email.");
+					mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send reminder email.");
 					redirect("../forgot-password?success=1");
 				}
 				else {
@@ -209,21 +206,21 @@
 		
 		case "Reset Password" :
 			if(isset($_POST["password"]) and strlen($_POST["password"]) > 5 and isset($_POST["password2"])
-				and isset($_POST["email"]) and $_POST["password"] == $_POST["password2"] && isset($_POST["token"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
-				if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token3'] ) 
-						redirect("../");
-				
+				and isset($_POST["email"]) and $_POST["password"] == $_POST["password2"] && isset($_POST["hash"]) && $_SERVER['REQUEST_METHOD'] == "POST" && (!empty($_POST['token']) || $_POST['token'] == $_SESSION['token3'])) {		
 				// Unset the token, so that it cannot be used again.
 				unset($_SESSION['token3']);
 					
 				$email = mysql_real_escape_string($_POST["email"]);
 				$password = mysql_real_escape_string($_POST["password"]);
+				$hash = mysql_real_escape_string($_POST["hash"]);
 				
-				$sql = "SELECT user_salt FROM users_grumble " . 
-					"WHERE user_email='" . $email . "'";
-				$result = mysql_query($sql, $conn) or die("Could not lookup password: " . mysql_error());
-				if(mysql_num_rows($result) > 0) {
-					$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+				$sql = "SELECT ug.user_id FROM temp_password_grumble AS tpg " .
+				"LEFT OUTER JOIN users_grumble AS ug ON ug.user_email = tpg.user_email " .
+				"WHERE tpg.temp_password ='" .	$hash. "' AND tpg.user_email ='" . $email . "' LIMIT 0,1";
+				$result = mysql_query($sql, $conn) or die("Could not lookup temp password: " . mysql_error());
+				if(mysql_num_rows($result) != 0) {
+					$row = mysql_fetch_assoc($result);
+					$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.';
 					$Chars_Len = 63;
 					$Salt_Length = 21;
 					
@@ -236,14 +233,10 @@
 					
 					$hashed_password = crypt($password, $salt) . $salt;
 					
-					$sql = "UPDATE users_grumble " .
-						"SET user_password='" . $hashed_password . 
-						"', user_salt='" . $salt . "' " .
-						"WHERE user_email='" . $email . "'";
+					$sql = "UPDATE users_grumble SET user_password='" . $hashed_password . "', user_salt='" . $salt . "' WHERE user_id = " . intval($row["user_id"]);
 					mysql_query($sql, $conn) or die("Could not update your user account: " . mysql_error());
-				}
-				else {
-					redirect("../login");
+					
+					redirect("../?login=1");
 				}
 			}
 			redirect("../login");

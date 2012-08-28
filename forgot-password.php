@@ -16,7 +16,7 @@ $_SESSION['token3'] = $token;
 		echo '<span class="error"><i>Could not send email reminder</i></span>';
 	}
 	else if(isset($_GET["success"]) && $_GET["success"] == 1) {
-		echo '<span class="available"><i>Email reminder has been sent successfully.</i></span>';
+		echo '<span class="available content-padding"><i>Email reminder has been sent successfully.</i></span>';
 	}
 	
 	if(!isset($_GET["hash"]) && !isset($_GET["email"])) {
@@ -30,27 +30,28 @@ $_SESSION['token3'] = $token;
 <?php 
 	}
 	else if(isset($_GET["hash"]) && isset($_GET["email"])) {
-	$sql = "SELECT user_email FROM temp_password_grumble WHERE temp_password ='" . 
-		mysql_real_escape_string($_GET["hash"]) . "' AND user_email ='" . mysql_real_escape_string($_GET["email"]) . "'";
+	$sql = "SELECT user_email, temp_password FROM temp_password_grumble WHERE temp_password ='" . 
+		mysql_real_escape_string($_GET["hash"]) . "' AND user_email ='" . mysql_real_escape_string($_GET["email"]) . "' AND temp_create >= '" . date("Y-m-d H:i:s", time()) . "' LIMIT 0,1";
 	$result = mysql_query($sql, $conn) or die("Could not lookup temp password: " . mysql_error());
 	$row = mysql_fetch_array($result);
 	if(mysql_num_rows($result) == 0) {
 	?>
-    	<p>This link has expired</p>
+    	<p class="content-padding"><b><i>This link has expired</i></b></p>
     <?php
 	}
 	else {
+		require_once "php/notificationbar.php";
 ?>
 <br/><p>Reset your password below.</p><br/>
-<p id="forg-pass-error"></p>
 <p>New Password: <br />
 	<input type="password" id="pass-forg" class="textInput" name="password" maxlength="50"/>
 </p>
 <p>New Password(again): <br />
-	<input type="password" id="pass2-forg" class="textInput" name="password2" maxlength="50"/>
+	<input type="password" id="pass-forg2" class="textInput" name="password2" maxlength="50"/>
 </p>
 <p>
-	<input type="hidden" name="email" value="<?php echo $row["email"]; ?>"/>
+	<input type="hidden" name="email" value="<?php echo $row["user_email"]; ?>"/>
+    <input type="hidden" name="hash" value="<?php echo $row["temp_password"]; ?>"/>
     <input type="hidden" name="token" value="<?php echo $token; ?>" />
 	<input type="submit" class="submit button" id="forg-submit" name="action" value="Reset Password"/>
 </p>
