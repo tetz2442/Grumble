@@ -199,6 +199,11 @@ $(document).ready(function() {
 		 }
 	});
 	
+	$('#quick-compose-textarea').focusin(function () {
+		$(this).css("height","75px");
+		$("#grumble-comment div").show();
+	});
+	
 	$('#quick-description-threadname').keyup(function() {
 		 var chars = $(this).val();
 		 var charLength = 40 - chars.length;
@@ -243,18 +248,33 @@ $(document).ready(function() {
 		$("#referrer").val(window.location.pathname);	
 	}
 	
-	$("#quick-compose-submit").click(function(event) {
+	$("#quick-compose-submit").click(function() {
+		var element = $(this);
 		if(charLengthGrumble < 0) {
-			event.preventDefault();
-			
 			$("#notification-bar p").html("Too many characters to submit.").addClass("error");
 			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
-		else if($(this).parents("#grumble-status-lightbox").find("#quick-compose-textarea").val().length == 0) {
-			event.preventDefault();
-			
+		else if($("#quick-compose-textarea").val().length == 0) {
 			$("#notification-bar p").html("Grumble cannot be empty.").addClass("error");
 			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+		}
+		else {
+			var grumbletext = $("#quick-compose-textarea").val();
+			var category = $("#grumble-category").val();
+			$(element).parent().find("#gif-loader-grumble").show();
+			$.post("/php/grumbleajax.php", {grumble:grumbletext, category:category},
+					function(result) {
+					$(element).parent().find("#gif-loader-grumble").hide();
+					if(result == 0 || result == "") {
+						$("#notification-bar p").html("Something went wrong. Please check your entries.").addClass("error");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					}
+					else if(result != "") {
+						$(result).insertBefore(".grumble-holder:first");
+						$("#quick-compose-textarea").val("").css("height","20px");
+						$("#grumble-comment div").hide();
+					}
+			});
 		}
 	});
 	
