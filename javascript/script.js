@@ -200,7 +200,7 @@ $(document).ready(function() {
 	});
 	
 	$('#quick-compose-textarea').focusin(function () {
-		$(this).css("height","75px");
+		$(this).css({"height":"75px","background-color":"white"});
 		$("#grumble-comment div").show();
 	});
 	
@@ -270,8 +270,10 @@ $(document).ready(function() {
 						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 					}
 					else if(result != "") {
+						var grumblenumber = parseInt($("#grumbles-left-header span").text()) + 1;
 						$(result).insertBefore(".grumble-holder:first");
-						$("#quick-compose-textarea").val("").css("height","20px");
+						$("#grumbles-left-header span").html(grumblenumber)
+						$("#quick-compose-textarea").val("").css({"height":"20px","background-color":"#f0f0f0"});
 						$("#grumble-comment div").hide();
 					}
 			});

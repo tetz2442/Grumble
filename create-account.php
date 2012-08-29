@@ -42,12 +42,12 @@
         <tr>
             <td align="right"><label for="username">Username:</label> (<span class="help-callout colored-link-1" data-id="3" title="Tips for creating a username on Grumble."><b>?</b></span>)</td>
             <td><input type="text" id="username" class="textInput" name="username" maxlength="15" autocomplete="off"/></td>
-            <td><img src="/images/ajax-loader-create.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="usernameError"></span></td>
+            <td><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="usernameError"></span></td>
         </tr>
         <tr>
             <td align="right"><label for="email">Email Address:</label></td>
             <td><input type="text" id="emails" class="textInput" name="email" maxlength="100" autocomplete="off" <?php if(isset($_POST["email"])) { echo "value='" . strip_tags($_POST["email"]) . "'";}; ?>/></td>
-            <td><img src="/images/ajax-loader-create.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="emailError"></span></td>
+            <td><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="emailError"></span></td>
         </tr>
         <tr>
             <td align="right"><label for="userpassword">Password:</label></td>

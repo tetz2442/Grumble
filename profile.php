@@ -55,7 +55,6 @@ else {
 				while($row = mysql_fetch_array($result)) {
 					outputGrumbles($row["status_id"], false, $loggedin);
 				}
-				echo '<div id="gif-loader"><img src="images/ajax-loader2.gif" width="32" height="32"/></div>';
 			}
 			else {
 				echo " <br/>\n";
