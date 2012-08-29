@@ -6,16 +6,14 @@
 	if(isset($_REQUEST["action"])) {
 		switch ($_REQUEST["action"]) {
 		case "Sign In" :
-			if(isset($_POST["email"]) && strlen($_POST["email"]) > 0 && isset($_POST["password"]) && strlen($_POST["password"]) > 0 && isset($_POST["referrer"])) {
-				if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token'] ) 
-					redirect("../");
+			if(isset($_POST["email"]) && strlen($_POST["email"]) > 0 && isset($_POST["password"]) && strlen($_POST["password"]) > 0 && isset($_POST["referrer"]) && (!empty($_POST['token']) || $_POST['token'] == $_SESSION['token'] )) {
 				// Unset the token, so that it cannot be used again.
 				unset($_SESSION['token']);
 				
 				$email = mysql_real_escape_string(strip_tags($_POST["email"]));
 				$password = mysql_real_escape_string(strip_tags($_POST["password"]));
 					
-				$sql = "SELECT user_id, access_lvl, username, user_password, user_salt " .
+				$sql = "SELECT user_id, access_lvl, username, user_password, user_salt, user_timezone " .
 					"FROM users_grumble " .
 					"WHERE user_email='" . $email . "' LIMIT 0,1";
 				$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
@@ -32,6 +30,7 @@
 					$_SESSION["user_id"] = $row["user_id"];
 					$_SESSION["access_lvl"] = $row["access_lvl"];
 					$_SESSION["username"] = $row["username"];	
+					$_SESSION["timezone"] = $row["user_timezone"];
 					if(isset($_POST["remember-box"])) {
 						$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
 						$Chars_Len = 63;
@@ -88,16 +87,9 @@
 			break;
 			
 		case "Create Account" :
-			if(isset($_POST["firstname"]) && strlen($_POST["firstname"]) > 1
-			&& isset($_POST["lastname"]) && strlen($_POST["lastname"]) > 1
-			&& isset($_POST["username"]) && strlen($_POST["username"]) > 3
-				&& isset($_POST["email"]) && strlen($_POST["email"]) > 5
-				&& isset($_POST["password"]) && strlen($_POST["password"]) > 5
-				&& isset($_POST["password2"])
-				&& ($_POST["password"]) == $_POST["password2"] && isset($_POST["terms"])) {
-					if( empty($_POST['token']) || $_POST['token'] != $_SESSION['token2']) 
-						redirect("../");
-				
+			if(isset($_POST["firstname"]) && strlen($_POST["firstname"]) > 1 && isset($_POST["lastname"]) && strlen($_POST["lastname"]) > 1
+			&& isset($_POST["username"]) && strlen($_POST["username"]) > 3&& isset($_POST["email"]) && strlen($_POST["email"]) > 5 && isset($_POST["password"]) && strlen($_POST["password"]) > 5 && isset($_POST["password2"])
+				&& ($_POST["password"]) == $_POST["password2"] && isset($_POST["terms"]) && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token2']) && isset($_POST["tz"]) && $_POST["tz"] != "none") {
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token2']);
 					
@@ -112,6 +104,7 @@
 						$pass1 = mysql_real_escape_string($_POST["password"]);
 						$pass2 = mysql_real_escape_string($_POST["password2"]);
 						$email = mysql_real_escape_string($_POST["email"]);
+						$timezone = mysql_real_escape_string($_POST["tz"]);
 						
 						$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
 						$Chars_Len = 63;
@@ -126,8 +119,8 @@
 						
 						$hashed_password = crypt($pass1, $salt) . $salt;
 						
-						$sql = "INSERT INTO users_grumble(username, user_firstname, user_lastname, user_password, user_salt, user_email, user_create_date) " . 
-							"VALUES('" . $username . "','" . $firstname . "','" . $lastname . "','" . $hashed_password . "','" . $salt . "','" . $email . "','" . date("Y-m-d H:i:s", time()) . "')";
+						$sql = "INSERT INTO users_grumble(username, user_firstname, user_lastname, user_password, user_salt, user_email, user_create_date, user_timezone) " . 
+							"VALUES('" . $username . "','" . $firstname . "','" . $lastname . "','" . $hashed_password . "','" . $salt . "','" . $email . "','" . date("Y-m-d H:i:s", time()) . "','" . $timezone . "')";
 						mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
 						
 						$id = mysql_insert_id();
@@ -140,6 +133,7 @@
 						$_SESSION["user_id"] = $id;
 						$_SESSION["access_lvl"] = 1;
 						$_SESSION["username"] = $username;
+						$_SESSION["timezone"] = $timezone;
 						redirect("../");
 					}
 					else {

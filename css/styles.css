@@ -563,7 +563,12 @@ html { overflow-y: scroll; }
 	float:left;	
 	margin-left:0px;
 }
-
+.comments-view img {
+	margin:0 2px -2px 2px;		
+}
+.comments-view img:hover { 
+	cursor:pointer;
+}
 .view-all-comments {
 	width:100%;
 	padding:5px 0px 5px 0;
@@ -608,7 +613,12 @@ html { overflow-y: scroll; }
 	text-decoration:underline;	
 	cursor:pointer;
 }
-
+.votes-up img {
+	margin:0 2px -2px 2px;		
+}
+.votes-up img:hover { 
+	cursor:pointer;
+}
 .comments-view span {
 	color:#000;	
 }

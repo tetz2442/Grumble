@@ -21,6 +21,7 @@
                 //if $_SESSION['username'] is false, we know the user is not logged in
                 if(isset($_SESSION['username'])) {
                     $loggedin = true;
+					date_default_timezone_set($_SESSION["timezone"]);
                 }
                 else {
                     $loggedin = false;	

@@ -267,6 +267,20 @@ $(document).ready(function() {
 			$("#createError").addClass("available");
 		}
 	});
+	
+	//stores the url parameter
+	$.urlParam = function(name){
+		var results = null;
+		var results = new RegExp('[\\?&]' + name + '=([^&#]*)').exec(window.location.href);
+		if(results != null) {
+			return results[1] || 0;
+		}
+	}
+	
+	if($.urlParam("create") == "fail") {
+		$("#notification-bar p").html("Error when creating account.").addClass("error").removeClass("available");
+		$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+	}
 });
 
 function checkLength(element, chars_allowed) {

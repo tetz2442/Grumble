@@ -39,20 +39,28 @@ function outputGrumbles($grumble, $comments = false, $loggedin = false) {
 					$commentcount = mysql_query($sql, $conn);
 					$row3 = mysql_fetch_array($commentcount);
 					if($comments) {
-						echo '<p class="gif-loader-comments"><img src="/images/ajax-loader.gif" width="16" height="16"/></p><p class="comments-view" rel="' . $row["status_id"] . '" data-html="Comments" data-number="(' . $row3[0] . ')" data-comments="' . $row3[0] . '" title="View/Add comments on this Grumble">Comments<span>(' . $row3[0] . ')</span></p>';
+						echo '<p class="gif-loader-comments"><img src="/images/ajax-loader.gif" alt="loader" width="16" height="16"/></p><p class="comments-view" rel="' . $row["status_id"] . '" data-html="Comments" data-number="(' . $row3[0] . ')" data-comments="' . $row3[0] . '" title="View/Add comments on this Grumble">Comments';
+						if($row3[0] >= 1)
+							echo '<img src="/images/balloons.png" alt="View Comments" width="16" height="16"/><span>(' . $row3[0] . ')</span></p>';
+						else 
+							echo '<img src="/images/balloon.png" alt="View Comment" width="16" height="16"/><span>(' . $row3[0] . ')</span></p>';
 					}
 					else {
-						echo '<p class="gif-loader-comments"><img src="/images/ajax-loader.gif" width="16" height="16"/></p><p class="comments-view" rel="' . $row["status_id"] . '" data-html="Comments" data-number="(' . $row3[0] . ')" data-comments="' . $row3[0] . '" title="View/Add comments on this Grumble"><a>Comments</a><span>(' . $row3[0] . ')</span></p>';
+						echo '<p class="gif-loader-comments"><img src="/images/ajax-loader.gif" alt="loader" width="16" height="16"/></p><p class="comments-view" rel="' . $row["status_id"] . '" data-html="Comments" data-number="(' . $row3[0] . ')" data-comments="' . $row3[0] . '" title="View/Add comments on this Grumble"><a>Comments</a>';
+						if($row3[0] >= 1)
+							echo '<img src="/images/balloons.png" alt="View Comments" width="16" height="16"/><span>(' . $row3[0] . ')</span></p>';
+						else 
+							echo '<img src="/images/balloon.png" alt="View Comment" width="16" height="16"/><span>(' . $row3[0] . ')</span></p>';
 					}
 			}
 			if((isset($result2) && $row2 = mysql_fetch_array($result2))) {
-				echo '<p class="votes-up" title="You have already voted up">Vote up<span class="votes-up-number">(' . $row["votes_up_count"] . ')</span></p>';
+				echo '<p class="votes-up" title="You have already voted up">Vote up<img src="/images/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/><span class="votes-up-number">(' . $row["votes_up_count"] . ')</span></p>';
 			}
 			else if(!isset($_SESSION["user_id"])) {
 				echo '<p class="votes-up" title="You must log in to vote up">' . $row["votes_up_count"] . ' Vote(s) up</p>';
 			}
 			else {
-				echo '<p class="votes-up" title="Vote this grumble up"><a rel="' . $row["status_id"] . '" href="#">Vote up</a>(<span class="votes-up-number">' . $row["votes_up_count"] . '</span>)</p>';
+				echo '<p class="votes-up" title="Vote this grumble up"><a rel="' . $row["status_id"] . '" href="#">Vote up</a><img src="/images/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/>(<span class="votes-up-number">' . $row["votes_up_count"] . '</span>)</p>';
 			}
 			echo '</div>';
 			echo '</div>';
