@@ -79,7 +79,7 @@ if($exist) {
         echo '<div id="grumbles-left">';
         ?>
         <div id="grumbles-left-header">
-            <h3 <?php if($row["grumble_number"] > 10) echo 'title="Number of total grumbles"';?>>Grumbles<?php if($row["grumble_number"] > 10) echo "(" . $row["grumble_number"] . ")";?></h3>
+            <h3 <?php if($row["grumble_number"] > 10) echo 'title="Number of total grumbles"';?>>Grumbles<?php if($row["grumble_number"] > 10) echo "(<span>" . $row["grumble_number"] . "</span>)";?></h3>
         </div>
         <?php
         if(isset($_SESSION["username"])) {

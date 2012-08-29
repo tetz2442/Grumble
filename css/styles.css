@@ -740,6 +740,7 @@ html { overflow-y: scroll; }
 	max-width:635px;
 	max-height:200px;
 	padding:6px;
+	background-color:#f0f0f0;
 }
 #grumble-comment textarea:hover {
 	border:1px solid #999;
