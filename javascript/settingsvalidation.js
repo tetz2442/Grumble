@@ -147,15 +147,18 @@ $(document).ready(function() {
 							location = "http://" + window.location.hostname;
 						}
 						$("#gif-loader-settings").fadeOut("fast");
-						//clear fields
-						$("#pass-current").val("");
-						$("#pass-change").val("");
-						$("#pass-change2").val("");
-						$("#pass-change").parent().find(".validation-settings:eq(0)").fadeOut(500);
-						$("#pass-change2").parent().find(".validation-settings:eq(1)").fadeOut(500);
-						username = false;
-						passwords = false;
-						changes = false;
+						
+						if(result != 0) {
+							//clear fields
+							$("#pass-current").val("");
+							$("#pass-change").val("");
+							$("#pass-change2").val("");
+							$("#pass-change").parent().find(".validation-settings:eq(0)").fadeOut(500);
+							$("#pass-change2").parent().find(".validation-settings:eq(1)").fadeOut(500);
+							username = false;
+							passwords = false;
+							changes = false;
+						}
 					});
 				}
 			}
