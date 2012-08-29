@@ -3,10 +3,9 @@
 	require_once "timeago.php";
 	require_once "outputgrumbles.php";
 	require_once "sendemail.php";
-	
 	session_start();
 	if(isset($_POST["grumble"]) && strlen($_POST["grumble"]) > 0 && strlen($_POST["grumble"]) <= 400 && isset($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
-		
+		date_default_timezone_set($_SESSION["timezone"]);
 		$grumble = mysql_real_escape_string(strip_tags($_POST["grumble"]));
 		$category = mysql_real_escape_string(strip_tags($_POST["category"]));
 		

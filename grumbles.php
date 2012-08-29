@@ -34,7 +34,7 @@ if($exist) {
             <div id="category-header">
                 <h1 id="subcat-id" data-id="<?php echo strip_tags($_GET["subcat"]);?>"><?php echo stripslashes($row["sub_category_name"]); ?></h1>
                 <h4><a href="/category/<?php echo strtolower($row["category_name"]); ?>" class="colored-link-1"><?php echo stripslashes($row["category_name"]); ?></a> | Created by <a href="/profile/<?php echo $row["username"];?>" class="colored-link-1"><?php echo $row["username"];?></a></h4>
-                <p id="sub-category-desc"><?php echo stripslashes($row["sub_category_description"]); ?></p>
+                <p id="sub-category-desc"><?php echo stripslashes($row["sub_category_description"]); echo date_default_timezone_get();?></p>
             </div>
             <div id="share-category">
             <?php

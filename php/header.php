@@ -3,7 +3,7 @@ session_start();
 //if cookie is set, set session variables
 if(isset($_COOKIE["user_grumble"]) && !isset($_SESSION["user_id"])) {
 	require_once "conn.php";
-	$sql = "SELECT cg.cookie_id, ug.user_id, ug.access_lvl, ug.username " .
+	$sql = "SELECT cg.cookie_id, ug.user_id, ug.access_lvl, ug.username, ug.user_timezone " .
 			"FROM cookies_grumble AS cg " .
 			"LEFT OUTER JOIN users_grumble AS ug ON cg.user_id = ug.user_id " .
 			"WHERE cg.cookie_text='" . $_COOKIE["user_grumble"] . "' AND cg.cookie_expire >= '" . date("Y-m-d H:i:s", time()) . "' LIMIT 0,1";
@@ -13,6 +13,8 @@ if(isset($_COOKIE["user_grumble"]) && !isset($_SESSION["user_id"])) {
 		$_SESSION["user_id"] = $row["user_id"];
 		$_SESSION["access_lvl"] = $row["access_lvl"];
 		$_SESSION["username"] = $row["username"];
+		$_SESSION["timezone"] = $row["user_timezone"];
+		date_default_timezone_set($_SESSION["timezone"]);
 	}	
 }
 ?>
