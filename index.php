@@ -48,7 +48,7 @@ else {
                 $result = mysql_query($sql, $conn);
                 
 				$topnumber = mysql_num_rows($result);
-				
+			
                 if(mysql_num_rows($result) > 0) {
                     while($row2 = mysql_fetch_array($result)) {
                         outputThreads($row2["sub_category_id"], true);	

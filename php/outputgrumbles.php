@@ -32,6 +32,11 @@ function outputGrumbles($grumble, $comments = false, $loggedin = false) {
 					echo '<div class="embed-link"></div>';
 				echo '</div>';
 			echo '<div class="grumble-extras">';
+			if(isset($_SESSION["username"]) && $_SESSION["username"] == $row["username"]) {
+				echo '<div class="grumble-options">';
+				echo '<p class="grumble-delete" title="Delete this Grumble">Delete</p>';
+				echo '</div>';
+			}
 			echo '<div class="grumble-votes">';
 			if(isset($_SESSION["user_id"])) {
 					//get the number of comments from the db

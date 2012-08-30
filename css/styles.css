@@ -765,6 +765,13 @@ html { overflow-y: scroll; }
 	float:right;	
 	margin:5px 5px 0;
 }
+.grumble-options {
+	float:left;	
+	display:none;
+}
+.grumble-options p:hover {
+	cursor:pointer;	
+}
 /********
 *category css
 ******/
