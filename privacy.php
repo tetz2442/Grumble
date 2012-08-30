@@ -8,11 +8,12 @@ require_once "php/containerWide.php";
 	<h1>Privacy Policy</h1>
 
     <p>Grumble is committed to protecting your privacy.</p>
-    <p>This privacy policy describes the privacy practices for the Grumble (the "Site"), located at www.grumbleonline.com).</p>
+    <p>This privacy policy describes the privacy practices for Grumble (the "Site"), located at www.grumbleonline.com).</p>
     <h2>Information we collect</h2>
     <p>We may collect the following information when your register on or fill out a form on our site:</p>
     <ul>
     <li>First name and/or last name</li>
+    <li>Username</li>
     <li>E-mail address</li>
     </ul>
     
