@@ -31,6 +31,8 @@
 					$_SESSION["access_lvl"] = $row["access_lvl"];
 					$_SESSION["username"] = $row["username"];	
 					$_SESSION["timezone"] = $row["user_timezone"];
+					
+					//mysql_query("SET time_zone = " . $row["user_timezone"], $conn);
 					if(isset($_POST["remember-box"])) {
 						$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
 						$Chars_Len = 63;

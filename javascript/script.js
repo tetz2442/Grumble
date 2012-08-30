@@ -61,6 +61,35 @@ $(document).ready(function() {
 			}
 		}
 	});
+	
+	$("body").on("mouseover", ".grumble-holder", function () {
+		$(this).find(".grumble-options").show();
+	}).mouseout(function () {
+		$(this).find(".grumble-options").hide();
+	});
+	
+	$("body").on("click", ".grumble-options p", function () {
+		var $element = $(this);
+		if($element.text() == "Delete") {
+			var id = $element.parents(".grumble-holder").find(".username").attr("rel");
+			if(confirm("Are you sure you want to delete this Grumble? All votes and comment will be deleted also.")) {
+				$element.parents(".grumble-holder").find(".gif-loader-comments").show();
+				$.post("/php/grumbleajax.php", {grumbleid:id, action:"Delete"},
+				function(result) {
+					$element.parents(".grumble-holder").find(".gif-loader-comments").hide();
+					if(result == 1) {
+						$("#notification-bar p").html("Grumble deleted.").removeClass("error").addClass("available");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						$element.parents(".grumble-holder").remove();
+					}
+					else {
+						$("#notification-bar p").html("Something went wrong. Could not delete.").removeClass("available").addClass("error");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					}
+				});
+			}
+		}
+	});
 
 	//adds a vote to vote up
 	$("body").on("click", ".votes-up a", function(event) {
@@ -270,9 +299,22 @@ $(document).ready(function() {
 						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 					}
 					else if(result != "") {
-						var grumblenumber = parseInt($("#grumbles-left-header span").text()) + 1;
-						$(result).insertBefore(".grumble-holder:first");
-						$("#grumbles-left-header span").html(grumblenumber)
+						if($(".grumble-holder").length > 0) {
+							$(result).insertBefore(".grumble-holder:first");
+						}
+						else {
+							$("#notification-bar p").html("Refreshing page...").removeClass("error").addClass("available");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).show();
+							document.location.reload(true);
+							//$(result).insertAfter(".grumble-comment");
+							//$(".grumbles-left .text-align-center").remove();
+						}
+							
+						if($("#grumbles-left-header").length > 0) {
+							var grumblenumber = parseInt($("#grumbles-left-header span").text()) + 1;
+							$("#grumbles-left-header span").html(grumblenumber);
+						}
+		
 						$("#quick-compose-textarea").val("").css({"height":"20px","background-color":"#f0f0f0"});
 						$("#grumble-comment div").hide();
 					}

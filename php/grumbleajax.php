@@ -17,6 +17,17 @@
 			$grumble = str_replace("\r", "", $grumble);
 			$grumble = str_replace("\n", "", $grumble);
 			
+			//validate grumble length is less than 160 with URL
+			/*if(preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url) == 0 && strlen($grumble) <= 160) {
+				
+			}
+			else if(preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url) && strlen($grumble) > 160) {
+				
+			}
+			else {
+				echo 0;
+			}*/
+			
 			$sql = "INSERT INTO status_grumble " .
 				"(status_text, sub_category_id, date_submitted, user_id) " .
 				"VALUES ('" . $grumble . "'," . $category . 
@@ -52,7 +63,37 @@
 			echo 0;
 		}
 	}
-	else {
-		echo 0;
+	
+	//code for handing deletion of a grumble
+	if(isset($_POST["grumbleid"]) && isset($_POST["action"]) && $_POST["action"] == "Delete" && isset($_SESSION["username"])) {
+		$id = mysql_real_escape_string($_POST["grumbleid"]);
+		
+		//check if status is there and user is owner
+		$sql = "SELECT ug.username, sg.status_id, sg.sub_category_id FROM status_grumble AS sg " .
+		"LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = sg.user_id " . 
+		"WHERE sg.status_id = " . $id . " LIMIT 0,1";
+		$result = mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+		if(mysql_num_rows($result) != 0) {
+			$row = mysql_fetch_array($result);
+			if($row["username"] == $_SESSION["username"]) {
+				//delete everything associated with grumble (grumble, comments, votes)
+				$sql = "DELETE FROM status_grumble WHERE status_id = " . $id . " LIMIT 1";
+				mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+				$sql = "DELETE FROM comments_grumble WHERE status_id = " . $id;
+				mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+				$sql = "DELETE FROM user_likes_grumble WHERE status_id = " . $id;
+				mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+				$sql =  "UPDATE sub_category_grumble SET grumble_number = grumble_number - 1 WHERE sub_category_id = " . $row["sub_category_id"];
+				mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
+				
+				echo 1;
+			}
+			else {
+				echo 0;	
+			}
+		}
+		else {
+			echo 0;	
+		}
 	}
 ?>

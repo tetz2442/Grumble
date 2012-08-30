@@ -34,7 +34,7 @@ if($exist) {
             <div id="category-header">
                 <h1 id="subcat-id" data-id="<?php echo strip_tags($_GET["subcat"]);?>"><?php echo stripslashes($row["sub_category_name"]); ?></h1>
                 <h4><a href="/category/<?php echo strtolower($row["category_name"]); ?>" class="colored-link-1"><?php echo stripslashes($row["category_name"]); ?></a> | Created by <a href="/profile/<?php echo $row["username"];?>" class="colored-link-1"><?php echo $row["username"];?></a></h4>
-                <p id="sub-category-desc"><?php echo stripslashes($row["sub_category_description"]); echo date_default_timezone_get();?></p>
+                <p id="sub-category-desc"><?php echo stripslashes($row["sub_category_description"]);?></p>
             </div>
             <div id="share-category">
             <?php
@@ -70,8 +70,20 @@ if($exist) {
             //grumbleOfTheDay();
             //require_once "php/lightbox.php";
 			require_once "php/notificationbar.php";
+			?>
+            <div id="grumble-comment">
+                    <textarea id="quick-compose-textarea" class="textArea" title="Compose grumble" rows="4" name="grumble" placeholder="Compose new Grumble..."></textarea>
+                    <input type="hidden" name="referrer" value="" id="referrer"/>
+                    <input type="hidden" name="category" id="grumble-category" value="<?php echo strip_tags($_GET["subcat"]); ?>"/>
+                    <div>
+                        <input type="submit" value="Submit Grumble" name="action" id="quick-compose-submit" class="button"/>
+                        <span id="character-count">160</span>
+                        <span id="gif-loader-grumble"><img src="/images/ajax-loader.gif" width="16" height="16"/></span>
+                        <span id="link-present">Link will be shortened.</span>
+                    </div>
+            </div>
+            <?php
         }
-        echo " <br/>\n";
         echo "<p class='text-align-center content-padding'><b>There are currently no grumbles to view.</b></p>";	
         echo '</div>';
     }

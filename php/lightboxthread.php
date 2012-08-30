@@ -14,7 +14,7 @@
         <label for="description">Thread Description</label> (<span class="help-callout colored-link-1" data-id="2" title="How to write a good thread description."><b>?</b></span>)<br/>
         <textarea id="quick-description-textarea" class="textArea" title="Compose grumble" rows="3" name="description" placeholder="Thread Description..."></textarea>
         <div id="lightbox-submit-padding">
-        <select name="category" id="thread-dropdown">
+        <select name="category" id="thread-dropdown" <?php if(isset($_GET["cat"])) echo 'disabled="disabled"';?>>
         	<option selected="selected" value="0">Choose a Category</option>
             <?php
 				$sql = "SELECT category_id, category_name, category_url FROM categories_grumble ORDER BY category_name ASC";
