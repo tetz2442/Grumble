@@ -5,7 +5,7 @@ require_once "php/containerGrumbles.php";
 require_once "php/timeago.php";
 require_once "php/timer.php";
 require_once "php/outputgrumbles.php";
-require_once "php/outputthreads.php";
+require_once "php/outputcomments.php";
 require_once "php/seofriendlyurls.php";
 ?>
 <div class="content-padding">
@@ -15,7 +15,7 @@ if(!isset($_SESSION["username"])) {
 ?>
         <h2>Hey there! Got something to Grumble about? Let's hear it.</h2>
         <p>Grumble lets you discuss topics that you feel are important and need attention.</p>
-        <p>Create a new thread and start Grumbling!</p>
+        <p>Create a new Grumble and start Grumbling!</p>
         <p>
         	<a href='about' class="colored-link-1">About</a> |
         	<a href="create-account" class="colored-link-1">Create account</a>
@@ -26,17 +26,17 @@ else {
 	require_once "php/notificationbar.php";
 ?>
 <h2>Hey <a href="profile/<?php echo $_SESSION["username"]; ?>" class="colored-link-1"><?php echo $_SESSION["username"]; ?></a>! Got something to Grumble about? Let's hear it.</h2>
- <button class="push_button orange" id="start-new-thread" title="Start New Thread">Start New Thread</button>
+ <button class="push_button orange" id="start-new-grumble" title="New Grumble">New Grumble</button>
 <?php
 }
 ?>
 </div>
 <div id="home-tabs-holder">
     <ul class="tabs">
-        <li><a href='#tab1' class="active">Top Threads</a></li>
-        <li><a href='#tab2'>Recent Threads</a></li>
-        <li><a href='#tab3'>Top Grumbles</a></li>
-        <li><a href='#tab4'>Recent Grumbles</a></li>
+        <li><a href='#tab1' class="active">Top Grumbles</a></li>
+        <li><a href='#tab2'>Recent Grumbles</a></li>
+        <li><a href='#tab3'>Top Comments</a></li>
+        <li><a href='#tab4'>Recent Comments</a></li>
     </ul>
     <div id="arrow-top"><img src="images/arrow-up.png" width="15" height="15"/></div>
     <div id="tabs-horizontal-float">
@@ -51,11 +51,11 @@ else {
 			
                 if(mysql_num_rows($result) > 0) {
                     while($row2 = mysql_fetch_array($result)) {
-                        outputThreads($row2["sub_category_id"], true);	
+                        outputGrumbles($row2["sub_category_id"], true);	
                     }
                 }
                 else {
-                    echo '<p class="content-padding"><b>No grumble threads.</b></p>';	
+                    echo '<p class="content-padding"><b>No top grumbles at this time.</b></p>';	
                 }
             ?>
         </div>
@@ -68,11 +68,11 @@ else {
             
             if(mysql_num_rows($result) > 0) {
                 while($row2 = mysql_fetch_array($result)) {
-                    outputThreads($row2["sub_category_id"], true);	
+                    outputGrumbles($row2["sub_category_id"], true);	
                 }
             }
             else {
-                echo '<p class="content-padding"><b>No grumble threads.</b></p>';	
+                echo '<p class="content-padding"><b>No recent grumbles.</b></p>';	
             }
         ?>
         </div>
@@ -89,11 +89,11 @@ else {
                 
                 if(mysql_num_rows($result) > 0) {
                     while($row2 = mysql_fetch_array($result)) {
-                        outputGrumbles($row2["status_id"], false, $loggedin);	
+                        outputComments($row2["status_id"], false, $loggedin);	
                     }
                 }
                 else {
-                    echo '<p class="content-padding"><b>No grumble.</b></p>';	
+                    echo '<p class="content-padding"><b>No top comments at this time.</b></p>';	
                 }
             ?>
         </div>
@@ -106,11 +106,11 @@ else {
             
             if(mysql_num_rows($result) > 0) {
                 while($row2 = mysql_fetch_array($result)) {
-                    outputGrumbles($row2["status_id"], false, $loggedin);	
+                    outputComments($row2["status_id"], false, $loggedin);	
                 }
             }
             else {
-                echo '<p class="content-padding"><b>No grumble.</b></p>';	
+                echo '<p class="content-padding"><b>No comments.</b></p>';	
             }
         ?>
         </div>
@@ -128,6 +128,6 @@ else {
 </div>
 </div>
 <?php	
-require_once "php/lightboxthread.php";
+require_once "php/lightboxgrumble.php";
 require_once "php/footer.php"; 
 ?>

@@ -5,7 +5,7 @@ require_once "php/header.php";
 require_once "php/timeago.php";
 require_once "php/timer.php";
 require_once "php/outputgrumbles.php";
-require_once "php/outputthreads.php";
+require_once "php/outputcomments.php";
 require_once "php/containerStatus.php";
 
 $grumble = true;
@@ -35,8 +35,8 @@ else {
         <?php }?>
     </div>
     <ul class="tabs-profile">
-        <li><a href='#tab1' class="active">Grumbles</a></li>
-        <li><a href='#tab2'>Threads</a></li>
+        <li><a href='#tab1' class="active">Comments</a></li>
+        <li><a href='#tab2'>Grumbles</a></li>
     </ul>
     <div id="arrow-top-profile"><img src="/images/arrow-up.png" width="15" height="15"/></div>
     <div id='tab1'>
@@ -53,12 +53,12 @@ else {
 			
 			if(mysql_num_rows($result) > 0) {
 				while($row = mysql_fetch_array($result)) {
-					outputGrumbles($row["status_id"], false, $loggedin);
+					outputComments($row["status_id"], false, $loggedin);
 				}
 			}
 			else {
 				echo " <br/>\n";
-				echo "<p class='text-align-center content-padding'><b>There are currently no grumbles to view.</b></p>";	
+				echo "<p class='text-align-center content-padding'><b>There are currently no comments to view.</b></p>";	
 				echo '</div>';
 			}
 		}
@@ -74,11 +74,11 @@ else {
 		
 		if(mysql_num_rows($result) > 0) {
 			while($row2 = mysql_fetch_array($result)) {
-				outputThreads($row2["sub_category_id"], true);	
+				outputGrumbles($row2["sub_category_id"], true);	
 			}
 		}
 		else {
-			echo '<p class="text-align-center content-padding"><b>No grumble threads.</b></p>';	
+			echo '<p class="text-align-center content-padding"><b>No grumbles to view.</b></p>';	
 		}
 	?>
     </div>

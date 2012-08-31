@@ -5,8 +5,8 @@ require_once "php/header.php";
 require_once "php/containerGrumbles.php";
 require_once "php/timeago.php";
 require_once "php/timer.php";
-require_once "php/outputgrumbles.php";
-require_once "php/grumbleOfTheDay.php";
+require_once "php/outputcomments.php";
+//require_once "php/grumbleOfTheDay.php";
 
 $grumble = true;
 $exist = true;
@@ -29,8 +29,8 @@ if(isset($_GET["subcat"])) {
 if($exist) {
 	$row = mysql_fetch_array($result2);
 ?>
-    <div id="grumbles-header">
-        <div id="grumbles-category">
+    <div id="grumble-header">
+        <div id="comments-category">
             <div id="category-header">
                 <h1 id="subcat-id" data-id="<?php echo strip_tags($_GET["subcat"]);?>"><?php echo stripslashes($row["sub_category_name"]); ?></h1>
                 <h4><a href="/category/<?php echo strtolower($row["category_name"]); ?>" class="colored-link-1"><?php echo stripslashes($row["category_name"]); ?></a> | Created by <a href="/profile/<?php echo $row["username"];?>" class="colored-link-1"><?php echo $row["username"];?></a></h4>
@@ -65,33 +65,33 @@ if($exist) {
     <?php
     //output all other grumbles for this sub category
     if(mysql_num_rows($result) == 0) {
-        echo '<div id="grumbles-left">';
+        echo '<div id="comments-left">';
         if(isset($_SESSION["username"])) {
             //grumbleOfTheDay();
             //require_once "php/lightbox.php";
 			require_once "php/notificationbar.php";
 			?>
             <div id="grumble-comment">
-                    <textarea id="quick-compose-textarea" class="textArea" title="Compose grumble" rows="4" name="grumble" placeholder="Compose new Grumble..."></textarea>
+                    <textarea id="quick-compose-textarea" class="textArea" title="Compose comment" rows="4" name="grumble" placeholder="Compose new comment..."></textarea>
                     <input type="hidden" name="referrer" value="" id="referrer"/>
-                    <input type="hidden" name="category" id="grumble-category" value="<?php echo strip_tags($_GET["subcat"]); ?>"/>
+                    <input type="hidden" name="category" id="comment-category" value="<?php echo strip_tags($_GET["subcat"]); ?>"/>
                     <div>
                         <input type="submit" value="Submit Grumble" name="action" id="quick-compose-submit" class="button"/>
                         <span id="character-count">160</span>
-                        <span id="gif-loader-grumble"><img src="/images/ajax-loader.gif" width="16" height="16"/></span>
+                        <span id="gif-loader-comment"><img src="/images/ajax-loader.gif" width="16" height="16"/></span>
                         <span id="link-present">Link will be shortened.</span>
                     </div>
             </div>
             <?php
         }
-        echo "<p class='text-align-center content-padding'><b>There are currently no grumbles to view.</b></p>";	
+        echo "<p class='text-align-center content-padding'><b>There are currently no comments to view.</b></p>";	
         echo '</div>';
     }
     else {
-        echo '<div id="grumbles-left">';
+        echo '<div id="comments-left">';
         ?>
-        <div id="grumbles-left-header">
-            <h3 <?php if($row["grumble_number"] > 10) echo 'title="Number of total grumbles"';?>>Grumbles<?php if($row["grumble_number"] > 10) echo "(<span>" . $row["grumble_number"] . "</span>)";?></h3>
+        <div id="comments-left-header">
+            <h3 <?php if($row["grumble_number"] > 10) echo 'title="Number of total grumbles"';?>>Comments<?php if($row["grumble_number"] > 10) echo "(<span>" . $row["grumble_number"] . "</span>)";?></h3>
         </div>
         <?php
         if(isset($_SESSION["username"])) {
@@ -100,27 +100,27 @@ if($exist) {
 			require_once "php/notificationbar.php";
 			?>
             <div id="grumble-comment">
-                    <textarea id="quick-compose-textarea" class="textArea" title="Compose grumble" rows="4" name="grumble" placeholder="Compose new Grumble..."></textarea>
+                    <textarea id="quick-compose-textarea" class="textArea" title="Compose comment" rows="4" name="comment" placeholder="Compose new comment..."></textarea>
                     <input type="hidden" name="referrer" value="" id="referrer"/>
-                    <input type="hidden" name="category" id="grumble-category" value="<?php echo strip_tags($_GET["subcat"]); ?>"/>
+                    <input type="hidden" name="category" id="comment-category" value="<?php echo strip_tags($_GET["subcat"]); ?>"/>
                     <div>
-                        <input type="submit" value="Submit Grumble" name="action" id="quick-compose-submit" class="button"/>
+                        <input type="submit" value="Submit Comment" name="action" id="quick-compose-submit" class="button"/>
                         <span id="character-count">160</span>
-                        <span id="gif-loader-grumble"><img src="/images/ajax-loader.gif" width="16" height="16"/></span>
+                        <span id="gif-loader-comment"><img src="/images/ajax-loader.gif" width="16" height="16"/></span>
                         <span id="link-present">Link will be shortened.</span>
                     </div>
             </div>
             <?php
         }
         while($row = mysql_fetch_array($result)) {
-            outputGrumbles($row["status_id"], false, $loggedin);	
+            outputComments($row["status_id"], false, $loggedin);	
         }
         echo '<div id="gif-loader"><img src="/images/ajax-loader2.gif" width="32" height="32"/></div>';
         echo '</div>';
     }	
 	
     if(preg_match("/\?create=new/", $_SERVER['REQUEST_URI']) == 1) {
-        require_once "php/lightboxsharethread.php"; 
+        require_once "php/lightboxsharegrumble.php"; 
     }
 	
 	if(mysql_num_rows($result) < 10)
@@ -131,7 +131,7 @@ if($exist) {
 //subcat doesnt exist
 else {
 	?>
-    <div class="content-padding"><p class="text-align-center"><br/><b>This thread doesn't exist. Please check your URL.</b></p></div>
+    <div class="content-padding"><p class="text-align-center"><br/><b>This Grumble doesn't exist. Please check your URL.</b></p></div>
     <?php
 	require_once "php/footer.php"; 
 }

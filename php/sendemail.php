@@ -1,6 +1,6 @@
 <?php
 function sendEmail($email, $sendfrom, $type, $parameters) {
-	if($type == "comment") {
+	if($type == "reply") {
 		$subject = "[Comment] on your Grumble!";
 		$body = "A new comment has been placed on your Grumble by " . $parameters[2] . "!\n\n" . 
 		"'" . $parameters[3] . "'\n\nClick the URL or paste it in your browser to view the comment.\n" . $parameters[0] . "\n\nThe Grumble Team\n\n"
@@ -8,7 +8,7 @@ function sendEmail($email, $sendfrom, $type, $parameters) {
 		. "Then let us know what we are doing wrong - http://" . $_SERVER['HTTP_HOST'] . "/contact";
 		mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send email.");
 	}
-	else if($type == "thread") {
+	else if($type == "grumble") {
 		//if the grumble number is divisible by 15, send an email
 		if((intval($parameters[0]) % 15 == 0)) {
 			$subject = "[Thread] your thread has reached " . $parameters[0]. " Grumbles!";

@@ -435,11 +435,11 @@ html { overflow-y: scroll; }
 /********
 *grumble css
 ******/
-#grumbles-category {
+#comments-category {
 	margin:35px 0 25px 0;
 }
 
-#grumbles-category p {
+#comments-category p {
 	margin-top:20px;	
 }
 
@@ -447,11 +447,11 @@ html { overflow-y: scroll; }
 	margin:5px 0px 15px 15px;	
 }
 
-#grumbles-header {
+#grumble-header {
 	float:left;	
 }
 
-#grumbles-left {
+#comments-left {
 	width:649px;
 	margin:auto;
 	overflow:auto;
@@ -459,7 +459,7 @@ html { overflow-y: scroll; }
 	margin-bottom:50px;
 }
 
-#grumbles-category h3 {
+#comment-category h3 {
 	margin-bottom:5px;
 }
 
@@ -475,7 +475,7 @@ html { overflow-y: scroll; }
 	float:left;
 	width:300px;
 }
-#grumbles-left-header {
+#comments-left-header {
 	border-bottom:1px solid #666;
 	margin-top:20px;	
 	padding-bottom:5px;
@@ -484,47 +484,38 @@ html { overflow-y: scroll; }
 	margin:25px 0 0 35px;	
 }
 
-.grumble-holder {
+.comment-holder {
 	padding:15px;
 	border-bottom:1px solid #e0e0e0;
 }
-.grumble-holder-top {
-	float:left;
-	border-bottom:1px solid #e0e0e0;
-}
 
-#top-grumble h2 {
-	margin-top:0px;
-	margin-bottom:5px;
-}
-
-.grumble-inner-holder {
+.comment-inner-holder {
 	width:100%;
 }
 
-.grumble-header {
+.comment-header {
 	width:100%;
 	overflow:auto;
 }
 
-.grumble-header a {
+.comment-header a {
 	float:left;
 }
 
-.grumble-header span {
+.comment-header span {
 	float:right;
 	padding:2px;
 }
 
-.grumble-text-holder {
+.comment-text-holder {
 	padding:5px 0;
 }
 
-.user-grumble {
+.user-comment {
 	float:left;	
 }
 
-#top-grumble-votes {
+#top-comment-votes {
 	float:right;
 	width:72px;
 	border:1px solid #666;
@@ -544,32 +535,26 @@ html { overflow-y: scroll; }
 	padding:5px 0px 5px 0px;
 }
 
-.user-grumble strong, .user-grumble p, user-grumble small {
+.user-comment strong, .user-comment p, user-comment small {
 	margin:0;
 }
 
-.user-grumble p {
+.user-comment p {
 	margin-top:6px;
 	margin-bottom:6px;	
 }
 
-.grumble-extras {
+.comment-extras {
 	margin-top:3px;
 	padding:2px 0px 2px 0px;
 	overflow:auto;
 }
 
-.comments-view {
+.reply-view {
 	float:left;	
 	margin-left:0px;
 }
-.comments-view img {
-	margin:0 2px -2px 2px;		
-}
-.comments-view img:hover { 
-	cursor:pointer;
-}
-.view-all-comments {
+.view-all-replies {
 	width:100%;
 	padding:5px 0px 5px 0;
 	text-align:center;
@@ -582,7 +567,7 @@ html { overflow-y: scroll; }
 	border-bottom:1px solid #e8e8e8;
 }
 
-.view-all-comments:hover {
+.view-all-replies:hover {
 	cursor:pointer;	
 	background-color:#CCC;
 }
@@ -592,7 +577,7 @@ html { overflow-y: scroll; }
 	margin-left:10px;
 }
 
-.grumble-votes {
+.comment-votes {
 	float:right;
 }
 
@@ -619,20 +604,20 @@ html { overflow-y: scroll; }
 .votes-up img:hover { 
 	cursor:pointer;
 }
-.comments-view span {
+.reply-view span {
 	color:#000;	
 }
 
-.comments-view span:hover {
+.reply-view span:hover {
 	text-decoration:none;	
 }
 
-.grumble-votes p {
+.comment-votes p {
 	float:left;	
 	margin:0 0 0 7px;	
 }
 
-.comments {
+.replies {
 	display:none;
 	width:100%;
 	overflow:auto;
@@ -643,35 +628,35 @@ html { overflow-y: scroll; }
 	-webkit-border-radius:3px;
 }
 
-.comment-text {
+.reply-text {
 	margin:6px 0px 6px 0px;	
 }
 
-.comment-username {
+.reply-username {
 	margin-left:0px !important;
 	margin-right:10px;	
 }
 
-.ind-comment {
+.ind-reply {
 	padding:3px 0px 3px 10px;
 	border-bottom:1px solid #e8e8e8;
 }
 
-.ind-comment-last {
+.ind-reply-last {
 	padding:3px 0px 3px 0px;
 	border-bottom:1px solid #000;
 	display:none;
 }
 
-.comment-padding {
+.reply-padding {
 	
 }
 
-.quick-comment {
+.quick-reply {
 	padding:3px 0;	
 }
 
-.quick-comment-input {
+.quick-reply-input {
 	width:86%;
 	max-width:86%;
 	max-height:100px;
@@ -683,18 +668,18 @@ html { overflow-y: scroll; }
 	border:1px solid #999;
 }
 
-.comment-character-count {
+.reply-character-count {
 	float:right;	
 	width:55px;
 	text-align:center;
 	margin:5px 5px 5px 0;
 }
 
-.gif-loader-comments {
+.gif-loader-replies {
 	display:none;
 }
 
-.quick-comment-button {
+.quick-reply-button {
 	margin-right:5px;
 	float:right;
 }
@@ -738,11 +723,11 @@ html { overflow-y: scroll; }
 	margin-right:auto;
 	display:block;
 }
-#grumble-comment {
+#grumble-reply {
 	display:block;	
 	border-bottom:1px solid #e0e0e0;
 }
-#grumble-comment textarea {
+#grumble-reply textarea {
 	width:100%;
 	display:block;
 	margin:10px 0 5px;
@@ -752,24 +737,24 @@ html { overflow-y: scroll; }
 	padding:6px;
 	background-color:#f0f0f0;
 }
-#grumble-comment textarea:hover {
+#grumble-reply textarea:hover {
 	border:1px solid #999;
 }
-#grumble-comment div{
+#grumble-reply div{
 	display:none;
 	width:98%;
 	height:38px;
 }
-#gif-loader-grumble {
+#gif-loader-comment {
 	display:none;
 	float:right;	
 	margin:5px 5px 0;
 }
-.grumble-options {
+.comment-options {
 	float:left;	
 	display:none;
 }
-.grumble-options p:hover {
+.comment-options p:hover {
 	cursor:pointer;	
 }
 /********
@@ -820,7 +805,7 @@ html { overflow-y: scroll; }
 	margin-left:70px;
 }
 
-.thread-holder {
+.grumble-holder {
 	float:left;
 	width:100%;
 	border-bottom:1px solid #e0e0e0;
@@ -829,19 +814,19 @@ html { overflow-y: scroll; }
 	min-height:70px;
 	padding:15px;
 }
-.thread-holder .content-padding {
+.grumble-holder .content-padding {
 	min-height:55px;
 }
-.thread-text-holder {
+.grumble-text-holder {
 	margin-right:100px;
 }
-.thread-text-holder p {
+.grumble-text-holder p {
 	margin-top:10px;	
 }
-.thread-comment-number {
+.grumble-comment-number {
 	float:right;
 }
-.thread-comment-font {
+.grumble-comment-font {
 	float:right;
 	text-align:center;
 	font-size:1.4em;
@@ -857,7 +842,7 @@ html { overflow-y: scroll; }
    -moz-box-shadow: 0 4px 4px -2px #000000;
     box-shadow: 0 4px 4px -2px #000000;
 }
-.thread-cat-name {
+.grumble-cat-name {
 	margin-bottom:8px;
 	font-size:.9em;
 }
@@ -1146,24 +1131,7 @@ html { overflow-y: scroll; }
 	opacity:.5;
 	display:none;
 }
-
-/*#grumble-status-lightbox {
-	width:500px;
-	top:150px;
-	left:50%;
-	margin-left:-250px;
-	position:fixed;
-	padding:10px 15px 10px 15px;
-	background-color:#FAF7F7;
-	z-index:6001;
-	border-radius:5px;
-	-moz-border-radius:5px;
-	-webkit-border-radius:5px;
-	box-shadow: 0 4px 12px rgba(0,0,0,.4);
-	display:none;
-}*/
-
-#grumble-thread-lightbox {
+#grumble-lightbox {
 	width:500px;
 	top:150px;
 	left:50%;
@@ -1178,8 +1146,7 @@ html { overflow-y: scroll; }
 	box-shadow: 0 4px 12px rgba(0,0,0,.4);
 	display:none;
 }
-
-#grumble-thread-share {
+#grumble-share {
 	width:400px;
 	top:150px;
 	left:50%;
@@ -1206,7 +1173,10 @@ html { overflow-y: scroll; }
 #share-info {
 	margin:10px 0 15px 0;	
 }
-
+#grumble-dropdown:disabled {
+	background-color:#fff;
+	color:#999;	
+}
 .lightbox-head {
 	float:left;
 	width:100%;
@@ -1229,7 +1199,7 @@ html { overflow-y: scroll; }
 	cursor:pointer;	
 }
 
-#quick-description-threadname {
+#quick-description-grumblename {
 	width:100%;	
 	max-width:495px;
 	border-radius:5px;
@@ -1238,14 +1208,14 @@ html { overflow-y: scroll; }
 	margin:3px 0 10px;
 }
 
-/*#quick-description-textarea {
+#quick-description-textarea {
 	width:100%;	
 	max-width:495px;
 	border-radius:5px;
 	-moz-border-radius:5px;
 	-webkit-border-radius:5px;
 	margin-top:3px;
-}*/
+}
 
 #quick-description-submit {
 	float:right;	
@@ -1264,7 +1234,6 @@ html { overflow-y: scroll; }
 	font-size:.8em;
 	display:none;	
 }
-
 #notification-bar {
 	position:fixed;
 	z-index:6010;
@@ -1368,10 +1337,6 @@ no script
 #no-script button {
 	margin:65px auto;
 }
-
-/********
-no script
-************/
 #page-four {
 	
 }

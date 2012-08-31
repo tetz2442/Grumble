@@ -1,7 +1,7 @@
 <?php
 require_once "php/conn.php";
 require_once "php/http.php";
-require_once "php/outputthreads.php";
+require_once "php/outputgrumbles.php";
 require_once "php/header.php";
 require_once "php/containerGrumbles.php";
 
@@ -24,19 +24,19 @@ else {
      <?php
 	 	if(isset($_SESSION["user_id"])) {
 	 ?>
-     <button class="push_button orange large" id="start-new-thread">Start New Thread</button>
+     <button class="push_button orange large" id="start-new-grumble">New Grumble</button>
      <?php
 		}
 		else {
 	 ?>
-     <button class="push_button orange large dropdown-shortlink">Start New Thread</button>
+     <button class="push_button orange large dropdown-shortlink">New Grumble</button>
      <?php
 		}
 	 ?>
 </div>
     <ul class="tabs">
-        <li><a href='#tab1' class="active">Top Threads</a></li>
-        <li><a href='#tab2'>Recent Threads</a></li>
+        <li><a href='#tab1' class="active">Top Grumbles</a></li>
+        <li><a href='#tab2'>Recent Grumbles</a></li>
     </ul>
     <div id="arrow-top"><img src="/images/arrow-up.png" width="15" height="15"/></div>
     <div id='tab1'>
@@ -50,11 +50,11 @@ else {
 			
 			if(mysql_num_rows($result) > 0) {
 				while($row2 = mysql_fetch_array($result)) {
-					outputThreads($row2["sub_category_id"]);	
+					outputGrumbles($row2["sub_category_id"]);	
 				}
 			}
 			else {
-				echo '<p class="content-padding"><b>No grumble threads.</b></p>';	
+				echo '<p class="content-padding"><b>No Grumbles to view.</b></p>';	
 			}
 		?>
     </div>
@@ -67,11 +67,11 @@ else {
 		
 		if(mysql_num_rows($result) > 0) {
 			while($row2 = mysql_fetch_array($result)) {
-				outputThreads($row2["sub_category_id"]);	
+				outputGrumbles($row2["sub_category_id"]);	
 			}
 		}
 		else {
-			echo '<p class="content-padding"><b>No grumble threads.</b></p>';	
+			echo '<p class="content-padding"><b>No Grumbles to view.</b></p>';	
 		}
 	?>
     </div>
@@ -91,7 +91,7 @@ else {
 </div>
 <?php
 if(isset($_SESSION["username"])) {
-	require_once "php/lightboxthread.php";
+	require_once "php/lightboxgrumble.php";
 	require_once "php/notificationbar.php";
 }
 require_once "php/footer.php"; 

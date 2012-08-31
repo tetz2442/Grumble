@@ -62,25 +62,25 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("body").on("mouseover", ".grumble-holder", function () {
+	$("body").on("mouseover", ".comment-holder", function () {
 		$(this).find(".grumble-options").show();
 	}).mouseout(function () {
-		$(this).find(".grumble-options").hide();
+		$(this).find(".comment-options").hide();
 	});
 	
-	$("body").on("click", ".grumble-options p", function () {
+	$("body").on("click", ".reply-options p", function () {
 		var $element = $(this);
 		if($element.text() == "Delete") {
-			var id = $element.parents(".grumble-holder").find(".username").attr("rel");
+			var id = $element.parents(".comment-holder").find(".username").attr("rel");
 			if(confirm("Are you sure you want to delete this Grumble? All votes and comment will be deleted also.")) {
-				$element.parents(".grumble-holder").find(".gif-loader-comments").show();
-				$.post("/php/grumbleajax.php", {grumbleid:id, action:"Delete"},
+				$element.parents(".comment-holder").find(".gif-loader-replies").show();
+				$.post("/php/commentajax.php", {commentid:id, action:"Delete"},
 				function(result) {
-					$element.parents(".grumble-holder").find(".gif-loader-comments").hide();
+					$element.parents(".comment-holder").find(".gif-loader-replies").hide();
 					if(result == 1) {
-						$("#notification-bar p").html("Grumble deleted.").removeClass("error").addClass("available");
+						$("#notification-bar p").html("Comment deleted.").removeClass("error").addClass("available");
 						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
-						$element.parents(".grumble-holder").remove();
+						$element.parents(".comment-holder").remove();
 					}
 					else {
 						$("#notification-bar p").html("Something went wrong. Could not delete.").removeClass("available").addClass("error");
@@ -100,10 +100,10 @@ $(document).ready(function() {
 		var votes = parseInt($element.find(".votes-up-number").text())
 		var htmlString = 'Vote up(<span class="votes-up-number">' + votes + '</span>)';
 		$element.html(htmlString);
-		$element.parents(".grumble-holder").find(".gif-loader-comments").show();
+		$element.parents(".comment-holder").find(".gif-loader-replies").show();
 		$.post("/php/votes.php", {vote_up:id},
 			function(result) {
-				$element.parents(".grumble-holder").find(".gif-loader-comments").hide();
+				$element.parents(".comment-holder").find(".gif-loader-replies").hide();
 				if(result == 1) {
 					votes = votes + 1;
 					$element.find(".votes-up-number").html(votes);
@@ -111,91 +111,91 @@ $(document).ready(function() {
 			});
 	});
 	
-	$("body").on("keyup",(".quick-comment-input"), function(event) {
+	$("body").on("keyup",(".quick-reply-input"), function(event) {
 		/*if (event.keyCode == 13) { 
 			event.preventDefault(); 
 		}*/
 		 var chars = $(this).val();
 		 var charLength = 160 - chars.length;
 		 if(charLength <= 0) {
-			 $(this).parent().find(".comment-character-count").html(charLength);
-			 $(this).parent().find(".comment-character-count").css("color", "red");
+			 $(this).parent().find(".reply-character-count").html(charLength);
+			 $(this).parent().find(".reply-character-count").css("color", "red");
 		 }
 		 else {
-			 $(this).parent().find(".comment-character-count").html(charLength);
-			 $(this).parent().find(".comment-character-count").css("color", "green");
+			 $(this).parent().find(".reply-character-count").html(charLength);
+			 $(this).parent().find(".reply-character-count").css("color", "green");
 		 }
 	});
 	
 	//opens and load comments
-	$("body").on("click", "p.comments-view", function() {
+	$("body").on("click", "p.replies-view", function() {
 		var $element = $(this);
 		var id = $element.attr("rel");
-		if($element.parents(".grumble-holder").find(".comments").is(":visible") == false) {
-			if($element.attr("data-comments") == 0) {
-				$element.parents(".grumble-holder").find(".comments").slideDown("fast");
+		if($element.parents(".comment-holder").find(".replies").is(":visible") == false) {
+			if($element.attr("data-replies") == 0) {
+				$element.parents(".comment-holder").find(".replies").slideDown("fast");
 				$element.find("a").html("Close");
 			}
-			else if($element.parents(".grumble-holder").find(".ind-comment").length > 0) {
-				$element.parents(".grumble-holder").find(".comments").slideDown("fast");
+			else if($element.parents(".comment-holder").find(".ind-reply").length > 0) {
+				$element.parents(".comment-holder").find(".replies").slideDown("fast");
 				$element.find("a").html("Close");
 			}
 			else {
-				$element.parents(".grumble-holder").find(".gif-loader-comments").show();
-				$element.parents(".grumble-holder").find(".view-all-comments").show();
-				$.post("/php/comments.php", {comment:id, type:"load", amount:"few"},
+				$element.parents(".comment-holder").find(".gif-loader-replies").show();
+				$element.parents(".comment-holder").find(".view-all-replies").show();
+				$.post("/php/repliesajax.php", {reply:id, type:"load", amount:"few"},
 					function(result) {
-						$element.parents(".grumble-holder").find(".gif-loader-comments").hide();
+						$element.parents(".comment-holder").find(".gif-loader-replies").hide();
 						if(result != "") {
-							$(result).insertBefore($element.parents(".grumble-holder").find(".quick-comment-input"));
-							$element.parents(".grumble-holder").find(".comments").slideDown("fast");
+							$(result).insertBefore($element.parents(".comment-holder").find(".quick-reply-input"));
+							$element.parents(".comment-holder").find(".replies").slideDown("fast");
 							$element.find("a").html("Close");
 						}
 				});
 			}
 		}
 		else if($element.find("a").html() == "Close") {
-			$element.parents(".grumble-holder").find(".comments").slideUp("fast");
+			$element.parents(".comment-holder").find(".replies").slideUp("fast");
 			$element.find("a").html($element.attr("data-html"));
 		}
 	});
 	
-	$("body").on("click", "div.view-all-comments", function() {
+	$("body").on("click", "div.view-all-replies", function() {
 		var $element = $(this);
 		var id = $element.attr("rel");
-		$element.parents(".grumble-holder").find(".gif-loader-comments").show();
-		$.post("/php/comments.php", {comment:id, type:"load", amount:"all"},
+		$element.parents(".comment-holder").find(".gif-loader-replies").show();
+		$.post("/php/repliesajax.php", {reply:id, type:"load", amount:"all"},
 			function(result) {
-				$element.parents(".grumble-holder").find(".gif-loader-comments").hide();
+				$element.parents(".comment-holder").find(".gif-loader-replies").hide();
 				if(result != "") {
-					$.each($(".ind-comment"), function() {
+					$.each($(".ind-reply"), function() {
 						$(this).remove();
 					});
-					$(result).insertBefore($element.parents(".grumble-holder").find(".quick-comment-input"));
+					$(result).insertBefore($element.parents(".comment-holder").find(".quick-reply-input"));
 					$element.hide();
 				}
 		});
 	});
 	
 	//checks if the submit comment button has been clicked
-	$("body").on("click", ".quick-comment-button", function() {
+	$("body").on("click", ".quick-reply-button", function() {
 		var $element = $(this);
-		var $commentText = $(this).parent().find(".quick-comment-input").val();
-		var id = $(this).parents(".grumble-holder").find(".comments-view").attr("rel");
-		var statususername = $(this).parents(".grumble-holder").find(".username:first").text();
+		var $commentText = $(this).parent().find(".quick-reply-input").val();
+		var id = $(this).parents(".comment-holder").find(".replies-view").attr("rel");
+		var statususername = $(this).parents(".comment-holder").find(".username:first").text();
 		if($commentText != "" && $commentText.length <= 160) {
-			$element.parents(".grumble-holder").find(".gif-loader-comments").show();
-			$.post("/php/comments.php", {comment:id, type:"enter", text:$commentText, statususername:statususername},
+			$element.parents(".comment-holder").find(".gif-loader-replies").show();
+			$.post("/php/repliesajax.php", {reply:id, type:"enter", text:$commentText, statususername:statususername},
 			function(result) {
-				$element.parents(".grumble-holder").find(".gif-loader-comments").hide();
+				$element.parents(".comment-holder").find(".gif-loader-replies").hide();
 				if(result != "") {
-					$(result).insertBefore($element.parents(".grumble-holder").find(".quick-comment-input"));
-					$element.parents(".grumble-holder").find(".ind-comment:last").slideDown("fast");
-					$element.parents(".grumble-holder").find(".quick-comment-input").val("");
-					$element.parents(".grumble-holder").find(".comment-character-count").html("160");
-					$element.parents(".grumble-holder").find(".comments-view").attr("data-comments", (parseInt($element.parents(".grumble-holder").find(".comments-view").attr("data-comments")) + 1));
-					$element.parents(".grumble-holder").find(".comments-view span").html("(" + $element.parents(".grumble-holder").find(".comments-view").attr("data-comments") + ")");
-					$element.parents(".grumble-holder").find(".view-all-comments p").html("View All Comments(" + $element.parents(".grumble-holder").find(".comments-view").attr("data-comments") + ")");
+					$(result).insertBefore($element.parents(".comment-holder").find(".quick-reply-input"));
+					$element.parents(".comment-holder").find(".ind-reply:last").slideDown("fast");
+					$element.parents(".comment-holder").find(".quick-reply-input").val("");
+					$element.parents(".comment-holder").find(".reply-character-count").html("160");
+					$element.parents(".comment-holder").find(".comments-view").attr("data-replies", (parseInt($element.parents(".comment-holder").find(".replies-view").attr("data-reply")) + 1));
+					$element.parents(".comment-holder").find(".replies-view span").html("(" + $element.parents(".comment-holder").find(".replies-view").attr("data-replies") + ")");
+					$element.parents(".comment-holder").find(".view-all-replies p").html("View All Replies(" + $element.parents(".comment-holder").find(".comments-view").attr("data-comments") + ")");
 				}
 			});
 		}
@@ -233,7 +233,7 @@ $(document).ready(function() {
 		$("#grumble-comment div").show();
 	});
 	
-	$('#quick-description-threadname').keyup(function() {
+	$('#quick-description-grumblename').keyup(function() {
 		 var chars = $(this).val();
 		 var charLength = 40 - chars.length;
 		 if(charLength <= 0) {
@@ -288,19 +288,19 @@ $(document).ready(function() {
 			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
 		else {
-			var grumbletext = $("#quick-compose-textarea").val();
-			var category = $("#grumble-category").val();
-			$(element).parent().find("#gif-loader-grumble").show();
-			$.post("/php/grumbleajax.php", {grumble:grumbletext, category:category},
+			var commenttext = $("#quick-compose-textarea").val();
+			var category = $("#comment-category").val();
+			$(element).parent().find("#gif-loader-comment").show();
+			$.post("/php/commentajax.php", {comment:commenttext, category:category},
 					function(result) {
-					$(element).parent().find("#gif-loader-grumble").hide();
+					$(element).parent().find("#gif-loader-comment").hide();
 					if(result == 0 || result == "") {
 						$("#notification-bar p").html("Something went wrong. Please check your entries.").addClass("error");
 						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 					}
 					else if(result != "") {
-						if($(".grumble-holder").length > 0) {
-							$(result).insertBefore(".grumble-holder:first");
+						if($(".comment-holder").length > 0) {
+							$(result).insertBefore(".comment-holder:first");
 						}
 						else {
 							$("#notification-bar p").html("Refreshing page...").removeClass("error").addClass("available");
@@ -310,9 +310,9 @@ $(document).ready(function() {
 							//$(".grumbles-left .text-align-center").remove();
 						}
 							
-						if($("#grumbles-left-header").length > 0) {
-							var grumblenumber = parseInt($("#grumbles-left-header span").text()) + 1;
-							$("#grumbles-left-header span").html(grumblenumber);
+						if($("#comments-left-header").length > 0) {
+							var grumblenumber = parseInt($("#comments-left-header span").text()) + 1;
+							$("#comments-left-header span").html(grumblenumber);
 						}
 		
 						$("#quick-compose-textarea").val("").css({"height":"20px","background-color":"#f0f0f0"});
@@ -323,19 +323,19 @@ $(document).ready(function() {
 	});
 	
 	$("#quick-description-submit").click(function(event) {
-		if($("#quick-description-threadname").val().length > 40 || charLengthThread < 0) {
+		if($("#quick-description-grumblename").val().length > 40 || charLengthThread < 0) {
 			event.preventDefault();
 			
 			$("#notification-bar p").html("Too many characters to submit.").addClass("error");
 			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
-		else if($("#quick-description-threadname").val().length == 0 || $("#quick-description-textarea").val().length == 0) {
+		else if($("#quick-description-grumblename").val().length == 0 || $("#quick-description-textarea").val().length == 0) {
 			event.preventDefault();
 			
-			$("#notification-bar p").html("Thread name/description cannot be empty.").addClass("error");
+			$("#notification-bar p").html("Grumble name/description cannot be empty.").addClass("error");
 			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
-		else if($("#thread-dropdown").val() == 0) {
+		else if($("#grumble-dropdown").val() == 0) {
 			event.preventDefault();
 			
 			$("#notification-bar p").html("A category must be selected.").addClass("error");
@@ -343,19 +343,20 @@ $(document).ready(function() {
 		}
 	});
 	
+	//may be able to delete//////
 	$("#open-quick-compose").mousedown(function() {
 		$("#lightbox-container").fadeIn(100);
-		$("#grumble-status-lightbox").fadeIn(100, function() {
+		$("#comment-status-lightbox").fadeIn(100, function() {
 			$("#quick-compose-textarea").focus();
 		});
 		
 		$("#lightbox-container").click(function() {
 			$("#lightbox-container").fadeOut(50);
-			$("#grumble-status-lightbox").fadeOut(50);
+			$("#comment-status-lightbox").fadeOut(50);
 		});
 		$(".close-quick-submit").click(function() {
 			$("#lightbox-container").fadeOut(50);
-			$("#grumble-status-lightbox").fadeOut(50);
+			$("#comment-status-lightbox").fadeOut(50);
 		});
 	});
 	
@@ -380,29 +381,29 @@ $(document).ready(function() {
 				var userID = $(".user-name").attr("rel");
 			var type = "";
 			var last = 0;
-			if($(".tabs a.active").html() == "Top Threads") {
+			if($(".tabs a.active").html() == "Top Grumbles") {
 				type = "top";
-				last = $("#tab1 .thread-holder").length;
-			}
-			else if($(".tabs a.active").html() == "Recent Threads"){
-				type = "recent";
-				last = $("#tab2 .thread-holder:last").find(".thread-text-holder a").attr("data-id");
-			}
-			else if($(".tabs a.active").html() == "Top Grumbles"){
-				type = "top-grumble";
-				last = $("#tab3 .grumble-holder").length;
+				last = $("#tab1 .grumble-holder").length;
 			}
 			else if($(".tabs a.active").html() == "Recent Grumbles"){
+				type = "recent";
+				last = $("#tab2 .grumble-holder:last").find(".comment-text-holder a").attr("data-id");
+			}
+			else if($(".tabs a.active").html() == "Top Comments"){
+				type = "top-comment";
+				last = $("#tab3 .comment-holder").length;
+			}
+			else if($(".tabs a.active").html() == "Recent Comments"){
+				type = "recent-comment";
+				last = $("#tab4 .comment-holder:last").find(".username").attr("rel");
+			}
+			else if($(".tabs-profile a.active").html() == "Comments"){
 				type = "recent-grumble";
-				last = $("#tab4 .grumble-holder:last").find(".username").attr("rel");
+				last = $("#tab1 .comment-holder:last").find(".username").attr("rel");
 			}
 			else if($(".tabs-profile a.active").html() == "Grumbles"){
-				type = "recent-grumble";
-				last = $("#tab1 .grumble-holder:last").find(".username").attr("rel");
-			}
-			else if($(".tabs-profile a.active").html() == "Threads"){
 				type = "recent";
-				last = $("#tab2 .thread-holder:last").find(".thread-text-holder a").attr("data-id");
+				last = $("#tab2 .grumble-holder:last").find(".comment-text-holder a").attr("data-id");
 			}
 			
 			//load for category page
@@ -413,28 +414,28 @@ $(document).ready(function() {
 					$("#gif-loader").hide();
 					canLoad = true;
 					if(result != "none" && type =="top") {
-						$(result).insertAfter($("#tab1 .thread-holder:last"));
+						$(result).insertAfter($("#tab1 .grumble-holder:last"));
 						
-						$.each($(".thread-description"), function() {
+						$.each($(".grumble-description"), function() {
 							if(!$(this).hasClass("linked")) {
 								var newText = linkify($(this).html());
 								$(this).addClass("linked").html(newText);
 							}
 						});
 						
-						shortenLink(".thread-description a");
+						shortenLink(".grumble-description a");
 					}
 					else if(result != "none" && type =="recent") {
-						$(result).insertAfter($("#tab2 .thread-holder:last"));
+						$(result).insertAfter($("#tab2 .grumble-holder:last"));
 						
-						$.each($(".thread-description"), function() {
+						$.each($(".grumble-description"), function() {
 							if(!$(this).hasClass("linked")) {
 								var newText = linkify($(this).html());
 								$(this).addClass("linked").html(newText);
 							}
 						});
 						
-						shortenLink(".thread-description a");
+						shortenLink(".grumble-description a");
 					}
 					else if(result == "none" && type == "top") {
 						topDone == "true";
@@ -450,14 +451,14 @@ $(document).ready(function() {
 			else if(userID != undefined) {
 				$("#gif-loader").show();
 				if(type == "recent-grumble") {
-					$.post("/php/grumbleloadajax.php", {userID:userID, type:type, last:last},
+					$.post("/php/commentloadajax.php", {userID:userID, type:type, last:last},
 					function(result) {
 						$("#gif-loader").hide();
 						canLoad = true;
-						if(result != "none" && type =="recent-grumble") {
-							$(result).insertAfter($("#tab1 .grumble-holder:last"));
+						if(result != "none" && type =="recent-comment") {
+							$(result).insertAfter($("#tab1 .comment-holder:last"));
 						}
-						else if(result == "none" && type == "recent-grumble") {
+						else if(result == "none" && type == "recent-comment") {
 							resultGDone == "true";
 							$(".view-more").slideUp("fast");
 						}
@@ -470,7 +471,7 @@ $(document).ready(function() {
 						$("#gif-loader").hide();
 						canLoad = true;
 						if(result != "none" && type =="recent") {
-							$(result).insertAfter($("#tab2 .thread-holder:last"));
+							$(result).insertAfter($("#tab2 .grumble-holder:last"));
 						}
 						else if(result == "none" && type == "recent") {
 							resultDone == "true";
@@ -488,28 +489,28 @@ $(document).ready(function() {
 						canLoad = true;
 						$("#gif-loader").hide();
 						if(result != "none" && type =="top") {
-							$(result).insertAfter($("#tab1 .thread-holder:last"));
+							$(result).insertAfter($("#tab1 .grumble-holder:last"));
 							
-							$.each($(".thread-description"), function() {
+							$.each($(".grumble-description"), function() {
 								if(!$(this).hasClass("linked")) {
 									var newText = linkify($(this).html());
 									$(this).addClass("linked").html(newText);
 								}
 							});
 							
-							shortenLink(".thread-description a");
+							shortenLink(".grumble-description a");
 						}
 						else if(result != "none" && type =="recent") {
-							$(result).insertAfter($("#tab2 .thread-holder:last"));
+							$(result).insertAfter($("#tab2 .grumble-holder:last"));
 							
-							$.each($(".thread-description"), function() {
+							$.each($(".grumble-description"), function() {
 								if(!$(this).hasClass("linked")) {
 									var newText = linkify($(this).html());
 									$(this).addClass("linked").html(newText);
 								}
 							});
 							
-							shortenLink(".thread-description a");
+							shortenLink(".grumble-description a");
 						}
 						else if(result == "none" && type == "top") {
 							topDone == "true";
@@ -521,40 +522,40 @@ $(document).ready(function() {
 						}
 					});	
 				}
-				else if(type == "top-grumble" || type == "recent-grumble") {
-					$.post("/php/grumbleloadajax.php", {type:type, last:last, location:"home"},
+				else if(type == "top-comment" || type == "recent-comment") {
+					$.post("/php/commentloadajax.php", {type:type, last:last, location:"home"},
 					function(result) {
 						$("#gif-loader").hide();
 						canLoad = true;
-						if(result != "none" && type =="top-grumble") {
-							$(result).insertAfter($("#tab3 .grumble-holder:last"));
+						if(result != "none" && type =="top-comment") {
+							$(result).insertAfter($("#tab3 .comment-holder:last"));
 							
-							$.each($(".grumble-text"), function() {
+							$.each($(".comment-text"), function() {
 								if(!$(this).hasClass("linked")) {
 									var newText = linkify($(this).html());
 									$(this).addClass("linked").html(newText);
 								}
 							});
 							
-							shortenLink(".grumble-text a");
+							shortenLink(".comment-text a");
 						}
-						else if(result != "none" && type =="recent-grumble") {
-							$(result).insertAfter($("#tab4 .grumble-holder:last"));
+						else if(result != "none" && type =="recent-comment") {
+							$(result).insertAfter($("#tab4 .comment-holder:last"));
 							
-							$.each($(".grumble-text"), function() {
+							$.each($(".comment-text"), function() {
 								if(!$(this).hasClass("linked")) {
 									var newText = linkify($(this).html());
 									$(this).addClass("linked").html(newText);
 								}
 							});
 							
-							shortenLink(".grumble-text a");
+							shortenLink(".comment-text a");
 						}
-						else if(result == "none" && type == "top-grumble") {
+						else if(result == "none" && type == "top-comment") {
 							topGDone == "true";
 							$(".view-more").slideUp("fast");
 						}
-						else if(result == "none" && type == "recent-grumble") {
+						else if(result == "none" && type == "recent-comment") {
 							resultGDone == "true";
 							$(".view-more").slideUp("fast");
 						}
@@ -579,20 +580,20 @@ $(document).ready(function() {
 	
 	$("button").removeAttr("disabled");
 	
-	$("#start-new-thread").mousedown(function() {
+	$("#start-new-grumble").mousedown(function() {
 		$("#lightbox-container").fadeIn(100);
-		$("#grumble-thread-lightbox").fadeIn(100, function() {
-			$("#quick-description-threadname").focus();
+		$("#grumble-lightbox").fadeIn(100, function() {
+			$("#quick-description-grumblename").focus();
 		});
 		
 		$("#lightbox-container").click(function() {
 			$("#lightbox-container").fadeOut(50);
-			$("#grumble-thread-lightbox").fadeOut(50);
+			$("#grumble-lightbox").fadeOut(50);
 			$("#help-callout").fadeOut(50);
 		});
 		$(".close-quick-submit").click(function() {
 			$("#lightbox-container").fadeOut(50);
-			$("#grumble-thread-lightbox").fadeOut(50);
+			$("#grumble-lightbox").fadeOut(50);
 			$("#help-callout").fadeOut(50);
 		});
 	});
@@ -601,7 +602,7 @@ $(document).ready(function() {
 	var loadMore = true;
 	var pageNumber = 1;
 	var subCat = 0;
-	if($("#grumbles-left .grumble-holder").length == 10) {
+	if($("#comments-left .comment-holder").length == 10) {
 		$(window).scroll(function () {
 			if ($(window).scrollTop() >= $(document).height() - $(window).height() && canLoad) {
 				canLoad = false;
@@ -611,7 +612,7 @@ $(document).ready(function() {
 				}
 				var lastid = $(".username:last").attr("rel");
 				$("#gif-loader").fadeIn(50);
-				$.post("/php/grumbleloadajax.php", {pagenumber:pageNumber, number:"10", subCat:subCat, lastid:lastid},
+				$.post("/php/commentloadajax.php", {pagenumber:pageNumber, number:"10", subCat:subCat, lastid:lastid},
 					function(result) {
 						$("#gif-loader").fadeOut(50);
 						if(result == "none") {
@@ -628,16 +629,16 @@ $(document).ready(function() {
 							pageNumber++;
 		
 							//insert
-							$(result).insertAfter($(".grumble-holder:last"));
+							$(result).insertAfter($(".comment-holder:last"));
 							
-							$.each($(".grumble-text"), function() {
+							$.each($(".comment-text"), function() {
 								if(!$(this).hasClass("linked")) {
 									var newText = linkify($(this).html());
 									$(this).addClass("linked").html(newText);
 								}
 							});
 							
-							shortenLink(".grumble-text a");
+							shortenLink(".comment-text a");
 						}
 				});
 			}
@@ -655,20 +656,20 @@ $(document).ready(function() {
 		});
 	
 		$(this).on('click', 'a', function(e){
-			if(($("#tab2 .thread-holder").length >= 10 && $(this).html() == "Recent Threads" && !resultDone) || ($("#tab1 .thread-holder").length >= 10 && $(this).html() == "Top Threads" && !topDone)
-			|| ($("#tab4 .grumble-holder").length >= 10 && $(this).html() == "Recent Grumbles" && !resultGDone) || ($("#tab3 .grumble-holder").length >= 10 && $(this).html() == "Top Grumbles" && !topGDone)) {
+			if(($("#tab2 .grumble-holder").length >= 10 && $(this).html() == "Recent Grumbles" && !resultDone) || ($("#tab1 .grumble-holder").length >= 10 && $(this).html() == "Top Grumbles" && !topDone)
+			|| ($("#tab4 .comment-holder").length >= 10 && $(this).html() == "Recent Comments" && !resultGDone) || ($("#tab3 .comment-holder").length >= 10 && $(this).html() == "Top Comments" && !topGDone)) {
 				$(".view-more").slideDown("fast");
 			}
 			else {
 				$(".view-more").slideUp("fast");
 			}
-			if($(this).html() == "Recent Threads")
+			if($(this).html() == "Recent Grumbles")
 				$("#arrow-top img").animate({"marginLeft":"235px"}, "normal");
-			else if($(this).html() == "Top Threads")
-				$("#arrow-top img").animate({"marginLeft":"70px"}, "normal");
 			else if($(this).html() == "Top Grumbles")
+				$("#arrow-top img").animate({"marginLeft":"70px"}, "normal");
+			else if($(this).html() == "Top Comments")
 				$("#arrow-top img").animate({"marginLeft":"400px"}, "normal");
-			else if($(this).html() == "Recent Grumbles")
+			else if($(this).html() == "Recent Comments")
 				$("#arrow-top img").animate({"marginLeft":"565px"}, "normal");
 			$active.removeClass('active');
 			$content.fadeOut("fast");
@@ -694,15 +695,15 @@ $(document).ready(function() {
 		});
 	
 		$(this).on('click', 'a', function(e){
-			if(($("#tab2 .thread-holder").length >= 10 && $(this).html() == "Threads" && !topDone) || ($("#tab1 .grumble-holder").length >= 10 && $(this).html() == "Grumbles" && !resultGDone)) {
+			if(($("#tab2 .grumble-holder").length >= 10 && $(this).html() == "Grumbles" && !topDone) || ($("#tab1 .comment-holder").length >= 10 && $(this).html() == "Comments" && !resultGDone)) {
 				$(".view-more").slideDown("fast");
 			}
 			else {
 				$(".view-more").slideUp("fast");
 			}
-			if($(this).html() == "Threads")
+			if($(this).html() == "Grumbles")
 				$("#arrow-top-profile img").animate({"marginLeft":"193px"}, "normal");
-			else if($(this).html() == "Grumbles")
+			else if($(this).html() == "Comments")
 				$("#arrow-top-profile img").animate({"marginLeft":"58px"}, "normal");
 			$active.removeClass('active');
 			$content.fadeOut("fast");
@@ -735,15 +736,15 @@ $(document).ready(function() {
 	
 	if($.urlParam("create") == "new") {
 		$("#lightbox-container").fadeIn(100);
-		$("#grumble-thread-share").fadeIn(100);
+		$("#grumble-share").fadeIn(100);
 		
 		$("#lightbox-container").click(function() {
 			$("#lightbox-container").fadeOut(50);
-			$("#grumble-thread-share").fadeOut(50);
+			$("#grumble-share").fadeOut(50);
 		});
 		$(".close-quick-submit").click(function() {
 			$("#lightbox-container").fadeOut(50);
-			$("#grumble-thread-share").fadeOut(50);
+			$("#grumble-share").fadeOut(50);
 		});
 	}
 	
@@ -793,13 +794,13 @@ $(document).ready(function() {
 	/*
 	These next three ifs linkify text blocks
 	*/
-	if($(".grumble-text").length > 0) {
-		$.each($(".grumble-text"), function() {
+	if($(".comment-text").length > 0) {
+		$.each($(".comment-text"), function() {
 			var newText = linkify($(this).html());
 			$(this).addClass("linked").html(newText);
 		});
 		
-		shortenLink(".grumble-text a");
+		shortenLink(".comment-text a");
 	}
 	if($("#sub-category-desc").length > 0) {
 		var catText = linkify($("#sub-category-desc").html());
@@ -807,13 +808,13 @@ $(document).ready(function() {
 		
 		shortenLink("#sub-category-desc a");
 	}
-	if($(".thread-description").length > 0) {
-		$.each($(".thread-description"), function() {
+	if($(".grumble-description").length > 0) {
+		$.each($(".grumble-description"), function() {
 			var newText = linkify($(this).html());
 			$(this).addClass("linked").html(newText);
 		});
 		
-		shortenLink(".thread-description a");
+		shortenLink(".grumble-description a");
 	}
 });
 

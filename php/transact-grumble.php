@@ -8,7 +8,7 @@
 	if(isset($_REQUEST["action"]) &&
 		isset($_SESSION["username"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		switch ($_REQUEST["action"]) {
-			case "Submit Grumble" :
+			case "Submit Comment" :
 				if(isset($_POST["grumble"]) && strlen($_POST["grumble"]) > 0 && strlen($_POST["grumble"]) <= 400 && isset($_POST["category"]) && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token4']);
@@ -50,7 +50,7 @@
 						if(mysql_num_rows($result) != 0) {
 							$row = mysql_fetch_array($result);
 							$parameters = array($row["grumble_number"], "http://" . $_SERVER["HTTP_HOST"] . "/" . $row["category_url"] . "/" . $row["sub_category_url"] . "/" . $category, $row["username"]);
-							sendEmail($row["user_email"], "From: no-reply@grumbleonline.com", "thread", $parameters);
+							sendEmail($row["user_email"], "From: no-reply@grumbleonline.com", "grumble", $parameters);
 						}
 						
 						$refer = ".." . strip_tags($_POST["referrer"]);
@@ -65,7 +65,7 @@
 				}
 				break;
 			
-			case "Submit Grumble Thread" :
+			case "New Grumble" :
 				if(isset($_POST["thread"]) && strlen($_POST["thread"]) > 0 && strlen($_POST["thread"]) <= 40 && isset($_POST["category"]) && $_POST["category"] != "Choose a Category" && 
 				isset($_POST["description"]) && strlen($_POST["description"]) > 0 && strlen($_POST["description"]) <= 400 && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {				
 					// Unset the token, so that it cannot be used again.

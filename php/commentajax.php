@@ -4,7 +4,7 @@
 	require_once "outputgrumbles.php";
 	require_once "sendemail.php";
 	session_start();
-	if(isset($_POST["grumble"]) && strlen($_POST["grumble"]) > 0 && strlen($_POST["grumble"]) <= 400 && isset($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+	if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		date_default_timezone_set($_SESSION["timezone"]);
 		$grumble = mysql_real_escape_string(strip_tags($_POST["grumble"]));
 		$category = mysql_real_escape_string(strip_tags($_POST["category"]));
@@ -54,10 +54,10 @@
 			if(mysql_num_rows($result) != 0) {
 				$row = mysql_fetch_array($result);
 				$parameters = array($row["grumble_number"], "http://" . $_SERVER["HTTP_HOST"] . "/" . $row["category_url"] . "/" . $row["sub_category_url"] . "/" . $category, $row["username"]);
-				sendEmail($row["user_email"], "From: no-reply@grumbleonline.com", "thread", $parameters);
+				sendEmail($row["user_email"], "From: no-reply@grumbleonline.com", "grumble", $parameters);
 			}
 			
-			outputGrumbles($last_id_status, false, true);
+			outputComments($last_id_status, false, true);
 		}
 		else {
 			echo 0;
@@ -65,8 +65,8 @@
 	}
 	
 	//code for handing deletion of a grumble
-	if(isset($_POST["grumbleid"]) && isset($_POST["action"]) && $_POST["action"] == "Delete" && isset($_SESSION["username"])) {
-		$id = mysql_real_escape_string($_POST["grumbleid"]);
+	if(isset($_POST["commentid"]) && isset($_POST["action"]) && $_POST["action"] == "Delete" && isset($_SESSION["username"])) {
+		$id = mysql_real_escape_string($_POST["commentid"]);
 		
 		//check if status is there and user is owner
 		$sql = "SELECT ug.username, sg.status_id, sg.sub_category_id FROM status_grumble AS sg " .
