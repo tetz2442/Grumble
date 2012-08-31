@@ -230,7 +230,7 @@ html { overflow-y: scroll; }
 	background-repeat: repeat;
 	z-index:2000;
 	position:fixed;
-	top:0;
+	top:-2px;
 	font-size:1.1em;
 	box-shadow: inset 0 2px #fff, 0 2px 3px rgba(34,25,25,0.4);
 }
@@ -351,11 +351,11 @@ html { overflow-y: scroll; }
 #login-form-ul {
 }
 .colored-link-1 {
-	color:#634328;	
+	color:#9B6F40;	
 	text-decoration:none;
 }
 .colored-link-1:hover {
-	color:#000;	
+	color:#F59A38;	
 	cursor:pointer;
 }
 .submit-login {
