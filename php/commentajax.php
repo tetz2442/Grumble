@@ -79,7 +79,7 @@
 				//delete everything associated with grumble (grumble, comments, votes)
 				$sql = "DELETE FROM status_grumble WHERE status_id = " . $id . " LIMIT 1";
 				mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
-				$sql = "DELETE FROM comments_grumble WHERE status_id = " . $id;
+				$sql = "DELETE FROM replies_grumble WHERE status_id = " . $id;
 				mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
 				$sql = "DELETE FROM user_likes_grumble WHERE status_id = " . $id;
 				mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());

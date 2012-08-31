@@ -193,9 +193,10 @@ $(document).ready(function() {
 					$element.parents(".comment-holder").find(".ind-reply:last").slideDown("fast");
 					$element.parents(".comment-holder").find(".quick-reply-input").val("");
 					$element.parents(".comment-holder").find(".reply-character-count").html("160");
-					$element.parents(".comment-holder").find(".comments-view").attr("data-replies", (parseInt($element.parents(".comment-holder").find(".replies-view").attr("data-reply")) + 1));
-					$element.parents(".comment-holder").find(".replies-view span").html("(" + $element.parents(".comment-holder").find(".replies-view").attr("data-replies") + ")");
-					$element.parents(".comment-holder").find(".view-all-replies p").html("View All Replies(" + $element.parents(".comment-holder").find(".comments-view").attr("data-comments") + ")");
+					var replies = parseInt($element.parents(".comment-holder").find(".replies-view").attr("data-replies")) + 1;
+					$element.parents(".comment-holder").find(".replies-view").attr("data-replies", replies);
+					$element.parents(".comment-holder").find(".replies-view span").html("(" + replies + ")");
+					$element.parents(".comment-holder").find(".view-all-replies p").html("View All Replies (" + replies + ")");
 				}
 			});
 		}
