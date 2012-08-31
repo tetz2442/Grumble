@@ -40,7 +40,7 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 			echo '<div class="comment-votes">';
 			if(isset($_SESSION["user_id"])) {
 					//get the number of comments from the db
-					$sql = "SELECT COUNT(*) FROM comments_grumble WHERE status_id = " . $grumble;
+					$sql = "SELECT COUNT(*) FROM replies_grumble WHERE status_id = " . $grumble;
 					$commentcount = mysql_query($sql, $conn);
 					$row3 = mysql_fetch_array($commentcount);
 					if($comments) {
@@ -51,8 +51,8 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 							echo '<img src="/images/balloon.png" alt="View Replies" width="16" height="16"/><span>(' . $row3[0] . ')</span></p>';
 					}
 					else {
-						echo '<p class="gif-loader-replies"><img src="/images/ajax-loader.gif" alt="loader" width="16" height="16"/></p><p class="replies-view" rel="' . $row["status_id"] . '" data-html="Replies" data-number="(' . $row3[0] . ')" data-replies="' . $row3[0] . '" title="View/Add replies on this comment"><a>Comments</a>';
-						if($row3[0] >= 1)
+						echo '<p class="gif-loader-replies"><img src="/images/ajax-loader.gif" alt="loader" width="16" height="16"/></p><p class="replies-view" rel="' . $row["status_id"] . '" data-html="Replies" data-number="(' . $row3[0] . ')" data-replies="' . $row3[0] . '" title="View/Add replies on this comment"><a>Replies</a>';
+						if($row3[0] > 1)
 							echo '<img src="/images/balloons.png" alt="View Replies" width="16" height="16"/><span>(' . $row3[0] . ')</span></p>';
 						else 
 							echo '<img src="/images/balloon.png" alt="View Reply" width="16" height="16"/><span>(' . $row3[0] . ')</span></p>';
@@ -72,7 +72,7 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 			echo '<div class="replies">';
 			if($loggedin && $row3[0] > 2) {
 				if(!$comments) {
-				echo '<div class="view-all-replies" rel="' . $row["status_id"] . '"><p>View All Replies(';
+				echo '<div class="view-all-replies" rel="' . $row["status_id"] . '"><p>View All Replies (';
 				echo $row3[0];
 				echo ')</p></div>';
 				}
