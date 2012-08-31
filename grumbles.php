@@ -72,11 +72,11 @@ if($exist) {
 			require_once "php/notificationbar.php";
 			?>
             <div id="grumble-comment">
-                    <textarea id="quick-compose-textarea" class="textArea" title="Compose comment" rows="4" name="grumble" placeholder="Compose new comment..."></textarea>
+                    <textarea id="quick-compose-textarea" class="textArea" title="Compose comment" rows="4" name="comment" placeholder="Compose new comment..."></textarea>
                     <input type="hidden" name="referrer" value="" id="referrer"/>
                     <input type="hidden" name="category" id="comment-category" value="<?php echo strip_tags($_GET["subcat"]); ?>"/>
                     <div>
-                        <input type="submit" value="Submit Grumble" name="action" id="quick-compose-submit" class="button"/>
+                        <input type="submit" value="Submit Comment" name="action" id="quick-compose-submit" class="button"/>
                         <span id="character-count">160</span>
                         <span id="gif-loader-comment"><img src="/images/ajax-loader.gif" width="16" height="16"/></span>
                         <span id="link-present">Link will be shortened.</span>

@@ -1,12 +1,12 @@
 <?php
 	require_once "conn.php";
 	require_once "timeago.php";
-	require_once "outputgrumbles.php";
+	require_once "outputcomments.php";
 	require_once "sendemail.php";
 	session_start();
 	if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		date_default_timezone_set($_SESSION["timezone"]);
-		$grumble = mysql_real_escape_string(strip_tags($_POST["grumble"]));
+		$comment = mysql_real_escape_string(strip_tags($_POST["comment"]));
 		$category = mysql_real_escape_string(strip_tags($_POST["category"]));
 		
 		$sql = "SELECT sub_category_id FROM sub_category_grumble WHERE sub_category_id = " . $category . " LIMIT 0,1";
@@ -14,14 +14,14 @@
 		//check if the entered category is valid
 		if(mysql_num_rows($result) != 0) {
 			//remove spaces
-			$grumble = str_replace("\r", "", $grumble);
-			$grumble = str_replace("\n", "", $grumble);
+			$comment = str_replace("\r", "", $comment);
+			$comment = str_replace("\n", "", $comment);
 			
 			//validate grumble length is less than 160 with URL
-			/*if(preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url) == 0 && strlen($grumble) <= 160) {
+			/*if(preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url) == 0 && strlen($comment) <= 160) {
 				
 			}
-			else if(preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url) && strlen($grumble) > 160) {
+			else if(preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url) && strlen($comment) > 160) {
 				
 			}
 			else {
@@ -30,7 +30,7 @@
 			
 			$sql = "INSERT INTO status_grumble " .
 				"(status_text, sub_category_id, date_submitted, user_id) " .
-				"VALUES ('" . $grumble . "'," . $category . 
+				"VALUES ('" . $comment . "'," . $category . 
 				",'" . date("Y-m-d H:i:s", time()) . 
 				"'," . $_SESSION["user_id"] . ")"; 
 			mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
