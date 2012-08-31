@@ -3,7 +3,7 @@ require_once "php/conn.php";
 require_once "php/header.php";
 require_once "php/containerGrumbles.php";
 require_once "php/timeago.php";
-require_once "php/outputgrumbles.php";
+require_once "php/outputcomments.php";
 $grumble = true;
 
 if(isset($_GET["user"]) && isset($_GET["s"])) {
@@ -21,8 +21,8 @@ if(isset($_GET["user"]) && isset($_GET["s"])) {
 	else {
 		$row = mysql_fetch_array($result);
 		?>
-        <div id="grumbles-header">
-            <div id="grumbles-category">
+        <div id="comments-header">
+            <div id="comments-category">
                 <div id="category-header">
                     <h1 id="subcat-id"><a href="/<?php echo strtolower($row["category_name"]) . "/" . $row["sub_category_url"] . "/" . $row["sub_category_id"]; ?>" class="colored-link-1"><?php echo stripslashes($row["sub_category_name"]); ?></h1>
                     <h4><a href="/category/<?php echo strtolower($row["category_name"]); ?>" class="colored-link-1"><?php echo stripslashes($row["category_name"]); ?></a></h4>
@@ -39,10 +39,10 @@ if(isset($_GET["user"]) && isset($_GET["s"])) {
                 </div>
             </div>
         </div>
-        <div id="grumbles-left">
+        <div id="comments-left">
         <div class="divider"></div>
         <?php
-		outputGrumbles($statusid, true, $loggedin);
+		outputComments($statusid, true, $loggedin);
 	}	
 }
 else {

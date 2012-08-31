@@ -1,4 +1,4 @@
-<div id="grumble-thread-share">
+<div id="grumble-share">
     <div class="lightbox-head">
     	<h3 class="view-all-header">Share your new thread!</h3>
     	<img src="/images/exit.png" width="15" height="15" class="close-quick-submit" onmouseover="this.src='/images/exitHover.png'" onmouseout="this.src='/images/exit.png'"/>
