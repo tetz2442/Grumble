@@ -550,7 +550,7 @@ html { overflow-y: scroll; }
 	overflow:auto;
 }
 
-.reply-view {
+.replies-view {
 	float:left;	
 	margin-left:0px;
 }
@@ -572,15 +572,13 @@ html { overflow-y: scroll; }
 	background-color:#CCC;
 }
 
-.reply-grumble {
+.replies-grumble {
 	float:left;	
 	margin-left:10px;
 }
-
 .comment-votes {
 	float:right;
 }
-
 .username, .username:visited {
 	color:#DE6C28;
 	text-decoration:none;
@@ -589,34 +587,30 @@ html { overflow-y: scroll; }
 	text-decoration:underline;	
 	cursor:pointer;
 }
-.votes-up a, .votes a:visited, .comments-view a {
+.votes-up a, .votes a:visited, .replies-view a {
 	color:#F59A38;
 	text-decoration:none;
 }
-
-.votes-up a:hover, .comments-view a:hover {
+.votes-up a:hover, .replies-view a:hover {
 	text-decoration:underline;	
 	cursor:pointer;
 }
-.votes-up img {
+.votes-up img, replies-view img {
 	margin:0 2px -2px 2px;		
 }
-.votes-up img:hover { 
+.votes-up img:hover, replies-view img:hover { 
 	cursor:pointer;
 }
-.reply-view span {
+.replies-view span {
 	color:#000;	
 }
-
-.reply-view span:hover {
+.replies-view span:hover {
 	text-decoration:none;	
 }
-
 .comment-votes p {
 	float:left;	
 	margin:0 0 0 7px;	
 }
-
 .replies {
 	display:none;
 	width:100%;
@@ -627,35 +621,25 @@ html { overflow-y: scroll; }
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
 }
-
 .reply-text {
 	margin:6px 0px 6px 0px;	
 }
-
 .reply-username {
 	margin-left:0px !important;
 	margin-right:10px;	
 }
-
 .ind-reply {
 	padding:3px 0px 3px 10px;
 	border-bottom:1px solid #e8e8e8;
 }
-
 .ind-reply-last {
 	padding:3px 0px 3px 0px;
 	border-bottom:1px solid #000;
 	display:none;
 }
-
-.reply-padding {
-	
-}
-
 .quick-reply {
 	padding:3px 0;	
 }
-
 .quick-reply-input {
 	width:86%;
 	max-width:86%;
@@ -667,41 +651,33 @@ html { overflow-y: scroll; }
 	-moz-border-radius:3px;
 	border:1px solid #999;
 }
-
 .reply-character-count {
 	float:right;	
 	width:55px;
 	text-align:center;
 	margin:5px 5px 5px 0;
 }
-
 .gif-loader-replies {
 	display:none;
 }
-
 .quick-reply-button {
 	margin-right:5px;
 	float:right;
 }
-
 #open-quick-compose {
 	margin:30px 0 0 30px;
 }
-
 #open-quick-compose:hover {
 	background-color:#999;
 	cursor:pointer;
 }
-
 #open-quick-compose p {
 	margin-left:10px;
 }
-
 #grumble-quick-compose {
 	display:none;
 	padding:0px 25px 0px 25px;	
 }
-
 #grumble-quick-compose p {
 	margin-bottom:0px;	
 }
@@ -723,11 +699,11 @@ html { overflow-y: scroll; }
 	margin-right:auto;
 	display:block;
 }
-#grumble-reply {
+#grumble-comment {
 	display:block;	
 	border-bottom:1px solid #e0e0e0;
 }
-#grumble-reply textarea {
+#grumble-comment textarea {
 	width:100%;
 	display:block;
 	margin:10px 0 5px;
@@ -737,10 +713,10 @@ html { overflow-y: scroll; }
 	padding:6px;
 	background-color:#f0f0f0;
 }
-#grumble-reply textarea:hover {
+#grumble-comment textarea:hover {
 	border:1px solid #999;
 }
-#grumble-reply div{
+#grumble-comment div{
 	display:none;
 	width:98%;
 	height:38px;
@@ -753,9 +729,11 @@ html { overflow-y: scroll; }
 .comment-options {
 	float:left;	
 	display:none;
+	color:#C03;
 }
 .comment-options p:hover {
 	cursor:pointer;	
+	text-decoration:underline;
 }
 /********
 *category css

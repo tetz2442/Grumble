@@ -9,7 +9,8 @@
 		isset($_SESSION["username"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		switch ($_REQUEST["action"]) {
 			case "Submit Comment" :
-				if(isset($_POST["grumble"]) && strlen($_POST["grumble"]) > 0 && strlen($_POST["grumble"]) <= 400 && isset($_POST["category"]) && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {
+			//this isnt used anymore, moved to commentajax.php
+				if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token4']);
 					
@@ -65,20 +66,20 @@
 				}
 				break;
 			
-			case "New Grumble" :
-				if(isset($_POST["thread"]) && strlen($_POST["thread"]) > 0 && strlen($_POST["thread"]) <= 40 && isset($_POST["category"]) && $_POST["category"] != "Choose a Category" && 
+			case "Submit Grumble" :
+				if(isset($_POST["grumble"]) && strlen($_POST["grumble"]) > 0 && strlen($_POST["grumble"]) <= 40 && isset($_POST["category"]) && $_POST["category"] != "Choose a Category" && 
 				isset($_POST["description"]) && strlen($_POST["description"]) > 0 && strlen($_POST["description"]) <= 400 && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {				
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token4']);
 					
-					$thread = mysql_real_escape_string(strip_tags($_POST["thread"]));
+					$grumble = mysql_real_escape_string(strip_tags($_POST["grumble"]));
 					$category = mysql_real_escape_string(strip_tags($_POST["category"]));
 					$description = mysql_real_escape_string(strip_tags($_POST["description"]));
 					//remove spaces
 					$description = str_replace("\r", "", $description);
 					$description = str_replace("\n", "", $description);
-					$thread = str_replace("\r", "", $thread);
-					$thread = str_replace("\n", "", $thread);
+					$grumble = str_replace("\r", "", $grumble);
+					$grumble = str_replace("\n", "", $grumble);
 					
 					$sql = "SELECT category_url FROM categories_grumble WHERE category_id = " . $category;
 					$result = mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
@@ -86,11 +87,11 @@
 					if(mysql_num_rows($result) != 0) {
 						$row = mysql_fetch_array($result);
 						//$bad_words = array('a','and','the','an','it','is','with','can','of','not');
-						$seo = generate_seo_link($thread,'-',false);
+						$seo = generate_seo_link($grumble,'-',false);
 						
 						$sql = "INSERT INTO sub_category_grumble " .
 							"(category_id, sub_category_name, sub_category_description, sub_category_created, sub_category_url, user_id) " .
-							"VALUES (" . $category . ",'" . $thread . 
+							"VALUES (" . $category . ",'" . $grumble . 
 							"','" . $description . "','" . date("Y-m-d H:i:s", time()) . "','" . $seo . "'," . $_SESSION["user_id"] . ")";
 						mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
 						$id = mysql_insert_id();
