@@ -45,6 +45,5 @@ $validation = true;
     </div>
 </div>
 <?php	
-require_once "php/lightboxthread.php";
 require_once "php/footer.php"; 
 ?>

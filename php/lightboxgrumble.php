@@ -1,6 +1,6 @@
 <div id="grumble-lightbox">
 <div class="lightbox-head">
-    <h3 class="quick-compose-header">Compose New Thread</h3>
+    <h3 class="quick-compose-header">Compose New Grumble</h3>
     <img src="/images/exit.png" width="15" height="15" class="close-quick-submit" onmouseover="this.src='/images/exitHover.png'" onmouseout="this.src='/images/exit.png'"/>
 </div>
 <div class="lightbox-grumble-padding">

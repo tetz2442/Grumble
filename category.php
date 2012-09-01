@@ -3,7 +3,7 @@ require_once "php/conn.php";
 require_once "php/http.php";
 require_once "php/outputgrumbles.php";
 require_once "php/header.php";
-require_once "php/containerGrumbles.php";
+require_once "php/containerStatus.php";
 
 $category = strtolower(mysql_real_escape_string($_GET["cat"]));;
 $sql = "SELECT category_id, category_name FROM categories_grumble" .
