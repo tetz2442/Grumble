@@ -330,7 +330,7 @@ html { overflow-y: scroll; }
 }
 
 #dropdown-sub-nav li {
-	padding:5px 35px 5px 15px;
+	padding:5px 55px 5px 15px;
 	font-size:.9em;
 }
 
@@ -436,7 +436,7 @@ html { overflow-y: scroll; }
 *grumble css
 ******/
 #comments-category {
-	margin:35px 0 25px 0;
+	margin:20px 0 20px 0;
 }
 
 #comments-category p {
@@ -449,6 +449,7 @@ html { overflow-y: scroll; }
 
 #grumble-header {
 	float:left;	
+	width:100%;
 }
 
 #comments-left {
@@ -465,19 +466,18 @@ html { overflow-y: scroll; }
 
 #category-header {
 	float:left;	
-	width:500px;
-	padding:0px 20px 10px 15px;
+	width:80%;
+	margin:0 15px 0 5px;
 }
 #category-header h4 {
 	margin-top:3px;
 }
 #share-category {
 	float:left;
-	width:300px;
+	width:15%;
 }
 #comments-left-header {
 	border-bottom:1px solid #666;
-	margin-top:20px;	
 	padding-bottom:5px;
 }
 .compose-grumble {
@@ -764,7 +764,7 @@ html { overflow-y: scroll; }
 	text-decoration:none;
 	color:#333;
 	font-size:1.1em;
-	width:160px;
+	width:120px;
 	text-align:center;
 }
 .tabs a:hover {
@@ -776,11 +776,10 @@ html { overflow-y: scroll; }
 #arrow-top {
 	width:100%;
 	border-bottom:1px solid #000;
-	margin-bottom:25px;
 }
 #arrow-top img {
 	margin-bottom:-4px;	
-	margin-left:70px;
+	margin-left:52px;
 }
 
 .grumble-holder {
@@ -1144,7 +1143,7 @@ html { overflow-y: scroll; }
 	margin-top:10px;
 }
 
-.lightbox-thread-padding {
+.lightbox-grumble-padding {
 	float:left;
 	width:100%;
 }

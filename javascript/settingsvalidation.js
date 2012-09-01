@@ -1,5 +1,5 @@
 // JavaScript Document
-var expSC = /[!@#%*+=~`$&^]/;
+var expSC = /[!@#%*+=~`$&^-]/;
 var username = false;
 var saving = false;
 var changes = false;
@@ -15,53 +15,54 @@ $(document).ready(function() {
 		changes = true;
 	});
 	$("#username-change-input").keyup(function () {
-		var element = $(this);
+		var $element = $(this);
 		if(chars != $(".dropdown-login").text()) {
-			if(checkLength(element, 3)) {
-				if(checkSC(element)) {
+			if(checkLength($element, 3)) {
+				if(checkSC($element)) {
 					var chars = $('#username-change-input').val();
 					if(!chars.match(/\s/g)) {
 						if(chars != usernameval) {
-							$(element).parent().find(".validation-settings").attr("src","/images/ajax-loader.gif").fadeIn(250);
+							$element.parent().find(".validation-settings").attr("src","/images/ajax-loader.gif").fadeIn(250);
 							$.post("/php/checkavail.php", {username:chars, settings:true},
 								  function(result) {
 									  if(result == 1) {
 										  $("#notification-bar p").html("Username Available.").removeClass("error").addClass("available");
-										  $(element).parent().find(".validation-settings").attr("src","/images/tick-circle_1.png");
+										  $element.parent().find(".validation-settings").attr("src","/images/tick-circle_1.png");
 										  showBar();
 										  username = true;
 									  }
 									  else if(result == 0) {
 										  $("#notification-bar p").html("Username not available.").addClass("error").removeClass("available");
-										  $(element).parent().find(".validation-settings").attr("src","/images/exclamation-red_1.png");
+										  $element.parent().find(".validation-settings").attr("src","/images/exclamation-red_1.png");
 										  showBar();
 										  username = false;
 									  }
 									  else {
-										  $(element).parent().find(".validation-settings").fadeOut(250);
+										  $element.parent().find(".validation-settings").fadeOut(250);
 										  username = false;
 									  }
 							});
 						}
 						else {
-							 $(element).parent().find(".validation-settings").fadeOut(250);
+							 $element.parent().find(".validation-settings").fadeOut(250);
+							 hideBar();
 							 username = false;
 						}
 					}
 					else {
 						$("#notification-bar p").html("Username cannot contain spaces.").addClass("error").removeClass("available");
-						$(element).parent().find(".gif-loader-settings").attr("src","/images/exclamation-red_1.png").fadeIn(250);
+						$element.parent().find(".validation-settings").attr("src","/images/exclamation-red_1.png").fadeIn(250);
 						showBar();
 					}
 				}
 				else {
-					$(element).parent().find(".gif-loader-settings").attr("src","/images/exclamation-red_1.png").fadeIn(250);
+					$element.parent().find(".validation-settings").attr("src","/images/exclamation-red_1.png").fadeIn(250);
 					$("#notification-bar p").html("Username cannot contain special characters.").addClass("error").removeClass("available");
 					showBar();
 				}
 			}
 			else {
-				$(element).parent().find(".gif-loader-settings".attr("src","/images/exclamation-red_1.png")).fadeIn(250);
+				$element.parent().find(".validation-settings").attr("src","/images/exclamation-red_1.png").fadeIn(250);
 				$("#notification-bar p").html("Username must be at least 4 characters.").addClass("error").removeClass("available");
 				showBar();
 			}
