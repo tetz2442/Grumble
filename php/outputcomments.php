@@ -24,7 +24,7 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 				echo '<div class="comment-inner-holder">';
 					echo '<div class="comment-header">';
 						echo '<a href="/profile/' . $row["username"] . '" rel="' . $row["status_id"] . '" class="username" title="Visit profile"><strong>' . $row["username"] . '</strong></a>';
-						echo '<span class="comment-time" title="' . $row["date_submitted"] . '"><a href="/profile/' . $row["username"] . '/grumble/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($row["date_submitted"]) . '</a></span>';
+						echo '<span class="comment-time" title="' . $row["date_submitted"] . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($row["date_submitted"]) . '</a></span>';
 					echo '</div>';
 					echo '<div class="comment-text-holder">';
 						echo '<p class="comment-text">' . stripslashes($row["status_text"]) . '</p>';

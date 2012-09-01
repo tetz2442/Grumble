@@ -16,7 +16,7 @@ if(isset($_GET["user"]) && isset($_GET["s"])) {
 	$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
 	
 	if(mysql_num_rows($result) == 0) {
-		echo '<div class="content-padding"><p class="text-align-center content-padding"><b>This status does not exist. Please check your URL.</b></p></div>';
+		echo '<div class="content-padding"><p class="text-align-center content-padding"><b>This comment does not exist. Please check your URL.</b></p></div>';
 	}
 	else {
 		$row = mysql_fetch_array($result);
@@ -47,7 +47,7 @@ if(isset($_GET["user"]) && isset($_GET["s"])) {
 }
 else {
 ?>
-<div class="content-padding"><p class="text-align-center content-padding"><b>This status does not exist. Please check your URL.</b></p></div>
+<div class="content-padding"><p class="text-align-center content-padding"><b>This comment does not exist. Please check your URL.</b></p></div>
 <?php
 }
 ?>
@@ -56,16 +56,20 @@ else {
  var loggedin = <?php echo $loggedin; ?>;
  var statusid = <?php echo strip_tags($_GET["s"]); ?>;
 window.onload = function(){
-	if(loggedin) {
-		$(".grumble-holder").find(".gif-loader-comments").show();
-		$.post("/php/comments.php", {comment:statusid, type:"load", amount:"all"},
+	var replynumber = parseInt($(".reply-view").attr("data-replies"));
+	if(loggedin && replynumber != 0) {
+		$(".gif-loader-replies").show();
+		$.post("/php/repliesajax.php", {reply:statusid, type:"load", amount:"all"},
 				function(result) {
-					$(".grumble-holder").find(".gif-loader-comments").hide();
+					$(".gif-loader-replies").hide();
 					if(result != "") {
-						$(result).insertBefore(".quick-comment-input");
-						$(".comments").slideDown("fast");
+						$(result).insertBefore(".quick-reply-input");
+						$(".replies").slideDown("fast");
 					}
 		});
+	}
+	else {
+		$(".replies").slideDown("fast");
 	}
 }
  
