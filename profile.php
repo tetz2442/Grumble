@@ -42,7 +42,7 @@ else {
     <div id='tab1'>
          <?php
 			if(isset($_GET["id"])) {
-			//get user grumbles
+			//get user omments
 			$sql = "SELECT sg.status_id, ug.user_id, sg.sub_category_id FROM status_grumble AS sg " .
 			"LEFT OUTER JOIN users_grumble AS ug ON sg.user_id = ug.user_id " .
 			"WHERE ug.username = '" . $id . 
@@ -66,7 +66,7 @@ else {
     </div>
     <div id="tab2">
     <?php
-		//recent threads
+		//recent grumbles
 		$sql = "SELECT scg.sub_category_id FROM sub_category_grumble AS scg" .
 			" LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = scg.user_id " .
 			" WHERE ug.username = '" . $id . "' ORDER BY sub_category_id DESC LIMIT 10";
