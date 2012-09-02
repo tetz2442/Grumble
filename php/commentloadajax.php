@@ -70,12 +70,10 @@
 			}
 		}
 		else if($type == "top-grumble") {
-			$sql = "SELECT sg.status_id FROM status_grumble AS sg " . 
-                  "LEFT OUTER JOIN votes_up_grumble AS vg ON sg.status_id = vg.status_id " .
-                  "LEFT OUTER JOIN users_grumble AS ug ON " .
-                  "sg.user_id = ug.user_id " . 
-                  "WHERE date_submitted >= (CURDATE() - INTERVAL 7 DAY) " .
-                  "AND vg.votes_up_count > 0 ORDER BY vg.votes_up_count DESC LIMIT 10 OFFSET " . $last;
+			$sql = "SELECT sg.status_id,(SELECT COUNT(user_like_id) FROM user_likes_grumble AS ulg WHERE sg.status_id = ulg.status_id) AS votes_up_count" .
+				" FROM status_grumble AS sg " . 
+                  "WHERE sg.date_submitted >= (CURDATE() - INTERVAL 7 DAY) HAVING votes_up_count > 0" .
+                  " ORDER BY votes_up_count DESC LIMIT 10 OFFSET " . $last;
 			$result = mysql_query($sql, $conn);
 			if(mysql_num_rows($result) == 0) {
 				echo "none";	

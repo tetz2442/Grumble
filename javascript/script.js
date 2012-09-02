@@ -662,13 +662,13 @@ $(document).ready(function() {
 				$(".view-more").slideUp("fast");
 			}
 			if($(this).html() == "Recent Grumbles")
-				$("#arrow-top img").animate({"marginLeft":"168px"}, "normal");
+				$("#arrow-top img").animate({"marginLeft":"166px"}, "normal");
 			else if($(this).html() == "Top Grumbles")
 				$("#arrow-top img").animate({"marginLeft":"47px"}, "normal");
 			else if($(this).html() == "Top Comments")
-				$("#arrow-top img").animate({"marginLeft":"288px"}, "normal");
+				$("#arrow-top img").animate({"marginLeft":"286px"}, "normal");
 			else if($(this).html() == "Recent Comments")
-				$("#arrow-top img").animate({"marginLeft":"406px"}, "normal");
+				$("#arrow-top img").animate({"marginLeft":"404px"}, "normal");
 			$active.removeClass('active');
 			$content.fadeOut("fast");
 	
