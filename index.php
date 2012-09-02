@@ -42,7 +42,7 @@ else {
     <div id="tabs-horizontal-float">
         <div id='tab1'>
              <?php
-                //top threads
+                //top grumbles
                 $sql = "SELECT sub_category_id FROM sub_category_grumble" .
                 " WHERE grumble_number > 0 ORDER BY grumble_number DESC LIMIT 10";
                 $result = mysql_query($sql, $conn);
@@ -61,7 +61,7 @@ else {
         </div>
         <div id="tab2">
         <?php
-            //recent threads
+            //recent grumbles
             $sql = "SELECT sub_category_id FROM sub_category_grumble" .
             " ORDER BY sub_category_id DESC LIMIT 10";
             $result = mysql_query($sql, $conn);
@@ -78,13 +78,13 @@ else {
         </div>
         <div id='tab3'>
              <?php
-                //top grumbles
-                $sql = "SELECT sg.status_id FROM status_grumble AS sg " . 
-                  "LEFT OUTER JOIN votes_up_grumble AS vg ON sg.status_id = vg.status_id " .
+                //top comments
+                $sql = "SELECT sg.status_id, COUNT(ulg.user_like_id) AS votes_up_count FROM status_grumble AS sg " . 
+                  "LEFT OUTER JOIN user_likes_grumble AS ulg ON sg.status_id = ulg.status_id " .
                   "LEFT OUTER JOIN users_grumble AS ug ON " .
                   "sg.user_id = ug.user_id " . 
-                  "WHERE date_submitted >= (CURDATE() - INTERVAL 7 DAY) " .
-                  "AND vg.votes_up_count > 0 ORDER BY vg.votes_up_count DESC LIMIT 10";
+                  "WHERE sg.date_submitted >= (CURDATE() - INTERVAL 7 DAY) " .
+                  " GROUP BY sg.status_id ORDER BY votes_up_count DESC LIMIT 10";
                 $result = mysql_query($sql, $conn);
                 
                 if(mysql_num_rows($result) > 0) {
@@ -99,7 +99,7 @@ else {
         </div>
         <div id="tab4">
         <?php
-            //recent threads
+            //recent comments
             $sql = "SELECT status_id FROM status_grumble" .
                 " ORDER BY status_id DESC LIMIT 10";
             $result = mysql_query($sql, $conn);

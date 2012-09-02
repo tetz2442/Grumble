@@ -764,7 +764,7 @@ html { overflow-y: scroll; }
 	text-decoration:none;
 	color:#333;
 	font-size:1.1em;
-	width:120px;
+	width:115px;
 	text-align:center;
 }
 .tabs a:hover {
@@ -779,7 +779,7 @@ html { overflow-y: scroll; }
 }
 #arrow-top img {
 	margin-bottom:-4px;	
-	margin-left:52px;
+	margin-left:47px;
 }
 
 .grumble-holder {
