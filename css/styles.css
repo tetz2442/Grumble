@@ -595,10 +595,10 @@ html { overflow-y: scroll; }
 	text-decoration:underline;	
 	cursor:pointer;
 }
-.votes-up img, replies-view img {
+.votes-up img, .replies-view img {
 	margin:0 2px -2px 2px;		
 }
-.votes-up img:hover, replies-view img:hover { 
+.votes-up img:hover, .replies-view img:hover { 
 	cursor:pointer;
 }
 .replies-view span {
