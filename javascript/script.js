@@ -183,11 +183,21 @@ $(document).ready(function() {
 		var $commentText = $(this).parent().find(".quick-reply-input").val();
 		var id = $(this).parents(".comment-holder").find(".replies-view").attr("rel");
 		var statususername = $(this).parents(".comment-holder").find(".username:first").text();
-		if($commentText != "" && $commentText.length <= 160) {
+		if($commentText == "") {
+			$("#notification-bar p").html("Comment cannot be empty.").addClass("error").removeClass("available");
+			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+		}
+		else if($commentText.length >= 160){
+			$("#notification-bar p").html("Too many characters to submit.").addClass("error").removeClass("available");
+			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+		}
+		else {
 			$element.parents(".comment-holder").find(".gif-loader-replies").show();
+			$element.attr("disabled","disabled");
 			$.post("/php/repliesajax.php", {reply:id, type:"enter", text:$commentText, statususername:statususername},
 			function(result) {
 				$element.parents(".comment-holder").find(".gif-loader-replies").hide();
+				$element.removeAttr("disabled");
 				if(result != "") {
 					$(result).insertBefore($element.parents(".comment-holder").find(".quick-reply-input"));
 					$element.parents(".comment-holder").find(".ind-reply:last").slideDown("fast");
@@ -411,6 +421,7 @@ $(document).ready(function() {
 						canLoad = true;
 						if(result != "none" && type =="recent-comment") {
 							$(result).insertAfter($("#tab1 .comment-holder:last"));
+
 						}
 						else if(result == "none" && type == "recent-comment") {
 							resultGDone == "true";
@@ -543,12 +554,18 @@ $(document).ready(function() {
 			else {
 				var commenttext = $("#quick-compose-textarea").val();
 				var category = $("#comment-category").val();
+				$(element).attr("disabled","disabled");
 				$(element).parent().find("#gif-loader-comment").show();
 				$.post("/php/commentajax.php", {comment:commenttext, category:category},
 						function(result) {
 						$(element).parent().find("#gif-loader-comment").hide();
+						$(element).removeAttr("disabled");
 						if(result == 0 || result == "") {
 							$("#notification-bar p").html("Something went wrong. Please check your entries.").addClass("error");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						}
+						else if(result == 1) {
+							$("#notification-bar p").html("Already submitted.").removeClass("available").addClass("error");
 							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 						}
 						else if(result != "") {
@@ -559,8 +576,6 @@ $(document).ready(function() {
 								$("#notification-bar p").html("Refreshing page...").removeClass("error").addClass("available");
 								$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).show();
 								document.location.reload(true);
-								//$(result).insertAfter(".grumble-comment");
-								//$(".grumbles-left .text-align-center").remove();
 							}
 								
 							if($("#comments-left-header").length > 0) {

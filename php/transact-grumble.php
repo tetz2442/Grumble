@@ -19,6 +19,7 @@
 					
 					$sql = "SELECT sub_category_id FROM sub_category_grumble WHERE sub_category_id = " . $category . " LIMIT 0,1";
 					$result = mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
+					
 					//check if the entered category is valid
 					if(mysql_num_rows($result) != 0) {
 						//remove spaces
@@ -82,24 +83,37 @@
 					$grumble = str_replace("\n", "", $grumble);
 					
 					$sql = "SELECT category_url FROM categories_grumble WHERE category_id = " . $category;
-					$result = mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
+					$result = mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
+					$catexist = mysql_num_rows($result);
+					$sql = "SELECT sub_category_url, sub_category_id FROM sub_category_grumble WHERE sub_category_description = '" . $description .
+					"' AND sub_category_name = '" . $grumble . "' AND user_id = " . $_SESSION["user_id"] . " LIMIT 0,1";
+					$result2 = mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
+					$grumbleexist = mysql_num_rows($result2);
 					//check if the entered category is valid
-					if(mysql_num_rows($result) != 0) {
+					if($catexist != 0) {
 						$row = mysql_fetch_array($result);
-						//$bad_words = array('a','and','the','an','it','is','with','can','of','not');
-						$seo = generate_seo_link($grumble,'-',false);
-						
-						$sql = "INSERT INTO sub_category_grumble " .
-							"(category_id, sub_category_name, sub_category_description, sub_category_created, sub_category_url, user_id) " .
-							"VALUES (" . $category . ",'" . $grumble . 
-							"','" . $description . "','" . date("Y-m-d H:i:s", time()) . "','" . $seo . "'," . $_SESSION["user_id"] . ")";
-						mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
-						$id = mysql_insert_id();
-						
-						$sql = "UPDATE categories_grumble SET thread_number = thread_number + 1 WHERE category_id = " . $category;
-						mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
-						
-						redirect("../" . $row["category_url"] . "/" . $seo . "/" . $id . "?create=new");
+						//check if grumble has already been created
+						if($grumbleexist != 1) {
+							//$bad_words = array('a','and','the','an','it','is','with','can','of','not');
+							$seo = generate_seo_link($grumble,'-',false);
+							
+							$sql = "INSERT INTO sub_category_grumble " .
+								"(category_id, sub_category_name, sub_category_description, sub_category_created, sub_category_url, user_id) " .
+								"VALUES (" . $category . ",'" . $grumble . 
+								"','" . $description . "','" . date("Y-m-d H:i:s", time()) . "','" . $seo . "'," . $_SESSION["user_id"] . ")";
+							mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
+							$id = mysql_insert_id();
+							
+							$sql = "UPDATE categories_grumble SET thread_number = thread_number + 1 WHERE category_id = " . $category;
+							mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
+							
+							redirect("../" . $row["category_url"] . "/" . $seo . "/" . $id . "?create=new");
+						}
+						else {
+							//grumble was already created (multi-submit), redirect to grumble
+							$row2 = mysql_fetch_array($result2);
+							redirect("../" . $row["category_url"] . "/" . $row2["sub_category_url"] . "/" . $row2["sub_category_id"]);
+						}
 					}
 					else
 						redirect("../");
