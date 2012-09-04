@@ -345,27 +345,27 @@ $(document).ready(function() {
 				var userID = $(".user-name").attr("rel");
 			var type = "";
 			var last = 0;
-			if($(".tabs a.active").html() == "Top Grumbles") {
+			if($(".tabs a.active").text() == "Top Grumbles") {
 				type = "top";
 				last = $("#tab1 .grumble-holder").length;
 			}
-			else if($(".tabs a.active").html() == "Recent Grumbles"){
+			else if($(".tabs a.active").text() == "Recent Grumbles"){
 				type = "recent";
-				last = $("#tab2 .grumble-holder:last").find(".comment-text-holder a").attr("data-id");
+				last = $("#tab2 .grumble-holder:last").find(".grumble-text-holder a").attr("data-id");
 			}
-			else if($(".tabs a.active").html() == "Top Comments"){
+			else if($(".tabs a.active").text() == "Top Comments"){
 				type = "top-comment";
 				last = $("#tab3 .comment-holder").length;
 			}
-			else if($(".tabs a.active").html() == "Recent Comments"){
+			else if($(".tabs a.active").text() == "Recent Comments"){
 				type = "recent-comment";
 				last = $("#tab4 .comment-holder:last").find(".username").attr("rel");
 			}
-			else if($(".tabs-profile a.active").html() == "Comments"){
+			else if($(".tabs-profile a.active").text == "Comments"){
 				type = "recent-grumble";
 				last = $("#tab1 .comment-holder:last").find(".username").attr("rel");
 			}
-			else if($(".tabs-profile a.active").html() == "Grumbles"){
+			else if($(".tabs-profile a.active").text == "Grumbles"){
 				type = "recent";
 				last = $("#tab2 .grumble-holder:last").find(".comment-text-holder a").attr("data-id");
 			}
@@ -529,7 +529,7 @@ $(document).ready(function() {
 			}
 		}
 		else if($(this).text() == "Settings") {
-			$("#settings-holder").stop().animate({"top":"48px"}, "normal");
+			$("#settings-holder").stop().animate({"top":"46px"}, "normal");
 			$("#settings-background").stop().fadeIn("normal");
 			
 			$("#settings-background").click(function() {

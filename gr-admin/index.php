@@ -2,6 +2,8 @@
 require_once "../php/conn.php";
 require_once "../php/header.php";
 require_once "../php/containerGrumbles.php";
+require_once "outputcontact.php";
+require_once "outputspam.php";
 
 //is an admin
 if(isset($_SESSION["username"]) && $_SESSION["access_lvl"] == 3) {
@@ -11,6 +13,7 @@ if(isset($_SESSION["username"]) && $_SESSION["access_lvl"] == 3) {
 	$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
 	
 ?>
+<link type="text/css" href="/css/admin.css" rel="stylesheet" media="all">
 <ul class="tabs">
     <li><a href='#tab1' class="active">Contact Messages</a></li>
     <li><a href='#tab2'>Reported Spam</a></li>
