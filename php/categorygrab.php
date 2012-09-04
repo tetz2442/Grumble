@@ -1,11 +1,11 @@
 <?php
 require_once "conn.php";
-require_once "outputthreads.php";
+require_once "outputgrumbles.php";
 
 if(isset($_POST["catID"]) && isset($_POST["type"]) && isset($_POST["last"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	
-	$catid = mysql_real_escape_string($_POST["catID"]);
-	$last = mysql_real_escape_string($_POST["last"]);
+	$catid = intval(mysql_real_escape_string($_POST["catID"]));
+	$last = intval(mysql_real_escape_string($_POST["last"]));
 	
 	if($_POST["type"] == "recent") {
 		$sql = "SELECT sub_category_id FROM sub_category_grumble" .
@@ -16,7 +16,7 @@ if(isset($_POST["catID"]) && isset($_POST["type"]) && isset($_POST["last"]) && $
 		}
 		else {
 			while($row = mysql_fetch_array($result)) {
-				outputThreads($row["sub_category_id"]);
+				outputGrumbles($row["sub_category_id"]);
 			}
 		}
 	}
@@ -29,7 +29,7 @@ if(isset($_POST["catID"]) && isset($_POST["type"]) && isset($_POST["last"]) && $
 		}
 		else {
 			while($row = mysql_fetch_array($result)) {
-				outputThreads($row["sub_category_id"]);
+				outputGrumbles($row["sub_category_id"]);
 			}
 		}
 	}
@@ -37,7 +37,7 @@ if(isset($_POST["catID"]) && isset($_POST["type"]) && isset($_POST["last"]) && $
 		echo "none";
 }
 else if(isset($_POST["type"]) && isset($_POST["last"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
-	$last = mysql_real_escape_string($_POST["last"]);
+	$last = intval(mysql_real_escape_string($_POST["last"]));
 	
 	if($_POST["type"] == "recent") {
 		$sql = "SELECT sub_category_id FROM sub_category_grumble" .
@@ -48,7 +48,7 @@ else if(isset($_POST["type"]) && isset($_POST["last"]) && $_SERVER['REQUEST_METH
 		}
 		else {
 			while($row = mysql_fetch_array($result)) {
-				outputThreads($row["sub_category_id"], true);
+				outputGrumbles($row["sub_category_id"], true);
 			}
 		}
 	}
@@ -61,7 +61,7 @@ else if(isset($_POST["type"]) && isset($_POST["last"]) && $_SERVER['REQUEST_METH
 		}
 		else {
 			while($row = mysql_fetch_array($result)) {
-				outputThreads($row["sub_category_id"], true);
+				outputGrumbles($row["sub_category_id"], true);
 			}
 		}
 	}
@@ -81,7 +81,7 @@ else if(isset($_POST["type"]) && isset($_POST["last"]) && isset($_POST["userID"]
 		}
 		else {
 			while($row = mysql_fetch_array($result)) {
-				outputThreads($row["sub_category_id"], true);
+				outputGrumbles($row["sub_category_id"], true);
 			}
 		}
 	}

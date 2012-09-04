@@ -1,12 +1,12 @@
 <?php
-function outputGrumbles($thread, $home = false) {
+function outputGrumbles($grumble, $home = false) {
 	global $conn;
-	if($thread) {
+	if($grumble) {
 		$sql = "SELECT cg.category_name, cg.category_url, scg.sub_category_id, scg.sub_category_name, scg.sub_category_description, scg.sub_category_url, COUNT(sg.status_id) AS grumble_number, DATE_FORMAT(scg.sub_category_created, '%b %e, %Y %l:%i %p') AS sub_category_created " . 
 			" FROM sub_category_grumble AS scg " .
 			"LEFT OUTER JOIN categories_grumble AS cg ON cg.category_id = scg.category_id " .
 			"LEFT OUTER JOIN status_grumble AS sg ON sg.sub_category_id = scg.sub_category_id " .
-			"WHERE sg.sub_category_id = " . $thread . 
+			"WHERE sg.sub_category_id = " . $grumble . 
 			" LIMIT 0, 1";	
 		$result = mysql_query($sql, $conn);
 		if($row = mysql_fetch_array($result)) {

@@ -183,7 +183,7 @@ $(document).ready(function() {
 	});
 	
 	$("#settings-dropdown").click(function () {
-		$("#settings-holder").css("top","48px");
+		$("#settings-holder").css("top","46px");
 		$("#settings-background").stop().fadeIn("normal");
 		
 		$("#dropdown-form").fadeOut(50, function() {
@@ -199,7 +199,7 @@ $(document).ready(function() {
 	var cururl = window.location.href;
 	var newuser = false;
 	if(cururl.indexOf("#settings") != -1) {
-		$("#settings-holder").css("top","48px");
+		$("#settings-holder").css("top","46px");
 		$("#settings-background").stop().fadeIn("normal");
 		
 		$("#settings-background").click(function() {
