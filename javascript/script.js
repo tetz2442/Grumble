@@ -89,6 +89,26 @@ $(document).ready(function() {
 				});
 			}
 		}
+		else if($element.text() == "Spam") {
+			var id = $element.parents(".comment-holder").find(".username").attr("data-id");
+			if(confirm("Are you sure you want to report this comment as spam?")) {
+				var $parent = $element.parents(".comment-holder");
+				$element.parents(".comment-holder").find(".gif-loader-replies").show();
+				$element.remove();
+				$.post("/php/commentajax.php", {commentid:id, action:"Spam"},
+				function(result) {
+					$parent.find(".gif-loader-replies").hide();
+					if(result == 1) {
+						$("#notification-bar p").html("Comment reported as spam. Thank you.").removeClass("error").addClass("available");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					}
+					else {
+						$("#notification-bar p").html("Something went wrong. Could not report.").removeClass("available").addClass("error");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					}
+				});
+			}
+		}
 	});
 
 	//adds a vote to vote up
