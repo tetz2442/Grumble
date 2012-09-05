@@ -115,7 +115,7 @@ if($exist) {
         while($row = mysql_fetch_array($result)) {
             outputComments($row["status_id"], false, $loggedin);	
         }
-        echo '<div id="gif-loader"><img src="/images/ajax-loader2.gif" width="32" height="32"/></div>';
+        echo '<div id="gif-loader"><img src="/images/ajax-loader2.gif" alt="loader" width="32" height="32"/></div>';
         echo '</div>';
     }	
 	

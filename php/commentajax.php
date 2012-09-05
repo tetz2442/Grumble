@@ -4,7 +4,7 @@
 	require_once "outputcomments.php";
 	require_once "sendemail.php";
 	session_start();
-	if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+	if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && is_numeric($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		//date_default_timezone_set($_SESSION["timezone"]);
 		$comment = mysql_real_escape_string(strip_tags($_POST["comment"]));
 		$category = mysql_real_escape_string(strip_tags($_POST["category"]));
@@ -71,7 +71,7 @@
 	}
 	
 	//code for handing deletion of a grumble
-	if(isset($_POST["commentid"]) && isset($_POST["action"]) && $_POST["action"] == "Delete" && isset($_SESSION["username"])) {
+	if(isset($_POST["commentid"]) && is_numeric($_POST["commentid"]) && isset($_POST["action"]) && $_POST["action"] == "Delete" && isset($_SESSION["username"])) {
 		$id = mysql_real_escape_string($_POST["commentid"]);
 		
 		//check if status is there and user is owner

@@ -1,7 +1,7 @@
 <div id="grumble-lightbox">
 <div class="lightbox-head">
     <h3 class="quick-compose-header">Compose New Grumble</h3>
-    <img src="/images/exit.png" width="15" height="15" class="close-quick-submit" onmouseover="this.src='/images/exitHover.png'" onmouseout="this.src='/images/exit.png'"/>
+    <img src="/images/exit.png" alt="exit" width="15" height="15" class="close-quick-submit" onmouseover="this.src='/images/exitHover.png'" onmouseout="this.src='/images/exit.png'"/>
 </div>
 <div class="lightbox-grumble-padding">
 <?php
@@ -9,9 +9,9 @@
 	$_SESSION['token4'] = $token;
 ?>
     <form action="/php/transact-grumble.php" method="post"><br/>
-    	<label for="grumble">Grumble Name</label> (<span class="help-callout colored-link-1" data-id="1" title="How to write a great Grumble name."><b>?</b></span>)<br/>
+    	<label for="quick-description-grumblename">Grumble Name</label> (<span class="help-callout colored-link-1" data-id="1" title="How to write a great Grumble name."><b>?</b></span>)<br/>
         <input type="text" name="grumble" id="quick-description-grumblename" class="textInput"/><br/>
-        <label for="description">Grumble Description</label> (<span class="help-callout colored-link-1" data-id="2" title="How to write a great Grumble description."><b>?</b></span>)<br/>
+        <label for="quick-description-textarea">Grumble Description</label> (<span class="help-callout colored-link-1" data-id="2" title="How to write a great Grumble description."><b>?</b></span>)<br/>
         <textarea id="quick-description-textarea" class="textArea" title="Describe this Grumble" rows="3" name="description" placeholder="Grumble Description..."></textarea>
         <div id="lightbox-submit-padding">
         <select name="category" id="grumble-dropdown" <?php if(isset($_GET["cat"])) echo 'disabled="disabled"';?>>

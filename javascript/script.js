@@ -625,7 +625,7 @@ $(document).ready(function() {
 				}
 				var lastid = $(".username:last").attr("rel");
 				$("#gif-loader").fadeIn(50);
-				$.post("/php/commentloadajax.php", {pagenumber:pageNumber, number:"10", subCat:subCat, lastid:lastid},
+				$.post("/php/commentloadajax.php", {pagenumber:pageNumber, number:10, subCat:subCat, lastid:lastid},
 					function(result) {
 						$("#gif-loader").fadeOut(50);
 						if(result == "none") {

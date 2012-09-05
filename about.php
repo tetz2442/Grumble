@@ -18,28 +18,19 @@ $validation = true;
         <p>Start your sign up below and start Grumbling.</p>
         <div id="login-table-about">	
             <form method='post' action='/create-account' name='userForm'>
-            <table>
-            <tr>
-            	<td id="createError"></td>
-            </tr>
-            <tr>
-            	<td><label for="fullname">Full Name: (ex. John Doe)</label></td>
-            </tr>
-            <tr>
-                <td><input type="text" id="fullname" class="textInput" name="fullname" maxlength="50"/></td>
-            <tr>
-            <tr>
-            	<td class="table-padding-top"><label for="emails">Email Address:</label></td>
-            </tr>
-            <tr>
-                <td><input type="text" id="emails" class="textInput" name="email" maxlength="255"/></td>
-            </tr>
-            <tr>
-                <td align="right" class="table-padding-top">
-                <input type="submit" id="about-create" class="button orange" name="action" value="Create Account"/>
-                </td>
-            </tr>
-            </table>
+            <ul>
+	            <li>
+	            	<label for="fullname">Full Name: (ex. John Doe)</label>
+	                <td><input type="text" id="fullname" class="textInput" name="fullname" maxlength="50"/></td>
+	            </li>
+	            <li class="padding-top">
+	            	<label for="emails">Email Address:</label>
+	                <input type="text" id="emails" class="textInput" name="email" maxlength="255"/>
+	            </li>
+	            <li>
+	                <input type="submit" id="about-create" class="button orange" name="action" value="Create Account"/>
+	            </li>
+            </ul>
             </form>
         </div>
     </div>

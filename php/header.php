@@ -26,7 +26,7 @@ if(isset($_COOKIE["user_grumble"]) && !isset($_SESSION["user_id"])) {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link type="text/css" href="/css/styles.css" rel="stylesheet" media="all">
         <noscript>
-        <meta http-equiv="Refresh"content="0;url=noscript.html" />
+        <meta http-equiv="Refresh" content="0;url=<?php echo "http://" . $_SERVER["HTTP_HOST"] . "/"; ?>noscript.html">
     </noscript>
 <title>Grumble |
 <?php
@@ -103,4 +103,4 @@ $validation = false;
 $contactvalidation = false;
 $grumble = false;
 ?>
-<div id="maincolumn" style="display:none;">
+<div id="maincolumn">

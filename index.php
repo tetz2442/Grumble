@@ -38,7 +38,7 @@ else {
         <li><a href='#tab3'>Top Comments</a></li>
         <li><a href='#tab4'>Recent Comments</a></li>
     </ul>
-    <div id="arrow-top"><img src="images/arrow-up.png" width="15" height="15"/></div>
+    <div id="arrow-top"><img src="images/arrow-up.png" alt="arrow" width="15" height="15"/></div>
     <div id="tabs-horizontal-float">
         <div id='tab1'>
              <?php
@@ -112,7 +112,7 @@ else {
             }
         ?>
         </div>
-        <div id="gif-loader"><img src="images/ajax-loader2.gif" width="32" height="32"/></div>
+        <div id="gif-loader"><img src="images/ajax-loader2.gif" alt="loader" width="32" height="32"/></div>
         <div id="view-more-holder">
         <?php
         if($topnumber < 10) 
