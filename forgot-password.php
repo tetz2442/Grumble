@@ -22,8 +22,8 @@ $_SESSION['token3'] = $token;
 	if(!isset($_GET["hash"]) && !isset($_GET["email"])) {
 ?>
 <p class="content-padding-forgetpass">Forgot your password? Please enter your email address, and we'll email you a temporary link to change your password.  This link will expire shorty so be sure to reset your password as soon as possible.</p>
-<label for="email-forg">Email Address:</label> <br />
-	<input type="email" id="email-forg" class="textInput" name="email" maxlength="100"/><br />
+<label for="email-forg">Email Address:</label>
+	<input type="email" id="email-forg" class="textInput" name="email" maxlength="100"/>
     <input type="hidden" name="token" value="<?php echo $token; ?>" />
 	<input type="submit" class="submit button" name="action" value="Send Email"/>
 </form>
@@ -43,10 +43,10 @@ $_SESSION['token3'] = $token;
 		require_once "php/notificationbar.php";
 ?>
 <br/><p>Reset your password below.</p><br/>
-<p>New Password: <br />
+<p><label for="pass-forg">Password:</label>
 	<input type="password" id="pass-forg" class="textInput" name="password" maxlength="50"/>
 </p>
-<p>New Password(again): <br />
+<p><label for="pass-forg2">New Password(again):</label>
 	<input type="password" id="pass-forg2" class="textInput" name="password2" maxlength="50"/>
 </p>
 <p>

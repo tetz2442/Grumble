@@ -925,8 +925,8 @@ html { overflow-y: scroll; }
 }
 #login-table {
 	margin:auto;
-	margin-bottom:20px;
-	width:371px;
+	width:350px;
+	margin-bottom:40px;
 	padding:15px 15px 15px 15px;
 	background-color:#feeed3;
 	border-radius:10px;
@@ -935,6 +935,22 @@ html { overflow-y: scroll; }
 	-webkit-box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 3px 0px rgba(0,0,0,.2);
     -moz-box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 3px 0px rgba(0,0,0,.2);
     box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 4px 0px rgba(0,0,0,.2);
+}
+#login-table ul {
+	list-style: none;
+}
+#login-table li {
+	margin: 10px;
+}
+#login-table input[type="input"], #login-table input[type="password"], #login-table input[type="email"] {
+	width:100%;
+}
+#login-table input[type="submit"]{
+	float:right;
+}
+#login-table .login-label {
+	display: block;
+	margin:5px 0;
 }
 .gif-loader {
 	margin-right:5px;	
@@ -1244,6 +1260,7 @@ html { overflow-y: scroll; }
 }
 #forgot-pass-holder input {
 	margin:5px 0 10px 0;
+	display: block;
 }
 
 /********

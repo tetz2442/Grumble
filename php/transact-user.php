@@ -68,11 +68,11 @@
 					redirect("../login?login=failed&email=" . $email);	
 				}
 				else {
-					redirect($refer . "?login=1");	
+					redirect($refer . "../login?login=failed");	
 				}
 			}
 			else {
-				redirect($refer . "?login=1");	
+				redirect($refer . "../login?login=failed");	
 			}
 		break;
 		

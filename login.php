@@ -4,21 +4,16 @@ require_once "php/containerWide.php";
  ?>
  <div class="content-padding text-align-center">
  <h1>Login</h1>
-    <?php
-    if(isset($_GET["login"]) && $_GET["login"] == "failed") {
-        echo '<p class="error padding-top">Incorrect email/password entered</p>';	
-    }
-    ?>
     </div>
 <div id="login-table">
 <form method="post" action="php/transact-user.php">
-<table>
-<tr>
-    <td align="right"><label for="email">Email Address:</label></td>
-    <td class="table-padding"><input type="email" id="email" class="textInput" name="email" maxlength="100" value="<?php if(isset($_GET["email"])) echo strip_tags($_GET["email"]); ?>"/></td>
-</tr>
-<tr>
-    <td align="right"><label for="password">Password:</label>
+<ul>
+<li>
+    <label for="email" class="login-label">Email Address:</label>
+    <input type="email" id="email" class="textInput" name="email" maxlength="100" value="<?php if(isset($_GET["email"])) echo strip_tags($_GET["email"]); ?>"/>
+</li>
+<li>
+    <label for="password" class="login-label">Password:</label>
     <?php
 	$refer = "../" . basename($_SERVER['PHP_SELF']);
 	if($_SERVER['QUERY_STRING'] != "") {
@@ -26,21 +21,21 @@ require_once "php/containerWide.php";
 	}
 	?>
 	<input type="hidden" name="referrer" value="<?php echo $refer; ?>"/>
-    </td>
-    <td class="table-padding"><input type="password" class="textInput" name="password" maxlength="50"/></td>
-</tr>
-<tr>
-<td><input type="hidden" name="token" value="<?php echo $token; ?>" /></td>
-    <td><input type="checkbox" name="remember-box" id="remember-checkbox2"/><label for="remember-checkbox2" class="colored-link-1">Remember me</label></td>
-</tr>
-<tr>
-    <td rowspan="2" align="right"><a href="forgot-password" class="colored-link-1">Forgot your password?</a></td>
-</tr>
-<tr>
-	<td colspan="2" align="right" class="table-padding"><input type="submit" class="button submit" name="action" value="Sign In"/></td>
-</tr>
-</table>
+    <input type="password" class="textInput" name="password" maxlength="50"/>
+</li>
+<li>
+	<input type="hidden" name="token" value="<?php echo $token; ?>" />
+    <input type="checkbox" name="remember-box" id="remember-checkbox2"/><label for="remember-checkbox2" class="colored-link-1">Remember me</label>
+    <input type="submit" class="button submit" name="action" value="Sign In"/>
+</li>
+<li>
+    <a href="forgot-password" class="colored-link-1">Forgot your password?</a>
+</li>
+</ul>
 </form>
 </div>
 
-<?php require_once "php/footer.php"; ?>
+<?php 
+require_once "php/notificationbar.php"; 
+require_once "php/footer.php"; 
+?>

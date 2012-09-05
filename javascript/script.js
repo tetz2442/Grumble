@@ -382,7 +382,7 @@ $(document).ready(function() {
 						
 						$.each($(".grumble-description"), function() {
 							if(!$(this).hasClass("linked")) {
-								var newText = linkify($(this).html());
+								var newText = linkText($(this).html());
 								$(this).addClass("linked").html(newText);
 							}
 						});
@@ -394,7 +394,7 @@ $(document).ready(function() {
 						
 						$.each($(".grumble-description"), function() {
 							if(!$(this).hasClass("linked")) {
-								var newText = linkify($(this).html());
+								var newText = linkText($(this).html());
 								$(this).addClass("linked").html(newText);
 							}
 						});
@@ -458,7 +458,7 @@ $(document).ready(function() {
 							
 							$.each($(".grumble-description"), function() {
 								if(!$(this).hasClass("linked")) {
-									var newText = linkify($(this).html());
+									var newText = linkText($(this).html());
 									$(this).addClass("linked").html(newText);
 								}
 							});
@@ -470,7 +470,7 @@ $(document).ready(function() {
 							
 							$.each($(".grumble-description"), function() {
 								if(!$(this).hasClass("linked")) {
-									var newText = linkify($(this).html());
+									var newText = linkText($(this).html());
 									$(this).addClass("linked").html(newText);
 								}
 							});
@@ -497,7 +497,7 @@ $(document).ready(function() {
 							
 							$.each($(".comment-text"), function() {
 								if(!$(this).hasClass("linked")) {
-									var newText = linkify($(this).html());
+									var newText = linkText($(this).html());
 									$(this).addClass("linked").html(newText);
 								}
 							});
@@ -509,7 +509,7 @@ $(document).ready(function() {
 							
 							$.each($(".comment-text"), function() {
 								if(!$(this).hasClass("linked")) {
-									var newText = linkify($(this).html());
+									var newText = linkText($(this).html());
 									$(this).addClass("linked").html(newText);
 								}
 							});
@@ -646,7 +646,7 @@ $(document).ready(function() {
 							
 							$.each($(".comment-text"), function() {
 								if(!$(this).hasClass("linked")) {
-									var newText = linkify($(this).html());
+									var newText = linkText($(this).html());
 									$(this).addClass("linked").html(newText);
 								}
 							});
@@ -761,6 +761,11 @@ $(document).ready(function() {
 		});
 	}
 	
+	if($.urlParam("login") == "failed") {
+		$("#notification-bar p").html("Incorrect email/password entered.").addClass("error");
+		$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+	}
+	
 	$("#forg-submit").click(function(event) {
 		if($("#pass-forg").val() == "" || $("#pass-forg2").val() == "") {
 			event.preventDefault();
@@ -805,25 +810,25 @@ $(document).ready(function() {
 	});
 	
 	/*
-	These next three ifs linkify text blocks
+	These next three ifs linkText text blocks
 	*/
 	if($(".comment-text").length > 0) {
 		$.each($(".comment-text"), function() {
-			var newText = linkify($(this).html());
+			var newText = linkText($(this).html());
 			$(this).addClass("linked").html(newText);
 		});
 		
 		shortenLink(".comment-text a");
 	}
 	if($("#sub-category-desc").length > 0) {
-		var catText = linkify($("#sub-category-desc").html());
+		var catText = linkText($("#sub-category-desc").html());
 		$("#sub-category-desc").html(catText);
 		
 		shortenLink("#sub-category-desc a");
 	}
 	if($(".grumble-description").length > 0) {
 		$.each($(".grumble-description"), function() {
-			var newText = linkify($(this).html());
+			var newText = linkText($(this).html());
 			$(this).addClass("linked").html(newText);
 		});
 		
@@ -831,7 +836,7 @@ $(document).ready(function() {
 	}
 });
 
-function linkify(inputText) {
+function linkText(inputText) {
     var replaceText, replacePattern1, replacePattern2, replacePattern3;
 
     //URLs starting with http://, https://
