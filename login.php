@@ -3,6 +3,9 @@ require_once "php/header.php";
 require_once "php/containerWide.php";
  ?>
  <div class="content-padding text-align-center">
+<?php
+if(!isset($_SESSION["user_id"])) {
+?>
  <h1>Login</h1>
     </div>
 <div id="login-table">
@@ -36,6 +39,12 @@ require_once "php/containerWide.php";
 </div>
 
 <?php 
+}
+else {
+?>
+<p class="content-padding"><b>Looks like you are already logged in. Get out there and start Grumbling!</b></p>
+<?php
+}
 require_once "php/notificationbar.php"; 
 require_once "php/footer.php"; 
 ?>
