@@ -98,7 +98,7 @@ $(document).ready(function() {
 		var $element = $(this).parent();
 		$(this).remove();
 		var votes = parseInt($element.find(".votes-up-number").text())
-		var htmlString = 'Vote up(<span class="votes-up-number">' + votes + '</span>)';
+		var htmlString = 'Votes up<img src="/images/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/>(<span class="votes-up-number">' + votes + '</span>)';
 		$element.html(htmlString);
 		$element.parents(".comment-holder").find(".gif-loader-replies").show();
 		$.post("/php/votes.php", {vote_up:id},
@@ -571,6 +571,9 @@ $(document).ready(function() {
 						else if(result != "") {
 							if($(".comment-holder").length > 0) {
 								$(result).insertBefore(".comment-holder:first");
+								var newText = linkText($(".comment-text:first").text());
+								$(".comment-text:first").addClass("linked").html(newText);
+								shortenLink(".comment-text:first a");
 							}
 							else {
 								$("#notification-bar p").html("Refreshing page...").removeClass("error").addClass("available");
@@ -852,13 +855,15 @@ function linkText(inputText) {
 
 function shortenLink(selector) {
 	$.each($(selector), function() {
-		var textReplace = $(this).text();
-		textReplace = textReplace.replace(/(https?):\/\//, "");
-		textReplace = textReplace.replace(/www\./, "");
-		if(textReplace.length > 30) {
-			textReplace = textReplace.substring(0, 27) + "...";
+		if(!$(this).hasClass("linked")) {
+			var textReplace = $(this).text();
+			textReplace = textReplace.replace(/(https?):\/\//, "");
+			textReplace = textReplace.replace(/www\./, "");
+			if(textReplace.length > 30) {
+				textReplace = textReplace.substring(0, 27) + "...";
+			}
+			$(this).text(textReplace);
 		}
-		$(this).text(textReplace);
 	});
 }
 

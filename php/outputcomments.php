@@ -37,6 +37,11 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 				echo '<p class="comment-delete" title="Delete this Comment">Delete</p>';
 				echo '</div>';
 			}
+			else {
+				echo '<div class="comment-options">';
+				echo '<p class="comment-spam" title="Report this comment as spam">Spam</p>';
+				echo '</div>';
+			}
 			echo '<div class="comment-votes">';
 			if(isset($_SESSION["user_id"])) {
 					//get the number of comments from the db
@@ -59,7 +64,7 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 					}
 			}
 			if((isset($result2) && $row2 = mysql_fetch_array($result2))) {
-				echo '<p class="votes-up" title="You have already voted up">Vote up<img src="/images/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/><span class="votes-up-number">(' . $row["votes_up_count"] . ')</span></p>';
+				echo '<p class="votes-up" title="You have already voted up">Votes up<img src="/images/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/><span class="votes-up-number">(' . $row["votes_up_count"] . ')</span></p>';
 			}
 			else if(!isset($_SESSION["user_id"])) {
 				echo '<p class="votes-up" title="You must log in to vote up">' . $row["votes_up_count"] . ' Vote(s) up</p>';
