@@ -102,4 +102,21 @@
 			echo 0;	
 		}
 	}
+    else if(isset($_POST["commentid"]) && is_numeric($_POST["commentid"]) && isset($_POST["action"]) && $_POST["action"] == "Spam" && isset($_SESSION["username"])) {
+		$id = mysql_real_escape_string($_POST["commentid"]);
+		
+		$sql = "SELECT spam_id FROM spam_grumble WHERE status_id = " . $id;
+		$result = mysql_query($sql, $conn) or die("Could not spam: " . mysql_error());
+		if(mysql_num_rows($result) == 0) {
+			//check if status is there and user is owner
+			$sql = "INSERT INTO spam_grumble(status_id, spam_report_number) VALUES(" . $id . ", 1)";
+			mysql_query($sql, $conn) or die("Could not spam: " . mysql_error());
+		}
+		else {
+			//check if status is there and user is owner
+			$sql = "UPDATE spam_grumble SET spam_report_number = spam_report_number + 1 WHERE status_id = " . $id;
+			mysql_query($sql, $conn) or die("Could not spam: " . mysql_error());
+		}
+		echo 1;
+	}
 ?>
