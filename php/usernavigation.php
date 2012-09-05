@@ -1,16 +1,15 @@
 <div id="user-navigation">
 	<div id="nav-container">
         	<ul id="navigation">
-                <a href="<?php echo "http://" . $_SERVER["HTTP_HOST"];?>"><li>Home</li></a>
-                <li id="nav-category" class="last">Categories<img src="/images/arrow.png" class="drop-image" width="10" height="10"/>
+                <li><a href="<?php echo "http://" . $_SERVER["HTTP_HOST"];?>">Home</a></li>
+                <li id="nav-category" class="last">Categories<img src="/images/arrow.png" alt="arrow" class="drop-image" width="10" height="10"/>
                 <ul id="sub-nav">
                 <?php
 					$sql = "SELECT category_id, category_name, category_url FROM categories_grumble ORDER BY category_name ASC";
 					$result = mysql_query($sql, $conn);
-					echo '<img id="sub-nav-dropdown-arrow" src="/images/dropdown-arrow.png" width="15" height="8"/>';
+					echo '<img id="sub-nav-dropdown-arrow" src="/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/>';
 					while($row = mysql_fetch_array($result)) {
-						echo '<a href="/category/' . $row["category_url"] . '" rel="' . $row["category_id"] . '"><li>' . $row["category_name"] . '</li>';
-						echo '</a>'; 					
+						echo '<li><a href="/category/' . $row["category_url"] . '" rel="' . $row["category_id"] . '">' . $row["category_name"] . '</a></li>';
 					}
 				?>
                 </ul>
@@ -31,34 +30,34 @@
         <div id="user-info">
         <?php
         if(isset($_SESSION["username"])) {
-            echo '<ul><span class="dropdown-shortlink dropdown-login">' . $_SESSION["username"] . '<img src="/images/arrow.png" class="login-drop-image"/></span>';
+            echo '<ul><span class="dropdown-shortlink dropdown-login">' . $_SESSION["username"] . '<img src="/images/arrow.png" alt="arrow" class="login-drop-image"/></span>';
             echo '<li id="dropdown-form">';
-			echo '<img id="dropdown-arrow-short" src="/images/dropdown-arrow.png" width="15" height="8"/>';
+			echo '<img id="dropdown-arrow-short" alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/>';
             echo '<ul id="dropdown-sub-nav">';
-            echo "<a href='/profile/" . $_SESSION["username"] . "'><li>Profile</li></a>";
+            echo "<li><a href='/profile/" . $_SESSION["username"] . "'>Profile</a></li>";
 			echo '<li class="divider light"></li>';
-			echo "<a href='/contact'><li>Contact Us</li></a>";
+			echo "<li><a href='/contact'>Contact Us</a></li>";
             echo '<li class="divider light"></li>';
-			echo "<a href='/profile/" . $_SESSION["username"] . "#settings' id='settings-dropdown'><li>Settings</li></a>";
-            echo "<a href='/php/transact-user.php?action=Logout'><li>Logout</li></a>";
+			echo "<li><a href='/profile/" . $_SESSION["username"] . "#settings' id='settings-dropdown'>Settings</a></li>";
+            echo "<li><a href='/php/transact-user.php?action=Logout'>Logout</a></li>";
             echo '</ul>';
             echo '</li>';
             echo '</ul>';
         }
         else {
-            echo '<ul><span class="dropdown-shortlink dropdown-login" title="Login/Register">Login<img src="/images/arrow.png" class="login-drop-image" width="10" height="10"/></span>';
+            echo '<ul><span class="dropdown-shortlink dropdown-login" title="Login/Register">Login<img src="/images/arrow.png" alt="arrow" class="login-drop-image" width="10" height="10"/></span>';
             echo '<li id="dropdown-form-login"><form action="/php/transact-user.php" method="post">';
 			$token = md5(uniqid(rand(), true));
 			$_SESSION['token'] = $token;
             ?>
-            		<img id="dropdown-arrow" src="/images/dropdown-arrow.png" width="15" height="8"/>
-                    <table width="100%">
-                        <tr>
-                            <td class="table-padding"><label for="email">Email</label><br/>
-                            <input type="text" id="email" name="email" maxlength="255" class="input-user-nav"/></td>
-                        </tr>
-                        <tr>
-                            <td class="table-padding"><label for="password">Password</label><br/>
+            		<img id="dropdown-arrow" alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/>
+                    <ul>
+                        <li>
+                            <label for="email">Email</label>
+                            <input type="text" id="email" name="email" maxlength="255" class="input-user-nav"/>
+                        </li>
+                        <li class="padding-top">
+                            <label for="password">Password</label>
                             <input type="password" name="password" id="password" maxlength="50" class="input-user-nav"/>
                             <?php
 							$refer = "../" . basename($_SERVER['PHP_SELF']);
@@ -67,19 +66,16 @@
 							}
 							?>
                             <input type="hidden" name="referrer" value="<?php echo $refer; ?>"/>
-                            </td>
-                        </tr>
-                        <tr>
-                        	<td class="padding-top">
-                            	<input type="hidden" name="token" value="<?php echo $token; ?>" />
-                                <input type="checkbox" name="remember-box" id="remember-checkbox"/><label for="remember-checkbox" class="colored-link-1">Remember me</label>
-                                <input type="submit" name="action" class="submit-login button" value="Sign In"/>
-                            </td>
-                        </tr>
-                         <tr>
-                        	<td class="padding-top"><a class="colored-link-1" href="/create-account">Create an account</a> | <a class="colored-link-1" href="/forgot-password">Forget password?</a></td>
-                        </tr>
-                    </table>
+                        </li>
+                        <li class="padding-top">
+                        	<input type="hidden" name="token" value="<?php echo $token; ?>" />
+                            <input type="checkbox" name="remember-box" id="remember-checkbox"/><label for="remember-checkbox" class="colored-link-1">Remember me</label>
+                            <input type="submit" name="action" class="submit-login button" value="Sign In"/>
+                        </li>
+                         <li class="login-last">
+                        	<a class="colored-link-1" href="/create-account">Create an account</a> | <a class="colored-link-1" href="/forgot-password">Forget password?</a>
+                        </li>
+                    </ul>
             <?php
             echo '</form></li>';
             echo '</ul>';

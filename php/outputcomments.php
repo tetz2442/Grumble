@@ -82,7 +82,7 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 						//echo '<div class="ind-comment" style="display:none;"></div>';
 						echo '<textarea rows="3" class="quick-reply-input" placeholder="Type reply..."></textarea>';
 						echo '<span class="reply-character-count">160</span>';
-						echo '<input type="button" value="Send" class="quick-reply-button button"></input>';
+						echo '<input type="button" value="Send" class="quick-reply-button button"/>';
 					echo '</div>';
 				echo '</div>';
 			echo '</div>';

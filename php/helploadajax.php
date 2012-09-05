@@ -1,7 +1,7 @@
 <?php
 	require_once "conn.php";
 	
-	if(isset($_POST["id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+	if(isset($_POST["id"]) && is_numeric($_POST["id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		//get the passed parameter
 		$id = mysql_real_escape_string($_POST["id"]);
 		

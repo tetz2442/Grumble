@@ -85,6 +85,7 @@ html { overflow-y: scroll; }
 
 #maincolumn {
 	margin-top:49px;	
+	display: none;
 }
 
 .padding-top {
@@ -140,48 +141,39 @@ html { overflow-y: scroll; }
 #nav-container {
 	margin-top:0px;	
 }
-
 #navigation a {	
+	padding:17px 5px 5px 10px;
 	text-decoration:none;
 	color:#333;
 }
-
 #navigation a:hover {	
 	text-decoration:none;
 	color:#F00;
 }
-
 #logo {	
 	position:absolute;
 	left:50%;
 	margin-left:-140px;
 }
-
 #logo a {
 	text-decoration:none;
 }
-
 #navigation li {
 	padding:17px 5px 5px 10px;
 	float:left;
 }
-
 .last {
 	border-bottom-right-radius:5px;
 }
-
-#navigation li:hover {
+#navigation li a:hover {
 	color:#FFF;
 }
-
 #nav-category {
 	cursor:pointer;	
 }
-
 #nav-category:hover {
 	color:#333;		
 }
-
 .drop-image {
 	margin-left:5px;
 }
@@ -204,18 +196,22 @@ html { overflow-y: scroll; }
 	margin-top:-13px;
 	margin-left:35px;	
 }
-#sub-nav a {
-	display:block;	
-}
 #sub-nav li {
+	display:block;
+	float: none;
+	position: relative;
+	padding:0;
+}
+#sub-nav a {
+	position:relative;
+	display: block;
 	padding:5px 16px 6px 10px;
 	font-size:.9em;
 	width:115px;
 }
-#sub-nav li:hover {
+#sub-nav a:hover {
 	background-color:#FCA954;
 }
-
 .display-list {
 	display:list-item;	
 }
@@ -295,11 +291,12 @@ html { overflow-y: scroll; }
 	margin-top:-13px;
 	margin-left:240px;	
 }
-
-.table-padding {
-	padding:5px 0 5px 0;	
+#dropdown-form-login ul {
+	list-style:none;
 }
-
+#dropdown-form-login .login-last {
+	margin-top: 25px;
+}
 #dropdown-arrow-short {
 	position:absolute;
 	margin-top:-12px;
@@ -323,20 +320,19 @@ html { overflow-y: scroll; }
 #dropdown-sub-nav a {
 	text-decoration:none;
 	color:#333;
-}
-
-#dropdown-sub-nav a:hover {
-	color:#666;	
-}
-
-#dropdown-sub-nav li {
 	padding:5px 55px 5px 15px;
 	font-size:.9em;
+	position: relative;
+	display: block;
 }
-
-#dropdown-sub-nav a:hover li {
+#dropdown-sub-nav a:hover {
 	color:#fff;
 	background-color:#FCA954;
+}
+#dropdown-sub-nav li {
+	display:block;
+	float: none;
+	position: relative;
 }
 .divider {
 	height:1px;
@@ -862,6 +858,7 @@ html { overflow-y: scroll; }
 #login-table-about {
 	float:left;
 	margin-left:70px;	
+	width:220px;
 	padding:15px 15px 15px 15px;
 	background-color:#feeed3;
 	border-radius:10px;
@@ -871,11 +868,20 @@ html { overflow-y: scroll; }
     -moz-box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 3px 0px rgba(0,0,0,.2);
     box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 4px 0px rgba(0,0,0,.2);
 }
-#login-table-about td input {
+#login-table-about ul li input {
 	padding:5px 5px 5px 5px;	
 }
-.table-padding-top {
-	padding-top:10px;	
+#login-table-about ul {
+	list-style:none;
+}
+#login-table-about label {
+	margin-top: 5px;
+}
+#login-table-about input {
+	margin-top: 10px;
+}
+#login-table-about input[type="submit"]{
+	float:right;
 }
 /********
 *create account
@@ -1215,7 +1221,7 @@ html { overflow-y: scroll; }
 	position:fixed;
 	z-index:6010;
 	display:none;
-	top:45px;
+	top:42px;
 	padding:5px;
 	left:50%;
 	background-color:#fff;

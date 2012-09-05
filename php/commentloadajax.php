@@ -1,10 +1,10 @@
 <?php
 	require_once "conn.php";
 	require_once "timeago.php";
-	require_once "outputgrumbles.php";
+	require_once "outputcomments.php";
 	
 	session_start();
-	if(isset($_POST["pagenumber"]) && isset($_POST["number"]) && isset($_POST["subCat"]) && isset($_POST["lastid"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+	if(isset($_POST["pagenumber"]) && is_numeric($_POST["pagenumber"]) && isset($_POST["number"]) && is_numeric($_POST["number"]) && isset($_POST["subCat"]) && is_numeric($_POST["subCat"]) && isset($_POST["lastid"]) && is_numeric($_POST["lastid"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		//get the passed parameter
 		$pagenumber = mysql_real_escape_string($_POST["pagenumber"]);
 		$number = mysql_real_escape_string($_POST["number"]);
@@ -32,12 +32,12 @@
 		if(mysql_num_rows($result) > 0) {
 			if(isset($_SESSION["user_id"])) {
 				while($row = mysql_fetch_array($result)) {
-					outputGrumbles($row["status_id"], false, true);	
+					outputComments($row["status_id"], false, true);	
 				}
 			}
 			else {
 				while($row = mysql_fetch_array($result)) {
-					outputGrumbles($row["status_id"], false, false);	
+					outputComments($row["status_id"], false, false);	
 				}
 			}
 		}
@@ -59,12 +59,12 @@
 			else {
 				if(isset($_SESSION["user_id"])) {
 					while($row = mysql_fetch_array($result)) {
-						outputgrumbles($row["status_id"], false, true);
+						outputComments($row["status_id"], false, true);
 					}
 				}
 				else {
 					while($row = mysql_fetch_array($result)) {
-						outputgrumbles($row["status_id"], false, false);
+						outputComments($row["status_id"], false, false);
 					}
 				}
 			}
@@ -81,12 +81,12 @@
 			else {
 				if(isset($_SESSION["user_id"])) {
 					while($row = mysql_fetch_array($result)) {
-						outputgrumbles($row["status_id"], false, true);
+						outputComments($row["status_id"], false, true);
 					}
 				}
 				else {
 					while($row = mysql_fetch_array($result)) {
-						outputgrumbles($row["status_id"], false, false);
+						outputComments($row["status_id"], false, false);
 					}
 				}
 			}
@@ -111,12 +111,12 @@
 			else {
 				if(isset($_SESSION["user_id"])) {
 					while($row = mysql_fetch_array($result)) {
-						outputgrumbles($row["status_id"], false, true);
+						outputComments($row["status_id"], false, true);
 					}
 				}
 				else {
 					while($row = mysql_fetch_array($result)) {
-						outputgrumbles($row["status_id"], false, false);
+						outputComments($row["status_id"], false, false);
 					}
 				}
 			}

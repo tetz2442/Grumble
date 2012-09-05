@@ -1,7 +1,7 @@
 <div id="grumble-share">
     <div class="lightbox-head">
     	<h3 class="view-all-header">Share your new Grumble!</h3>
-    	<img src="/images/exit.png" width="15" height="15" class="close-quick-submit" onmouseover="this.src='/images/exitHover.png'" onmouseout="this.src='/images/exit.png'"/>
+    	<img src="/images/exit.png" alt="exit" width="15" height="15" class="close-quick-submit" onmouseover="this.src='/images/exitHover.png'" onmouseout="this.src='/images/exit.png'"/>
     </div>
     <div class="lightbox-thread-padding">
        <p id="share-info">Congrats on your new Grumble!  Be a pal and share it with your friends.</p>

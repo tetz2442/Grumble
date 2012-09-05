@@ -3,10 +3,10 @@ require_once "conn.php";
 require_once "http.php";
 require_once "sendemail.php";
 session_start();
-if(isset($_POST["reply"]) && isset($_POST["type"]) && $_POST["type"] == "load" && isset($_POST["amount"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+if(isset($_POST["reply"]) && is_numeric($_POST["reply"]) && isset($_POST["type"]) && $_POST["type"] == "load" && isset($_POST["amount"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	retrieveReplies(mysql_real_escape_string($_POST["reply"]), mysql_real_escape_string($_POST["amount"]));
 }
-else if(isset($_POST["reply"]) && isset($_POST["type"]) && $_POST["type"] == "enter" && isset($_POST["text"]) && isset($_POST["statususername"]) && strlen($_POST["text"]) > 0 && strlen($_POST["text"]) < 160 && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+else if(isset($_POST["reply"]) && is_numeric($_POST["reply"]) && isset($_POST["type"]) && $_POST["type"] == "enter" && isset($_POST["text"]) && isset($_POST["statususername"]) && strlen($_POST["text"]) > 0 && strlen($_POST["text"]) < 160 && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	enterReply($_POST["reply"], $_POST["text"], $_POST["statususername"]);
 }
 
@@ -40,7 +40,7 @@ function retrieveReplies($voteid, $amount) {
 
 function enterReply($id, $text, $statususername) {
 	global $conn;
-	$id = intval(mysql_real_escape_string(strip_tags($id)));
+	$id = mysql_real_escape_string(strip_tags($id));
 	$commenttext = str_replace("\r", "", $text);
 	$commenttext = str_replace("\n", "", $commenttext);
 	$commenttext = mysql_real_escape_string(strip_tags($commenttext));
