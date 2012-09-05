@@ -13,6 +13,7 @@
 	
 	$token = md5(uniqid(rand(), true));
 	$_SESSION['token2'] = $token;
+	if(!isset($_SESSION["user_id"])) {
 ?>
 <div id="account-create-container">
 	<div id="account-create-welcome">
@@ -229,6 +230,14 @@
     </div>
 </div>
 <?php 
+}
+else {
+?>
+<div id="account-create-container">
+	<p class="content-padding text-align-center"><b>Looks like you have already created an account on Grumble. Thanks! Now get out there and start Grumbling.</b></p>	
+</div>
+<?php
+}
 require_once "php/notificationbar.php";
 require_once "php/helpcallout.php";
 require_once "php/footer.php"; 
