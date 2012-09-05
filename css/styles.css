@@ -137,10 +137,6 @@ html { overflow-y: scroll; }
 #navigation {	
 	list-style:none;
 }
-
-#nav-container {
-	margin-top:0px;	
-}
 #navigation a {	
 	padding:17px 5px 5px 10px;
 	text-decoration:none;
@@ -165,14 +161,11 @@ html { overflow-y: scroll; }
 .last {
 	border-bottom-right-radius:5px;
 }
-#navigation li a:hover {
+#navigation li a:hover, #nav-category:hover {
 	color:#FFF;
 }
 #nav-category {
 	cursor:pointer;	
-}
-#nav-category:hover {
-	color:#333;		
 }
 .drop-image {
 	margin-left:5px;
@@ -411,7 +404,7 @@ html { overflow-y: scroll; }
 	width:100%;
 }
 #help-callout {
-	position:fixed;
+	position:absolute;
 	z-index:6006;
 	width:300px; 
 	background-color:#FAF7F7;	
@@ -471,6 +464,7 @@ html { overflow-y: scroll; }
 #share-category {
 	float:left;
 	width:15%;
+	margin-top: 10px;
 }
 #comments-left-header {
 	border-bottom:1px solid #666;
@@ -1308,13 +1302,25 @@ terms of service / privacy
 	font-family:Helvetica, Arial, sans-serif;
 	line-height:1.2;
 }
-#terms-privacy-holder p {
+#terms-privacy-holder p, #how-it-works-holder p {
 	margin:5px 0 15px 15px;
 }
-#terms-privacy-holder ul {
+#terms-privacy-holder ul, #how-it-works-holder ul {
 	margin:5px 0 15px 30px;
 }
-
+#how-it-works-holder {
+	margin-top:25px;
+	line-height:1.2;
+}
+#how-it-works-holder h1 {
+	margin-bottom:15px;
+}
+#how-it-works-holder h2 {
+	margin:35px 0;
+}
+#how-it-works-holder ul {
+	list-style-type:decimal;
+}
 /********
 no script
 ************/

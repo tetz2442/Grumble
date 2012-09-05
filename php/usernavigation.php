@@ -2,7 +2,7 @@
 	<div id="nav-container">
         	<ul id="navigation">
                 <li><a href="<?php echo "http://" . $_SERVER["HTTP_HOST"];?>">Home</a></li>
-                <li id="nav-category" class="last">Categories<img src="/images/arrow.png" alt="arrow" class="drop-image" width="10" height="10"/>
+                <li id="nav-category">Categories<img src="/images/arrow.png" alt="arrow" class="drop-image" width="10" height="10"/>
                 <ul id="sub-nav">
                 <?php
 					$sql = "SELECT category_id, category_name, category_url FROM categories_grumble ORDER BY category_name ASC";

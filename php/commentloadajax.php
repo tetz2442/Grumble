@@ -49,7 +49,7 @@
 		$last = mysql_real_escape_string($_POST["last"]);
 		$type = $_POST["type"];
 		
-		if($type == "recent-grumble") {
+		if($type == "recent-comment") {
 			$sql = "SELECT status_id FROM status_grumble" .
                 " WHERE status_id < " . $last . " ORDER BY status_id DESC LIMIT 10";
 			$result = mysql_query($sql, $conn);
@@ -69,7 +69,7 @@
 				}
 			}
 		}
-		else if($type == "top-grumble") {
+		else if($type == "top-comment") {
 			$sql = "SELECT sg.status_id,(SELECT COUNT(user_like_id) FROM user_likes_grumble AS ulg WHERE sg.status_id = ulg.status_id) AS votes_up_count" .
 				" FROM status_grumble AS sg " . 
                   "WHERE sg.date_submitted >= (CURDATE() - INTERVAL 7 DAY) HAVING votes_up_count > 0" .
@@ -100,7 +100,7 @@
 		$userID = mysql_real_escape_string($_POST["userID"]);
 		$type = $_POST["type"];
 		
-		if($type == "recent-grumble") {
+		if($type == "recent-comment") {
 			$sql = "SELECT status_id FROM status_grumble" .
                 " WHERE status_id < " . $last . " AND user_id = " . $userID . " ORDER BY status_id DESC LIMIT 10";
 				

@@ -34,9 +34,17 @@ if(isset($_COOKIE["user_grumble"]) && !isset($_SESSION["user_id"])) {
 if(isset($_GET["subcat"])) {
 	$sql = "SELECT sub_category_name, sub_category_description FROM sub_category_grumble " .
 		"WHERE sub_category_id = " . mysql_real_escape_string($_GET["subcat"]);
-	$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+	$result = mysql_query($sql, $conn) or die("Could not look up information: " . mysql_error());
 	$row = mysql_fetch_array($result);
 	echo " " . stripslashes($row["sub_category_name"]);
+}
+else if(isset($_GET["cat"])) {
+	$category = strtolower(mysql_real_escape_string($_GET["cat"]));
+	$sql = "SELECT category_name FROM categories_grumble " .
+		"WHERE category_url = '" . $category . "'";
+	$result = mysql_query($sql, $conn) or die("Could not look up information: " . mysql_error());
+	$row = mysql_fetch_array($result);
+	echo " " . stripslashes($row["category_name"]);
 }
 else if(isset($_GET["id"])) {
 	echo " " . strip_tags($_GET["id"]);
@@ -58,6 +66,9 @@ else if(basename($_SERVER['PHP_SELF']) == "login.php") {
 }
 else if(basename($_SERVER['PHP_SELF']) == "contact.php") {
 	echo " Contact Us";
+}
+else if(basename($_SERVER['PHP_SELF']) == "how-it-works.php") {
+	echo " How it works";
 }
 else {
 	echo " Grumble for you. Grumble for change.";	

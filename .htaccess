@@ -13,3 +13,4 @@ RewriteRule ^contact contact.php
 RewriteRule ^login login.php
 RewriteRule ^([a-z_-]+)/([a-z0-9_-]+)/([0-9]+) grumbles.php?subcat=$3
 RewriteRule ^category/([a-zA-Z_-]+) category.php?cat=$1
+RewriteRule ^how-it-works how-it-works.php

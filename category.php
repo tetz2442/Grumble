@@ -5,7 +5,7 @@ require_once "php/outputgrumbles.php";
 require_once "php/header.php";
 require_once "php/containerStatus.php";
 
-$category = strtolower(mysql_real_escape_string($_GET["cat"]));;
+$category = strtolower(mysql_real_escape_string($_GET["cat"]));
 $sql = "SELECT category_id, category_name FROM categories_grumble" .
 	" WHERE category_url = '" . $category . "'";
 $result = mysql_query($sql, $conn);
