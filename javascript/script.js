@@ -71,7 +71,7 @@ $(document).ready(function() {
 	$("body").on("click", ".comment-options p", function () {
 		var $element = $(this);
 		if($element.text() == "Delete") {
-			var id = $element.parents(".comment-holder").find(".username").attr("rel");
+			var id = $element.parents(".comment-holder").find(".username").attr("data-id");
 			if(confirm("Are you sure you want to delete this Comment? **All votes and replies will be deleted also**")) {
 				$element.parents(".comment-holder").find(".gif-loader-replies").show();
 				$.post("/php/commentajax.php", {commentid:id, action:"Delete"},
@@ -94,7 +94,7 @@ $(document).ready(function() {
 	//adds a vote to vote up
 	$("body").on("click", ".votes-up a", function(event) {
 		event.preventDefault();
-		var id = $(this).attr("rel");
+		var id = $(this).attr("data-id");
 		var $element = $(this).parent();
 		$(this).remove();
 		var votes = parseInt($element.find(".votes-up-number").text())
@@ -130,7 +130,7 @@ $(document).ready(function() {
 	//opens and load comments
 	$("body").on("click", "p.replies-view", function() {
 		var $element = $(this);
-		var id = $element.attr("rel");
+		var id = $element.attr("data-id");
 		if($element.parents(".comment-holder").find(".replies").is(":visible") == false) {
 			if($element.attr("data-replies") == 0) {
 				$element.parents(".comment-holder").find(".replies").slideDown("fast");
@@ -162,7 +162,7 @@ $(document).ready(function() {
 	
 	$("body").on("click", "div.view-all-replies", function() {
 		var $element = $(this);
-		var id = $element.attr("rel");
+		var id = $element.attr("data-id");
 		$element.parents(".comment-holder").find(".gif-loader-replies").show();
 		$.post("/php/repliesajax.php", {reply:id, type:"load", amount:"all"},
 			function(result) {
@@ -181,7 +181,7 @@ $(document).ready(function() {
 	$("body").on("click", ".quick-reply-button", function() {
 		var $element = $(this);
 		var $commentText = $(this).parent().find(".quick-reply-input").val();
-		var id = $(this).parents(".comment-holder").find(".replies-view").attr("rel");
+		var id = $(this).parents(".comment-holder").find(".replies-view").attr("data-id");
 		var statususername = $(this).parents(".comment-holder").find(".username:first").text();
 		if($commentText == "") {
 			$("#notification-bar p").html("Comment cannot be empty.").addClass("error").removeClass("available");
@@ -340,9 +340,9 @@ $(document).ready(function() {
 		if($(this).val() == "View More" && canLoad) {
 			canLoad = false;
 			if($("#cat-header h1").length > 0)
-				var catID = $("#cat-header h1").attr("rel");
+				var catID = $("#cat-header h1").attr("data-id");
 			if($(".user-name").length > 0)
-				var userID = $(".user-name").attr("rel");
+				var userID = $(".user-name").attr("data-id");
 			var type = "";
 			var last = 0;
 			if($(".tabs a.active").text() == "Top Grumbles") {
@@ -359,11 +359,11 @@ $(document).ready(function() {
 			}
 			else if($(".tabs a.active").text() == "Recent Comments"){
 				type = "recent-comment";
-				last = $("#tab4 .comment-holder:last").find(".username").attr("rel");
+				last = $("#tab4 .comment-holder:last").find(".username").attr("data-id");
 			}
 			else if($(".tabs-profile a.active").text == "Comments"){
 				type = "recent-grumble";
-				last = $("#tab1 .comment-holder:last").find(".username").attr("rel");
+				last = $("#tab1 .comment-holder:last").find(".username").attr("data-id");
 			}
 			else if($(".tabs-profile a.active").text == "Grumbles"){
 				type = "recent";
@@ -623,7 +623,7 @@ $(document).ready(function() {
 				if(subCat == null) {
 					subCat = $.urlParam("id");
 				}
-				var lastid = $(".username:last").attr("rel");
+				var lastid = $(".username:last").attr("data-id");
 				$("#gif-loader").fadeIn(50);
 				$.post("/php/commentloadajax.php", {pagenumber:pageNumber, number:10, subCat:subCat, lastid:lastid},
 					function(result) {

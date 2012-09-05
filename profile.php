@@ -26,7 +26,7 @@ else {
 ?>
 <div id="user-info-holder">
     <div class="profile-user-info">
-    	<h2 class="user-name" rel="<?php echo $row["user_id"]; ?>"><?php echo $row["username"] . "'s Grumbles"; ?></h2>
+    	<h2 class="user-name" data-id="<?php echo $row["user_id"]; ?>"><?php echo $row["username"] . "'s Grumbles"; ?></h2>
         <p class="user-bio"></p>
         <?php if($userprofile) {?>
         <button class="button large" disabled="disabled"/>Settings</button>
