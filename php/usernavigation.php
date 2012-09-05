@@ -9,7 +9,7 @@
 					$result = mysql_query($sql, $conn);
 					echo '<img id="sub-nav-dropdown-arrow" src="/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/>';
 					while($row = mysql_fetch_array($result)) {
-						echo '<li><a href="/category/' . $row["category_url"] . '" rel="' . $row["category_id"] . '">' . $row["category_name"] . '</a></li>';
+						echo '<li><a href="/category/' . $row["category_url"] . '">' . $row["category_name"] . '</a></li>';
 					}
 				?>
                 </ul>
