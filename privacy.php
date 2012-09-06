@@ -15,6 +15,7 @@ require_once "php/containerWide.php";
     <li>First name and/or last name</li>
     <li>Username</li>
     <li>E-mail address</li>
+    <li>Timezone</li>
     </ul>
     
     <h2>Collected information uses</h2>
@@ -23,6 +24,8 @@ require_once "php/containerWide.php";
     <li>To send periodic e-mails and to contact you for market research purposes</li>
     <li>To personalize your website experience according to your interests</li>
     <li>To improve our products or services based on your needs</li>
+    <li>To help other users of Grumble identify you (by username)</li>
+    <li>To tailor times to your particular location/timezone</li>
     </ul>
     
     <h2>Collected information security</h2>
