@@ -1,6 +1,7 @@
 <?php
 	require_once "conn.php";
 	require_once "timeago.php";
+	require_once "timer.php";
 	require_once "outputcomments.php";
 	
 	session_start();

@@ -2,6 +2,7 @@
 function outputComments($grumble, $comments = false, $loggedin = false) {
 	global $conn;
 	if($grumble) {
+		date_default_timezone_set($_SESSION["timezone"]);
 		$sql = "SELECT sg.status_id, sg.status_text, ug.username, DATE_FORMAT(sg.date_submitted, '%b %e, %Y %l:%i %p') AS date_submitted, " . 
 			"ug.user_id, ug.username, COUNT(user_like_id) AS votes_up_count FROM status_grumble AS sg " . 
 			"LEFT OUTER JOIN user_likes_grumble AS vg ON sg.status_id = vg.status_id " .
@@ -24,7 +25,12 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 				echo '<div class="comment-inner-holder">';
 					echo '<div class="comment-header">';
 						echo '<a href="/profile/' . $row["username"] . '" data-id="' . $row["status_id"] . '" class="username" title="Visit profile"><strong>' . $row["username"] . '</strong></a>';
-						echo '<span class="comment-time" title="' . $row["date_submitted"] . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($row["date_submitted"]) . '</a></span>';
+						if (isset($_SESSION["timezone"])) {
+							echo '<span class="comment-time" title="' . $row["date_submitted"] . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($row["date_submitted"]) . '</a></span>';
+						}
+						else {
+							echo '<span class="comment-time" title="' . $row["date_submitted"] . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($row["date_submitted"]) . '</a></span>';
+						}
 					echo '</div>';
 					echo '<div class="comment-text-holder">';
 						echo '<p class="comment-text">' . stripslashes($row["status_text"]) . '</p>';
