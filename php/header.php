@@ -14,9 +14,6 @@ if(isset($_COOKIE["user_grumble"]) && !isset($_SESSION["user_id"])) {
 		$_SESSION["access_lvl"] = $row["access_lvl"];
 		$_SESSION["username"] = $row["username"];
 		$_SESSION["timezone"] = $row["user_timezone"];
-		date_default_timezone_set($_SESSION["timezone"]);
-			
-		//mysql_query("SET time_zone = " . $row["user_timezone"], $conn);
 	}	
 }
 ?>
