@@ -720,6 +720,12 @@ html { overflow-y: scroll; }
 	float:left;	
 	display:none;
 	color:#C03;
+	opacity:.5;
+	filter: alpha(opacity=50); /* internet explorer */
+}
+.comment-options:hover {
+	opacity:1;
+	filter: alpha(opacity=100); /* internet explorer */
 }
 .comment-options p:hover {
 	cursor:pointer;	
@@ -1034,6 +1040,7 @@ html { overflow-y: scroll; }
 	z-index:1998;
 	background-color:#000;
 	opacity:.5;
+	filter: alpha(opacity=50); /* internet explorer */
 	display:none;
 }
 #settings-holder {
@@ -1122,6 +1129,7 @@ html { overflow-y: scroll; }
 	z-index:6000;
 	background-color:#000;
 	opacity:.5;
+	filter: alpha(opacity=50); /* internet explorer */
 	display:none;
 }
 #grumble-lightbox {
@@ -1452,6 +1460,7 @@ button css
 }
 button[disabled] {
 	opacity:.5;
+	filter: alpha(opacity=50); /* internet explorer */
 }
 .button::-moz-focus-inner {
     margin: 0;
