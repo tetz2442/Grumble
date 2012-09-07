@@ -109,12 +109,12 @@
 		$sql = "SELECT spam_id FROM spam_grumble WHERE status_id = " . $id;
 		$result = mysql_query($sql, $conn) or die("Could not spam: " . mysql_error());
 		if(mysql_num_rows($result) == 0) {
-			//check if status is there and user is owner
+			//insert into spam table
 			$sql = "INSERT INTO spam_grumble(status_id, spam_report_number) VALUES(" . $id . ", 1)";
 			mysql_query($sql, $conn) or die("Could not spam: " . mysql_error());
 		}
 		else {
-			//check if status is there and user is owner
+			//row already exists, update
 			$sql = "UPDATE spam_grumble SET spam_report_number = spam_report_number + 1 WHERE status_id = " . $id;
 			mysql_query($sql, $conn) or die("Could not spam: " . mysql_error());
 		}
