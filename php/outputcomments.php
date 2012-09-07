@@ -43,7 +43,7 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 				echo '<p class="comment-delete" title="Delete this Comment">Delete</p>';
 				echo '</div>';
 			}
-			else {
+			else if(isset($_SESSION["username"])) {
 				echo '<div class="comment-options">';
 				echo '<p class="comment-spam" title="Report this comment as spam">Spam</p>';
 				echo '</div>';
