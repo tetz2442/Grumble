@@ -10,37 +10,25 @@ $(document).ready(function() {
 	if($("#firstname").val() != "" || $("#lastname").val() != "" && $("#emails").val() != "") {
 		if(checkLength($("#firstname"), 1)) {
 			if(checkLetters($("#firstname"))) {
-				$("#firstnameError").html("Success");
-				$("#firstnameError").addClass("available");
-				$("#firstnameError").removeClass("error");
+				$("#firstnameError").html("Success").removeClass("error").addClass("available");
 			}
 			else {
-				$("#firstnameError").html("No numbers or special characters allowed");
-				$("#firstnameError").addClass("error");
-				$("#firstnameError").removeClass("available");
+				$("#firstnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
 			}
 		}
 		else {
-			$("#firstnameError").html("Must be longer than 1 character");
-			$("#firstnameError").addClass("error");
-			$("#firstnameError").removeClass("available");
+			$("#firstnameError").html("Must be longer than 1 character").addClass("error").removeClass("available");
 		}
 		if(checkLength($("#lastname"), 1)) {
 			if(checkLetters($("#lastname"))) {
-				$("#lastnameError").html("Success");
-				$("#lastnameError").addClass("available");
-				$("#lastnameError").removeClass("error");
+				$("#lastnameError").html("Success").removeClass("error").addClass("available");
 			}
 			else {
-				$("#lastnameError").html("No numbers or special characters allowed");
-				$("#lastnameError").addClass("error");
-				$("#lastnameError").removeClass("available");
+				$("#lastnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
 			}
 		}
 		else {
-			$("#lastnameError").html("Must be longer than 1 character");
-			$("#lastnameError").addClass("error");
-			$("#lastnameError").removeClass("available");
+			$("#lastnameError").html("Must be longer than 1 character").addClass("error").removeClass("available");
 		}
 		chars = $('#emails').val();
 		if(checkEmail($("#emails"))) {
@@ -50,30 +38,22 @@ $(document).ready(function() {
 					  $('#emails').parents("tr").find(".gif-loader").hide();
 					  if(result == 1) {
 						  //success
-						$("#emailError").html("Valid email address");
-						$("#emailError").addClass("available");
-						$("#emailError").removeClass("error");
+						$("#emailError").html("Valid email address").removeClass("error").addClass("available");
 						email = true;
 					  }
 					  else if(result == 0) {
 						  //not available
-						  $("#emailError").html("Email has already been taken.");
-						$("#emailError").addClass("error");
-						$("#emailError").removeClass("available");
+						  $("#emailError").html("Email has already been taken.").addClass("error").removeClass("available");
 						email = false;
 					  }
 					  else {
-						 $("#emailError").html("Invalid Email");
-						$("#emailError").addClass("error");
-						$("#emailError").removeClass("available");
+						 $("#emailError").html("Invalid Email").addClass("error").removeClass("available");
 						email = false;
 					  }
 			});
 		}
 		else {
-			$("#emailError").html("Invalid Email");
-			$("#emailError").addClass("error");
-			$("#emailError").removeClass("available");
+			$("#emailError").html("Invalid Email").addClass("error").removeClass("available");
 			email = false;
 		}
 	}
@@ -81,40 +61,28 @@ $(document).ready(function() {
 	$("#firstname").keyup(function() {
 		if(checkLength($(this), 1)) {
 			if(checkLetters($("#firstname"))) {
-				$("#firstnameError").html("Success");
-				$("#firstnameError").addClass("available");
-				$("#firstnameError").removeClass("error");
+				$("#firstnameError").html("Success").removeClass("error").addClass("available");
 			}
 			else {
-				$("#firstnameError").html("No numbers or special characters allowed");
-				$("#firstnameError").addClass("error");
-				$("#firstnameError").removeClass("available");
+				$("#firstnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
 			}
 		}
 		else {
-			$("#firstnameError").html("Must be longer than 1 character");
-			$("#firstnameError").addClass("error");
-			$("#firstnameError").removeClass("available");
+			$("#firstnameError").html("Must be longer than 1 character").addClass("error").removeClass("available");
 		}
 	});
 	
 	$("#lastname").keyup(function() {
 		if(checkLength($(this), 1)) {
 			if(checkLetters($("#lastname"))) {
-				$("#lastnameError").html("Success");
-				$("#lastnameError").addClass("available");
-				$("#lastnameError").removeClass("error");
+				$("#lastnameError").html("Success").removeClass("error").addClass("available");
 			}
 			else {
-				$("#lastnameError").html("No numbers or special characters allowed");
-				$("#lastnameError").addClass("error");
-				$("#lastnameError").removeClass("available");
+				$("#lastnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
 			}
 		}
 		else {
-			$("#lastnameError").html("Must be longer than 1 character");
-			$("#lastnameError").addClass("error");
-			$("#lastnameError").removeClass("available");
+			$("#lastnameError").html("Must be longer than 1 character").addClass("error").removeClass("available");
 		}
 	});
 	
@@ -127,52 +95,41 @@ $(document).ready(function() {
 				chars = $('#username').val();
 				if(!chars.match(/\s/g)) {
 					$('#username').parents("tr").find(".gif-loader").show();
+					$("#usernameError").html("")
 					$.post("/php/checkavail.php", {username:chars},
 						  function(result) {
 							  $('#username').parents("tr").find(".gif-loader").hide();
 							  if(result == 1) {
 								  //success
-								  $("#usernameError").html("Username available");
-								  $("#usernameError").addClass("available");
-								  $("#usernameError").removeClass("error");
+								  $("#usernameError").html("Username available").removeClass("error").addClass("available");
 								  username = true;
 							  }
 							  else if(result == 0) {
 								  //not available
-								  $("#usernameError").html("Username not available");
-								  $("#usernameError").removeClass("available");
-								  $("#usernameError").addClass("error");
+								  $("#usernameError").html("Username not available").addClass("error").removeClass("available");
 								  username = false;
 							  }
 							  else {
-								  $("#usernameError").html("Username not available");
-								  $("#usernameError").removeClass("available");
-								  $("#usernameError").addClass("error");
+								  $("#usernameError").html("Username not available").addClass("error").removeClass("available");
 								  username = false;
 							  }
 					});
 				}
 				else {
 					usernameVal = 0;
-					$("#usernameError").html("No spaces allowed in username");
-					$("#usernameError").removeClass("available");
-					$("#usernameError").addClass("error");
+					$("#usernameError").html("No spaces allowed in username").addClass("error").removeClass("available");
 					username = false;
 				}
 			}
 			else {
 				usernameVal = 0;
-				$("#usernameError").html("No special characters allowed");
-				$("#usernameError").removeClass("available");
-				$("#usernameError").addClass("error");
+				$("#usernameError").html("No special characters allowed").addClass("error").removeClass("available");
 				username = false;
 			}
 		}
 		else {
 			usernameVal = 0;
-			$("#usernameError").html("Username must be at least 4 characters");
-			$("#usernameError").removeClass("available");
-			$("#usernameError").addClass("error");
+			$("#usernameError").html("Username must be at least 4 characters").addClass("error").removeClass("available");
 			username = false;
 		}
 	});
@@ -186,30 +143,22 @@ $(document).ready(function() {
 					  $('#emails').parents("tr").find(".gif-loader").hide();
 					  if(result == 1) {
 						  //success
-						  $("#emailError").html("Valid email address");
-						$("#emailError").addClass("available");
-						$("#emailError").removeClass("error");
+						  $("#emailError").html("Valid email address").removeClass("error").addClass("available");
 						email = true;
 					  }
 					  else if(result == 0) {
 						  //not available
-						  $("#emailError").html("Email has already been taken.");
-						$("#emailError").addClass("error");
-						$("#emailError").removeClass("available");
+						  $("#emailError").html("Email has already been taken.").addClass("error").removeClass("available");
 						email = false;
 					  }
 					  else {
-						 $("#emailError").html("Invalid Email");
-						$("#emailError").addClass("error");
-						$("#emailError").removeClass("available");
+						 $("#emailError").html("Invalid Email").addClass("error").removeClass("available");
 						email = false;
 					  }
 			});
 		}
 		else {
-			$("#emailError").html("Invalid Email");
-			$("#emailError").addClass("error");
-			$("#emailError").removeClass("available");
+			$("#emailError").html("Invalid Email").addClass("error").removeClass("available");
 			email = false;
 		}
 	});
@@ -217,54 +166,55 @@ $(document).ready(function() {
 	$("#userpassword").keyup(function() {
 		$("#password2").val("");
 		$("#pass2Error").html("");
-		if(checkLength($(this), 5)) {
-			$("#passError").html("Valid password");
-			$("#passError").addClass("available");
-			$("#passError").removeClass("error");
+		if(!checkLength($(this), 5)) {
+			$("#passError").html("Password not long enough").addClass("error").removeClass("available");
+		}
+		else if(!$(this).val().match(/[A-Z]/)) {
+			$("#passError").html("Passord must contain one capital letter").addClass("error").removeClass("available");
+		}
+		else if(!$(this).val().match(/[0-9]/)) {
+			$("#passError").html("Passord must contain one number").addClass("error").removeClass("available");
 		}
 		else {
-			$("#passError").html("Password not long enough");
-			$("#passError").addClass("error");
-			$("#passError").removeClass("available");
+			$("#passError").html("Valid password").removeClass("error").addClass("available");
 		}
 	});
 	
 	$("#userpassword2").keyup(function() {
 		if(checkPasswordMatch()) {
-			$("#pass2Error").html("Passwords match");
-			$("#pass2Error").addClass("available");
-			$("#pass2Error").removeClass("error");
+			$("#pass2Error").html("Passwords match").removeClass("error").addClass("available");
 		}
 		else {
-			$("#pass2Error").html("Passwords do not match");
-			$("#pass2Error").addClass("error");
-			$("#pass2Error").removeClass("available");
+			$("#pass2Error").html("Passwords do not match").addClass("error").removeClass("available");
 		}
 	});
 	
 	$("#terms").change(function() {
 		if($("#terms").attr("checked")) {
-			$("#termsError").html("");
-			$("#termsError").removeClass("error");
+			$("#termsError").html("").removeClass("error");
 		}
 		else {
-			$("#termsError").html("You must agree to the Terms of Service");
-			$("#termsError").addClass("error");
-			$("#termsError").removeClass("available");
+			$("#termsError").html("You must agree to the Terms of Service").addClass("error").removeClass("available");
 		}
 	});
+	
+	$("#tz").change(function() {
+		if ($("#tz").val() == "none") {
+			$("#timezoneError").html("You must select a timezone").addClass("error").removeClass("available");
+		}
+		else {
+			$("#timezoneError").html("").removeClass("error").addClass("available");
+		}
+	});
+	
 	
 	$("#about-create").click(function() {
 		if($("#fullname").val() == "" || $("#emails").val() == "") {
 			event.preventDefault();
-			$("#createError").html("Cannot leave a field blank");
-			$("#createError").addClass("error");
-			$("#createError").removeClass("available");
+			$("#createError").html("Cannot leave a field blank").addClass("error").removeClass("available");
 		}
 		else {
-			$("#createError").html("");
-			$("#createError").removeClass("error");
-			$("#createError").addClass("available");
+			$("#createError").html("").addClass("available").removeClass("error");
 		}
 	});
 	
@@ -332,46 +282,34 @@ function checkPasswordMatch() {
 }
 
 function checkForm() {
-	if(checkLength($("#firstname"), 1) && checkLength($("#lastname"), 1) && username && email && checkPasswordMatch() && checkLength($("#userpassword"), 5) && $("#terms").attr("checked")) {
+	if(checkLength($("#firstname"), 1) && checkLength($("#lastname"), 1) && username && email && checkPasswordMatch() && checkLength($("#userpassword"), 5) && $("#terms").attr("checked") && $("#tz").val() != "none") {
 		return true;
 	}
 	else {	
 		//check first name
 		if(checkLength($("#firstname"), 1)) {
 			if(checkLetters($("#firstname"))) {
-				$("#firstnameError").html("Success");
-				$("#firstnameError").addClass("available");
-				$("#firstnameError").removeClass("error");
+				$("#firstnameError").html("Success").addClass("available").removeClass("error");
 			}
 			else {
-				$("#firstnameError").html("No numbers or special characters allowed");
-				$("#firstnameError").addClass("error");
-				$("#firstnameError").removeClass("available");
+				$("#firstnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
 			}
 		}
 		else {
-			$("#firstnameError").html("Must be longer than 1 character");
-			$("#firstnameError").addClass("error");
-			$("#firstnameError").removeClass("available");
+			$("#firstnameError").html("Must be longer than 1 character").addClass("error").removeClass("available");
 		}
 		
 		//check last name
 		if(checkLength($("#lastname"), 1)) {
 			if(checkLetters($("#lastname"))) {
-				$("#lastnameError").html("Success");
-				$("#lastnameError").addClass("available");
-				$("#lastnameError").removeClass("error");
+				$("#lastnameError").html("Success").addClass("available").removeClass("error");
 			}
 			else {
-				$("#lastnameError").html("No numbers or special characters allowed");
-				$("#lastnameError").addClass("error");
-				$("#lastnameError").removeClass("available");
+				$("#lastnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
 			}
 		}
 		else {
-			$("#lastnameError").html("Must be longer than 1 character");
-			$("#lastnameError").addClass("error");
-			$("#lastnameError").removeClass("available");
+			$("#lastnameError").html("Must be longer than 1 character").addClass("error").removeClass("available");
 		}
 		
 		//check username
@@ -394,24 +332,18 @@ function checkForm() {
 				  }
 				  
 				  if(usernameVal == 1) {
-					  $("#usernameError").html("Username not available");
-					  $("#usernameError").removeClass("available");
-					  $("#usernameError").addClass("error");
+					  $("#usernameError").html("Username not available").addClass("error").removeClass("available");
 					  username = false;
 				  }
 				  else if(usernameVal == 2) {
-					  $("#usernameError").html("Username available");
-					  $("#usernameError").addClass("available");
-					  $("#usernameError").removeClass("error");
+					  $("#usernameError").html("Username available").addClass("available").removeClass("error");
 					  username = true;
 				  }
 		});
 		}
 		else {
 			usernameVal = 0;
-			$("#usernameError").html("Username must be at least 4 characters");
-			$("#usernameError").removeClass("available");
-			$("#usernameError").addClass("error");
+			$("#usernameError").html("Username must be at least 4 characters").addClass("error").removeClass("available");
 			username = false;
 		}
 		
@@ -421,54 +353,52 @@ function checkForm() {
 				  function(result) {
 					  if(result == 1) {
 						  //success
-						  $("#emailError").html("Valid email address");
-						$("#emailError").addClass("available");
-						$("#emailError").removeClass("error");
+						  $("#emailError").html("Valid email address").addClass("available").removeClass("error");
 						email = true;
 					  }
 					  else if(result == 0) {
 						  //not available
-						  $("#emailError").html("Email has already been taken.");
-						$("#emailError").addClass("error");
-						$("#emailError").removeClass("available");
+						  $("#emailError").html("Email has already been taken.").addClass("error").removeClass("available");
 						email = false;
 					  }
 					  else {
-						 $("#emailError").html("Invalid Email");
-						$("#emailError").addClass("error");
-						$("#emailError").removeClass("available");
+						 $("#emailError").html("Invalid Email").addClass("error").removeClass("available");
 						email = false;
 					  }
 			});
 		}
 		else {
-			$("#emailError").html("Invalid Email");
-			$("#emailError").addClass("error");
-			$("#emailError").removeClass("available");
+			$("#emailError").html("Invalid Email").addClass("error").removeClass("available");
 			email = false;
 		}
 		
 		//check passowrds
-		if(checkLength($("#userpassword"), 5)) {
-			$("#passError").html("Valid password");
-			$("#passError").addClass("available");
-			$("#passError").removeClass("error");
+		if(!checkLength($("#userpassword"), 5)) {
+			$("#passError").html("Password not long enough").addClass("error").removeClass("available");
+		}
+		else if(!$("#userpassword").val().match(/[A-Z]/)) {
+			$("#passError").html("Passord must contain one capital letter").addClass("error").removeClass("available");
+		}
+		else if(!$("#userpassword").val().match(/[0-9]/)) {
+			$("#passError").html("Passord must contain one number").addClass("error").removeClass("available");
 		}
 		else {
-			$("#passError").html("Password not long enough");
-			$("#passError").addClass("error");
-			$("#passError").removeClass("available");
+			$("#passError").html("Valid password").removeClass("error").addClass("available");
 		}
 		
 		//checkbox terms
 		if($("#terms").attr("checked")) {
-			$("#termsError").html("");
-			$("#termsError").removeClass("error");
+			$("#termsError").html("").removeClass("error");
 		}
 		else {
-			$("#termsError").html("You must agree to the Terms of Service");
-			$("#termsError").addClass("error");
-			$("#termsError").removeClass("available");
+			$("#termsError").html("You must agree to the Terms of Service").addClass("error").removeClass("available");
+		}
+		
+		if ($("#tz").val() == "none") {
+			$("#timezoneError").html("You must select a timezone").addClass("error").removeClass("available");
+		}
+		else {
+			$("#timezoneError").html("").removeClass("error").addClass("available");
 		}
 		return false;
 	}

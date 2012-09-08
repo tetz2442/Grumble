@@ -15,7 +15,7 @@
 					
 				$sql = "SELECT user_id, access_lvl, username, user_password, user_salt, user_timezone " .
 					"FROM users_grumble " .
-					"WHERE user_email='" . $email . "' LIMIT 0,1";
+					"WHERE user_email='" . $email . "' AND user_verified = 1 LIMIT 0,1";
 				$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
 				$row = mysql_fetch_array($result);
 				$hashed_pass = crypt($password, $row['user_salt']) . $row["user_salt"];
@@ -131,12 +131,27 @@
 							"VALUES(" . $id . ")";
 						mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
 						
-						session_start();
+						//redo salt
+						$Salt_Length = 50;
+						$salt = "";
+	
+						for($i=0; $i<$Salt_Length; $i++)
+						{
+							$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+						}
+						
+						$sql = "INSERT INTO temp_password_grumble (user_email, temp_password, temp_create) VALUES('" . 
+							$email . "','" . $salt . "','" . date("Y-m-d H:i:s", time()) . "')";
+						mysql_query($sql, $conn) or die("Could not insert: " . mysql_error());
+						/*session_start();
 						$_SESSION["user_id"] = $id;
 						$_SESSION["access_lvl"] = 1;
 						$_SESSION["username"] = $username;
-						$_SESSION["timezone"] = $timezone;
-						redirect("../");
+						$_SESSION["timezone"] = $timezone;*/
+						
+						$parameters = array("http://" . $_SERVER["HTTP_HOST"] . "/php/transact-user.php?email=" . $email . "&hash=" . $salt . "&action=verify");
+						sendEmail($email, "From: no-reply@grumbleonline.com", "verify", $parameters);
+						redirect("../create-account?user_created=1");
 					}
 					else {
 						redirect("../create-account?create=fail");
@@ -236,6 +251,35 @@
 				}
 			}
 			redirect("../login");
+			break;
+			
+		case "verify" :
+			if(isset($_GET["hash"]) && strlen($_GET["hash"]) == 50 && isset($_GET["email"])) {	
+				$hash = mysql_real_escape_string($_GET["hash"]);
+				$email = mysql_real_escape_string($_GET["email"]);
+				
+				$sql = "SELECT ug.user_id, ug.username, ug.user_timezone FROM temp_password_grumble AS tpg " .
+				"LEFT OUTER JOIN users_grumble AS ug ON ug.user_email = tpg.user_email AND ug.user_verified = 0 " .
+				"WHERE tpg.temp_password ='" .	$hash. "' AND tpg.user_email ='" . $email . "' LIMIT 0,1";
+				$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
+				if(mysql_num_rows($result) == 1) {
+					$row = mysql_fetch_array($result);
+					$sql = "UPDATE users_grumble SET user_verified = 1 WHERE user_id = " . $row["user_id"];
+					mysql_query($sql, $conn) or die("Error: " . mysql_error());
+					$sql = "DELETE FROM temp_password_grumble WHERE user_email = '" . $email . "'";
+					mysql_query($sql, $conn) or die("Error: " . mysql_error());
+					
+					$_SESSION["user_id"] = $row["user_id"];
+					$_SESSION["access_lvl"] = 1;
+					$_SESSION["username"] = $row["username"];
+					$_SESSION["timezone"] = $row["user_timezone"];
+					redirect("../");
+				}
+				else {
+					redirect("../create-account");
+				}
+			}
+			redirect("../");
 			break;
 		}
 	}
