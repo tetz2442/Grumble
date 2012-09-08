@@ -22,7 +22,6 @@ require_once "php/containerWide.php";
     <p><strong>Governing Law.</strong><br />Any disputes arising out of or related to these Terms of Service and/or any use by you of the Site shall be governed by the laws of the USA, without regard to the conflicts of laws provisions therein.</p>
     <p><strong>Date of Last Update.</strong><br />This agreement was last updated on September 7, 2012.</p>
     <p><a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en_US"><img alt="Creative Commons License" style="border-width:0" src="http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" property="dct:title">Grumble</span> by <span xmlns:cc="http://creativecommons.org/ns#" property="cc:attributionName">Jon Tetzlaff & Becca Schmidt</span> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-nc-nd/3.0/deed.en_US">Creative Commons Attribution-NonCommercial-NoDerivs 3.0 Unported License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="http://www.grumbleonline.com" rel="dct:source">http://www.grumbleonline.com</a>.</p>
-    <p><a href="http://termsfeed.com" title="Termsfeed"><img src="http://termsfeed.com/seals/ts-tos-authenticity.png" alt="Termsfeed" /></a></p>
     </div>
 
 </div>

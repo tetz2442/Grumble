@@ -1,7 +1,7 @@
 // JavaScript Document
 var regExpEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z]+\.[a-z]{2,4}$/;
-var expSC = /[!@#%*+=~`$&^-]/;
-var expLet = /[0-9!@#%*+=~`$&^]/;
+var expSC = /[!@#%*+=~`$&^}{|\')(,=+¬-.]/;
+var expLet = /[0-9!@#%*+=~`$&^}{|\')(,=+¬-.]/;
 var username = false;
 var email = false;
 

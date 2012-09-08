@@ -81,7 +81,7 @@ else {
                 //top comments
                 $sql = "SELECT sg.status_id,(SELECT COUNT(user_like_id) FROM user_likes_grumble AS ulg WHERE sg.status_id = ulg.status_id) AS votes_up_count" .
 				" FROM status_grumble AS sg " . 
-                  "WHERE sg.date_submitted >= (CURDATE() - INTERVAL 7 DAY) HAVING votes_up_count > 0" .
+                  "WHERE sg.date_submitted >= (NOW() - INTERVAL 7 DAY) HAVING votes_up_count > 0" .
                   " ORDER BY votes_up_count DESC LIMIT 10";
                 $result = mysql_query($sql, $conn);
                 
