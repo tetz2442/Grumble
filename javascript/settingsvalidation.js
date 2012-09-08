@@ -1,5 +1,5 @@
 // JavaScript Document
-var expSC = /[!@#%*+=~`$&^-]/;
+var expSC = /[!@#%*+=~`$&^}{|\')(,=+¬-.]/;
 var username = false;
 var saving = false;
 var changes = false;

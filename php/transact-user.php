@@ -59,7 +59,8 @@
 						
 						setcookie("user_grumble", $cookie_text, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
 					}
-					if(strpos($refer, "login.php") || strpos($refer, "index.php"))
+
+					if(strpos($refer, "login.php") || strpos($refer, "index.php") || strpos($refer, "create-account.php"))
 						redirect("../");
 					else
 						redirect($refer);
@@ -90,7 +91,7 @@
 			
 		case "Create Account" :
 			if(isset($_POST["firstname"]) && strlen($_POST["firstname"]) > 1 && isset($_POST["lastname"]) && strlen($_POST["lastname"]) > 1
-			&& isset($_POST["username"]) && strlen($_POST["username"]) > 3&& isset($_POST["email"]) && strlen($_POST["email"]) > 5 && isset($_POST["password"]) && strlen($_POST["password"]) > 5 && isset($_POST["password2"])
+			&& isset($_POST["username"]) && strlen($_POST["username"]) > 3 && isset($_POST["email"]) && strlen($_POST["email"]) > 5 && isset($_POST["password"]) && strlen($_POST["password"]) > 5 && isset($_POST["password2"])
 				&& ($_POST["password"]) == $_POST["password2"] && isset($_POST["terms"]) && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token2']) && isset($_POST["tz"]) && $_POST["tz"] != "none") {
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token2']);

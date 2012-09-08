@@ -113,6 +113,7 @@ html { overflow-y: scroll; }
 	width:650px;
 	margin:auto;
 	overflow:auto;
+	margin-bottom: 35px;
 }
 
 /*header container for other pages*/
@@ -272,7 +273,7 @@ html { overflow-y: scroll; }
 }
 
 #dropdown-form-login {
-	width:280px;
+	width:285px;
 	padding:5px 10px;	
 	right: 0px;
 }
