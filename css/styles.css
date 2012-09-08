@@ -632,27 +632,30 @@ html { overflow-y: scroll; }
 	padding:3px 0;	
 }
 .quick-reply-input {
-	width:86%;
-	max-width:86%;
+	width:94%;
+	max-width:94%;
+	height:25px;
 	max-height:100px;
 	float:left;
 	margin:3px 0 4px 10px;
-	border-radius:3px;
-	-webkit-border-radius:3px;
-	-moz-border-radius:3px;
+	padding:6px;
+}
+.quick-reply-input:hover {
 	border:1px solid #999;
+}
+.reply-btn-holder {
+	display:none;
+	margin-top: 5px;
 }
 .reply-character-count {
 	float:right;	
-	width:55px;
-	text-align:center;
-	margin:5px 5px 5px 0;
+	margin:5px 5px 0 0;
 }
 .gif-loader-replies {
 	display:none;
 }
 .quick-reply-button {
-	margin-right:5px;
+	margin:0 10px 5px;
 	float:right;
 }
 #open-quick-compose {
@@ -1234,6 +1237,12 @@ html { overflow-y: scroll; }
 #link-present {
 	float:left;
 	font-size:.8em;
+	display:none;	
+}
+.link-present {
+	float:left;
+	font-size:.8em;
+	margin:5px 0 0 10px;
 	display:none;	
 }
 #notification-bar {

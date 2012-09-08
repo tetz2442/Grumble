@@ -62,7 +62,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("body").on("mouseover", ".comment-holder", function () {
+	$("div").on("mouseover", ".comment-holder", function () {
 		$(this).find(".comment-options").show();
 	}).mouseout(function () {
 		$(this).find(".comment-options").hide();
@@ -131,20 +131,28 @@ $(document).ready(function() {
 			});
 	});
 	
-	$("body").on("keyup",(".quick-reply-input"), function(event) {
-		/*if (event.keyCode == 13) { 
-			event.preventDefault(); 
-		}*/
+	var charLengthReply = 160;
+	$("body").on("keyup",(".quick-reply-input"), function() {
 		 var chars = $(this).val();
-		 var charLength = 160 - chars.length;
-		 if(charLength <= 0) {
-			 $(this).parent().find(".reply-character-count").html(charLength);
-			 $(this).parent().find(".reply-character-count").css("color", "red");
+		 link = findLink(chars);
+		
+		 if(link > 0 && $("#link-present").is(":visible") == false) {
+			 $(this).parent().find(".link-present").fadeIn(100);
+		 }
+		 else if(link == 0) {
+			 $(this).parent().find(".link-present").fadeOut(50);
+		 }
+		 
+		 charLengthReply = 160 - chars.length + link;
+		 if(charLengthReply <= 0) {
+			 $(this).parent().find(".reply-character-count").html(charLengthReply).css("color", "red");
 		 }
 		 else {
-			 $(this).parent().find(".reply-character-count").html(charLength);
-			 $(this).parent().find(".reply-character-count").css("color", "green");
+			 $(this).parent().find(".reply-character-count").html(charLengthReply).css("color", "green");
 		 }
+	}).on("focusin",(".quick-reply-input"), function () {
+		$(this).css("height","50px");
+		$(this).parent().find(".reply-btn-holder").show();
 	});
 	
 	//opens and load comments
@@ -200,33 +208,41 @@ $(document).ready(function() {
 	//checks if the submit comment button has been clicked
 	$("body").on("click", ".quick-reply-button", function() {
 		var $element = $(this);
-		var $commentText = $(this).parent().find(".quick-reply-input").val();
-		var id = $(this).parents(".comment-holder").find(".replies-view").attr("data-id");
-		var statususername = $(this).parents(".comment-holder").find(".username:first").text();
+		var $commentText = $(this).parents(".reply-padding").find(".quick-reply-input").val();
+		var $commentholder = $(this).parents(".comment-holder");
+		var id = $commentholder.find(".replies-view").attr("data-id");
+		var statususername = $commentholder.find(".username:first").text();
 		if($commentText == "") {
 			$("#notification-bar p").html("Comment cannot be empty.").addClass("error").removeClass("available");
 			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
-		else if($commentText.length >= 160){
+		else if(charLengthReply < 0){
 			$("#notification-bar p").html("Too many characters to submit.").addClass("error").removeClass("available");
 			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
 		else {
-			$element.parents(".comment-holder").find(".gif-loader-replies").show();
+			$commentholder.find(".gif-loader-replies").show();
 			$element.attr("disabled","disabled");
 			$.post("/php/repliesajax.php", {reply:id, type:"enter", text:$commentText, statususername:statususername},
 			function(result) {
-				$element.parents(".comment-holder").find(".gif-loader-replies").hide();
+				$commentholder.find(".gif-loader-replies").hide();
 				$element.removeAttr("disabled");
 				if(result != "") {
-					$(result).insertBefore($element.parents(".comment-holder").find(".quick-reply-input"));
-					$element.parents(".comment-holder").find(".ind-reply:last").slideDown("fast");
-					$element.parents(".comment-holder").find(".quick-reply-input").val("");
-					$element.parents(".comment-holder").find(".reply-character-count").html("160");
-					var replies = parseInt($element.parents(".comment-holder").find(".replies-view").attr("data-replies")) + 1;
-					$element.parents(".comment-holder").find(".replies-view").attr("data-replies", replies);
-					$element.parents(".comment-holder").find(".replies-view span").html("(" + replies + ")");
-					$element.parents(".comment-holder").find(".view-all-replies p").html("View All Replies (" + replies + ")");
+					$(result).insertBefore($commentholder.find(".quick-reply-input"));
+					
+					var $newcomment = $commentholder.find(".ind-comment:last");
+					var newText = linkText($newcomment.html());
+					$newcomment.addClass("linked").html(newText);
+					
+					$commentholder.find(".ind-reply:last").slideDown("fast");
+					$commentholder.find(".quick-reply-input").val("");
+					$commentholder.find(".reply-character-count").html("160");
+					var replies = parseInt($commentholder.find(".replies-view").attr("data-replies")) + 1;
+					$commentholder.find(".replies-view").attr("data-replies", replies);
+					$commentholder.find(".replies-view span").html("(" + replies + ")");
+					$commentholder.find(".view-all-replies p").html("View All Replies (" + replies + ")");
+					$commentholder.find(".reply-btn-holder").hide();
+					$commentholder.find(".quick-reply-input").css("height","25px");
 				}
 			});
 		}
@@ -266,12 +282,19 @@ $(document).ready(function() {
 		 var chars = $(this).val();
 		 var charLength = 40 - chars.length;
 		 if(charLength <= 0) {
-			 $(this).parent().find("#character-count").html(charLength);
-			 $(this).parent().find("#character-count").css("color", "red");
+			 $(this).parent().find("#character-count").html(charLength).css("color", "red");
 		 }
 		 else {
-			 $(this).parent().find("#character-count").html(charLength);
-			 $(this).parent().find("#character-count").css("color", "green");
+			 $(this).parent().find("#character-count").html(charLength).css("color", "green");
+		 }
+	}).focusin(function () {
+		 var chars = $(this).val();
+		 var charLength = 40 - chars.length;
+		 if(charLength <= 0) {
+			 $(this).parent().find("#character-count").html(charLength).css("color", "red");
+		 }
+		 else {
+			 $(this).parent().find("#character-count").html(charLength).css("color", "green");
 		 }
 	});
 	
@@ -293,13 +316,20 @@ $(document).ready(function() {
 		 
 		 charLengthThread = 255 - chars.length + link;
 		 if(charLengthThread <= 0) {
-			 $(this).parent().find("#character-count").html(charLengthThread);
-			 $(this).parent().find("#character-count").css("color", "red");
+			 $(this).parent().find("#character-count").html(charLengthThread).css("color", "red");
 		 }
 		 else {
-			 $(this).parent().find("#character-count").html(charLengthThread);
-			 $(this).parent().find("#character-count").css("color", "green");
+			 $(this).parent().find("#character-count").html(charLengthThread).css("color", "green");
 		 }
+	}).focusin(function () {
+		var chars = $(this).val();
+		charLengthThread = 255 - chars.length + link;
+		if(charLengthThread <= 0) {
+			 $(this).parent().find("#character-count").html(charLengthThread).css("color", "red");
+		}
+		else {
+			 $(this).parent().find("#character-count").html(charLengthThread).css("color", "green");
+		}
 	});
 	
 	if($("#referrer").length > 0) {
@@ -307,11 +337,19 @@ $(document).ready(function() {
 	}
 	
 	$("#quick-description-submit").click(function(event) {
-		if($("#quick-description-grumblename").val().length > 40 || charLengthThread < 0) {
+		if($("#quick-description-grumblename").val().length > 40) {
 			event.preventDefault();
 			
-			$("#notification-bar p").html("Too many characters to submit.").addClass("error");
+			$("#notification-bar p").html("Too many characters in Grumble to submit.").addClass("error");
 			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			$("#quick-description-grumblename").focus();
+		}
+		else if(charLengthThread < 0) {
+			event.preventDefault();
+			
+			$("#notification-bar p").html("Too many characters in Grumble Description to submit.").addClass("error");
+			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			$('#quick-description-textarea').focus();
 		}
 		else if($("#quick-description-grumblename").val().length == 0 || $("#quick-description-textarea").val().length == 0) {
 			event.preventDefault();

@@ -171,7 +171,7 @@
 				$email = mysql_real_escape_string($_POST["email"]);
 				
 				$sql = "SELECT user_email FROM users_grumble " . 
-					"WHERE user_email='" . $email . "' LIMIT 0,1";
+					"WHERE user_email='" . $email . "' AND user_verified = 1 LIMIT 0,1";
 				$result = mysql_query($sql, $conn) or die("Could not lookup email: " . mysql_error());
 				if(mysql_num_rows($result) > 0) {
 					$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.';

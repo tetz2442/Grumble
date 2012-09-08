@@ -91,9 +91,12 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 				echo '<div class="quick-reply">';
 					echo '<div class="reply-padding">';
 						//echo '<div class="ind-comment" style="display:none;"></div>';
-						echo '<textarea rows="3" class="quick-reply-input" placeholder="Type reply..."></textarea>';
-						echo '<span class="reply-character-count">160</span>';
-						echo '<input type="button" value="Send" class="quick-reply-button button"/>';
+						echo '<textarea rows="3" class="quick-reply-input textArea" placeholder="Type reply..."></textarea>';
+						echo '<div class="reply-btn-holder">';
+							echo '<span class="link-present">Link will be shortened.</span>';
+							echo '<input type="button" value="Send" class="quick-reply-button button"/>';
+							echo '<span class="reply-character-count">160</span>';
+						echo '</div>';
 					echo '</div>';
 				echo '</div>';
 			echo '</div>';
