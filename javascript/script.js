@@ -580,6 +580,7 @@ $(document).ready(function() {
 						function(result) {
 						$(element).parent().find("#gif-loader-comment").hide();
 						$(element).removeAttr("disabled");
+						//alert(result);
 						if(result == 0 || result == "") {
 							$("#notification-bar p").html("Something went wrong. Please check your entries.").addClass("error");
 							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");

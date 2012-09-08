@@ -25,11 +25,13 @@
 			//check if comment was already submitted
 			if(mysql_num_rows($result) != 1) {
 				//validate grumble length is less than 160 with URL
-				/*if(preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url) == 0 && strlen($comment) <= 160) {
-					
+				/*if(preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url) === 0 && strlen($comment) <= 160) {
+					echo "here";
 				}
 				else if(preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url) && strlen($comment) > 160) {
-					
+					preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url, $matches);
+					$url = $matches[0] . $matches[1] . $matches[2];
+					echo $url;
 				}
 				else {
 					echo 0;
