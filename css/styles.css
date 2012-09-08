@@ -19,6 +19,10 @@ table {
     background:transparent;
 }
 
+h1, h2, h3, h4{
+	font-weight: normal;
+}
+
 body {
     line-height:1.1;
 	background-color:#f7ffff;
@@ -105,7 +109,7 @@ html { overflow-y: scroll; }
 /*header container for smaller size pages*/
 #grumbles-container {
 	width:850px;
-	margin:auto;
+	margin:0px auto 80px auto;
 	overflow:auto;
 }
 
@@ -200,7 +204,7 @@ html { overflow-y: scroll; }
 	position:relative;
 	display: block;
 	padding:5px 16px 6px 10px;
-	font-size:.9em;
+	font-size:.8em;
 	width:115px;
 }
 #sub-nav a:hover {
@@ -314,8 +318,8 @@ html { overflow-y: scroll; }
 #dropdown-sub-nav a {
 	text-decoration:none;
 	color:#333;
-	padding:5px 55px 5px 15px;
-	font-size:.9em;
+	padding:5px 40px 5px 15px;
+	font-size:.8em;
 	position: relative;
 	display: block;
 }
@@ -377,7 +381,7 @@ html { overflow-y: scroll; }
 }
 #footer-copyright {
 	color:#634328;
-	margin-bottom:2px;
+	margin-bottom:12px;
 }
 
 /********
@@ -408,6 +412,8 @@ html { overflow-y: scroll; }
 	position:absolute;
 	z-index:6006;
 	width:300px; 
+	line-height:1.4em;
+	font-size:.8em;
 	background-color:#FAF7F7;	
 	border-radius:1px;
 	-moz-border-radius:1px;
@@ -607,7 +613,7 @@ html { overflow-y: scroll; }
 	width:100%;
 	overflow:auto;
 	margin:3px 5px 0px 0px;
-	background-color:#EDEFF4;
+	background-color:#FFF9E8;
 	border-radius:3px;
 	-moz-border-radius:3px;
 	-webkit-border-radius:3px;
@@ -705,7 +711,7 @@ html { overflow-y: scroll; }
 	max-width:635px;
 	max-height:200px;
 	padding:6px;
-	background-color:#f0f0f0;
+	background-color:#FFF9E8;
 }
 #grumble-comment textarea:hover {
 	border:1px solid #999;
@@ -762,20 +768,20 @@ html { overflow-y: scroll; }
 	padding:5px 0;
 	display:inline-block;
 	text-decoration:none;
-	color:#333;
+	color:#696767;
 	font-size:1.1em;
 	width:115px;
 	text-align:center;
 }
 .tabs a:hover {
-	font-weight:bold;	
+	color:#333;	
 }
 .tabs a.active {
-	font-weight:bold;		
+	color:#333;		
 }
 #arrow-top {
 	width:100%;
-	border-bottom:1px solid #000;
+	border-bottom:1px solid #7A7979;
 }
 #arrow-top img {
 	margin-bottom:-4px;	
@@ -808,16 +814,16 @@ html { overflow-y: scroll; }
 	text-align:center;
 	font-size:1.4em;
 	min-width:25px;
-	padding:12px;
+	padding:8px;
 	background-color:#fca954;
 	border-radius:30px;
 	-moz-border-radius:30px;
 	-webkit-border-radius:30px;
 	font-weight:bold;
 	color:#fff;
-	-webkit-box-shadow: 0 4px 4px -2px #000000;
-   -moz-box-shadow: 0 4px 4px -2px #000000;
-    box-shadow: 0 4px 4px -2px #000000;
+	-webkit-box-shadow: 0 3px 4px -2px #4D4B4B;
+   -moz-box-shadow: 0 3px 4px -2px #4D4B4B;
+    box-shadow: 0 3px 4px -2px #4D4B4B;
 }
 .grumble-cat-name {
 	margin-bottom:8px;
@@ -849,7 +855,8 @@ html { overflow-y: scroll; }
 }
 #about-left p {
 	margin:15px 10px 10px 0;
-	font-size:1.2em;
+	font-size:1em;
+	line-height: 1.2em;
 }
 #about-right {
 	float:right;
@@ -964,7 +971,8 @@ html { overflow-y: scroll; }
 }
 .textInput {
 	height:30px;
-	font-size:1.2em;	
+	font-size:1.2em;
+	color:#333;	
 	border-radius:3px;
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
@@ -1012,20 +1020,20 @@ html { overflow-y: scroll; }
 	padding:5px 0;
 	display:inline-block;
 	text-decoration:none;
-	color:#000;
+	color:#696767;
 	font-size:1.1em;
 	width:130px;
 	text-align:center;
 }
 .tabs-profile a:hover {
-	font-weight:bold;	
+	color:#333;	
 }
 .tabs-profile a.active {
-	font-weight:bold;		
+	color:#333;		
 }
 #arrow-top-profile {
 	width:100%;
-	border-bottom:1px solid #000;
+	border-bottom:1px solid #7A7979;
 	margin-bottom:25px;
 }
 #arrow-top-profile img {
@@ -1042,7 +1050,7 @@ html { overflow-y: scroll; }
 	right:0;
 	bottom:0;
 	z-index:1998;
-	background-color:#000;
+	background-color:#9E9E9E;
 	opacity:.5;
 	filter: alpha(opacity=50); /* internet explorer */
 	display:none;
@@ -1279,7 +1287,8 @@ html { overflow-y: scroll; }
 *contact
 *******/
 #contact-page-container {
-	margin-top:25px;
+	margin-top:40px;
+	line-height:2em;
 }
 
 #contact-form {
