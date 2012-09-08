@@ -20,5 +20,12 @@ function sendEmail($email, $sendfrom, $type, $parameters) {
 			mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send email.");
 		}
 	}
+	else if($type == "verify") {
+		$subject = "[Grumble] Verify email";
+		$body = "Thanks for signing up for Grumble!\n\n" .
+		"To verify this email please follow the link below by pasting it in your browser or clicking on it.\n\n" . 
+		$parameters[0] . "\n\nThe Grumble Team";
+		mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send email.");
+	}
 }
 ?>

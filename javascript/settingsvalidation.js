@@ -73,13 +73,21 @@ $(document).ready(function() {
 	
 	$("#pass-change").keyup(function () {
 		var element = $(this);
-		if(checkLength(element, 5)) {
-			$(element).parent().find(".validation-settings:eq(0)").attr("src","/images/tick-circle_1.png").fadeIn(250);
-			passwords = true;
-		}
-		else {
+		if(!checkLength(element, 5)) {
 			$(element).parent().find(".validation-settings:eq(0)").attr("src","/images/exclamation-red_1.png").fadeIn(250);
 			passwords = false;
+		}
+		else if(!$(this).val().match(/[A-Z]/)) {
+			$(element).parent().find(".validation-settings:eq(0)").attr("src","/images/exclamation-red_1.png").fadeIn(250);
+			passwords = false;
+		}
+		else if(!$(this).val().match(/[0-9]/)) {
+			$(element).parent().find(".validation-settings:eq(0)").attr("src","/images/exclamation-red_1.png").fadeIn(250);
+			passwords = false;
+		}
+		else {
+			$(element).parent().find(".validation-settings:eq(0)").attr("src","/images/tick-circle_1.png").fadeIn(250);
+			passwords = true;
 		}
 	}).focusout(function() {
 		hideBar();

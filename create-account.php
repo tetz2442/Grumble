@@ -14,6 +14,14 @@
 	$token = md5(uniqid(rand(), true));
 	$_SESSION['token2'] = $token;
 	if(!isset($_SESSION["user_id"])) {
+		if(isset($_GET["user_created"]) && $_GET["user_created"] == 1) {
+?>
+<div id="account-create-container">
+	<p class="content-padding text-align-center"><b>An email has been sent to your entered email address. Before you can start using Grumble, you must verify this email.</b></p>
+</div>
+<?php
+		}
+		else {
 ?>
 <div id="account-create-container">
 	<div id="account-create-welcome">
@@ -51,7 +59,7 @@
             <td><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="emailError"></span></td>
         </tr>
         <tr>
-            <td align="right"><label for="userpassword">Password:</label></td>
+            <td align="right"><label for="userpassword">Password:</label> (<span class="help-callout colored-link-1" data-id="4" title="Tips for creating a password on Grumble."><b>?</b></span>)</td>
             <td><input type="password" id="userpassword" class="textInput" name="password" maxlength="50"/></td>
             <td><span id="passError"></span></td>
         </tr>
@@ -230,6 +238,7 @@
     </div>
 </div>
 <?php 
+		}
 }
 else {
 ?>
