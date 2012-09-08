@@ -44,7 +44,7 @@ else {
              <?php
                 //top grumbles
                 $sql = "SELECT sub_category_id FROM sub_category_grumble" .
-                " WHERE grumble_number > 0 ORDER BY grumble_number DESC LIMIT 10";
+                " WHERE grumble_number > 0 AND sub_category_created >= (NOW() - INTERVAL 7 DAY) ORDER BY grumble_number DESC LIMIT 10";
                 $result = mysql_query($sql, $conn);
                 
 				$topnumber = mysql_num_rows($result);
