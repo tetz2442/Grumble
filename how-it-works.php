@@ -28,9 +28,9 @@ require_once "php/containerWide.php";
 		    <li>Start a new comment.</li>
 		    <li>User who created the comment.</li>
 		    <li>Comment text.</li>
-		    <li>Comment options. If you own the comment you can delete, if you do not own you can report as spam.</li>
-		    <li>How long ago the comment was created. You can also click the time to open the status.</li>
-		    <li>More comment options. From here you can either vote up a comment or enter a reply.</li>
+		    <li>Comment options. If you own the comment, you can delete it, otherwise you can report a comment as spam.</li>
+		    <li>How long ago the comment was created. You can also click the time to open the status and see it individually.</li>
+		    <li>More comment options. From here you can either vote up a comment or enter a reply (more information below).</li>
 	    </ul>
 	    <div class="divider light"></div>
 	    <h2>C. Replies</h2>

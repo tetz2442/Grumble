@@ -1,5 +1,5 @@
 // JavaScript Document
-var expSC = /[!@#%*+=~`$&^}{|\')(,=+¬-.]/;
+var expSC = /^[a-zA-Z0-9_]*$/;
 var username = false;
 var saving = false;
 var changes = false;
@@ -244,7 +244,7 @@ function checkSC(element) {
 		return false;
 	}
 	else {
-		return !expSC.test(element.val());
+		return expSC.test(element.val());
 	}
 }
 

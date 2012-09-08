@@ -1,7 +1,7 @@
 // JavaScript Document
 var regExpEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z]+\.[a-z]{2,4}$/;
-var expSC = /[!@#%*+=~`$&^}{|\')(,=+¬-.]/;
-var expLet = /[0-9!@#%*+=~`$&^}{|\')(,=+¬-.]/;
+var expSC = /^[a-zA-Z0-9_]*$/;
+var expLet = /^[a-zA-Z]*$/;
 var username = false;
 var email = false;
 
@@ -247,7 +247,7 @@ function checkLetters(element) {
 		return false;
 	}
 	else {
-		return !expLet.test(element.val());
+		return expLet.test(element.val());
 	}
 }
 
@@ -268,7 +268,7 @@ function checkSC(element) {
 		return false;
 	}
 	else {
-		return !expSC.test(element.val());
+		return expSC.test(element.val());
 	}
 }
 

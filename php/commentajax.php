@@ -24,13 +24,14 @@
 			$result = mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 			//check if comment was already submitted
 			if(mysql_num_rows($result) != 1) {
-				//validate grumble length is less than 160 with URL
-				/*if(preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url) === 0 && strlen($comment) <= 160) {
-					echo "here";
+				//validate grumble length is less than 160 with URL or without
+				/*$url = "";
+				$urlpresent = preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%g', $comment, $matches);
+				if(strlen($comment) <= 160) {
+					
 				}
-				else if(preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url) && strlen($comment) > 160) {
-					preg_match('%^((https?://)|(www\.))([a-z0-9-].?)+(:[0-9]+)?(/.*)?$%i', $url, $matches);
-					$url = $matches[0] . $matches[1] . $matches[2];
+				else if($urlpresent == 1 && strlen($comment) > 160) {
+					$url = $matches[1] . $matches[2];
 					echo $url;
 				}
 				else {

@@ -54,7 +54,7 @@ else if(isset($_POST["type"]) && isset($_POST["last"]) && $_SERVER['REQUEST_METH
 	}
 	else if($_POST["type"] == "top") {
 		$sql = "SELECT sub_category_id FROM sub_category_grumble" .
-                " WHERE grumble_number > 0 && sub_category_created >= (CURDATE() - INTERVAL 7 DAY) ORDER BY grumble_number DESC LIMIT 10 OFFSET " .$last;
+                " WHERE grumble_number > 0 && sub_category_created >= (NOW() - INTERVAL 7 DAY) ORDER BY grumble_number DESC LIMIT 10 OFFSET " .$last;
 		$result = mysql_query($sql, $conn);
 		if(mysql_num_rows($result) == 0) {
 			echo "none";	

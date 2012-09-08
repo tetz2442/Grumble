@@ -34,27 +34,29 @@ $(document).ready(function() {
 	
 	$(".dropdown-shortlink").mousedown(function() {
 		var $element = $(this);
-		if($("#dropdown-form").length > 0) {
-			if($("#dropdown-form").is(":visible")) {
-				$("#dropdown-form").fadeOut(50, function() {
+		var $dropdownform = $("#dropdown-form");
+		var $drowdownformlogin = $("#dropdown-form-login");
+		if($dropdownform.length > 0) {
+			if($dropdownform.is(":visible")) {
+				$dropdownform.fadeOut(50, function() {
 					$element.parents("body").find(".login-drop-image").attr("src", "/images/arrow.png");
 				});
 			}
 			else {
-				$("#dropdown-form").fadeIn(100, function() {
+				$dropdownform.fadeIn(100, function() {
 					$("#email").focus();
 				});
 				$element.parents("body").find(".login-drop-image").attr("src", "/images/arrow-down.png");
 			}
 		}
-		else if($("#dropdown-form-login").length > 0) {
-			if($("#dropdown-form-login").is(":visible")) {
-				$("#dropdown-form-login").fadeOut(50, function() {
+		else if($drowdownformlogin.length > 0) {
+			if($drowdownformlogin.is(":visible")) {
+				$drowdownformlogin.fadeOut(50, function() {
 					$element.parents("body").find(".login-drop-image").attr("src", "/images/arrow.png");
 				});
 			}
 			else {
-				$("#dropdown-form-login").fadeIn(100, function() {
+				$drowdownformlogin.fadeIn(100, function() {
 					$("#email").focus();
 				});
 				$element.parents("body").find(".login-drop-image").attr("src", "/images/arrow-down.png");
@@ -70,17 +72,18 @@ $(document).ready(function() {
 	
 	$("body").on("click", ".comment-options p", function () {
 		var $element = $(this);
+		var $commentholder = $element.parents(".comment-holder");
 		if($element.text() == "Delete") {
-			var id = $element.parents(".comment-holder").find(".username").attr("data-id");
+			var id = $commentholder.find(".username").attr("data-id");
 			if(confirm("Are you sure you want to delete this Comment? **All votes and replies will be deleted also**")) {
-				$element.parents(".comment-holder").find(".gif-loader-replies").show();
+				$commentholder.find(".gif-loader-replies").show();
 				$.post("/php/commentajax.php", {commentid:id, action:"Delete"},
 				function(result) {
-					$element.parents(".comment-holder").find(".gif-loader-replies").hide();
+					$commentholder.find(".gif-loader-replies").hide();
 					if(result == 1) {
 						$("#notification-bar p").html("Comment deleted.").removeClass("error").addClass("available");
 						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
-						$element.parents(".comment-holder").remove();
+						$commentholder.remove();
 					}
 					else {
 						$("#notification-bar p").html("Something went wrong. Could not delete.").removeClass("available").addClass("error");
@@ -159,31 +162,38 @@ $(document).ready(function() {
 	$("body").on("click", "p.replies-view", function() {
 		var $element = $(this);
 		var id = $element.attr("data-id");
-		if($element.parents(".comment-holder").find(".replies").is(":visible") == false) {
+		var $commentholder = $element.parents(".comment-holder");
+		if($commentholder.find(".replies").is(":visible") == false) {
 			if($element.attr("data-replies") == 0) {
-				$element.parents(".comment-holder").find(".replies").slideDown("fast");
+				$commentholder.find(".replies").slideDown("fast");
 				$element.find("a").html("Close");
 			}
-			else if($element.parents(".comment-holder").find(".ind-reply").length > 0) {
-				$element.parents(".comment-holder").find(".replies").slideDown("fast");
+			else if($commentholder.find(".ind-reply").length > 0) {
+				$commentholder.find(".replies").slideDown("fast");
 				$element.find("a").html("Close");
 			}
 			else {
-				$element.parents(".comment-holder").find(".gif-loader-replies").show();
-				$element.parents(".comment-holder").find(".view-all-replies").show();
+				$commentholder.find(".gif-loader-replies").show();
+				$commentholder.find(".view-all-replies").show();
 				$.post("/php/repliesajax.php", {reply:id, type:"load", amount:"few"},
 					function(result) {
-						$element.parents(".comment-holder").find(".gif-loader-replies").hide();
+						$commentholder.find(".gif-loader-replies").hide();
 						if(result != "") {
-							$(result).insertBefore($element.parents(".comment-holder").find(".quick-reply-input"));
-							$element.parents(".comment-holder").find(".replies").slideDown("fast");
+							$(result).insertBefore($commentholder.find(".quick-reply-input"));
+							$commentholder.find(".replies").slideDown("fast");
 							$element.find("a").html("Close");
+							
+							$($commentholder.find(".reply-text")).each(function() {
+								var newText = linkText($(this).html());
+								$(this).addClass("linked").html(newText);
+							});
+							shortenLink(".reply-text a");
 						}
 				});
 			}
 		}
 		else if($element.find("a").html() == "Close") {
-			$element.parents(".comment-holder").find(".replies").slideUp("fast");
+			$commentholder.find(".replies").slideUp("fast");
 			$element.find("a").html($element.attr("data-html"));
 		}
 	});
@@ -201,6 +211,12 @@ $(document).ready(function() {
 					});
 					$(result).insertBefore($element.parents(".comment-holder").find(".quick-reply-input"));
 					$element.hide();
+					
+					$($element.parents(".comment-holder").find(".reply-text")).each(function() {
+						var newText = linkText($(this).html());
+						$(this).addClass("linked").html(newText);
+					});
+					shortenLink(".reply-text a");
 				}
 		});
 	});
@@ -230,9 +246,10 @@ $(document).ready(function() {
 				if(result != "") {
 					$(result).insertBefore($commentholder.find(".quick-reply-input"));
 					
-					var $newcomment = $commentholder.find(".ind-comment:last");
+					var $newcomment = $commentholder.find(".ind-reply:last .reply-text");
 					var newText = linkText($newcomment.html());
 					$newcomment.addClass("linked").html(newText);
+					shortenLink(".ind-reply:last .reply-text a");
 					
 					$commentholder.find(".ind-reply:last").slideDown("fast");
 					$commentholder.find(".quick-reply-input").val("");
@@ -266,12 +283,10 @@ $(document).ready(function() {
 		 }
 		 charLengthGrumble = 160 - chars.length + link;
 		 if(charLengthGrumble <= 0) {
-			 $(this).parent().find("#character-count").html(charLengthGrumble);
-			 $(this).parent().find("#character-count").css("color", "red");
+			 $(this).parent().find("#character-count").html(charLengthGrumble).css("color", "red");
 		 }
 		 else {
-			 $(this).parent().find("#character-count").html(charLengthGrumble);
-			 $(this).parent().find("#character-count").css("color", "green");
+			 $(this).parent().find("#character-count").html(charLengthGrumble).css("color", "green");
 		 }
 	}).focusin(function () {
 		$(this).css({"height":"75px","background-color":"white"});
@@ -397,25 +412,26 @@ $(document).ready(function() {
 	$(".button").mousedown(function(event) {
 		if($(this).val() == "View More" && canLoad) {
 			canLoad = false;
+			var $aactive = $(".tabs a.active");
 			if($("#cat-header h1").length > 0)
 				var catID = $("#cat-header h1").attr("data-id");
 			if($(".user-name").length > 0)
 				var userID = $(".user-name").attr("data-id");
 			var type = "";
 			var last = 0;
-			if($(".tabs a.active").text() == "Top Grumbles") {
+			if($aactive.text() == "Top Grumbles") {
 				type = "top";
 				last = $("#tab1 .grumble-holder").length;
 			}
-			else if($(".tabs a.active").text() == "Recent Grumbles"){
+			else if($aactive.text() == "Recent Grumbles"){
 				type = "recent";
 				last = $("#tab2 .grumble-holder:last").find(".grumble-text-holder a").attr("data-id");
 			}
-			else if($(".tabs a.active").text() == "Top Comments"){
+			else if($aactive.text() == "Top Comments"){
 				type = "top-comment";
 				last = $("#tab3 .comment-holder").length;
 			}
-			else if($(".tabs a.active").text() == "Recent Comments"){
+			else if($aactive.text() == "Recent Comments"){
 				type = "recent-comment";
 				last = $("#tab4 .comment-holder:last").find(".username").attr("data-id");
 			}
@@ -618,7 +634,6 @@ $(document).ready(function() {
 						function(result) {
 						$(element).parent().find("#gif-loader-comment").hide();
 						$(element).removeAttr("disabled");
-						//alert(result);
 						if(result == 0 || result == "") {
 							$("#notification-bar p").html("Something went wrong. Please check your entries.").addClass("error");
 							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
@@ -739,13 +754,13 @@ $(document).ready(function() {
 				$(".view-more").slideUp("fast");
 			}
 			if($(this).html() == "Recent Grumbles")
-				$("#arrow-top img").animate({"marginLeft":"166px"}, "normal");
+				$("#arrow-top img").animate({"marginLeft":"169px"}, "normal");
 			else if($(this).html() == "Top Grumbles")
-				$("#arrow-top img").animate({"marginLeft":"47px"}, "normal");
+				$("#arrow-top img").animate({"marginLeft":"48px"}, "normal");
 			else if($(this).html() == "Top Comments")
-				$("#arrow-top img").animate({"marginLeft":"286px"}, "normal");
+				$("#arrow-top img").animate({"marginLeft":"289px"}, "normal");
 			else if($(this).html() == "Recent Comments")
-				$("#arrow-top img").animate({"marginLeft":"404px"}, "normal");
+				$("#arrow-top img").animate({"marginLeft":"407px"}, "normal");
 			$active.removeClass('active');
 			$content.fadeOut("fast");
 	
