@@ -15,13 +15,13 @@ function retrieveReplies($voteid, $amount) {
 	if($amount == "few") {
 		$sql = "(SELECT cg.reply_id, cg.status_id, DATE_FORMAT(cg.reply_date, '%b %e, %Y %l:%i %p') AS reply_date, cg.reply_text, ug.username FROM replies_grumble AS cg" . 
 			" LEFT OUTER JOIN users_grumble AS ug ON cg.reply_user = ug. user_id" . 
-			" WHERE status_id = " . intval($voteid) . " ORDER BY cg.reply_date DESC LIMIT 2)" . 
+			" WHERE status_id = " . $voteid . " ORDER BY cg.reply_date DESC LIMIT 2)" . 
 			" ORDER BY reply_id";
 	}
 	else if($amount = "all") {
 		$sql = "SELECT cg.reply_id, cg.status_id, DATE_FORMAT(cg.reply_date, '%b %e, %Y %l:%i %p') AS reply_date, cg.reply_text, ug.username FROM replies_grumble AS cg" . 
 			" LEFT OUTER JOIN users_grumble AS ug ON cg.reply_user = ug.user_id" . 
-			" WHERE status_id = " . intval($voteid) . " ORDER BY cg.reply_id";
+			" WHERE status_id = " . $voteid . " ORDER BY cg.reply_id";
 	}
 	$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
 	if(mysql_num_rows($result) != 0) {

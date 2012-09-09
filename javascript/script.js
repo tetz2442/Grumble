@@ -199,7 +199,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	$("body").on("click", "div.view-all-replies", function() {
+	$("div").on("click", ".view-all-replies", function() {
 		var $element = $(this);
 		var id = $element.attr("data-id");
 		$element.parents(".comment-holder").find(".gif-loader-replies").show();
@@ -223,7 +223,7 @@ $(document).ready(function() {
 	});
 	
 	//checks if the submit comment button has been clicked
-	$("body").on("click", ".quick-reply-button", function() {
+	$("div").on("click", ".quick-reply-button", function() {
 		var $element = $(this);
 		var $commentText = $(this).parents(".reply-padding").find(".quick-reply-input").val();
 		var $commentholder = $(this).parents(".comment-holder");

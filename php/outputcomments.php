@@ -2,7 +2,10 @@
 function outputComments($grumble, $comments = false, $loggedin = false) {
 	global $conn;
 	if($grumble) {
-		date_default_timezone_set($_SESSION["timezone"]);
+		if (isset($_SESSION["timezone"])) {
+			date_default_timezone_set($_SESSION["timezone"]);
+		}
+
 		$sql = "SELECT sg.status_id, sg.status_text, ug.username, DATE_FORMAT(sg.date_submitted, '%b %e, %Y %l:%i %p') AS date_submitted, " . 
 			"ug.user_id, ug.username, COUNT(user_like_id) AS votes_up_count FROM status_grumble AS sg " . 
 			"LEFT OUTER JOIN user_likes_grumble AS vg ON sg.status_id = vg.status_id " .
@@ -55,14 +58,14 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 					$commentcount = mysql_query($sql, $conn);
 					$row3 = mysql_fetch_array($commentcount);
 					if($comments) {
-						echo '<p class="gif-loader-replies"><img src="/images/ajax-loader.gif" alt="loader" width="16" height="16"/></p><p class="reply-view" data-id="' . $row["status_id"] . '" data-html="Replies" data-number="(' . $row3[0] . ')" data-replies="' . $row3[0] . '" title="View/Add replies on this comment">Replies';
+						echo '<p class="gif-loader-replies"><img src="/images/ajax-loader.gif" alt="loader" width="16" height="16"/></p><p class="replies-view" data-id="' . $row["status_id"] . '" data-html="Replies" data-replies="' . $row3[0] . '" title="View/Add replies on this comment">Replies';
 						if($row3[0] >= 1)
 							echo '<img src="/images/balloons.png" alt="View Replies" width="16" height="16"/><span>(' . $row3[0] . ')</span></p>';
 						else 
 							echo '<img src="/images/balloon.png" alt="View Replies" width="16" height="16"/><span>(' . $row3[0] . ')</span></p>';
 					}
 					else {
-						echo '<p class="gif-loader-replies"><img src="/images/ajax-loader.gif" alt="loader" width="16" height="16"/></p><p class="replies-view" data-id="' . $row["status_id"] . '" data-html="Replies" data-number="(' . $row3[0] . ')" data-replies="' . $row3[0] . '" title="View/Add replies on this comment"><a>Replies</a>';
+						echo '<p class="gif-loader-replies"><img src="/images/ajax-loader.gif" alt="loader" width="16" height="16"/></p><p class="replies-view" data-id="' . $row["status_id"] . '" data-html="Replies" data-replies="' . $row3[0] . '" title="View/Add replies on this comment"><a>Replies</a>';
 						if($row3[0] > 1)
 							echo '<img src="/images/balloons.png" alt="View Replies" width="16" height="16"/><span>(' . $row3[0] . ')</span></p>';
 						else 
