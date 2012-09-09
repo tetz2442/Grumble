@@ -7,7 +7,7 @@
                 <?php
 					$sql = "SELECT category_id, category_name, category_url FROM categories_grumble ORDER BY category_name ASC";
 					$result = mysql_query($sql, $conn);
-					echo '<img id="sub-nav-dropdown-arrow" src="/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/>';
+					echo '<li id="sub-nav-dropdown-arrow"><img src="/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/></li>';
 					while($row = mysql_fetch_array($result)) {
 						echo '<li><a href="/category/' . $row["category_url"] . '">' . $row["category_name"] . '</a></li>';
 					}
@@ -30,10 +30,10 @@
         <div id="user-info">
         <?php
         if(isset($_SESSION["username"])) {
-            echo '<ul><span class="dropdown-shortlink dropdown-login">' . $_SESSION["username"] . '<img src="/images/arrow.png" alt="arrow" class="login-drop-image"/></span>';
-            echo '<li id="dropdown-form">';
-			echo '<img id="dropdown-arrow-short" alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/>';
+            echo '<ul>';
+            echo '<li class="dropdown-shortlink dropdown-login">' . $_SESSION["username"] . '<img src="/images/arrow.png" alt="arrow" class="login-drop-image"/>';
             echo '<ul id="dropdown-sub-nav">';
+            echo '<li id="dropdown-arrow-short"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
             echo "<li><a href='/profile/" . $_SESSION["username"] . "'>Profile</a></li>";
 			echo '<li class="divider light"></li>';
 			echo "<li><a href='/contact'>Contact Us</a></li>";
@@ -50,8 +50,8 @@
 			$token = md5(uniqid(rand(), true));
 			$_SESSION['token'] = $token;
             ?>
-            		<img id="dropdown-arrow" alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/>
                     <ul>
+                        <li id="dropdown-arrow"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>
                         <li>
                             <label for="email">Email</label>
                             <input type="text" id="email" name="email" maxlength="255" class="input-user-nav"/>

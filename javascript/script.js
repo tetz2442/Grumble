@@ -35,7 +35,7 @@ $(document).ready(function() {
 	
 	$(".dropdown-shortlink").mousedown(function() {
 		var $element = $(this);
-		var $dropdownform = $("#dropdown-form");
+		var $dropdownform = $("#dropdown-sub-nav");
 		var $drowdownformlogin = $("#dropdown-form-login");
 		if($dropdownform.length > 0) {
 			if($dropdownform.is(":visible")) {
