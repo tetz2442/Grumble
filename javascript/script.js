@@ -18,6 +18,7 @@
   
 $(document).ready(function() { 
 	$("#maincolumn").delay(50).fadeIn(150);
+	$("#footer").delay(50).fadeIn(150);
 
 	$("#nav-category").click(function() {
 		var $element = $(this);
