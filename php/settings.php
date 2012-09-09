@@ -9,7 +9,6 @@ $row = mysql_fetch_array($result);
 	<div class="content-padding">
     	<h1>Settings</h1>
     	<div id="username-change" class="padding-top">
-        	<h4>Change Your Username</h4>
         	<label for="username-change-input" title="Change your username">Change Username</label><img src="/images/exclamation-red_1.png" alt="validation" class="validation-settings" width="16" height="16"/>
         	<input type="text" name="username-change-input" id="username-change-input" class="textInput" maxlength="15" value="<?php echo strip_tags($_GET["id"]); ?>"/>
             <div id="email-change" class="padding-top">

@@ -368,6 +368,7 @@ html { overflow-y: scroll; }
 	margin-bottom:30px;
 	border-top:1px solid #e0e0e0;
 	text-align:center;
+	display: none;
 }
 #footer-links {
 	padding:2px 0px 5px 2px;
