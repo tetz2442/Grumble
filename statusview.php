@@ -65,6 +65,12 @@ window.onload = function(){
 					if(result != "") {
 						$(result).insertBefore(".quick-reply-input");
 						$(".replies").slideDown("fast");
+
+						$(".reply-text").each(function() {
+							var newText = linkText($(this).html());
+							$(this).addClass("linked").html(newText);
+						});
+						shortenLink(".reply-text a");
 					}
 		});
 	}

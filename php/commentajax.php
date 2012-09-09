@@ -6,7 +6,7 @@
 	require_once "sendemail.php";
 	session_start();
 	if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && is_numeric($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
-		//date_default_timezone_set('America/Chicago');
+		//date_default_timezone_set($_SESSION["timezone"]);
 		$comment = mysql_real_escape_string(strip_tags($_POST["comment"]));
 		$category = mysql_real_escape_string(strip_tags($_POST["category"]));
 		
@@ -41,7 +41,7 @@
 				$sql = "INSERT INTO status_grumble " .
 					"(status_text, sub_category_id, date_submitted, user_id) " .
 					"VALUES ('" . $comment . "'," . $category . 
-					",'" . date("Y-m-d H:i:s", time()) . 
+					",'" . gmdate("Y-m-d H:i:s", time()) . 
 					"'," . $_SESSION["user_id"] . ")"; 
 				mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 				$last_id_status = mysql_insert_id();	
