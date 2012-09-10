@@ -243,7 +243,7 @@
 else {
 ?>
 <div id="account-create-container">
-	<p class="content-padding text-align-center"><b>Looks like you have already created an account on Grumble. Thanks! Now get out there and start Grumbling.</b></p>	
+	<p class="content-padding text-align-center">Looks like you have already created an account on Grumble. Thanks! Now get out there and start Grumbling.</p>	
 </div>
 <?php
 }

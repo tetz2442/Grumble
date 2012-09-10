@@ -759,7 +759,7 @@ $(document).ready(function() {
 			else if($(this).html() == "Top Grumbles")
 				$("#arrow-top img").animate({"marginLeft":"48px"}, "normal");
 			else if($(this).html() == "Top Comments")
-				$("#arrow-top img").animate({"marginLeft":"289px"}, "normal");
+				$("#arrow-top img").animate({"marginLeft":"286px"}, "normal");
 			else if($(this).html() == "Recent Comments")
 				$("#arrow-top img").animate({"marginLeft":"407px"}, "normal");
 			$active.removeClass('active');

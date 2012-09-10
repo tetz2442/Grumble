@@ -42,7 +42,7 @@ if(!isset($_SESSION["user_id"])) {
 }
 else {
 ?>
-<p class="content-padding"><b>Looks like you are already logged in. Get out there and start Grumbling!</b></p>
+<p class="content-padding">Looks like you are already logged in. Get out there and start Grumbling!</p>
 <?php
 }
 require_once "php/notificationbar.php"; 

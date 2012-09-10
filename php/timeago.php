@@ -1,5 +1,4 @@
 <?php
-// DISPLAYS COMMENT POST TIME AS "1 year, 1 week ago" or "5 minutes, 7 seconds ago", etc...
 function time_ago($date,$granularity=1) {
 	$retval = "";
     $date = strtotime($date);

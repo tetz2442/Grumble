@@ -19,7 +19,7 @@
 			$comment = str_replace("\n", "", $comment);
 			
 			$sql = "SELECT status_id FROM status_grumble WHERE sub_category_id = " . $category .
-			" AND status_text = '" . $comment . "' AND date_submitted >= (NOW() - INTERVAL 2 MINUTE) LIMIT 0,1";
+			" AND status_text = '" . $comment . "' AND date_submitted >= (UTC_TIMESTAMP() - INTERVAL 2 MINUTE) LIMIT 0,1";
 			
 			$result = mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 			//check if comment was already submitted
@@ -41,8 +41,7 @@
 				$sql = "INSERT INTO status_grumble " .
 					"(status_text, sub_category_id, date_submitted, user_id) " .
 					"VALUES ('" . $comment . "'," . $category . 
-					",'" . gmdate("Y-m-d H:i:s", time()) . 
-					"'," . $_SESSION["user_id"] . ")"; 
+					",UTC_TIMESTAMP()," . $_SESSION["user_id"] . ")"; 
 				mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 				$last_id_status = mysql_insert_id();	
 				
