@@ -3,7 +3,7 @@
         	<ul id="navigation">
                 <li><a href="<?php echo "http://" . $_SERVER["HTTP_HOST"];?>">Home</a></li>
                 <li id="nav-category">Categories<img src="/images/arrow.png" alt="arrow" class="drop-image" width="10" height="10"/>
-                <ul id="sub-nav">
+                <ul id="sub-nav" class="rounded-corners-medium">
                 <?php
 					$sql = "SELECT category_id, category_name, category_url FROM categories_grumble ORDER BY category_name ASC";
 					$result = mysql_query($sql, $conn);
@@ -31,8 +31,8 @@
         <?php
         if(isset($_SESSION["username"])) {
             echo '<ul>';
-            echo '<li class="dropdown-shortlink dropdown-login">' . $_SESSION["username"] . '<img src="/images/arrow.png" alt="arrow" class="login-drop-image"/>';
-            echo '<ul id="dropdown-sub-nav">';
+            echo '<li class="dropdown-login"><span class="dropdown-shortlink">' . $_SESSION["username"] . '<img src="/images/arrow.png" alt="arrow" class="login-drop-image"/></span>';
+            echo '<ul id="dropdown-sub-nav" class="rounded-corners-medium">';
             echo '<li id="dropdown-arrow-short"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
             echo "<li><a href='/profile/" . $_SESSION["username"] . "'>Profile</a></li>";
 			echo '<li class="divider light"></li>';
@@ -46,7 +46,7 @@
         }
         else {
             echo '<ul><span class="dropdown-shortlink dropdown-login" title="Login/Register">Login<img src="/images/arrow.png" alt="arrow" class="login-drop-image" width="10" height="10"/></span>';
-            echo '<li id="dropdown-form-login"><form action="/php/transact-user.php" method="post">';
+            echo '<li id="dropdown-form-login" class="rounded-corners-medium"><form action="/php/transact-user.php" method="post">';
 			$token = md5(uniqid(rand(), true));
 			$_SESSION['token'] = $token;
             ?>
@@ -54,11 +54,11 @@
                         <li id="dropdown-arrow"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>
                         <li>
                             <label for="email">Email</label>
-                            <input type="text" id="email" name="email" maxlength="255" class="input-user-nav"/>
+                            <input type="text" id="email" name="email" maxlength="255" class="input-user-nav textArea"/>
                         </li>
                         <li class="padding-top">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" maxlength="50" class="input-user-nav"/>
+                            <input type="password" name="password" id="password" maxlength="50" class="input-user-nav textArea"/>
                             <?php
 							$refer = "../" . basename($_SERVER['PHP_SELF']);
 							if($_SERVER['QUERY_STRING'] != "") {

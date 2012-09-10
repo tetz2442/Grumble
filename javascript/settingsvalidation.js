@@ -6,7 +6,7 @@ var changes = false;
 var passwords = false;
 
 $(document).ready(function() {
-	var usernameval = $(".dropdown-login").text();
+	var usernameval = $(".dropdown-login span").text();
 	
 	$("#email-noti-thread").change(function () {
 		changes = true;
@@ -125,6 +125,7 @@ $(document).ready(function() {
 						
 					$.post("/php/settingsajax.php", {user:chars, username:usernameval, currentpass:currentpass, newpass:newpass, newpass2:newpass2, threadcheck:threadcheck, commentcheck:commentcheck},
 						function(result) {
+							alert(result);
 						if(result == 1) {
 							$("#notification-bar p").html("Success. Redirecting to homepage...").removeClass("error").addClass("available");
 							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(1000).queue(function() {

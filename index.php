@@ -39,7 +39,7 @@ else {
         <li><a href='#tab4'>Recent Comments</a></li>
     </ul>
     <div id="arrow-top"><img src="images/arrow-up.png" alt="arrow" width="15" height="15"/></div>
-    <div id="tabs-horizontal-float">
+    <div class="float-left">
         <div id='tab1'>
              <?php
                 //top grumbles

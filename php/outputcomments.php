@@ -83,7 +83,7 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 			}
 			echo '</div>';
 			echo '</div>';
-			echo '<div class="replies">';
+			echo '<div class="replies rounded-corners-small">';
 			if($loggedin && $row3[0] > 2) {
 				if(!$comments) {
 				echo '<div class="view-all-replies" data-id="' . $row["status_id"] . '"><p>View All Replies (';

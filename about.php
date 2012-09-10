@@ -16,7 +16,7 @@ $validation = true;
     <div id="about-right">
     	<h2>Have something to Grumble about?</h2>
         <p>Start your sign up below and start Grumbling.</p>
-        <div id="login-table-about">	
+        <div id="login-table-about" class="rounded-corners-large content-padding">	
             <form method='post' action='/create-account' name='userForm'>
             <ul>
 	            <li>

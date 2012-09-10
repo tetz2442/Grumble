@@ -32,7 +32,7 @@
         <p>Start new Grumble categories and inspire an action for change or simply Grumble about an issue that has been bothering you.</p>
         <p>Welcome to Grumble!</p>
     </div>
-    <div id="create-account-table">	
+    <div id="create-account-table" class="rounded-corners-large content-padding">	
         <form method='post' action='/php/transact-user.php' onsubmit="return checkForm(this)" name='userForm'>
         <table>
         <tr>
