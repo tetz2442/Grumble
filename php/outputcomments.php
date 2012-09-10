@@ -6,7 +6,7 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 			date_default_timezone_set($_SESSION["timezone"]);
 		}
 
-		$sql = "SELECT sg.status_id, sg.status_text, ug.username, DATE_FORMAT(sg.date_submitted, '%b %e, %Y %l:%i %p') AS date_submitted, " . 
+		$sql = "SELECT sg.status_id, sg.status_text, ug.username, sg.date_submitted, " . 
 			"ug.user_id, ug.username, COUNT(user_like_id) AS votes_up_count FROM status_grumble AS sg " . 
 			"LEFT OUTER JOIN user_likes_grumble AS vg ON sg.status_id = vg.status_id " .
 			"LEFT OUTER JOIN users_grumble AS ug ON " .
@@ -29,10 +29,17 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 					echo '<div class="comment-header">';
 						echo '<a href="/profile/' . $row["username"] . '" data-id="' . $row["status_id"] . '" class="username" title="Visit profile"><strong>' . $row["username"] . '</strong></a>';
 						if (isset($_SESSION["timezone"])) {
-							echo '<span class="comment-time" title="' . $row["date_submitted"] . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($row["date_submitted"]) . '</a></span>';
+							$newtime = new DateTime($row["date_submitted"] . " UTC");
+							$newtime->setTimezone(new DateTimeZone($_SESSION["timezone"]));
+							$formatted_date = date_format($newtime, "M d, Y g:iA");
+							//Sep 10, 2012 1:35 PM
+							//echo strtotime($formatted_date);
+							echo '<span class="comment-time" title="' . $formatted_date . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($formatted_date) . '</a></span>';
 						}
 						else {
-							echo '<span class="comment-time" title="' . $row["date_submitted"] . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($row["date_submitted"]) . '</a></span>';
+							$newtime = new DateTime($row["date_submitted"] . " " . $_SESSION["time"]);
+							$formatted_date = date_format($newtime, "M d, Y g:iA");
+							echo '<span class="comment-time" title="' . $formatted_date . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($formatted_date) . '</a></span>';
 						}
 					echo '</div>';
 					echo '<div class="comment-text-holder">';

@@ -23,7 +23,7 @@ if(isset($_COOKIE["user_grumble"]) && !isset($_SESSION["user_id"])) {
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link type="text/css" href="/css/styles.css" rel="stylesheet" media="all">
         <noscript>
-        <meta http-equiv="Refresh" content="0;url=<?php echo "http://" . $_SERVER["HTTP_HOST"] . "/"; ?>noscript.html">
+        <meta http-equiv="Refresh" content="0;url=<?php echo "/"; ?>noscript.php">
     </noscript>
 <title>Grumble |
 <?php
@@ -67,6 +67,9 @@ else if(basename($_SERVER['PHP_SELF']) == "contact.php") {
 else if(basename($_SERVER['PHP_SELF']) == "how-it-works.php") {
 	echo " How it works";
 }
+else if(basename($_SERVER['PHP_SELF']) == "noscript.php") {
+	echo " JavaScript not enabled";
+}
 else {
 	echo " Grumble for you. Grumble for change.";	
 }
@@ -94,6 +97,9 @@ else if(basename($_SERVER['PHP_SELF']) == "login.php") {
 else if(basename($_SERVER['PHP_SELF']) == "contact.php") {
 	echo "Contact Grumble. Use this page to suggest a feature, report a bug, or just send us a message. We will get back to you as soon as possible.";
 }
+else if(basename($_SERVER['PHP_SELF']) == "noscript.php") {
+	echo "You must enable your JavaScript to be able to have the best viewing experience on Grumble.";
+}
 else {
 	echo "Grumble is a place where you can discuss the topics that you feel are important and need attention. It's simple. Grumble for you. Grumble for change.";
 }
@@ -103,6 +109,35 @@ else {
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html.js"></script>
     <![endif]-->
 <link rel="Shortcut Icon" href="/favicon.ico">
+<?php //javascript files?>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script>!window.jQuery && document.write('<script src="/javascript/jquery-1.8.0.min"><\/script>')</script>
+<?php
+if(!isset($_SESSION["user_id"])) {
+?>
+<script type="text/javascript">
+        if("<?php echo $_SESSION["time"]; ?>".length==0){
+            var visitortime = new Date();
+            var visitortimezone = "GMT " + -visitortime.getTimezoneOffset()/60;
+            $.post("/php/timezoneset.php",{time:visitortimezone}, 
+            	function(result) {
+            		location.reload();
+            	});
+        }
+</script>
+<?php } ?>
+<script type="text/javascript" src="/javascript/script.js"></script>
+<?php
+if($validation == true) {
+ echo '<script type="text/javascript" src="/javascript/formValidation.js"></script>';	
+}
+if($contactvalidation == true) {
+ echo '<script type="text/javascript" src="/javascript/contactvalidation.js"></script>';	
+}
+if($settings == true) {
+ echo '<script type="text/javascript" src="/javascript/settingsvalidation.js"></script>';	
+}
+?>
 </head>
 <body>
 <?php
@@ -110,5 +145,10 @@ require_once "usernavigation.php";
 $validation = false;
 $contactvalidation = false;
 $grumble = false;
+if(basename($_SERVER['PHP_SELF']) == "noscript.php") {
+	echo '<div id="maincolumn" style="display:block;">';
+}
+else {
+	echo '<div id="maincolumn">';
+}
 ?>
-<div id="maincolumn">

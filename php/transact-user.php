@@ -123,7 +123,7 @@
 						$hashed_password = crypt($pass1, $salt) . $salt;
 						
 						$sql = "INSERT INTO users_grumble(username, user_firstname, user_lastname, user_password, user_salt, user_email, user_create_date, user_timezone) " . 
-							"VALUES('" . $username . "','" . $firstname . "','" . $lastname . "','" . $hashed_password . "','" . $salt . "','" . $email . "','" . date("Y-m-d H:i:s", time()) . "','" . $timezone . "')";
+							"VALUES('" . $username . "','" . $firstname . "','" . $lastname . "','" . $hashed_password . "','" . $salt . "','" . $email . "',UTC_TIMESTAMP(),'" . $timezone . "')";
 						mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
 						
 						$id = mysql_insert_id();
@@ -246,6 +246,8 @@
 					$hashed_password = crypt($password, $salt) . $salt;
 					
 					$sql = "UPDATE users_grumble SET user_password='" . $hashed_password . "', user_salt='" . $salt . "' WHERE user_id = " . intval($row["user_id"]);
+					mysql_query($sql, $conn) or die("Could not update your user account: " . mysql_error());
+					$sql = "DELETE FROM temp_password_grumble WHERE user_email = '" . $email . "'";
 					mysql_query($sql, $conn) or die("Could not update your user account: " . mysql_error());
 					
 					redirect("../?login=1");

@@ -100,7 +100,7 @@
 							$sql = "INSERT INTO sub_category_grumble " .
 								"(category_id, sub_category_name, sub_category_description, sub_category_created, sub_category_url, user_id) " .
 								"VALUES (" . $category . ",'" . $grumble . 
-								"','" . $description . "','" . date("Y-m-d H:i:s", time()) . "','" . $seo . "'," . $_SESSION["user_id"] . ")";
+								"','" . $description . "',UTC_TIMESTAMP(),'" . $seo . "'," . $_SESSION["user_id"] . ")";
 							mysql_query($sql, $conn) or die("Could not submit thread: " . mysql_error());
 							$id = mysql_insert_id();
 							
