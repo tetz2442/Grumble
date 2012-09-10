@@ -223,14 +223,14 @@ $(document).ready(function() {
 	});
 	
 	//checks if the submit comment button has been clicked
-	$("div").on("click", ".quick-reply-button", function() {
+	$("body").on("click", ".quick-reply-button", function() {
 		var $element = $(this);
 		var $commentText = $(this).parents(".reply-padding").find(".quick-reply-input").val();
 		var $commentholder = $(this).parents(".comment-holder");
 		var id = $commentholder.find(".replies-view").attr("data-id");
 		var statususername = $commentholder.find(".username:first").text();
 		if($commentText == "") {
-			$("#notification-bar p").html("Comment cannot be empty.").addClass("error").removeClass("available");
+			$("#notification-bar p").html("Reply cannot be empty.").addClass("error").removeClass("available");
 			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 		}
 		else if(charLengthReply < 0){
