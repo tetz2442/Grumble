@@ -1414,7 +1414,3 @@ a.button { outline: 0 }
 }
 .button.orange { background-color: #FF5C00; }
 .button.orange:hover, .button.orange:active { background-color: #FF782F; }​
-
-.fb_like {
-	margin-top:-9px;	
-}
