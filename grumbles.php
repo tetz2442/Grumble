@@ -1,29 +1,29 @@
 <?php
 require_once "php/conn.php";
-require_once "php/http.php";
 require_once "php/header.php";
 require_once "php/containerStatus.php";
 require_once "php/timeago.php";
 require_once "php/timer.php";
 require_once "php/outputcomments.php";
-//require_once "php/grumbleOfTheDay.php";
 
 $grumble = true;
-$exist = true;
-if(isset($_GET["subcat"])) {
+$exist = false;
+if(isset($_GET["subcat"]) && is_numeric($_GET["subcat"])) {
+    $subcat = mysql_real_escape_string($_GET["subcat"]);
+
 	$sql = "SELECT status_id FROM status_grumble " .
-		"WHERE sub_category_id = " . mysql_real_escape_string($_GET["subcat"]) . 
+		"WHERE sub_category_id = " . $subcat . 
 		" ORDER BY status_id DESC LIMIT 10";
 	$result = mysql_query($sql, $conn);
 	
 	$sql = "SELECT scg.sub_category_id, scg.sub_category_name, scg.grumble_number, scg.sub_category_description, scg.sub_category_url, cg.category_name, cg.category_id, cg.category_url, ug.username FROM sub_category_grumble AS scg " .
 		"LEFT OUTER JOIN categories_grumble AS cg ON scg.category_id = cg.category_id " .
 		"LEFT OUTER JOIN users_grumble AS ug ON scg.user_id = ug.user_id " .
-		"WHERE sub_category_id = " . mysql_real_escape_string($_GET["subcat"]) . " LIMIT 0,1";
+		"WHERE sub_category_id = " . $subcat . " LIMIT 0,1";
 	$result2 = mysql_query($sql, $conn);
 	
-	if(mysql_num_rows($result2) == 0)
-		$exist = false;
+	if(mysql_num_rows($result2) != 0)
+		$exist = true;
 }
 
 if($exist) {
@@ -37,26 +37,12 @@ if($exist) {
                 <p id="sub-category-desc"><?php echo stripslashes($row["sub_category_description"]);?></p>
             </div>
             <div id="share-category">
-            <?php
-            $new_url = "http://".$_SERVER['HTTP_HOST']. "/" . $row["category_url"] . "/" . $row["sub_category_url"] . "/" . $row["sub_category_id"];
-            ?>
+                <?php
+                $new_url = "http://".$_SERVER['HTTP_HOST']. "/" . $row["category_url"] . "/" . $row["sub_category_url"] . "/" . $row["sub_category_id"];
+                ?>
                 <div class="g-plusone" data-href="<?php echo $new_url;?>" data-size="medium"></div>
                 <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $new_url;?>" data-via="grumbleonline" data-text="Come check out <?php echo $row["sub_category_name"];?>" data-related="grumbleonline" data-hashtags="grumble">Tweet</a>
                 <div class="fb-like" data-href="<?php echo $new_url;?>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-action="like"></div>
-                <?php
-                //different button for logged in users
-                /*if(isset($_SESSION["username"])) {
-                ?>
-                
-                <?php
-				<button class="push_button orange compose-gumble" id="open-quick-compose" title="Compose Grumble">Compose New Grumble</button>
-                }
-                else {
-                ?>
-                <?php
-				<button class="push_button orange dropdown-shortlink compose-grumble" title="Compose Grumble">Compose New Grumble</button>
-                }*/
-                ?>
             </div>
         </div>
     </div>
@@ -65,8 +51,6 @@ if($exist) {
     if(mysql_num_rows($result) == 0) {
         echo '<div id="comments-left">';
         if(isset($_SESSION["username"])) {
-            //grumbleOfTheDay();
-            //require_once "php/lightbox.php";
 			require_once "php/notificationbar.php";
 			?>
             <div id="grumble-comment">
@@ -82,19 +66,17 @@ if($exist) {
             </div>
             <?php
         }
-        echo "<p class='text-align-center content-padding'><b>There are currently no comments to view.</b></p>";	
+        echo "<p class='text-align-center content-padding'>There are currently no comments to view.</p>";	
         echo '</div>';
     }
     else {
-        echo '<div id="comments-left">';
         ?>
-        <div id="comments-left-header">
-            <h3 <?php if($row["grumble_number"] > 10) echo 'title="Number of total grumbles"';?>>Comments<?php if($row["grumble_number"] > 10) echo "(<span>" . $row["grumble_number"] . "</span>)";?></h3>
-        </div>
+        <div id="comments-left">
+            <div id="comments-left-header">
+                <h3 <?php if($row["grumble_number"] > 10) echo 'title="Number of total grumbles"';?>Comments<?php if($row["grumble_number"] > 10) echo "(<span>" . $row["grumble_number"] . "</span>)";?></h3>
+            </div>
         <?php
         if(isset($_SESSION["username"])) {
-            //grumbleOfTheDay();
-           // require_once "php/lightbox.php";
 			require_once "php/notificationbar.php";
 			?>
             <div id="grumble-comment">
@@ -129,7 +111,7 @@ if($exist) {
 //subcat doesnt exist
 else {
 	?>
-    <div class="content-padding"><p class="text-align-center"><br/><b>This Grumble doesn't exist. Please check your URL.</b></p></div>
+    <div class="content-padding"><p class="text-align-center">This Grumble doesn't exist. Please check your URL.</p></div>
     <?php
 	require_once "php/footer.php"; 
 }

@@ -491,7 +491,7 @@ html { overflow-y: scroll; }
 }
 .view-all-replies:hover {
 	cursor:pointer;	
-	background-color:#CCC;
+	background-color:#F8D0AB;
 }
 .replies-grumble {
 	float:left;	
