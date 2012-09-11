@@ -76,7 +76,7 @@ $(document).ready(function() {
 		var $commentholder = $element.parents(".comment-holder");
 		if($element.text() == "Delete") {
 			var id = $commentholder.find(".username").attr("data-id");
-			if(confirm("Are you sure you want to delete this Comment? **All votes and replies will be deleted also**")) {
+			if(confirm("Are you sure you want to delete this comment? **All votes and replies will be deleted also**")) {
 				$commentholder.find(".gif-loader-replies").show();
 				$.post("/php/commentajax.php", {commentid:id, action:"Delete"},
 				function(result) {
@@ -84,7 +84,7 @@ $(document).ready(function() {
 					if(result == 1) {
 						$("#notification-bar p").html("Comment deleted.").removeClass("error").addClass("available");
 						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
-						$commentholder.remove();
+						$element.parents(".comment-holder").remove();
 					}
 					else {
 						$("#notification-bar p").html("Something went wrong. Could not delete.").removeClass("available").addClass("error");
@@ -661,7 +661,7 @@ $(document).ready(function() {
 								$("#comments-left-header span").html(grumblenumber);
 							}
 			
-							$("#quick-compose-textarea").val("").css({"height":"20px","background-color":"#f0f0f0"});
+							$("#quick-compose-textarea").val("").css({"height":"20px","background-color":"#FFF9E8"});
 							$("#grumble-comment div").hide();
 						}
 				});

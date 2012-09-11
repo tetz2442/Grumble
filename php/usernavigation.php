@@ -45,12 +45,14 @@
             echo '</ul>';
         }
         else {
-            echo '<ul><span class="dropdown-shortlink dropdown-login" title="Login/Register">Login<img src="/images/arrow.png" alt="arrow" class="login-drop-image" width="10" height="10"/></span>';
-            echo '<li id="dropdown-form-login" class="rounded-corners-medium"><form action="/php/transact-user.php" method="post">';
+            echo '<ul>';
+            echo '<li class="dropdown-login">';
+            echo '<span class="dropdown-shortlink" title="Login/Register">Login<img src="/images/arrow.png" alt="arrow" class="login-drop-image" width="10" height="10"/></span>';
+            echo '<form action="/php/transact-user.php" method="post">';
 			$token = md5(uniqid(rand(), true));
 			$_SESSION['token'] = $token;
             ?>
-                    <ul>
+                    <ul id="dropdown-form-login" class="rounded-corners-medium">
                         <li id="dropdown-arrow"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>
                         <li>
                             <label for="email">Email</label>
