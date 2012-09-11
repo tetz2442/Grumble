@@ -670,7 +670,7 @@ $(document).ready(function() {
 	});
 	
 	$("button").removeAttr("disabled");
-	
+
 	$("#start-new-grumble").mousedown(function() {
 		$("#lightbox-container").fadeIn(100);
 		$("#grumble-lightbox").fadeIn(100, function() {
