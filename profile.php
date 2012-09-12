@@ -56,7 +56,7 @@ else {
 			}
 			else {
 				echo " <br/>\n";
-				echo "<p class='text-align-center content-padding'><b>There are currently no comments to view.</b></p>";	
+				echo "<p class='text-align-center content-padding'>There are currently no comments to view.</p>";	
 				echo '</div>';
 			}
 		}
@@ -76,7 +76,7 @@ else {
 			}
 		}
 		else {
-			echo '<p class="text-align-center content-padding"><b>No grumbles to view.</b></p>';	
+			echo '<p class="text-align-center content-padding">No grumbles to view.</p>';	
 		}
 	?>
     </div>
