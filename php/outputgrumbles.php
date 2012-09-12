@@ -22,7 +22,7 @@ function outputGrumbles($grumble, $home = false) {
 				echo '<div class="grumble-comment-number">';
 					if($home)
 						echo '<p><a href="category/' . $row["category_url"] . '" class="colored-link-1 grumble-cat-name" title="' . $row["category_name"] . '">' . $row["category_name"] . '</a></p>';
-					echo '<p class="grumble-comment-font" title="' . $row["grumble_number"] . ' Grumble(s) on this thread">'; 
+					echo '<p class="grumble-comment-font" title="' . $row["grumble_number"] . ' comments(s) on this Grumble">'; 
 							echo $row["grumble_number"];
 					echo '</p>';
 					echo '</div>';

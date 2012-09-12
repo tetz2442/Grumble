@@ -16,7 +16,7 @@ if(isset($_GET["user"]) && isset($_GET["s"])) {
 	$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
 	
 	if(mysql_num_rows($result) == 0) {
-		echo '<div class="content-padding"><p class="text-align-center content-padding"><b>This comment does not exist. Please check your URL.</b></p></div>';
+		echo '<div class="content-padding"><p class="text-align-center content-padding">This comment does not exist. Please check your URL.</p></div>';
 	}
 	else {
 		$row = mysql_fetch_array($result);
@@ -47,7 +47,7 @@ if(isset($_GET["user"]) && isset($_GET["s"])) {
 }
 else {
 ?>
-<div class="content-padding"><p class="text-align-center content-padding"><b>This comment does not exist. Please check your URL.</b></p></div>
+<div class="content-padding"><p class="text-align-center content-padding">This comment does not exist. Please check your URL.</p></div>
 <?php
 }
 ?>

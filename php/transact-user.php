@@ -60,7 +60,7 @@
 						setcookie("user_grumble", $cookie_text, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
 					}
 
-					if(strpos($refer, "login.php") || strpos($refer, "index.php") || strpos($refer, "create-account.php"))
+					if(strpos($refer, "login.php") || strpos($refer, "index.php") || strpos($refer, "create-account.php") || strpos($refer, "forgot-password.php")))
 						redirect("../");
 					else
 						redirect($refer);
@@ -98,13 +98,14 @@
 					
 					$username = mysql_real_escape_string($_POST["username"]);
 					$username = str_replace(" ", "", $username);
+					$pass1 = mysql_real_escape_string($_POST["password"]);
 					//validate username further
-					if(strlen($username) >= 4 && strlen($username) <= 15 && !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬-]/', $username)) {
+					if(strlen($username) >= 4 && strlen($username) <= 15 && !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬-]/', $username)
+						&& preg_match('/[A-Z0-9]/', $pass1)) {
 
 						$firstname = mysql_real_escape_string($_POST["firstname"]);
 						$lastname = mysql_real_escape_string($_POST["lastname"]);
 						
-						$pass1 = mysql_real_escape_string($_POST["password"]);
 						$pass2 = mysql_real_escape_string($_POST["password2"]);
 						$email = mysql_real_escape_string($_POST["email"]);
 						$timezone = mysql_real_escape_string($_POST["tz"]);
@@ -218,7 +219,9 @@
 		
 		case "Reset Password" :
 			if(isset($_POST["password"]) and strlen($_POST["password"]) > 5 and isset($_POST["password2"])
-				and isset($_POST["email"]) and $_POST["password"] == $_POST["password2"] && isset($_POST["hash"]) && $_SERVER['REQUEST_METHOD'] == "POST" && (!empty($_POST['token']) || $_POST['token'] == $_SESSION['token3'])) {		
+				and isset($_POST["email"]) and $_POST["password"] == $_POST["password2"] && isset($_POST["hash"]) 
+				&& $_SERVER['REQUEST_METHOD'] == "POST" && (!empty($_POST['token']) || $_POST['token'] == $_SESSION['token3'])
+				&& preg_match('/[A-Z0-9]/', $_POST["password"])) {		
 				// Unset the token, so that it cannot be used again.
 				unset($_SESSION['token3']);
 					
@@ -250,7 +253,7 @@
 					$sql = "DELETE FROM temp_password_grumble WHERE user_email = '" . $email . "'";
 					mysql_query($sql, $conn) or die("Could not update your user account: " . mysql_error());
 					
-					redirect("../?login=1");
+					redirect("../login?email=" . $email);
 				}
 			}
 			redirect("../login");

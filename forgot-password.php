@@ -13,10 +13,10 @@ $_SESSION['token3'] = $token;
 			<h1>Change password by email</h1>
 			<?php
 				if(isset($_GET["error"]) && $_GET["error"] == 1) {
-					echo '<p class="error content-padding"><i>Could not send email reminder</i></p>';
+					echo '<p class="error content-padding">Could not send email reminder</p>';
 				}
 				else if(isset($_GET["success"]) && $_GET["success"] == 1) {
-					echo '<p class="available content-padding"><i>Email reminder has been sent successfully.</i></p>';
+					echo '<p class="available content-padding">Email reminder has been sent successfully.</p>';
 				}
 				
 				if(!isset($_GET["hash"]) && !isset($_GET["email"])) {
@@ -67,5 +67,6 @@ $_SESSION['token3'] = $token;
 		}
 		//end forget-pass-holder and content-padding divs
 echo '</div></div>';
+require_once "php/notificationbar.php"; 
 require_once "php/footer.php"; 
 ?>

@@ -3,7 +3,6 @@
 	require_once "php/http.php";
 	require_once "php/header.php";
 	require_once "php/containerWide.php";
-	$validation = true;
 	$previousFill = false;
 	$name =  array("", "");
 	if(isset($_POST["fullname"]) && isset($_POST["email"])) {
@@ -17,7 +16,7 @@
 		if(isset($_GET["user_created"]) && $_GET["user_created"] == 1) {
 ?>
 <div id="account-create-container">
-	<p class="content-padding text-align-center"><b>An email has been sent to your entered email address. Before you can start using Grumble, you must verify this email.</b></p>
+	<p class="content-padding text-align-center">An email has been sent to your entered email address. Before you can start using Grumble, you must verify this email.</p>
 </div>
 <?php
 		}

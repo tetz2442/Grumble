@@ -27,6 +27,7 @@ if(isset($_COOKIE["user_grumble"]) && !isset($_SESSION["user_id"])) {
     </noscript>
 <title>Grumble |
 <?php
+$filename = basename($_SERVER['PHP_SELF']);
 //dynamically change title
 if(isset($_GET["subcat"])) {
 	$sql = "SELECT sub_category_name, sub_category_description FROM sub_category_grumble " .
@@ -46,28 +47,28 @@ else if(isset($_GET["cat"])) {
 else if(isset($_GET["id"])) {
 	echo " " . strip_tags($_GET["id"]);
 }
-else if(basename($_SERVER['PHP_SELF']) == "create-account.php") {
+else if($filename == "create-account.php") {
 	echo " Create Account";
 }
-else if(basename($_SERVER['PHP_SELF']) == "about.php") {
+else if($filename == "about.php") {
 	echo " About";
 }
-else if(basename($_SERVER['PHP_SELF']) == "privacy.php") {
+else if($filename == "privacy.php") {
 	echo " Privacy Policy";
 }
-else if(basename($_SERVER['PHP_SELF']) == "terms-of-service.php") {
+else if($filename == "terms-of-service.php") {
 	echo " Terms of Service";
 }
-else if(basename($_SERVER['PHP_SELF']) == "login.php") {
+else if($filename == "login.php") {
 	echo " Login";
 }
-else if(basename($_SERVER['PHP_SELF']) == "contact.php") {
+else if($filename == "contact.php") {
 	echo " Contact Us";
 }
-else if(basename($_SERVER['PHP_SELF']) == "how-it-works.php") {
+else if($filename == "how-it-works.php") {
 	echo " How it works";
 }
-else if(basename($_SERVER['PHP_SELF']) == "noscript.php") {
+else if($filename == "noscript.php") {
 	echo " JavaScript not enabled";
 }
 else {
@@ -82,22 +83,22 @@ if(isset($_GET["subcat"])) {
 	else
 		echo stripslashes($row["sub_category_description"]) . " | Grumble is a place where you can discuss the topics that you feel are important and need attention. It's simple. Grumble for you. Grumble for change.";
 }
-else if(basename($_SERVER['PHP_SELF']) == "create-account.php") {
+else if($filename == "create-account.php") {
 	echo "Create Account an account on Grumble to access its many features. Join today and inspire an action for change or simply get something off of your chest. ";
 }
-else if(basename($_SERVER['PHP_SELF']) == "privacy.php") {
+else if($filename == "privacy.php") {
 	echo "What you say on Grumble will be accessible by anyone with an Internet connection. Read more of this document to find out more.";
 }
-else if(basename($_SERVER['PHP_SELF']) == "terms-of-service.php") {
+else if($filename == "terms-of-service.php") {
 	echo "Terms of Service.  These Terms of Service explain how Grumble works. Read more of this document for more information.";
 }
-else if(basename($_SERVER['PHP_SELF']) == "login.php") {
+else if($filename == "login.php") {
 	echo "Login in to Grumble with your user account. ";
 }
-else if(basename($_SERVER['PHP_SELF']) == "contact.php") {
+else if($filename == "contact.php") {
 	echo "Contact Grumble. Use this page to suggest a feature, report a bug, or just send us a message. We will get back to you as soon as possible.";
 }
-else if(basename($_SERVER['PHP_SELF']) == "noscript.php") {
+else if($filename == "noscript.php") {
 	echo "You must enable your JavaScript to be able to have the best viewing experience on Grumble.";
 }
 else {
@@ -111,12 +112,9 @@ else {
 <link rel="Shortcut Icon" href="/favicon.ico">
 <?php //javascript files?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-<script>!window.jQuery && document.write('<script src="/javascript/jquery-1.8.0.min"><\/script>')</script>
-<?php
-if(!isset($_SESSION["user_id"])) {
-?>
 <script type="text/javascript">
-        if("<?php echo $_SESSION["time"]; ?>".length==0){
+!window.jQuery && document.write('<script src="/javascript/jquery-1.8.0.min"><\/script>');
+if("<?php echo $_SESSION["time"]; ?>".length==0){
             var visitortime = new Date();
             var visitortimezone = "GMT " + -visitortime.getTimezoneOffset()/60;
             $.post("/php/timezoneset.php",{time:visitortimezone}, 
@@ -125,16 +123,15 @@ if(!isset($_SESSION["user_id"])) {
             	});
         }
 </script>
-<?php } ?>
 <script type="text/javascript" src="/javascript/script.js"></script>
 <?php
-if($validation == true) {
+if($filename == "create-account.php") {
  echo '<script type="text/javascript" src="/javascript/formValidation.js"></script>';	
 }
-if($contactvalidation == true) {
+if($filename == "contact.php") {
  echo '<script type="text/javascript" src="/javascript/contactvalidation.js"></script>';	
 }
-if($settings == true) {
+if($filename == "profile.php" || $filename == "forgot-password.php") {
  echo '<script type="text/javascript" src="/javascript/settingsvalidation.js"></script>';	
 }
 ?>
@@ -142,10 +139,7 @@ if($settings == true) {
 <body>
 <?php
 require_once "usernavigation.php";
-$validation = false;
-$contactvalidation = false;
-$grumble = false;
-if(basename($_SERVER['PHP_SELF']) == "noscript.php") {
+if($filename == "noscript.php") {
 	echo '<div id="maincolumn" style="display:block;">';
 }
 else {

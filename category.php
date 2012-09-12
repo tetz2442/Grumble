@@ -1,6 +1,5 @@
 <?php
 require_once "php/conn.php";
-require_once "php/http.php";
 require_once "php/outputgrumbles.php";
 require_once "php/header.php";
 require_once "php/containerStatus.php";
@@ -13,7 +12,7 @@ $row = mysql_fetch_array($result);
 
 if(mysql_num_rows($result) == 0) {
 ?>
-<div class="content-padding"><p class="text-align-center"><br/><b>This category doesn't exist. Please check your URL.</b></p></div>
+<div class="content-padding"><p class="text-align-center">This category doesn't exist. Please check your URL.</p></div>
 <?php
 }
 else {
@@ -25,11 +24,6 @@ else {
 	 	if(isset($_SESSION["user_id"])) {
 	 ?>
      <button class="push_button orange large" id="start-new-grumble">New Grumble</button>
-     <?php
-		}
-		else {
-	 ?>
-     <button class="push_button orange large dropdown-shortlink">New Grumble</button>
      <?php
 		}
 	 ?>
@@ -54,7 +48,7 @@ else {
 				}
 			}
 			else {
-				echo '<p class="content-padding"><b>No Grumbles to view.</b></p>';	
+				echo '<p class="content-padding">No Grumbles to view.</p>';	
 			}
 		?>
     </div>
@@ -71,7 +65,7 @@ else {
 			}
 		}
 		else {
-			echo '<p class="content-padding"><b>No Grumbles to view.</b></p>';	
+			echo '<p class="content-padding">No Grumbles to view.</p>';	
 		}
 	?>
     </div>
