@@ -2,7 +2,6 @@
 require_once "php/conn.php";
 require_once "php/header.php";
 require_once "php/containerWide.php";
-$contactvalidation = true;
 ?>
 <div id="contact-page-container">
 	<div class="text-align-center">
@@ -13,7 +12,7 @@ $contactvalidation = true;
     <?php
 		if(isset($_SESSION["username"])) {
 	?>
-        <table width="100%">
+        <table>
             <tr>
                 <td colspan="2"><textarea id="contact-textarea" class="textArea" title="Message" rows="10" placeholder="Message"></textarea></td>
             </tr>

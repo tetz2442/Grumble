@@ -55,7 +55,7 @@ else {
                     }
                 }
                 else {
-                    echo '<p class="content-padding"><b>No top grumbles at this time.</b></p>';	
+                    echo '<p class="content-padding">No top grumbles at this time.</p>';	
                 }
             ?>
         </div>
@@ -72,7 +72,7 @@ else {
                 }
             }
             else {
-                echo '<p class="content-padding"><b>No recent grumbles.</b></p>';	
+                echo '<p class="content-padding">No recent grumbles to view.</p>';	
             }
         ?>
         </div>
@@ -91,7 +91,7 @@ else {
                     }
                 }
                 else {
-                    echo '<p class="content-padding"><b>No top comments at this time.</b></p>';	
+                    echo '<p class="content-padding">No top comments at this time.</p>';	
                 }
             ?>
         </div>
@@ -108,7 +108,7 @@ else {
                 }
             }
             else {
-                echo '<p class="content-padding"><b>No comments.</b></p>';	
+                echo '<p class="content-padding">No recent comments to view.</p>';	
             }
         ?>
         </div>

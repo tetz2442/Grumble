@@ -14,7 +14,7 @@ $result = mysql_query($sql, $conn);
 $row = mysql_fetch_array($result);
 if(mysql_num_rows($result) == 0) {
 ?>
-<div class="content-padding"><p class="text-align-center content-padding"><b>This user does not exist</b></p></div>
+<div class="content-padding"><p class="text-align-center content-padding">This user does not exist</p></div>
 <?php		
 }
 else {

@@ -95,7 +95,7 @@ $(document).ready(function() {
 	
 	$("#pass-change2").keyup(function () {
 		var element = $(this);
-		if(checkPasswordMatch() && checkLength($("#pass-change"), 5)) {
+		if(checkPasswordMatch($("#pass-change"),$("#pass-change2")) && checkLength($("#pass-change"), 5)) {
 			$(element).parent().find(".validation-settings:eq(1)").attr("src","/images/tick-circle_1.png").fadeIn(250);
 			passwords = true;
 		}
@@ -107,7 +107,7 @@ $(document).ready(function() {
 		hideBar();
 	});
 			
-	$(".button").click(function() {
+	$(".button").click(function(event) {
 		if($(this).text() == "Save") {
 			var chars = $('#username-change-input').val();
 			var currentpass = $("#pass-current").val();
@@ -125,7 +125,6 @@ $(document).ready(function() {
 						
 					$.post("/php/settingsajax.php", {user:chars, username:usernameval, currentpass:currentpass, newpass:newpass, newpass2:newpass2, threadcheck:threadcheck, commentcheck:commentcheck},
 						function(result) {
-							alert(result);
 						if(result == 1) {
 							$("#notification-bar p").html("Success. Redirecting to homepage...").removeClass("error").addClass("available");
 							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(1000).queue(function() {
@@ -189,6 +188,11 @@ $(document).ready(function() {
 				$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 			}
 		}
+		else if ($(this).val() == "Reset Password") {
+			if(!passwords) {
+				event.preventDefault();
+			}
+		}
 	});
 	
 	$("#settings-dropdown").click(function () {
@@ -203,6 +207,48 @@ $(document).ready(function() {
 			$("#settings-holder").stop().animate({"top":"-500px"}, "normal");
 			$("#settings-background").stop().fadeOut("normal");
 		});
+	});
+
+	$("#pass-forg").keyup(function () {
+		var element = $(this);
+		if(!checkLength(element, 5)) {
+			$("#notification-bar p").html("Password is not long enough.").addClass("error").removeClass("available");
+			showBar();
+			passwords = false;
+		}
+		else if(!$(this).val().match(/[A-Z]/)) {
+			$("#notification-bar p").html("Password must contain a capital letter.").addClass("error").removeClass("available");
+			showBar();
+			passwords = false;
+		}
+		else if(!$(this).val().match(/[0-9]/)) {
+			$("#notification-bar p").html("Password must contain a number.").addClass("error").removeClass("available");
+			showBar();
+			passwords = false;
+		}
+		else {
+			$("#notification-bar p").html("Valid password.").removeClass("error").addClass("available");
+			showBar();
+			passwords = true;
+		}
+	}).focusout(function() {
+		hideBar();
+	});
+	
+	$("#pass-forg2").keyup(function () {
+		var element = $(this);
+		if(checkPasswordMatch($("#pass-forg"),$("#pass-forg2")) && checkLength(element, 5)) {
+			$("#notification-bar p").html("Passwords match.").removeClass("error").addClass("available");
+			showBar();
+			passwords = true;
+		}
+		else {
+			$("#notification-bar p").html("Passwords do not match.").addClass("error").removeClass("available");
+			showBar();
+			passwords = false;
+		}
+	}).focusout(function() {
+		hideBar();
 	});
 	
 	var cururl = window.location.href;
@@ -249,8 +295,8 @@ function checkSC(element) {
 	}
 }
 
-function checkPasswordMatch() {
-	if($("#pass-change").val() ==  $("#pass-change2").val() && $("#pass-change").val() != "" && $("#pass-change2").val() != "") {
+function checkPasswordMatch(field1, field2) {
+	if($(field1).val() ==  $(field2).val() && $(field1).val() != "" && $(field2).val() != "") {
 		return true;	
 	}
 	else {

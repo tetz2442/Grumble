@@ -2,7 +2,6 @@
 require_once "php/conn.php";
 require_once "php/header.php";
 require_once "php/containerWide.php";
-$validation = true;
 ?>
 <div id="account-create-container">
 	<div id="about-left">
