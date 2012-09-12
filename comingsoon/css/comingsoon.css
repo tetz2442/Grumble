@@ -164,14 +164,6 @@ html{overflow-y: scroll;}
   text-align:center;
   font-size:1.2em;
 }
-#social-icons {
-  margin: auto;
-  margin-top: 12px;
-}
-#social-icons img {
-  display: inline-block;
-  padding: 0 10px;
-}
 .timer-area {
 	text-align: center;
 	width:100%;	
@@ -280,4 +272,29 @@ ul#countdown li p.timeRefSeconds {
   text-align:center;
   color:#634328;
   padding-top:15px;
+}
+#social-icons {
+  margin: auto;
+  margin-top: 12px;
+}
+#social-icons img {
+  display: inline-block;
+  padding: 0 10px;
+}
+#social-icons img:hover {
+  -webkit-animation: cssAnimation 0.5s 1 ease;
+  -moz-animation: cssAnimation 0.5s 1 ease;
+  -o-animation: cssAnimation 0.5s 1 ease;
+}
+@-webkit-keyframes cssAnimation {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+@-moz-keyframes cssAnimation {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+@-o-keyframes cssAnimation {
+  from { -o-transform: rotate(0deg); }
+  to { -o-transform: rotate(360deg); }
 }
