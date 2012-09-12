@@ -19,7 +19,7 @@ else {
 ?>
 <div class="content-padding">
 <div id="cat-header">
-     <h1 rel="<?php echo $row["category_id"]; ?>"><?php echo $row["category_name"]; ?></h1>
+     <h1 data-id="<?php echo $row["category_id"]; ?>"><?php echo $row["category_name"]; ?></h1>
      <?php
 	 	if(isset($_SESSION["user_id"])) {
 	 ?>

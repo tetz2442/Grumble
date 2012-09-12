@@ -73,7 +73,7 @@ if($exist) {
         ?>
         <div id="comments-left">
             <div id="comments-left-header">
-                <h3 <?php if($row["grumble_number"] > 10) echo 'title="Number of total grumbles"';?>Comments<?php if($row["grumble_number"] > 10) echo "(<span>" . $row["grumble_number"] . "</span>)";?></h3>
+                <h3 title="Total number comments">Comments<?php if($row["grumble_number"] > 10) echo "(<span>" . $row["grumble_number"] . "</span>)";?></h3>
             </div>
         <?php
         if(isset($_SESSION["username"])) {

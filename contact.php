@@ -8,56 +8,48 @@ require_once "php/containerWide.php";
     	<h1>We want to hear from you.</h1>
         <p>Let us know what is on your mind; a question, a suggestion, whatever. We will respond as soon as we can.</p>
     </div>
-    <div id="contact-form">	
+    <div id="contact-form" class="rounded-corners-large">	
     <?php
 		if(isset($_SESSION["username"])) {
 	?>
-        <table>
-            <tr>
-                <td colspan="2"><textarea id="contact-textarea" class="textArea" title="Message" rows="10" placeholder="Message"></textarea></td>
-            </tr>
-            <tr>
-                <td>
-                    <select class="contact-dropdown rounded-corners">
-                        <option>Request Feature</option>
-                        <option>Report Bug</option>
-                        <option>Send Message</option>
-                    </select>
-                </td>
-                <td align="right" class="table-padding-top">
+        <ul>
+            <li>
+                <textarea id="contact-textarea" class="textArea" title="Message" rows="10" placeholder="Message"></textarea>
+            </li>
+            <li>
+                <select class="contact-dropdown rounded-corners">
+                    <option>Request Feature</option>
+                    <option>Report Bug</option>
+                    <option>Send Message</option>
+                </select>
                 <input type="hidden" id="contact-username" value="<?php echo $_SESSION["username"]; ?>"/>
                 <input type="submit" id="contact-send" class="push_button orange" name="action" value="Send Please!"/>
-                </td>
-            </tr>
-        </table>
+            </li>
+        </ul>
     <?php
 		}
 		else {
 	?>
-    <table>
-        <tr>
-            <td><input type="text" id="fullname-contact" class="textInput" name="fullname" maxlength="50" placeholder="Name"/></td>
-            <td rowspan="2" align="center" id="contact-error">Have an account? Make this easier and <a class="dropdown-shortlink" href="#">Sign in</a></td>
-        </tr>
-        <tr>
-            <td><input type="text" id="email-contact" class="textInput margin-top" name="email" maxlength="255" placeholder="Email"/></td>
-        </tr>
-        <tr>
-            <td colspan="2"><textarea id="contact-textarea" class="margin-top textArea" title="Message" rows="10" name="message" placeholder="Message"></textarea></td>
-        </tr>
-        <tr>
-        	<td>
-            	<select class="contact-dropdown rounded-corners">
-            		<option>Request Feature</option>
-                    <option>Report Bug</option>
-                    <option>Send Message</option>
-            	</select>
-            </td>
-            <td align="right" class="table-padding-top">
+    <ul>
+        <li>
+            <input type="text" id="fullname-contact" class="textInput" name="fullname" maxlength="50" placeholder="Name"/>
+            <p>Have an account? Make this easier and <a class="dropdown-shortlink colored-link-1">Sign in</a></p>
+        </li>
+        <li>
+            <input type="text" id="email-contact" class="textInput margin-top" name="email" maxlength="255" placeholder="Email"/>
+        </li>
+        <li>
+            <textarea id="contact-textarea" class="margin-top textArea" title="Message" rows="10" name="message" placeholder="Message"></textarea>
+        </li>
+        <li>
+        	<select class="contact-dropdown rounded-corners">
+        		<option>Request Feature</option>
+                <option>Report Bug</option>
+                <option>Send Message</option>
+        	</select>
             <input type="submit" id="contact-send" class="push_button orange" name="action" value="Send Please!"/>
-            </td>
-        </tr>
-        </table>
+        </li>
+    </ul>
     <?php
 		}
 	?>

@@ -20,7 +20,7 @@ require_once "php/containerWide.php";
             <ul>
 	            <li>
 	            	<label for="fullname">Full Name: (ex. John Doe)</label>
-	                <td><input type="text" id="fullname" class="textInput" name="fullname" maxlength="50"/></td>
+	                <input type="text" id="fullname" class="textInput" name="fullname" maxlength="50"/>
 	            </li>
 	            <li class="padding-top">
 	            	<label for="emails">Email Address:</label>

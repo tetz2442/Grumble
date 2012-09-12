@@ -1,47 +1,36 @@
 <div id="user-navigation">
 	<div id="nav-container">
-        	<ul id="navigation">
-                <li><a href="<?php echo "http://" . $_SERVER["HTTP_HOST"];?>">Home</a></li>
-                <li id="nav-category">Categories<img src="/images/arrow.png" alt="arrow" class="drop-image" width="10" height="10"/>
+    	<ul id="navigation">
+            <li><a href="<?php echo "http://" . $_SERVER["HTTP_HOST"];?>">Home</a></li>
+            <li id="nav-category">Categories<img src="/images/arrow.png" alt="arrow" class="drop-image" width="10" height="10"/>
                 <ul id="sub-nav" class="rounded-corners-medium">
+                    <li id="sub-nav-dropdown-arrow"><img src="/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/></li>
                 <?php
 					$sql = "SELECT category_id, category_name, category_url FROM categories_grumble ORDER BY category_name ASC";
 					$result = mysql_query($sql, $conn);
-					echo '<li id="sub-nav-dropdown-arrow"><img src="/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/></li>';
 					while($row = mysql_fetch_array($result)) {
 						echo '<li><a href="/category/' . $row["category_url"] . '">' . $row["category_name"] . '</a></li>';
 					}
 				?>
                 </ul>
-                </li>
-            </ul>
-            <?php
-                $loggedin = false;
-                //if $_SESSION['username'] is false, we know the user is not logged in
-                if(isset($_SESSION['username'])) {
-                    $loggedin = true;
-					date_default_timezone_set($_SESSION["timezone"]);
-                }
-                else {
-                    $loggedin = false;	
-                }
-            ?>
+            </li>
+        </ul>
         <a id="logo" href="<?php echo "http://" . $_SERVER["HTTP_HOST"]; ?>"><img src="/images/logo.png" height="51" width="275" alt="Grumble logo" title="Grumble home" onmouseover="this.src='/images/logo-hover.png'" onmouseout="this.src='/images/logo.png'"></a>
         <div id="user-info">
         <?php
         if(isset($_SESSION["username"])) {
             echo '<ul>';
-            echo '<li><span class="dropdown-login dropdown-shortlink">' . $_SESSION["username"] . '<img src="/images/arrow.png" alt="arrow" class="login-drop-image"/></span>';
-            echo '<ul id="dropdown-sub-nav" class="rounded-corners-medium">';
-            echo '<li id="dropdown-arrow-short"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
-            echo "<li><a href='/profile/" . $_SESSION["username"] . "'>Profile</a></li>";
-			echo '<li class="divider light"></li>';
-			echo "<li><a href='/contact'>Contact Us</a></li>";
-            echo '<li class="divider light"></li>';
-			echo "<li><a href='/profile/" . $_SESSION["username"] . "#settings' id='settings-dropdown'>Settings</a></li>";
-            echo "<li><a href='/php/transact-user.php?action=Logout'>Logout</a></li>";
-            echo '</ul>';
-            echo '</li>';
+                echo '<li><span class="dropdown-login dropdown-shortlink">' . $_SESSION["username"] . '<img src="/images/arrow.png" alt="arrow" class="login-drop-image"/></span>';
+                    echo '<ul id="dropdown-sub-nav" class="rounded-corners-medium">';
+                        echo '<li id="dropdown-arrow-short"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
+                        echo "<li><a href='/profile/" . $_SESSION["username"] . "'>Profile</a></li>";
+            			echo '<li class="divider light"></li>';
+            			echo "<li><a href='/contact'>Contact Us</a></li>";
+                        echo '<li class="divider light"></li>';
+            			echo "<li><a href='/profile/" . $_SESSION["username"] . "#settings' id='settings-dropdown'>Settings</a></li>";
+                        echo "<li><a href='/php/transact-user.php?action=Logout'>Logout</a></li>";
+                    echo '</ul>';
+                echo '</li>';
             echo '</ul>';
         }
         else {
@@ -56,11 +45,11 @@
                         <li id="dropdown-arrow"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>
                         <li>
                             <label for="email">Email</label>
-                            <input type="text" id="email" name="email" maxlength="255" class="input-user-nav textArea"/>
+                            <input type="text" id="email" name="email" maxlength="255" class="input-user-nav textInput"/>
                         </li>
                         <li class="padding-top">
                             <label for="password">Password</label>
-                            <input type="password" name="password" id="password" maxlength="50" class="input-user-nav textArea"/>
+                            <input type="password" name="password" id="password" maxlength="50" class="input-user-nav textInput"/>
                             <?php
 							$refer = "../" . basename($_SERVER['PHP_SELF']);
 							if($_SERVER['QUERY_STRING'] != "") {
