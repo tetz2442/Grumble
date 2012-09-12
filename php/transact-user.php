@@ -60,7 +60,7 @@
 						setcookie("user_grumble", $cookie_text, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
 					}
 
-					if(strpos($refer, "login.php") || strpos($refer, "index.php") || strpos($refer, "create-account.php") || strpos($refer, "forgot-password.php")))
+					if(strpos($refer, "login.php") || strpos($refer, "index.php") || strpos($refer, "create-account.php") || strpos($refer, "forgot-password.php"))
 						redirect("../");
 					else
 						redirect($refer);

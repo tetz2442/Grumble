@@ -164,6 +164,14 @@ html{overflow-y: scroll;}
   text-align:center;
   font-size:1.2em;
 }
+#social-icons {
+  margin: auto;
+  margin-top: 12px;
+}
+#social-icons img {
+  display: inline-block;
+  padding: 0 10px;
+}
 .timer-area {
 	text-align: center;
 	width:100%;	
@@ -265,16 +273,8 @@ ul#countdown li p.timeRefSeconds {
 }
 #footer-links{
   margin:auto;
-  overflow:auto;
-  width:210px;	
   padding:2px 0px 5px 2px;
-}
-#footer-links a{
-  float:left;	
-  padding:2px 5px 0px 2px;
-}
-#footer-links p{
-  float:left;	
+  text-align: center;
 }
 #footer-copyright{
   text-align:center;

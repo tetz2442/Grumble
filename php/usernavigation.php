@@ -31,7 +31,7 @@
         <?php
         if(isset($_SESSION["username"])) {
             echo '<ul>';
-            echo '<li class="dropdown-login"><span class="dropdown-shortlink">' . $_SESSION["username"] . '<img src="/images/arrow.png" alt="arrow" class="login-drop-image"/></span>';
+            echo '<li><span class="dropdown-login dropdown-shortlink">' . $_SESSION["username"] . '<img src="/images/arrow.png" alt="arrow" class="login-drop-image"/></span>';
             echo '<ul id="dropdown-sub-nav" class="rounded-corners-medium">';
             echo '<li id="dropdown-arrow-short"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
             echo "<li><a href='/profile/" . $_SESSION["username"] . "'>Profile</a></li>";

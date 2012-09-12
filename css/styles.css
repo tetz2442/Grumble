@@ -14,15 +14,12 @@ table {
     padding:0;
     border:0;
     outline:0;
-    /*font-size:100%;*/
     vertical-align:baseline;
     background:transparent;
 }
-
 h1, h2, h3, h4{
 	font-weight: normal;
 }
-
 body {
     line-height:1.1;
 	background-color:#f7ffff;
@@ -32,7 +29,6 @@ body {
 	font-family:"OpenSansLight", Helvetica;
 	color:#333;
 }
-
 a {
     margin:0;
     padding:0;
@@ -40,21 +36,18 @@ a {
     vertical-align:baseline;
     background:transparent;
 }
-
 abbr[title], dfn[title] {
     border-bottom:1px dotted;
     cursor:help;
 }
-
 table {
     border-collapse:collapse;
     border-spacing:0;
+    width: 100%;
 }
-
 input, select {
     vertical-align:middle;
 }
-
 select {
 	background: transparent;
 	padding: 4px;
@@ -240,6 +233,9 @@ html { overflow-y: scroll; }
 	float:right;
 	position:relative;
 }
+#user-info ul {
+	list-style: none;
+}
 .input-user-nav {
 	width:100%;	
 	border:1px solid #ccc;
@@ -293,7 +289,6 @@ html { overflow-y: scroll; }
 .dropdown-login {
 	float:right;
 	padding:17px 10px 5px 15px;
-	list-style: none;
 }
 .dropdown-login:hover {
 	color:#FFF;	
@@ -303,6 +298,7 @@ html { overflow-y: scroll; }
 	text-decoration:none;
 	color:#333;
 	padding:5px 40px 5px 15px;
+	min-width: 70px;
 	font-size:.8em;
 	position: relative;
 	display: block;
@@ -349,6 +345,7 @@ html { overflow-y: scroll; }
 	padding-top:5px;
 	border-top:1px solid #e0e0e0;
 	text-align:center;
+	display: none;
 }
 #footer-links {
 	padding:2px 0px 5px 2px;
@@ -362,6 +359,14 @@ html { overflow-y: scroll; }
 #footer-copyright {
 	color:#634328;
 	margin-bottom:12px;
+}
+#social-icons {
+	margin: auto;
+	margin-top: 12px;
+}
+#social-icons img {
+	display: inline-block;
+	padding: 0 10px;
 }
 
 /********
@@ -1376,7 +1381,7 @@ button[disabled] {
 	opacity:.5;
 	filter: alpha(opacity=50); /* internet explorer */
 }
-.button::-moz-focus-inner {
+ns.button::-moz-focus-inner {
     margin: 0;
     padding: 0;
     border: 0;
