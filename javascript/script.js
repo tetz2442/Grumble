@@ -19,6 +19,7 @@
 $(document).ready(function() { 
 	$("#maincolumn").delay(50).fadeIn(150);
 	$("#footer").delay(50).fadeIn(150);
+	$("#logo").fadeIn("slow");
 
 	$("#nav-category").click(function() {
 		var $element = $(this);
@@ -436,11 +437,11 @@ $(document).ready(function() {
 				type = "recent-comment";
 				last = $("#tab4 .comment-holder:last").find(".username").attr("data-id");
 			}
-			else if($(".tabs-profile a.active").text == "Comments"){
+			else if($aactive.text == "Comments"){
 				type = "recent-grumble";
 				last = $("#tab1 .comment-holder:last").find(".username").attr("data-id");
 			}
-			else if($(".tabs-profile a.active").text == "Grumbles"){
+			else if($aactive.text == "Grumbles"){
 				type = "recent";
 				last = $("#tab2 .grumble-holder:last").find(".comment-text-holder a").attr("data-id");
 			}
@@ -748,7 +749,8 @@ $(document).ready(function() {
 	
 		$(this).on('click', 'a', function(e){
 			if(($("#tab2 .grumble-holder").length >= 10 && $(this).html() == "Recent Grumbles" && !resultDone) || ($("#tab1 .grumble-holder").length >= 10 && $(this).html() == "Top Grumbles" && !topDone)
-			|| ($("#tab4 .comment-holder").length >= 10 && $(this).html() == "Recent Comments" && !resultGDone) || ($("#tab3 .comment-holder").length >= 10 && $(this).html() == "Top Comments" && !topGDone)) {
+			|| ($("#tab4 .comment-holder").length >= 10 && $(this).html() == "Recent Comments" && !resultGDone) || ($("#tab3 .comment-holder").length >= 10 && $(this).html() == "Top Comments" && !topGDone)
+			|| ($("#tab2 .grumble-holder").length >= 10 && $(this).html() == "Grumbles" && !topDone) || ($("#tab1 .comment-holder").length >= 10 && $(this).html() == "Comments" && !resultGDone)) {
 				$(".view-more").slideDown("fast");
 			}
 			else {
@@ -762,40 +764,10 @@ $(document).ready(function() {
 				$("#arrow-top img").animate({"marginLeft":"286px"}, "normal");
 			else if($(this).html() == "Recent Comments")
 				$("#arrow-top img").animate({"marginLeft":"407px"}, "normal");
-			$active.removeClass('active');
-			$content.fadeOut("fast");
-	
-			$active = $(this);
-			$content = $($(this).attr('href'));
-	
-			$active.addClass('active');
-			$content.fadeIn("normal");
-	
-			e.preventDefault();
-		});
-	});
-	
-	$('ul.tabs-profile').each(function(){
-		var $active, $content, $links = $(this).find('a');
-	
-		$active = $links.first().addClass('active');
-		$content = $($active.attr('href'));
-	
-		$links.not(':first').each(function () {
-			$($(this).attr('href')).hide();
-		});
-	
-		$(this).on('click', 'a', function(e){
-			if(($("#tab2 .grumble-holder").length >= 10 && $(this).html() == "Grumbles" && !topDone) || ($("#tab1 .comment-holder").length >= 10 && $(this).html() == "Comments" && !resultGDone)) {
-				$(".view-more").slideDown("fast");
-			}
-			else {
-				$(".view-more").slideUp("fast");
-			}
-			if($(this).html() == "Grumbles")
-				$("#arrow-top-profile img").animate({"marginLeft":"193px"}, "normal");
+			else if($(this).html() == "Grumbles")
+				$("#arrow-top-profile img").animate({"marginLeft":"169px"}, "normal");
 			else if($(this).html() == "Comments")
-				$("#arrow-top-profile img").animate({"marginLeft":"58px"}, "normal");
+				$("#arrow-top-profile img").animate({"marginLeft":"50px"}, "normal");
 			$active.removeClass('active');
 			$content.fadeOut("fast");
 	

@@ -124,7 +124,6 @@ else {
     </div>
     </div>
 </div>
-</div>
 <?php	
 require_once "php/lightboxgrumble.php";
 require_once "php/footer.php"; 

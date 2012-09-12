@@ -1,5 +1,6 @@
-<div id="lightbox-container"></div>
 </div>
+</div>
+<div id="lightbox-container"></div>
 <div id="footer">
 	<div id="footer-links">
     	<div id="footer-copyright">© 2012 Grumble</div>

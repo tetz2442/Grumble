@@ -16,15 +16,24 @@ if(isset($_COOKIE["user_grumble"]) && !isset($_SESSION["user_id"])) {
 		$_SESSION["timezone"] = $row["user_timezone"];
 	}	
 }
+
+$loggedin = false;
+//if $_SESSION['username'] is false, we know the user is not logged in
+if(isset($_SESSION['username'])) {
+    $loggedin = true;
+}
+else {
+    $loggedin = false;	
+}
 ?>
 <!DOCTYPE html>  
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link type="text/css" href="/css/styles.css" rel="stylesheet" media="all">
-        <noscript>
-        <meta http-equiv="Refresh" content="0;url=<?php echo "/"; ?>noscript.php">
-    </noscript>
+<noscript>
+    <meta http-equiv="Refresh" content="0; url=/noscript.php">
+</noscript>
 <title>Grumble |
 <?php
 $filename = basename($_SERVER['PHP_SELF']);
@@ -105,7 +114,7 @@ else {
 	echo "Grumble is a place where you can discuss the topics that you feel are important and need attention. It's simple. Grumble for you. Grumble for change.";
 }
 ?>
-"/>
+">
 <!--[if IE]
 	<script src="http://html5shiv.googlecode.com/svn/trunk/html.js"></script>
     <![endif]-->
