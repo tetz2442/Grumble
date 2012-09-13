@@ -101,23 +101,23 @@ $(document).ready(function() {
 							  $('#username').parents("tr").find(".gif-loader").hide();
 							  if(result == 1) {
 								  //success
-								  $("#usernameError").html("Username available").removeClass("error").addClass("available");
+								  $("#usernameError").html("Available").removeClass("error").addClass("available");
 								  username = true;
 							  }
 							  else if(result == 0) {
 								  //not available
-								  $("#usernameError").html("Username not available").addClass("error").removeClass("available");
+								  $("#usernameError").html("Not available").addClass("error").removeClass("available");
 								  username = false;
 							  }
 							  else {
-								  $("#usernameError").html("Username not available").addClass("error").removeClass("available");
+								  $("#usernameError").html("Not available").addClass("error").removeClass("available");
 								  username = false;
 							  }
 					});
 				}
 				else {
 					usernameVal = 0;
-					$("#usernameError").html("No spaces allowed in username").addClass("error").removeClass("available");
+					$("#usernameError").html("No spaces allowed").addClass("error").removeClass("available");
 					username = false;
 				}
 			}
@@ -129,7 +129,7 @@ $(document).ready(function() {
 		}
 		else {
 			usernameVal = 0;
-			$("#usernameError").html("Username must be at least 4 characters").addClass("error").removeClass("available");
+			$("#usernameError").html("Must be at least 4 characters").addClass("error").removeClass("available");
 			username = false;
 		}
 	});
@@ -332,18 +332,18 @@ function checkForm() {
 				  }
 				  
 				  if(usernameVal == 1) {
-					  $("#usernameError").html("Username not available").addClass("error").removeClass("available");
+					  $("#usernameError").html("Not available").addClass("error").removeClass("available");
 					  username = false;
 				  }
 				  else if(usernameVal == 2) {
-					  $("#usernameError").html("Username available").addClass("available").removeClass("error");
+					  $("#usernameError").html("Available").addClass("available").removeClass("error");
 					  username = true;
 				  }
 		});
 		}
 		else {
 			usernameVal = 0;
-			$("#usernameError").html("Username must be at least 4 characters").addClass("error").removeClass("available");
+			$("#usernameError").html("Must be at least 4 characters").addClass("error").removeClass("available");
 			username = false;
 		}
 		
