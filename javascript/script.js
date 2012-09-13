@@ -337,6 +337,9 @@ $(document).ready(function() {
 	if($("#referrer").length > 0) {
 		$("#referrer").val(window.location.pathname);	
 	}
+	if($("#login-refer").length > 0) {
+		$("#login-refer").val(".." + window.location.pathname);
+	}
 	
 	$("#quick-description-submit").click(function(event) {
 		if($("#quick-description-grumblename").val().length > 40) {
@@ -679,6 +682,8 @@ $(document).ready(function() {
 	var loadMore = true;
 	var pageNumber = 1;
 	var subCat = 0;
+	var canLoad2 = true;
+	var loadedtype = $("#comments-filter").val();
 	if($("#comments-left .comment-holder").length == 10) {
 		$(window).scroll(function () {
 			if ($(window).scrollTop() >= $(document).height() - $(window).height() && canLoad) {
@@ -687,9 +692,12 @@ $(document).ready(function() {
 				if(subCat == null) {
 					subCat = $.urlParam("id");
 				}
-				var lastid = $(".username:last").attr("data-id");
+				if(loadedtype == "recent") 
+					var lastid = $(".username:last").attr("data-id");
+				else
+					var lastid = $(".comment-holder").length;
 				$("#gif-loader").fadeIn(50);
-				$.post("/php/commentloadajax.php", {pagenumber:pageNumber, number:10, subCat:subCat, lastid:lastid},
+				$.post("/php/commentloadajax.php", {typescroll:loadedtype ,pagenumber:pageNumber, number:10, subCat:subCat, lastid:lastid},
 					function(result) {
 						$("#gif-loader").fadeOut(50);
 						if(result == "none") {
@@ -697,7 +705,7 @@ $(document).ready(function() {
 							loadMore = false;
 							canLoad = false;
 							
-							$("#notification-bar p").html("No more Grumbles to load.").addClass("error").removeClass("available");
+							$("#notification-bar p").html("No more comments to load.").addClass("error").removeClass("available");
 							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 						}
 						else if(result != "") {
@@ -716,6 +724,36 @@ $(document).ready(function() {
 							});
 							
 							shortenLink(".comment-text a");
+						}
+				});
+			}
+		});
+		$("#comments-filter").change(function() {
+			var type = $(this).val();
+			subCat = $("#subcat-id").attr("data-id");
+			if(subCat == null) {
+				subCat = $.urlParam("id");
+			}
+			if(canLoad2 && type != loadedtype) {
+				loadedtype = type;
+				canLoad2 = false;
+				$(".comment-holder").each(function () {
+					$(this).remove();
+				});
+				$("#gif-loader").show();
+				$.post("/php/commentloadajax.php", {type:type, subCat:subCat},
+					function(result) {
+						canLoad2 = true;
+						$("#gif-loader").hide();
+						if(result != "none" && result != "") {
+							if($("#grumble-comment").length > 0)
+								$(result).insertAfter("#grumble-comment");
+							else
+								$(result).insertAfter("#comments-left-header");
+						}
+						else {
+							$("#notification-bar p").html("No comments loaded.").addClass("error").removeClass("available");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 						}
 				});
 			}

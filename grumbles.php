@@ -47,7 +47,7 @@ if($exist) {
         </div>
     </div>
     <?php
-    //output all other grumbles for this sub category
+    //no comments returned
     if(mysql_num_rows($result) == 0) {
         echo '<div id="comments-left">';
         if(isset($_SESSION["username"])) {
@@ -69,11 +69,20 @@ if($exist) {
         echo "<p class='text-align-center content-padding'>There are currently no comments to view.</p>";	
         echo '</div>';
     }
+    //comments were returned
     else {
         ?>
         <div id="comments-left">
             <div id="comments-left-header">
-                <h3 title="Total number comments">Comments<?php if($row["grumble_number"] > 10) echo "(<span>" . $row["grumble_number"] . "</span>)";?></h3>
+                <h4 title="Total number comments">Comments
+                    <?php if($row["grumble_number"] > 10) echo "(<span>" . $row["grumble_number"] . "</span>)";?>
+                </h4>
+                <?php if($row["grumble_number"] > 10) { ?>
+                <select id="comments-filter">
+                    <option value="recent" selected="selected">Recent</option>
+                    <option value="top">Top</option>
+                </select>
+                <?php } ?>
             </div>
         <?php
         if(isset($_SESSION["username"])) {
