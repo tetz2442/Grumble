@@ -19,7 +19,6 @@
 $(document).ready(function() { 
 	$("#maincolumn").delay(50).fadeIn(150);
 	$("#footer").delay(50).fadeIn(150);
-	$("#logo").fadeIn("slow");
 
 	$("#nav-category").click(function() {
 		var $element = $(this);
@@ -71,7 +70,7 @@ $(document).ready(function() {
 	}).mouseout(function () {
 		$(this).find(".comment-options").hide();
 	});
-	
+	var charLengthReply = 160;
 	$("body").on("click", ".comment-options p", function () {
 		var $element = $(this);
 		var $commentholder = $element.parents(".comment-holder");
@@ -114,10 +113,7 @@ $(document).ready(function() {
 				});
 			}
 		}
-	});
-
-	//adds a vote to vote up
-	$("body").on("click", ".votes-up a", function(event) {
+	}).on("click", ".votes-up a", function(event) {
 		event.preventDefault();
 		var id = $(this).attr("data-id");
 		var $element = $(this).parent();
@@ -134,10 +130,7 @@ $(document).ready(function() {
 					$element.find(".votes-up-number").html(votes);
 				}
 			});
-	});
-	
-	var charLengthReply = 160;
-	$("body").on("keyup",(".quick-reply-input"), function() {
+	}).on("keyup",(".quick-reply-input"), function() {
 		 var chars = $(this).val();
 		 link = findLink(chars);
 		
@@ -158,10 +151,7 @@ $(document).ready(function() {
 	}).on("focusin",(".quick-reply-input"), function () {
 		$(this).css("height","50px");
 		$(this).parent().find(".reply-btn-holder").show();
-	});
-	
-	//opens and load comments
-	$("body").on("click", "p.replies-view", function() {
+	}).on("click", "p.replies-view", function() {
 		var $element = $(this);
 		var id = $element.attr("data-id");
 		var $commentholder = $element.parents(".comment-holder");
@@ -198,9 +188,7 @@ $(document).ready(function() {
 			$commentholder.find(".replies").slideUp("fast");
 			$element.find("a").html($element.attr("data-html"));
 		}
-	});
-	
-	$("div").on("click", ".view-all-replies", function() {
+	}).on("click", ".view-all-replies", function() {
 		var $element = $(this);
 		var id = $element.attr("data-id");
 		$element.parents(".comment-holder").find(".gif-loader-replies").show();
@@ -221,10 +209,7 @@ $(document).ready(function() {
 					shortenLink(".reply-text a");
 				}
 		});
-	});
-	
-	//checks if the submit comment button has been clicked
-	$("body").on("click", ".quick-reply-button", function() {
+	}).on("click", ".quick-reply-button", function() {
 		var $element = $(this);
 		var $commentText = $(this).parents(".reply-padding").find(".quick-reply-input").val();
 		var $commentholder = $(this).parents(".comment-holder");

@@ -26,7 +26,7 @@ body {
 	background-color:#f7ffff;
 	background-image:url(../images/backgrounds/white-noise.jpg);
 	background-repeat:repeat;
-	min-width:900px;
+	min-width:850px;
 	font-family:"OpenSansLight", Helvetica;
 	color:#333;
 }
@@ -149,7 +149,6 @@ html { overflow-y: scroll; }
 	position:absolute;
 	left:50%;
 	margin-left:-133px;
-	display: none;
 }
 #logo a {
 	text-decoration:none;
@@ -842,11 +841,32 @@ html { overflow-y: scroll; }
     -moz-box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 3px 0px rgba(0,0,0,.2);
     box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 4px 0px rgba(0,0,0,.2);
 }
-#create-account-table td {
-	padding:5px 0px 5px 5px;
+#create-account-table ul {
+	list-style: none;
 }
-#create-account-table label {
-	font-size:1.2em;
+#create-account-table ul li {
+	margin: 10px;
+}
+#create-account-table p {
+	display: inline-block;
+}
+#create-checkbox {
+	width: 205px;
+}
+#create-account-table input[type=submit] {
+	margin:25px 0 0 270px;
+}
+.column1 {
+	width:170px;
+	text-align: right;
+	font-size: 1.2em;
+}
+.column2 input {
+	width:205px;
+}
+.column3 {
+	width:240px;
+	font-size: 1em !important;
 }
 #login-table {
 	margin:auto;
@@ -854,9 +874,6 @@ html { overflow-y: scroll; }
 	margin-bottom:40px;
 	padding:15px 15px 15px 15px;
 	background-color:#feeed3;
-	border-radius:10px;
-	-moz-border-radius:10px;
-	-webkit-border-radius:10px;
 	-webkit-box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 3px 0px rgba(0,0,0,.2);
     -moz-box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 3px 0px rgba(0,0,0,.2);
     box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 4px 0px rgba(0,0,0,.2);
@@ -1155,7 +1172,7 @@ html { overflow-y: scroll; }
 	box-shadow:0 2px 4px rgba(0, 0, 0, 0.2);
 	-moz-box-shadow:0 2px 4px rgba(0,0,0,0.2);
 	-webkit-box-shadow:0 2px 4px rgba(0,0,0,0.2);
-	border:1px solid #CCC;
+	border:1px solid #999;
 }
 #notification-bar p{
 	margin:0 !important;
@@ -1272,6 +1289,31 @@ no script
 }
 #page-four button {
 	margin:35px auto;
+}
+/********
+social tab
+************/
+#social-tab {
+	position: fixed;
+	z-index: 3000;
+	right: -1px;
+	top: 150px;
+}
+#social-tab img {
+	display: block;
+}
+#social-tab .content-padding {
+	width: 55px;
+	background-color: #fff;
+	border: 1px solid #666;
+	border-bottom-left-radius: 3px;
+	-moz-border-radius-bottomleft:3px;
+	-webkit-border-bottom-left-radius:3px;
+	float: right;
+}
+#social-tab .content-padding p {
+	display: block;
+	margin-bottom: 10px;
 }
 /********
 button css
