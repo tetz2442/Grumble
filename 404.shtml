@@ -5,7 +5,12 @@
 <link rel="Shortcut Icon" href="/images/favicon.ico">
 <link type="text/css" href="/css/styles.css" rel="stylesheet">
 <title>Grumble | 404 Error!</title>
-<meta name="robots" content="noindex, nofollow" />
+<meta name="description" content="Grumble Grumble. 404 Error, this page does not exist.">
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+<script type="text/javascript">
+!window.jQuery && document.write('<script src="/javascript/jquery-1.8.0.min"><\/script>');
+</script>
+<script type="text/javascript" src="/javascript/script.js"></script>
 </head>
 
 <body>
@@ -19,8 +24,8 @@
     	<div class="text-align-center" id="page-four">
             <h1>404 Error!</h1>
             <p>The page you are trying to reach doesn't exist. <br/>Try checking the URL for errors, or let us guide you to our homepage.</p>
-            <a href="http://wiki.zeldalegends.net/index.php?title=Bait" target="_blank"><img src="/images/legend-of-zelda-grumble-guy.png"  height="528" width="768"/></a>
             <a href="http://grumbleonline.com" class=""><button class="push_button orange">Go Home</button></a>
+            <a href="http://wiki.zeldalegends.net/index.php?title=Bait" target="_blank"><img src="/images/legend-of-zelda-grumble-guy.png"  height="528" width="768"/></a>
         </div>
     </div>
 </div>
@@ -31,6 +36,10 @@
         <a class="colored-link-1" href="privacy">Privacy</a>|
         <a class="colored-link-1" href="terms-of-service">Terms</a>|
         <a class="colored-link-1" href="contact">Contact Us</a>
+    </div>
+    <div id="social-icons">
+        <a href="https://facebook.com/grumbleonline" target="_blank"><img src="/images/facebook.png" width="25" height="25" alt="Facebook page" title="Facebook page"></a>
+        <a href="https://twitter.com/grumbleonline" target="_blank"><img src="/images/twitter.png" width="25" height="25" alt="Twitter" title="Twitter page"></a>
     </div>
 </div>
 </div>

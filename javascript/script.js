@@ -15,7 +15,7 @@
     po.src = 'https://apis.google.com/js/plusone.js';
     var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
   })();
-  
+
 $(document).ready(function() { 
 	$("#maincolumn").delay(50).fadeIn(150);
 	$("#footer").delay(50).fadeIn(150);
