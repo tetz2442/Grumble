@@ -20,7 +20,7 @@ table {
 h1, h2, h3, h4{
 	font-weight: normal;
 }
-h1 {font-size: 1.8em;} h2 {font-size: 1.5em;} h3 {font-size: 1.4em;}
+h1 {font-size: 1.8em;} h2 {font-size: 1.5em;} h3 {font-size: 1.4em;} h4 {font-size: 1.2em;}
 body {
     line-height:1.1;
 	background-color:#f7ffff;
@@ -51,7 +51,7 @@ input, select {
 }
 select {
 	padding: 4px;
-	font-size: 16px;
+	font-size: 1em;
 	color: #666666;
 	border:1px solid #e0e0e0;
 	border-radius:3px;
@@ -459,7 +459,15 @@ html { overflow-y: scroll; }
 }
 #comments-left-header {
 	border-bottom:1px solid #666;
-	padding-bottom:5px;
+	padding-bottom:3px;
+	overflow: auto;
+}
+#comments-left-header h4 {
+	float: left;
+}
+#comments-filter {
+	float: right;
+	padding: 0;
 }
 .compose-grumble {
 	margin:25px 0 0 35px;	

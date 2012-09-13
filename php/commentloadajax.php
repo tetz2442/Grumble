@@ -5,45 +5,70 @@
 	require_once "outputcomments.php";
 	
 	session_start();
-	if(isset($_POST["pagenumber"]) && is_numeric($_POST["pagenumber"]) && isset($_POST["number"]) && is_numeric($_POST["number"]) && isset($_POST["subCat"]) && is_numeric($_POST["subCat"]) && isset($_POST["lastid"]) && is_numeric($_POST["lastid"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+	if(isset($_POST["pagenumber"]) && isset($_POST["typescroll"]) && is_numeric($_POST["pagenumber"]) && isset($_POST["number"]) && is_numeric($_POST["number"]) && isset($_POST["subCat"]) && is_numeric($_POST["subCat"]) && isset($_POST["lastid"]) && is_numeric($_POST["lastid"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		//get the passed parameter
 		$pagenumber = mysql_real_escape_string($_POST["pagenumber"]);
 		$number = mysql_real_escape_string($_POST["number"]);
 		$subcat = mysql_real_escape_string($_POST["subCat"]);
 		$lastid = mysql_real_escape_string($_POST["lastid"]);
+		$type = $_POST["typescroll"];
 		
-		//load grumbles from sub category
-		if(is_numeric($subcat)) {
+		if($type == "recent") {
+			//load grumbles from sub category
 			//send a request to the database
 			$sql = "SELECT status_id FROM status_grumble " .
 			"WHERE sub_category_id = " . $subcat . 
 			" AND status_id < " . $lastid . " ORDER BY status_id DESC LIMIT 10";
 			$result = mysql_query($sql, $conn) or die("Failed: " . mysql_error());
-		}
-		//load grumbles for profile
-		/*else {
-			//send a request to the database
-			$sql = "SELECT sg.status_id FROM status_grumble AS sg " .
-			"LEFT OUTER JOIN users_grumble AS ug ON sg.user_id = ug.user_id " .
-			"WHERE ug.username = '" . $subcat . 
-			"' AND sg.status_id < " . $lastid . " ORDER BY sg.status_id DESC LIMIT 10";
-			$result = mysql_query($sql, $conn) or die("Failed: " . mysql_error());
-		}*/
-		
-		if(mysql_num_rows($result) > 0) {
-			if(isset($_SESSION["user_id"])) {
-				while($row = mysql_fetch_array($result)) {
-					outputComments($row["status_id"], false, true);	
+			//load grumbles for profile
+			/*else {
+				//send a request to the database
+				$sql = "SELECT sg.status_id FROM status_grumble AS sg " .
+				"LEFT OUTER JOIN users_grumble AS ug ON sg.user_id = ug.user_id " .
+				"WHERE ug.username = '" . $subcat . 
+				"' AND sg.status_id < " . $lastid . " ORDER BY sg.status_id DESC LIMIT 10";
+				$result = mysql_query($sql, $conn) or die("Failed: " . mysql_error());
+			}*/
+			
+			if(mysql_num_rows($result) > 0) {
+				if(isset($_SESSION["user_id"])) {
+					while($row = mysql_fetch_array($result)) {
+						outputComments($row["status_id"], false, true);	
+					}
+				}
+				else {
+					while($row = mysql_fetch_array($result)) {
+						outputComments($row["status_id"], false, false);	
+					}
 				}
 			}
 			else {
-				while($row = mysql_fetch_array($result)) {
-					outputComments($row["status_id"], false, false);	
-				}
+				echo "none";
 			}
 		}
-		else {
-			echo "none";
+		else if ($type == "top") {
+			//load grumbles from sub category
+			//send a request to the database
+			$sql = "SELECT sg.status_id,(SELECT COUNT(user_like_id) FROM user_likes_grumble AS ulg WHERE sg.status_id = ulg.status_id) AS votes_up_count" .
+				" FROM status_grumble AS sg WHERE sub_category_id = " . $subcat . 
+                  " ORDER BY votes_up_count DESC LIMIT 10 OFFSET " . $lastid;
+			$result = mysql_query($sql, $conn) or die("Failed: " . mysql_error());
+			
+			if(mysql_num_rows($result) > 0) {
+				if(isset($_SESSION["user_id"])) {
+					while($row = mysql_fetch_array($result)) {
+						outputComments($row["status_id"], false, true);	
+					}
+				}
+				else {
+					while($row = mysql_fetch_array($result)) {
+						outputComments($row["status_id"], false, false);	
+					}
+				}
+			}
+			else {
+				echo "none";
+			}
 		}
 	}
 	else if(isset($_POST["type"]) && isset($_POST["last"]) && isset($_POST["location"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
@@ -124,6 +149,57 @@
 		}
 		else {
 			echo "none";	
+		}
+	}
+	else if (isset($_POST["type"]) && isset($_POST["subCat"]) && is_numeric($_POST["subCat"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
+		$type = $_POST["type"];
+		$subcat = mysql_real_escape_string($_POST["subCat"]);
+
+		if($type == "recent") {
+			$sql = "SELECT status_id FROM status_grumble " .
+			"WHERE sub_category_id = " . $subcat . 
+			" ORDER BY status_id DESC LIMIT 10";
+			$result = mysql_query($sql, $conn) or die("Failed: " . mysql_error());
+
+			if(mysql_num_rows($result) > 0) {
+				if(isset($_SESSION["user_id"])) {
+					while($row = mysql_fetch_array($result)) {
+						outputComments($row["status_id"], false, true);	
+					}
+				}
+				else {
+					while($row = mysql_fetch_array($result)) {
+						outputComments($row["status_id"], false, false);	
+					}
+				}
+			}
+			else {
+				echo "none";
+			}
+
+		}
+		else if ($type == "top") {
+			$sql = "SELECT sg.status_id,(SELECT COUNT(user_like_id) FROM user_likes_grumble AS ulg WHERE sg.status_id = ulg.status_id) AS votes_up_count" .
+				" FROM status_grumble AS sg " . 
+                  "WHERE sub_category_id = " . $subcat .
+                  " ORDER BY votes_up_count DESC LIMIT 10";
+			$result = mysql_query($sql, $conn) or die("Failed: " . mysql_error());
+
+			if(mysql_num_rows($result) > 0) {
+				if(isset($_SESSION["user_id"])) {
+					while($row = mysql_fetch_array($result)) {
+						outputComments($row["status_id"], false, true);	
+					}
+				}
+				else {
+					while($row = mysql_fetch_array($result)) {
+						outputComments($row["status_id"], false, false);	
+					}
+				}
+			}
+			else {
+				echo "none";
+			}
 		}
 	}
 ?>

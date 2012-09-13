@@ -51,12 +51,12 @@
                             <label for="password">Password</label>
                             <input type="password" name="password" id="password" maxlength="50" class="input-user-nav textInput"/>
                             <?php
-							$refer = "../" . basename($_SERVER['PHP_SELF']);
+							/*$refer = "../" . basename($_SERVER['PHP_SELF']);
 							if($_SERVER['QUERY_STRING'] != "") {
 								$refer = $refer . "?" . $_SERVER['QUERY_STRING'];	
-							}
+							}*/
 							?>
-                            <input type="hidden" name="referrer" value="<?php echo $refer; ?>"/>
+                            <input type="hidden" name="referrer" id="login-refer" value=""/>
                         </li>
                         <li class="padding-top">
                         	<input type="hidden" name="token" value="<?php echo $token; ?>" />
