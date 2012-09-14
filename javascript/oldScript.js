@@ -46,3 +46,55 @@ $("#quick-compose-submit").click(function(event) {
 
     return replacedText;
 }*/
+
+//check if the fields have been pre-filled, then validates
+	if($("#firstname").val() != "" || $("#lastname").val() != "" && $("#emails").val() != "") {
+		if(checkLength($("#firstname"), 1)) {
+			if(checkLetters($("#firstname"))) {
+				$("#firstnameError").html("Success").removeClass("error").addClass("available");
+			}
+			else {
+				$("#firstnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
+			}
+		}
+		else {
+			$("#firstnameError").html("Must be longer than 1 character").addClass("error").removeClass("available");
+		}
+		if(checkLength($("#lastname"), 1)) {
+			if(checkLetters($("#lastname"))) {
+				$("#lastnameError").html("Success").removeClass("error").addClass("available");
+			}
+			else {
+				$("#lastnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
+			}
+		}
+		else {
+			$("#lastnameError").html("Must be longer than 1 character").addClass("error").removeClass("available");
+		}
+		chars = $('#emails').val();
+		if(checkEmail($("#emails"))) {
+			$('#emails').parent().find(".gif-loader").show();
+			$.post("/php/checkavail.php", {email:chars},
+				  function(result) {
+					  $('#emails').parent().find(".gif-loader").hide();
+					  if(result == 1) {
+						  //success
+						$("#emailError").html("Valid email address").removeClass("error").addClass("available");
+						email = true;
+					  }
+					  else if(result == 0) {
+						  //not available
+						  $("#emailError").html("Email has already been taken.").addClass("error").removeClass("available");
+						email = false;
+					  }
+					  else {
+						 $("#emailError").html("Invalid Email").addClass("error").removeClass("available");
+						email = false;
+					  }
+			});
+		}
+		else {
+			$("#emailError").html("Invalid Email").addClass("error").removeClass("available");
+			email = false;
+		}
+	}

@@ -2,6 +2,7 @@
 	require_once "conn.php";
 	require_once "http.php";
 	require_once "sendemail.php";
+	require_once "functions.php";
 	session_start();
 	if(isset($_REQUEST["action"])) {
 		switch ($_REQUEST["action"]) {
@@ -99,16 +100,16 @@
 					$username = mysql_real_escape_string($_POST["username"]);
 					$username = str_replace(" ", "", $username);
 					$pass1 = mysql_real_escape_string($_POST["password"]);
+					$pass2 = mysql_real_escape_string($_POST["password2"]);
+					$firstname = mysql_real_escape_string($_POST["firstname"]);
+					$lastname = mysql_real_escape_string($_POST["lastname"]);
+					
+					$email = mysql_real_escape_string($_POST["email"]);
+					$timezone = mysql_real_escape_string($_POST["tz"]);
+
 					//validate username further
 					if(strlen($username) >= 4 && strlen($username) <= 15 && !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬-]/', $username)
-						&& preg_match('/[A-Z0-9]/', $pass1)) {
-
-						$firstname = mysql_real_escape_string($_POST["firstname"]);
-						$lastname = mysql_real_escape_string($_POST["lastname"]);
-						
-						$pass2 = mysql_real_escape_string($_POST["password2"]);
-						$email = mysql_real_escape_string($_POST["email"]);
-						$timezone = mysql_real_escape_string($_POST["tz"]);
+						&& preg_match('/[A-Z]/', $pass1) && preg_match('/[0-9]/', $pass1) && checkTimeZone($_POST["tz"])) {
 						
 						$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
 						$Chars_Len = 63;
@@ -145,18 +146,13 @@
 						$sql = "INSERT INTO temp_password_grumble (user_email, temp_password, temp_create) VALUES('" . 
 							$email . "','" . $salt . "','" . date("Y-m-d H:i:s", time()) . "')";
 						mysql_query($sql, $conn) or die("Could not insert: " . mysql_error());
-						/*session_start();
-						$_SESSION["user_id"] = $id;
-						$_SESSION["access_lvl"] = 1;
-						$_SESSION["username"] = $username;
-						$_SESSION["timezone"] = $timezone;*/
 						
 						$parameters = array("http://" . $_SERVER["HTTP_HOST"] . "/php/transact-user.php?email=" . $email . "&hash=" . $salt . "&action=verify");
 						sendEmail($email, "From: no-reply@grumbleonline.com", "verify", $parameters);
 						redirect("../create-account?user_created=1");
 					}
 					else {
-						redirect("../create-account?create=fail");
+						redirect("../create-account?create=fail&email=" . $email . "&fullname=" . $firstname . " " . $lastname . "&username=" . $username);
 					}
 			}
 			else {

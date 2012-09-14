@@ -126,5 +126,6 @@ else {
 </div>
 <?php	
 require_once "php/lightboxgrumble.php";
+require_once "php/socialtab.php";
 require_once "php/footer.php"; 
 ?>

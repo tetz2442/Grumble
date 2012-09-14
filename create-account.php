@@ -5,9 +5,13 @@
 	require_once "php/containerWide.php";
 	$previousFill = false;
 	$name =  array("", "");
-	if(isset($_POST["fullname"]) && isset($_POST["email"])) {
+	if(isset($_POST["fullname"])) {
 		$previousFill = true;
 		$name = explode(" ", strip_tags($_POST["fullname"]));
+	}
+	else if (isset($_GET["fullname"])) {
+		$previousFill = true;
+		$name = explode(" ", strip_tags($_GET["fullname"]));
 	}
 	
 	$token = md5(uniqid(rand(), true));
@@ -46,12 +50,12 @@
 	        </li>
 	        <li>
 	            <p class="column1"><label for="username">Username:</label> (<span class="help-callout colored-link-1" data-id="3" title="Tips for creating a username on Grumble."><b>?</b></span>)</p>
-	            <p class="column2"><input type="text" id="username" class="textInput" name="username" maxlength="15" autocomplete="off"/></p>
+	            <p class="column2"><input type="text" id="username" class="textInput" name="username" maxlength="15" autocomplete="off"<?php if(isset($_GET["username"])) { echo "value='" . strip_tags($_GET["username"]) . "'";} ?>/></p>
 	            <p class="column3"><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="usernameError"></span></p>
 	        </li>
 	        <li>
 	            <p class="column1"><label for="email">Email Address:</label></p>
-	            <p class="column2"><input type="text" id="emails" class="textInput" name="email" maxlength="100" autocomplete="off" <?php if(isset($_POST["email"])) { echo "value='" . strip_tags($_POST["email"]) . "'";}; ?>/></p>
+	            <p class="column2"><input type="text" id="emails" class="textInput" name="email" maxlength="100" autocomplete="off" <?php if(isset($_POST["email"])) { echo "value='" . strip_tags($_POST["email"]) . "'";} else if(isset($_GET["email"])) {echo "value='" . strip_tags($_GET["email"]) . "'"; } ?>/></p>
 	            <p class="column3"><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="emailError"></span></p>
 	        </li>
 	        <li>
@@ -219,7 +223,7 @@
 	        <li>
 	        	<p class="column1"></p>
 	            <p id="create-checkbox">
-	            	<input type="checkbox" name="terms" id="terms"/><label for="terms" class="terms">Agree to <a href="terms-of-service.php" target="_blank">Terms of Service</a> & <a href="terms-of-service.php" target="_blank">Privacy Policy</a></label>
+	            	<input type="checkbox" name="terms" id="terms"/><label for="terms" class="terms">Agree to <a href="terms-of-service.php" class="colored-link-1" target="_blank">Terms of Service</a> & <a href="terms-of-service.php" class="colored-link-1" target="_blank">Privacy Policy</a></label>
 	            </p>
 	            <p class="column3"><span id="termsError"></span></p>
 	        </li>

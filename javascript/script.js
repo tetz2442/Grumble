@@ -737,6 +737,8 @@ $(document).ready(function() {
 			if(canLoad2 && type != loadedtype) {
 				loadedtype = type;
 				canLoad2 = false;
+				loadMore = true;
+				canLoad = true;
 				$(".comment-holder").each(function () {
 					$(this).remove();
 				});

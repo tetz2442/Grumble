@@ -1304,7 +1304,7 @@ social tab
 #social-tab {
 	position: fixed;
 	z-index: 3000;
-	right: -1px;
+	right: 0px;
 	top: 150px;
 }
 #social-tab img {
@@ -1314,11 +1314,12 @@ social tab
 	width: 55px;
 	background-color: #fff;
 	border: 1px solid #666;
-	border-bottom-left-radius: 3px;
-	-moz-border-radius-bottomleft:3px;
-	-webkit-border-bottom-left-radius:3px;
+	border-radius: 3px;
+	-moz-border-radius:3px;
+	-webkit-border-radius:3px;
 	float: right;
 	margin-top: -8px;
+	margin-right: 8px;
 }
 #social-tab .content-padding p {
 	display: block;
