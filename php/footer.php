@@ -1,7 +1,6 @@
 </div>
 </div>
 <div id="lightbox-container"></div>
-<?php require_once "socialtab.php"; ?>
 <div id="footer">
 	<div id="footer-links">
     	<div id="footer-copyright">© 2012 Grumble</div>

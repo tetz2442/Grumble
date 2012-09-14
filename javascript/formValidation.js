@@ -6,58 +6,6 @@ var username = false;
 var email = false;
 
 $(document).ready(function() { 
-	//check if the fields have been pre-filled, then validates
-	if($("#firstname").val() != "" || $("#lastname").val() != "" && $("#emails").val() != "") {
-		if(checkLength($("#firstname"), 1)) {
-			if(checkLetters($("#firstname"))) {
-				$("#firstnameError").html("Success").removeClass("error").addClass("available");
-			}
-			else {
-				$("#firstnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
-			}
-		}
-		else {
-			$("#firstnameError").html("Must be longer than 1 character").addClass("error").removeClass("available");
-		}
-		if(checkLength($("#lastname"), 1)) {
-			if(checkLetters($("#lastname"))) {
-				$("#lastnameError").html("Success").removeClass("error").addClass("available");
-			}
-			else {
-				$("#lastnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
-			}
-		}
-		else {
-			$("#lastnameError").html("Must be longer than 1 character").addClass("error").removeClass("available");
-		}
-		chars = $('#emails').val();
-		if(checkEmail($("#emails"))) {
-			$('#emails').parents("tr").find(".gif-loader").show();
-			$.post("/php/checkavail.php", {email:chars},
-				  function(result) {
-					  $('#emails').parents("tr").find(".gif-loader").hide();
-					  if(result == 1) {
-						  //success
-						$("#emailError").html("Valid email address").removeClass("error").addClass("available");
-						email = true;
-					  }
-					  else if(result == 0) {
-						  //not available
-						  $("#emailError").html("Email has already been taken.").addClass("error").removeClass("available");
-						email = false;
-					  }
-					  else {
-						 $("#emailError").html("Invalid Email").addClass("error").removeClass("available");
-						email = false;
-					  }
-			});
-		}
-		else {
-			$("#emailError").html("Invalid Email").addClass("error").removeClass("available");
-			email = false;
-		}
-	}
-	
 	$("#firstname").keyup(function() {
 		if(checkLength($(this), 1)) {
 			if(checkLetters($("#firstname"))) {
@@ -87,18 +35,16 @@ $(document).ready(function() {
 	});
 	
 	$("#username").keyup(function() {
-		//var value = $("#username").val();
-		//var usernameVal = checkUsername($(this), 3);
 		chars = $('#username').val();
 		if(checkLength($('#username'), 3)) {
 			if(checkSC($('#username'))) {
 				chars = $('#username').val();
 				if(!chars.match(/\s/g)) {
-					$('#username').parents("tr").find(".gif-loader").show();
+					$('#username').parents("li").find(".gif-loader").show();
 					$("#usernameError").html("")
 					$.post("/php/checkavail.php", {username:chars},
 						  function(result) {
-							  $('#username').parents("tr").find(".gif-loader").hide();
+							  $('#username').parents("li").find(".gif-loader").hide();
 							  if(result == 1) {
 								  //success
 								  $("#usernameError").html("Available").removeClass("error").addClass("available");
@@ -137,10 +83,10 @@ $(document).ready(function() {
 	$("#emails").keyup(function() {
 		chars = $('#emails').val();
 		if(checkEmail($(this))) {
-			$('#emails').parents("tr").find(".gif-loader").show();
+			$('#emails').parents("li").find(".gif-loader").show();
 			$.post("/php/checkavail.php", {email:chars},
 				  function(result) {
-					  $('#emails').parents("tr").find(".gif-loader").hide();
+					  $('#emails').parents("li").find(".gif-loader").hide();
 					  if(result == 1) {
 						  //success
 						  $("#emailError").html("Valid email address").removeClass("error").addClass("available");
@@ -167,13 +113,13 @@ $(document).ready(function() {
 		$("#password2").val("");
 		$("#pass2Error").html("");
 		if(!checkLength($(this), 5)) {
-			$("#passError").html("Password not long enough").addClass("error").removeClass("available");
+			$("#passError").html("Not long enough").addClass("error").removeClass("available");
 		}
 		else if(!$(this).val().match(/[A-Z]/)) {
-			$("#passError").html("Passord must contain one capital letter").addClass("error").removeClass("available");
+			$("#passError").html("Must contain one capital letter").addClass("error").removeClass("available");
 		}
 		else if(!$(this).val().match(/[0-9]/)) {
-			$("#passError").html("Passord must contain one number").addClass("error").removeClass("available");
+			$("#passError").html("Must contain one number").addClass("error").removeClass("available");
 		}
 		else {
 			$("#passError").html("Valid password").removeClass("error").addClass("available");
@@ -182,10 +128,10 @@ $(document).ready(function() {
 	
 	$("#userpassword2").keyup(function() {
 		if(checkPasswordMatch()) {
-			$("#pass2Error").html("Passwords match").removeClass("error").addClass("available");
+			$("#pass2Error").html("Match").removeClass("error").addClass("available");
 		}
 		else {
-			$("#pass2Error").html("Passwords do not match").addClass("error").removeClass("available");
+			$("#pass2Error").html("Do not match").addClass("error").removeClass("available");
 		}
 	});
 	
@@ -282,7 +228,8 @@ function checkPasswordMatch() {
 }
 
 function checkForm() {
-	if(checkLength($("#firstname"), 1) && checkLength($("#lastname"), 1) && username && email && checkPasswordMatch() && checkLength($("#userpassword"), 5) && $("#terms").attr("checked") && $("#tz").val() != "none") {
+	if(checkLength($("#firstname"), 1) && checkLength($("#lastname"), 1) && username && email && checkPasswordMatch() && $("#userpassword").val().match(/[A-Z]/) && 
+		$("#userpassword").val().match(/[0-9]/) && checkLength($("#userpassword"), 5) && $("#terms").attr("checked") && $("#tz").val() != "none") {
 		return true;
 	}
 	else {	
@@ -292,7 +239,7 @@ function checkForm() {
 				$("#firstnameError").html("Success").addClass("available").removeClass("error");
 			}
 			else {
-				$("#firstnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
+				$("#firstnameError").html("Numbers and special characters not allowed").addClass("error").removeClass("available");
 			}
 		}
 		else {
@@ -305,7 +252,7 @@ function checkForm() {
 				$("#lastnameError").html("Success").addClass("available").removeClass("error");
 			}
 			else {
-				$("#lastnameError").html("No numbers or special characters allowed").addClass("error").removeClass("available");
+				$("#lastnameError").html("Numbers and special characters not allowed").addClass("error").removeClass("available");
 			}
 		}
 		else {
@@ -315,10 +262,8 @@ function checkForm() {
 		//check username
 		chars = $('#username').val();
 		if(checkLength($('#username'), 3)) {
-		$('#username').parents("tr").find(".gif-loader").show();
 		$.post("/php/checkavail.php", {username:chars},
 			  function(result) {
-				  $('#username').parents("tr").find(".gif-loader").hide();
 				  if(result == 1) {
 					  //success
 					  usernameVal = 2;
@@ -374,13 +319,13 @@ function checkForm() {
 		
 		//check passowrds
 		if(!checkLength($("#userpassword"), 5)) {
-			$("#passError").html("Password not long enough").addClass("error").removeClass("available");
+			$("#passError").html("Not long enough").addClass("error").removeClass("available");
 		}
 		else if(!$("#userpassword").val().match(/[A-Z]/)) {
-			$("#passError").html("Passord must contain one capital letter").addClass("error").removeClass("available");
+			$("#passError").html("Must contain one capital letter").addClass("error").removeClass("available");
 		}
 		else if(!$("#userpassword").val().match(/[0-9]/)) {
-			$("#passError").html("Passord must contain one number").addClass("error").removeClass("available");
+			$("#passError").html("Must contain one number").addClass("error").removeClass("available");
 		}
 		else {
 			$("#passError").html("Valid password").removeClass("error").addClass("available");

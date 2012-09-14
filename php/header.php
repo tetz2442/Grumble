@@ -134,7 +134,7 @@ if("<?php echo $_SESSION["time"]; ?>".length==0){
 </script>
 <script type="text/javascript" src="/javascript/script.js"></script>
 <?php
-if($filename == "create-account.php") {
+if($filename == "create-account.php" && !isset($_SESSION["user_id"])) {
  echo '<script type="text/javascript" src="/javascript/formValidation.js"></script>';	
 }
 if($filename == "contact.php") {
