@@ -1318,6 +1318,7 @@ social tab
 	-moz-border-radius-bottomleft:3px;
 	-webkit-border-bottom-left-radius:3px;
 	float: right;
+	margin-top: -8px;
 }
 #social-tab .content-padding p {
 	display: block;
