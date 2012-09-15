@@ -40,12 +40,12 @@
         <ul>
 	        <li>
 	            <p class="column1"><label for="firstname">First name:</label></p>
-	            <p class="column2"><input type="text" id="firstname" class="textInput" name="firstname" maxlength="50" autocomplete="off" <?php echo "value='" . $name[0] . "'"; ?>/></p>
+	            <p class="column2"><input type="text" id="firstname" class="textInput" name="firstname" maxlength="50" <?php echo "value='" . $name[0] . "'"; ?>/></p>
 	            <p class="column3"><span id="firstnameError"></span></p>
 	        <li>
 	        <li>
 	            <p class="column1"><label for="lastname">Last name:</label></p>
-	            <p class="column2"><input type="text" id="lastname" class="textInput" name="lastname" maxlength="50" autocomplete="off" <?php echo "value='" . $name[1] . "'"; ?>/></p>
+	            <p class="column2"><input type="text" id="lastname" class="textInput" name="lastname" maxlength="50" <?php echo "value='" . $name[1] . "'"; ?>/></p>
 	            <p class="column3"><span id="lastnameError"></span></p>
 	        </li>
 	        <li>
