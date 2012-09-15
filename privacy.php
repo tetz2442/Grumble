@@ -22,6 +22,7 @@ require_once "php/containerWide.php";
     <p>Any information provided by you is used to understand your needs and provide a better service. We may use your information for the following reasons:</p>
     <ul>
     <li>To send periodic e-mails and to contact you for market research purposes</li>
+    <li>To notify you when your Grumble's have reached a certain amount of comments, or when a reply has been places on your comment</li>
     <li>To personalize your website experience according to your interests</li>
     <li>To improve our products or services based on your needs</li>
     <li>To help other users of Grumble identify you (by username only)</li>
