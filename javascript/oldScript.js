@@ -98,3 +98,53 @@ $("#quick-compose-submit").click(function(event) {
 			email = false;
 		}
 	}
+
+	/*var element = $(this);
+			if(charLengthGrumble < 0) {
+				$("#notification-bar p").html("Too many characters to submit.").addClass("error");
+				$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			}
+			else if($("#quick-compose-textarea").val().length == 0) {
+				$("#notification-bar p").html("Grumble cannot be empty.").addClass("error");
+				$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			}
+			else {
+				var commenttext = $("#quick-compose-textarea").val();
+				var category = $("#comment-category").val();
+				$(element).attr("disabled","disabled");
+				$(element).parent().find("#gif-loader-comment").show();
+				$.post("/php/commentajax.php", {comment:commenttext, category:category},
+						function(result) {
+						$(element).parent().find("#gif-loader-comment").hide();
+						$(element).removeAttr("disabled");
+						if(result == 0 || result == "") {
+							$("#notification-bar p").html("Something went wrong. Please check your entries.").addClass("error");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						}
+						else if(result == 1) {
+							$("#notification-bar p").html("Already submitted.").removeClass("available").addClass("error");
+							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						}
+						else if(result != "") {
+							if($(".comment-holder").length > 0) {
+								$(result).insertBefore(".comment-holder:first");
+								var newText = linkText($(".comment-text:first").text());
+								$(".comment-text:first").addClass("linked").html(newText);
+								shortenLink(".comment-text:first a");
+							}
+							else {
+								$("#notification-bar p").html("Refreshing page...").removeClass("error").addClass("available");
+								$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).show();
+								document.location.reload(true);
+							}
+								
+							if($("#comments-left-header").length > 0) {
+								var grumblenumber = parseInt($("#comments-left-header span").text()) + 1;
+								$("#comments-left-header span").html(grumblenumber);
+							}
+			
+							$("#quick-compose-textarea").val("").css({"height":"20px","background-color":"#FFF9E8"});
+							$("#grumble-comment div").hide();
+						}
+				});
+			}*/
