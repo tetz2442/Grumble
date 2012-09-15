@@ -77,8 +77,7 @@ html { overflow-y: scroll; }
 
 }
 #maincolumn {
-	margin-top:49px;	
-	display: none;
+	margin-top:49px;
 }
 
 .padding-top {
@@ -341,7 +340,6 @@ html { overflow-y: scroll; }
 	padding-top:5px;
 	border-top:1px solid #e0e0e0;
 	text-align:center;
-	display: none;
 }
 #footer-links {
 	padding:2px 0px 5px 2px;
@@ -1319,7 +1317,7 @@ social tab
 	-webkit-border-radius:3px;
 	float: right;
 	margin-top: -8px;
-	margin-right: 8px;
+	margin-right: 7px;
 }
 #social-tab .content-padding p {
 	display: block;

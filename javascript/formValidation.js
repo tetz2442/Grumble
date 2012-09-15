@@ -6,6 +6,11 @@ var username = false;
 var email = false;
 
 $(document).ready(function() { 
+	//validate form if pre-filled
+	if($("#firstname").val() != "") {
+		checkForm();	
+	}
+	
 	$("#firstname").keyup(function() {
 		if(checkLength($(this), 1)) {
 			if(checkLetters($("#firstname"))) {
@@ -228,7 +233,7 @@ function checkPasswordMatch() {
 }
 
 function checkForm() {
-	if(checkLength($("#firstname"), 1) && checkLength($("#lastname"), 1) && username && email && checkPasswordMatch() && $("#userpassword").val().match(/[A-Z]/) && 
+	if(checkLength($("#firstname"), 1) && checkLetters($("#firstname")) && checkLength($("#lastname"), 1) && checkLetters($("#lastname")) && username && email && checkPasswordMatch() && $("#userpassword").val().match(/[A-Z]/) && 
 		$("#userpassword").val().match(/[0-9]/) && checkLength($("#userpassword"), 5) && $("#terms").attr("checked") && $("#tz").val() != "none") {
 		return true;
 	}
@@ -345,6 +350,7 @@ function checkForm() {
 		else {
 			$("#timezoneError").html("").removeClass("error").addClass("available");
 		}
+		
 		return false;
 	}
 }

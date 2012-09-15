@@ -17,9 +17,6 @@
   })();
 
 $(document).ready(function() { 
-	$("#maincolumn").delay(50).fadeIn(150);
-	$("#footer").delay(50).fadeIn(150);
-
 	$("#nav-category").click(function() {
 		var $element = $(this);
 		if($("#sub-nav").is(":visible")) {
@@ -63,6 +60,19 @@ $(document).ready(function() {
 				$element.parents("body").find(".login-drop-image").attr("src", "/images/arrow-down.png");
 			}
 		}
+	});
+	
+	$("#maincolumn").click(function () {
+		$element = $("body");
+		$("#sub-nav").fadeOut(50,function() {
+			$element.find(".drop-image").attr("src", "/images/arrow.png");
+		});
+		$("#dropdown-sub-nav").fadeOut(50, function() {
+			$element.find(".login-drop-image").attr("src", "/images/arrow.png");
+		});
+		$("#dropdown-form-login").fadeOut(50, function() {
+			$element.find(".login-drop-image").attr("src", "/images/arrow.png");
+		});
 	});
 	
 	$("div").on("mouseover", ".comment-holder", function () {
