@@ -1,6 +1,7 @@
 <?php
 require_once "conn.php";
 require_once "http.php";
+require_once "functions.php";
 require_once "sendemail.php";
 session_start();
 if(isset($_POST["reply"]) && is_numeric($_POST["reply"]) && isset($_POST["type"]) && $_POST["type"] == "load" && isset($_POST["amount"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
@@ -30,7 +31,7 @@ function retrieveReplies($voteid, $amount) {
 			echo '<div class="reply-padding">';
 			echo '<a class="reply-username username" href="/profile/' . $row["username"] . '">' . $row["username"] . '</a>';
 			echo '<p class="reply-text">' . stripslashes($row["reply_text"]) . '</p>';
-			echo '<small class="reply-time">' . $row["reply_date"] . '</small>';
+			echo '<small class="reply-time">' . convertToTimeZone($row["reply_date"], $_SESSION["timezone"]) . '</small>';
 			echo '</div>';
 			echo '</div>';
 		}
@@ -50,14 +51,14 @@ function enterReply($id, $text, $statususername) {
 	
 	if(mysql_num_rows($result) != 0) {
 		$sql = "INSERT INTO replies_grumble (status_id, reply_date, reply_user, reply_text) " . 
-			"VALUES(" . $id . ",'" . date("Y-m-d H:i:s", time()) . "'," . $_SESSION["user_id"] . ",'" . $commenttext . "')";
+			"VALUES(" . $id . ",UTC_TIMESTAMP()," . $_SESSION["user_id"] . ",'" . $commenttext . "')";
 		mysql_query($sql, $conn) or die("Error: " . mysql_error());
 		$commenttext = stripslashes(stripslashes($commenttext));
 		echo '<div class="ind-reply">';
 		echo '<div class="reply-padding">';
 		echo '<a class="reply-username username" href="/profile/' . $_SESSION["username"] . '">' . $_SESSION["username"] . '</a>';
 		echo '<p class="reply-text">' . $commenttext . '</p>';
-		echo '<small class="reply-time">' . date("M d, o g:i A", time()) . '</small>';
+		echo '<small class="reply-time">' . convertToTimeZone(gmdate("M d, o g:i A", time()), $_SESSION["timezone"]) . '</small>';
 		echo '</div>';
 		echo '</div>';
 		
