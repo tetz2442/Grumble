@@ -2,7 +2,7 @@
 	session_start();
 	require_once "conn.php";
 	require_once "http.php";
-	require_once "seofriendlyurls.php";
+	require_once "functions.php";
 	require_once "sendemail.php";
 	
 	if(isset($_REQUEST["action"]) &&

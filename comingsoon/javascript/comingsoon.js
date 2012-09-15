@@ -104,7 +104,7 @@ var email = false;
 
 $(document).ready(function() { 
 	$("#countdown").countdown({
-		date: "19 september 2012 7:00:00",
+		date: "19 september 2012 18:30:00",
 		format: "on"
 	});
 			

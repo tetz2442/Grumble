@@ -1,4 +1,87 @@
 <?php
+//user is logged in and timezone is set
+function convertToTimeZone($time, $tz) {
+	$newtime = new DateTime($time . " UTC");
+	$newtime->setTimezone(new DateTimeZone($tz));
+	return date_format($newtime, "M d, Y g:iA");
+}
+
+//user is not logged in and offset was grabbed
+function convertToUserTime($time, $offset) {
+	$newtime = new DateTime($time . " " . $offset);
+	return date_format($newtime, "M d, Y g:iA");
+}
+
+//returns the date as the time ago (1m, 1w, etc)
+function time_ago($date,$granularity=1) {
+	$retval = "";
+    $date = strtotime($date);
+    $difference = time() - $date;
+    $periods = array('dec' => 315360000,
+        'y' => 31536000,
+        'mon' => 2628000,
+        'w' => 604800, 
+        'd' => 86400,
+        'h' => 3600,
+        'm' => 60,
+        's' => 1);
+    if ($difference <= 59) { // less than 5 seconds ago, let's say "just now"
+        $retval = "just now";
+        return $retval;
+    } else {                            
+        foreach ($periods as $key => $value) {
+            if ($difference >= $value) {
+                $time = floor($difference/$value);
+                $difference %= $value;
+                $retval .= ($retval ? ' ' : '').$time;
+                $retval .= (($time > 1) ? $key : $key);
+                $granularity--;
+            }
+            if ($granularity == '0') { break; }
+        }
+        return $retval;      
+    }
+}
+
+/* takes the input, scrubs bad characters */
+function generate_seo_link($input,$replace = '-',$remove_words = true,$words_array = array())
+{
+	//make it lowercase, remove punctuation, remove multiple/leading/ending spaces
+	$return = trim(preg_replace('/[^a-zA-Z0-9\s]/','',strtolower($input)));
+
+	//remove words, if not helpful to seo
+	//i like my defaults list in remove_words(), so I wont pass that array
+	if($remove_words) { $return = remove_words($return,$replace,$words_array); }
+
+	//convert the spaces to whatever the user wants
+	//usually a dash or underscore..
+	//...then return the value.
+	return str_replace(' ',$replace,$return);
+}
+
+/* takes an input, scrubs unnecessary words */
+function remove_words($input,$replace,$words_array = array(),$unique_words = true)
+{
+	//separate all words based on spaces
+	$input_array = explode(' ',$input);
+
+	//create the return array
+	$return = array();
+
+	//loops through words, remove bad words, keep good ones
+	foreach($input_array as $word)
+	{
+		//if it's a word we should add...
+		if(!in_array($word,$words_array) && ($unique_words ? !in_array($word,$return) : true))
+		{
+			$return[] = $word;
+		}
+	}
+
+	//return good words separated by dashes
+	return implode($replace,$return);
+}
+
 //check if timezone exists
 function checkTimeZone($tz) {
 	// create an array listing the time zones

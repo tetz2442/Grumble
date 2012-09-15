@@ -29,16 +29,12 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 					echo '<div class="comment-header">';
 						echo '<a href="/profile/' . $row["username"] . '" data-id="' . $row["status_id"] . '" class="username" title="Visit profile"><strong>' . $row["username"] . '</strong></a>';
 						if (isset($_SESSION["timezone"])) {
-							$newtime = new DateTime($row["date_submitted"] . " UTC");
-							$newtime->setTimezone(new DateTimeZone($_SESSION["timezone"]));
-							$formatted_date = date_format($newtime, "M d, Y g:iA");
+							$formatted_date = convertToTimeZone($row["date_submitted"], $_SESSION["timezone"]);
 							//Sep 10, 2012 1:35 PM
-							//echo strtotime($formatted_date);
 							echo '<span class="comment-time" title="' . $formatted_date . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($formatted_date) . '</a></span>';
 						}
 						else {
-							$newtime = new DateTime($row["date_submitted"] . " " . $_SESSION["time"]);
-							$formatted_date = date_format($newtime, "M d, Y g:iA");
+							$formatted_date = convertToUserTime($row["date_submitted"], $_SESSION["time"]);
 							echo '<span class="comment-time" title="' . $formatted_date . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($formatted_date) . '</a></span>';
 						}
 					echo '</div>';

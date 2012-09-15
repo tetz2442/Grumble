@@ -1,7 +1,7 @@
 <?php
 require_once "php/conn.php";
 require_once "php/header.php";
-require_once "php/timeago.php";
+require_once "php/functions.php";
 require_once "php/outputgrumbles.php";
 require_once "php/outputcomments.php";
 require_once "php/containerStatus.php";
