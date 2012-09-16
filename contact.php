@@ -8,7 +8,7 @@ require_once "php/containerWide.php";
     	<h1>We want to hear from you.</h1>
         <p>Let us know what is on your mind; a question, a suggestion, whatever. We will respond as soon as we can.</p>
     </div>
-    <div id="contact-form" class="rounded-corners-large">	
+    <div id="contact-form" class="rounded-corners-large content-padding">	
     <?php
 		if(isset($_SESSION["username"])) {
 	?>
