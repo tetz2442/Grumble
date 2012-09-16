@@ -200,7 +200,7 @@
 						'Pacific/Auckland' => '(GMT+12:00) Auckland',
 						'Pacific/Tongatapu' => '(GMT+13:00) Nukualofa');
 					?>
-	            	<select name="tz" style="width:205px;" id="tz">
+	            	<select name="tz" id="tz">
 	                	<option value="none">Select Timezone</option>
 	                    <option value="Pacific/Honolulu">(GMT-10:00) Hawaii</option>
 	                    <option value="America/Anchorage">(GMT-09:00) Alaska</option>

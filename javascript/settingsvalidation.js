@@ -4,15 +4,23 @@ var username = false;
 var saving = false;
 var changes = false;
 var passwords = false;
+var timezone = false;
 
 $(document).ready(function() {
 	var usernameval = $(".dropdown-login").text();
+	var timezoneval = $("#tz").val();
 	
 	$("#email-noti-thread").change(function () {
 		changes = true;
 	});
 	$("#email-noti-comment").change(function () {
 		changes = true;
+	});
+	$("#tz").change(function () {
+		if($("#tz").val() != timezoneval)
+			timezone = true;
+		else
+			timezone = false;
 	});
 	$("#username-change-input").keyup(function () {
 		var $element = $(this);
@@ -111,22 +119,38 @@ $(document).ready(function() {
 			var currentpass = $("#pass-current").val();
 			var newpass = $("#pass-change").val();
 			var newpass2 = $("#pass-change2").val();
+			var tz = $("#tz").val();
 			var threadcheck = $("#email-noti-thread").is(":checked");
 			var commentcheck = $("#email-noti-comment").is(":checked");
 			
-			if(username || changes || passwords) {
+			if(username || changes || passwords || timezone) {
 				if(!saving) {
 					$("#gif-loader-settings").fadeIn("fast");
 					saving = true;
 					$("#notification-bar p").html("Saving...").removeClass("error").addClass("available");
 					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast");
-						
-					$.post("/php/settingsajax.php", {user:chars, username:usernameval, currentpass:currentpass, newpass:newpass, newpass2:newpass2, threadcheck:threadcheck, commentcheck:commentcheck},
+
+					var tabs = $("#settings-holder").find(".tabs a.active").text();
+					var obj;
+					//get object to send
+					if(tabs == "Username")
+						obj = {user:chars, username:usernameval};
+					else if(tabs == "Email")
+						obj = {threadcheck:threadcheck, commentcheck:commentcheck, username:usernameval};
+					else if (tabs == "Password")
+						obj = {currentpass:currentpass, newpass:newpass, newpass2:newpass2, username:usernameval};
+					else if(tabs == "Timezone")
+						obj = {timezone:tz, username:usernameval};
+					else
+						obj = {};
+
+					$.post("/php/settingsajax.php", obj,
 						function(result) {
 						if(result == 1) {
-							$("#notification-bar p").html("Success. Redirecting to homepage...").removeClass("error").addClass("available");
+							usernameval = chars;
+							$("#notification-bar p").html("Success, username changed. Refreshing page...").removeClass("error").addClass("available");
 							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(1000).queue(function() {
-								location = "http://" + window.location.hostname;
+								location = "http://" + window.location.hostname + "/profile/" + chars + "#settings";
 							});
 						}
 						else if(result == 2) {
@@ -141,9 +165,9 @@ $(document).ready(function() {
 						}
 						else if(result == 4) {
 							saving = false;
-							$("#notification-bar p").html("Success. Email settings and Username changed. Redireting to homepage...").removeClass("error").addClass("available");
+							$("#notification-bar p").html("Success, timezone changed. Refreshing page...").removeClass("error").addClass("available");
 							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(1000).queue(function() {
-								location = "http://" + window.location.hostname;
+								window.location.reload();
 							});
 						}
 						else if(result == 5) {
