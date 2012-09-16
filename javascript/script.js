@@ -653,9 +653,11 @@ $(document).ready(function() {
 							shortenLink(".comment-text:first a");
 						}
 						else {
-							$("#notification-bar p").html("Refreshing page...").removeClass("error").addClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).show();
-							document.location.reload(true);
+							$("<div id='comments-left-header'><h4>Comments</h4></div>").insertBefore("#grumble-comment");
+							$(result).insertAfter("#grumble-comment");
+							var newText = linkText($(".comment-text:first").text());
+							$(".comment-text:first").addClass("linked").html(newText);
+							shortenLink(".comment-text:first a");
 						}
 							
 						if($("#comments-left-header").length > 0) {
