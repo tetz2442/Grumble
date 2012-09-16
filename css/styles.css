@@ -682,27 +682,27 @@ html { overflow-y: scroll; }
 #cat-header button {
 	float:right;
 }
-.tabs {
+.tabs, .tabs-settings {
 	width:100%;	
 	margin-top:30px;
 }
-.tabs li {
+.tabs li, .tabs-settings li {
 	list-style:none;
 	display:inline;	
 }
-.tabs a {
+.tabs a, .tabs-settings a {
 	padding:5px 0;
 	display:inline-block;
 	text-decoration:none;
-	color:#696767;
+	color:#B5B2B2;
 	font-size:1.1em;
 	width:115px;
 	text-align:center;
 }
-.tabs a:hover {
+.tabs a:hover, .tabs-settings a:hover {
 	color:#333;	
 }
-.tabs a.active {
+.tabs a.active, .tabs-settings a.active {
 	color:#333;		
 }
 #arrow-top {
@@ -949,7 +949,6 @@ html { overflow-y: scroll; }
 #arrow-top-profile {
 	width:100%;
 	border-bottom:1px solid #7A7979;
-	margin-bottom:25px;
 }
 #arrow-top-profile img {
 	margin-bottom:-4px;	
@@ -974,8 +973,8 @@ html { overflow-y: scroll; }
 	position:fixed;
 	top:-500px;
 	left:50%;
-	margin-left:-325px;
-	width:650px;
+	margin-left:-275px;
+	width:550px;
 	z-index:1999;
 	background-color:#FAF7F7;
 	border-bottom-left-radius:3px;
@@ -1007,20 +1006,11 @@ html { overflow-y: scroll; }
 	display:block;
 	width:90%;
 }
-#username-change {
+#username-change, #password-change {
 	float:left;	
-	width:50%;
-}
-#password-change {
-	float:left;	
-	width:45%;
-	margin-left:5%;
 }
 #pass-current {
 	margin-bottom:15px !important;	
-}
-#email-change {
-	margin-top:15px;
 }
 #button-controls {
 	float:left;
@@ -1107,7 +1097,7 @@ html { overflow-y: scroll; }
 .lightbox-head {
 	float:left;
 	width:100%;
-	padding:2px 0px 2px 0px;
+	padding:2px 0px 2px 0px;su
 }
 .quick-compose-header {
 	float:left;

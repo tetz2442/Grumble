@@ -29,7 +29,6 @@ $(document).ready(function() {
 			$element.find(".drop-image").attr("src", "/images/arrow-down.png");
 		}
 	});
-	
 	$(".dropdown-shortlink").mousedown(function() {
 		var $element = $(this);
 		var $dropdownform = $("#dropdown-sub-nav");
