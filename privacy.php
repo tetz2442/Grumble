@@ -1,7 +1,7 @@
 <?php
 require_once "php/conn.php";
 require_once "php/header.php";
-require_once "php/containerWide.php";
+require_once "php/containerGrumbles.php";
 ?>
 
 <div id="terms-privacy-holder" class="content-padding">
@@ -44,7 +44,7 @@ require_once "php/containerWide.php";
     <h2>Changes to this Policy</h2>
     <p>Grumble reserves the right to change or modify any of the privacy policies contained in this page at any time. We will notify you through the email you have provided when our policies change. By continuing to use Grumble after a revision has been made, you agree to be bound by the revised Privacy Policy.</p>
 
-	<p><strong>Date of Last Update.</strong><br />This agreement was last updated on September 7, 2012.</p>
+	<p><strong>Date of Last Update.</strong><br />This agreement was last updated on September 19, 2012.</p>
 </div>
 
 </div>
