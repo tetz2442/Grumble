@@ -131,6 +131,11 @@ function sendEmail($email, $sendfrom, $type, $parameters) {
 		$parameters[0] . "\n\nThe Grumble Team";
 		mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send email.");
 	}
+	else if($type == "admin") {
+		$subject = $parameters[0];
+		$body = stripslashes($parameters[1]);
+		mail($email, $subject, $body, $sendfrom) or die("Could not send email.");
+	}
 }
 
 //check if timezone exists

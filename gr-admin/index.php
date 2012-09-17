@@ -2,16 +2,16 @@
 require_once "../php/conn.php";
 require_once "../php/header.php";
 require_once "../php/containerGrumbles.php";
-
+require_once "adminincludes.php";
 //is an admin
 if(isset($_SESSION["username"]) && $_SESSION["access_lvl"] == 3) {	
 ?>
-<link type="text/css" href="/css/admin.css" rel="stylesheet" media="all">
-
 <div class="content-padding">
-	<a class="button" href="contact.php">Contact Messages</a>
-	<a class="button" href="spam.php">Spam</a>
-	<a class="button">Remove old Temp Passwords</a>
+	<div>
+		<a class="button" href="contact.php">Contact Messages</a>
+		<a class="button" href="spam.php">Spam</a>
+		<a class="button">Remove old Temp Passwords</a>
+	</div>
 </div>
 <?php
 }

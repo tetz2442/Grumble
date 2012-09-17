@@ -44,7 +44,7 @@
                     <ul id="dropdown-form-login" class="rounded-corners-medium">
                         <li id="dropdown-arrow"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>
                         <li>
-                            <label for="email">Email</label>
+                            <label for="email">Email or Username</label>
                             <input type="text" id="email" name="email" maxlength="255" class="input-user-nav textInput"/>
                         </li>
                         <li class="padding-top">

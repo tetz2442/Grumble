@@ -12,7 +12,7 @@ if(!isset($_SESSION["user_id"])) {
 <form method="post" action="php/transact-user.php">
 <ul>
 <li>
-    <label for="email" class="login-label">Email Address:</label>
+    <label for="email" class="login-label">Email or Username:</label>
     <input type="email" id="email" class="textInput" name="email" maxlength="100" value="<?php if(isset($_GET["email"])) echo strip_tags($_GET["email"]); ?>"/>
 </li>
 <li>
