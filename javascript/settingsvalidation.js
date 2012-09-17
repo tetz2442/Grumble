@@ -125,84 +125,90 @@ $(document).ready(function() {
 			
 			if(username || changes || passwords || timezone) {
 				if(!saving) {
-					$("#gif-loader-settings").fadeIn("fast");
-					saving = true;
-					$("#notification-bar p").html("Saving...").removeClass("error").addClass("available");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast");
-
 					var tabs = $("#settings-holder").find(".tabs a.active").text();
 					var obj;
 					//get object to send
-					if(tabs == "Username")
+					if(tabs == "Username" && username)
 						obj = {user:chars, username:usernameval};
-					else if(tabs == "Email")
+					else if(tabs == "Email" && changes)
 						obj = {threadcheck:threadcheck, commentcheck:commentcheck, username:usernameval};
-					else if (tabs == "Password")
+					else if (tabs == "Password" && passwords)
 						obj = {currentpass:currentpass, newpass:newpass, newpass2:newpass2, username:usernameval};
-					else if(tabs == "Timezone")
+					else if(tabs == "Timezone" && timezone)
 						obj = {timezone:tz, username:usernameval};
 					else
-						obj = {};
+						obj = "none";
 
-					$.post("/php/settingsajax.php", obj,
-						function(result) {
-						if(result == 1) {
-							usernameval = chars;
-							$("#notification-bar p").html("Success, username changed. Refreshing page...").removeClass("error").addClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(1000).queue(function() {
-								location = "http://" + window.location.hostname + "/profile/" + chars + "#settings";
-							});
-						}
-						else if(result == 2) {
-							saving = false;
-							$("#notification-bar p").html("Success. Password has been Changed.").removeClass("error").addClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
-						}
-						else if(result == 3) {
-							saving = false;
-							$("#notification-bar p").html("Success. Email settings changed.").removeClass("error").addClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
-						}
-						else if(result == 4) {
-							saving = false;
-							$("#notification-bar p").html("Success, timezone changed. Refreshing page...").removeClass("error").addClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(1000).queue(function() {
-								window.location.reload();
-							});
-						}
-						else if(result == 5) {
-							saving = false;
-							$("#notification-bar p").html("Current password did not match. Settings not changed.").addClass("error").removeClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
-						}
-						else if(result == 0) {
-							saving = false;
-							$("#notification-bar p").html("Something went wrong. Please check your entries.").addClass("error").removeClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
-						}
-						else {
-							saving = false;
-							$("#notification-bar p").html("Error. Please contact us with details.").addClass("error").removeClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
-						}
-						
-						if(newuser) {
-							location = "http://" + window.location.hostname;
-						}
-						$("#gif-loader-settings").fadeOut("fast");
-						
-						if(result != 0) {
-							//clear fields
-							$("#pass-current").val("");
-							$("#pass-change").val("");
-							$("#pass-change2").val("");
-							$("#pass-change").parent().find(".validation-settings:eq(0)").fadeOut(500);
-							$("#pass-change2").parent().find(".validation-settings:eq(1)").fadeOut(500);
-							username = false;
-							passwords = false;
-							changes = false;
-						}
-					});
+					if(obj != "none") {
+						$("#gif-loader-settings").fadeIn("fast");
+						saving = true;
+						$("#notification-bar p").html("Saving...").removeClass("error").addClass("available");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast");
+					
+						$.post("/php/settingsajax.php", obj,
+							function(result) {
+							if(result == 1) {
+								usernameval = chars;
+								$("#notification-bar p").html("Success, username changed. Refreshing page...").removeClass("error").addClass("available");
+								$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(1000).queue(function() {
+									location = "http://" + window.location.hostname + "/profile/" + chars + "#settings";
+								});
+							}
+							else if(result == 2) {
+								saving = false;
+								$("#notification-bar p").html("Success. Password has been Changed.").removeClass("error").addClass("available");
+								$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+							}
+							else if(result == 3) {
+								saving = false;
+								$("#notification-bar p").html("Success. Email settings changed.").removeClass("error").addClass("available");
+								$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+							}
+							else if(result == 4) {
+								saving = false;
+								$("#notification-bar p").html("Success, timezone changed. Refreshing page...").removeClass("error").addClass("available");
+								$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(1000).queue(function() {
+									window.location.reload();
+								});
+							}
+							else if(result == 5) {
+								saving = false;
+								$("#notification-bar p").html("Current password did not match. Settings not changed.").addClass("error").removeClass("available");
+								$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+							}
+							else if(result == 0) {
+								saving = false;
+								$("#notification-bar p").html("Something went wrong. Please check your entries.").addClass("error").removeClass("available");
+								$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+							}
+							else {
+								saving = false;
+								$("#notification-bar p").html("Error. Please contact us with details.").addClass("error").removeClass("available");
+								$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+							}
+							
+							if(newuser) {
+								location = "http://" + window.location.hostname;
+							}
+							$("#gif-loader-settings").fadeOut("fast");
+							
+							if(result != 0) {
+								//clear fields
+								$("#pass-current").val("");
+								$("#pass-change").val("");
+								$("#pass-change2").val("");
+								$("#pass-change").parent().find(".validation-settings:eq(0)").fadeOut(500);
+								$("#pass-change2").parent().find(".validation-settings:eq(1)").fadeOut(500);
+								username = false;
+								passwords = false;
+								changes = false;
+							}
+						});
+					}
+					else {
+						$("#notification-bar p").html("No changes detected on this tab.").addClass("error").removeClass("available");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					}
 				}
 			}
 			else {
