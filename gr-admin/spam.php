@@ -5,6 +5,7 @@ require_once "../php/containerGrumbles.php";
 require_once "../php/functions.php";
 require_once "outputspam.php";
 require_once "../php/outputcomments.php";
+require_once "adminincludes.php";
 
 //is an admin
 if(isset($_SESSION["username"]) && $_SESSION["access_lvl"] == 3) {
@@ -13,14 +14,20 @@ if(isset($_SESSION["username"]) && $_SESSION["access_lvl"] == 3) {
 	$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
 	
 ?>
-<link type="text/css" href="/css/admin.css" rel="stylesheet" media="all">
 <div class="content-padding">
-	<a class="button" href="contact.php">Contact Messages</a>
-	<a class="button" href="spam.php">Spam</a>
-	<a class="button">Remove old Temp Passwords</a>
+	<div>
+		<a class="button" href="contact.php">Contact Messages</a>
+		<a class="button" href="spam.php">Spam</a>
+		<a class="button">Remove old Temp Passwords</a>
+	</div>
     	<?php
-		while($row = mysql_fetch_array($result)) {
-			outputspam($row["spam_id"]);
+    	if(mysql_num_rows($result) != 0) {
+			while($row = mysql_fetch_array($result)) {
+				outputspam($row["spam_id"]);
+			}
+		}
+		else {
+			echo '<p class="content-padding">No spam at this time.</p>';
 		}
 		?>
 </div>

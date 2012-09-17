@@ -15,7 +15,7 @@
 					
 				$sql = "SELECT user_id, access_lvl, username, user_password, user_salt, user_timezone " .
 					"FROM users_grumble " .
-					"WHERE user_email='" . $email . "' AND user_verified = 1 LIMIT 0,1";
+					"WHERE (user_email='" . $email . "' OR username = '" . $email . "') AND user_verified = 1 LIMIT 0,1";
 				$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
 				$row = mysql_fetch_array($result);
 				$hashed_pass = crypt($password, $row['user_salt']) . $row["user_salt"];
