@@ -106,7 +106,7 @@ $(document).ready(function() {
 			var id = $element.parents(".comment-holder").find(".username").attr("data-id");
 			if(confirm("Are you sure you want to report this comment as spam?")) {
 				var $parent = $element.parents(".comment-holder");
-				$element.parents(".comment-holder").find(".gif-loader-replies").show();
+				$parent.find(".gif-loader-replies").show();
 				$element.remove();
 				$.post("/php/commentajax.php", {commentid:id, action:"Spam"},
 				function(result) {
@@ -117,6 +117,27 @@ $(document).ready(function() {
 					}
 					else {
 						$("#notification-bar p").html("Something went wrong. Could not report.").removeClass("available").addClass("error");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					}
+				});
+			}
+		}
+		else if($element.text() == "Remove") {
+			var id = $element.parents(".comment-holder").find(".username").attr("data-id");
+			if(confirm("Are you sure you want to remove this comment from the spam list?")) {
+				var $parent = $element.parents(".comment-holder");
+				$parent.find(".gif-loader-replies").show();
+				$.post("/php/commentajax.php", {commentid:id, action:"Remove"},
+				function(result) {
+					$parent.find(".gif-loader-replies").hide();
+					if(result == 1) {
+						$("#notification-bar p").html("Removed from spam list.").removeClass("error").addClass("available");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						$element.closest(".spam-holder").remove();
+						$parent.remove();
+					}
+					else {
+						$("#notification-bar p").html("Something went wrong. Could not remove.").removeClass("available").addClass("error");
 						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 					}
 				});

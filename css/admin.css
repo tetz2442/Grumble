@@ -1,0 +1,17 @@
+.contact-message {
+	margin-bottom: 10px;
+	padding-top:10px;
+	border-bottom: 1px solid #333;
+}
+.contact-text {
+	margin: 15px 0 15px 10px !important;
+}
+.contact-message p {
+	margin: 5px 0;
+}
+.contact-options a {
+	margin-right: 5px;
+}
+.spam-holder {
+	margin-top: 10px;
+}
