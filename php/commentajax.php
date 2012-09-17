@@ -2,7 +2,6 @@
 	require_once "conn.php";
 	require_once "functions.php";
 	require_once "outputcomments.php";
-	require_once "sendemail.php";
 	session_start();
 	if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && is_numeric($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		$comment = mysql_real_escape_string(strip_tags($_POST["comment"]));
@@ -119,5 +118,17 @@
 			mysql_query($sql, $conn) or die("Could not spam: " . mysql_error());
 		}
 		echo 1;
+	}
+	else if(isset($_POST["commentid"]) && is_numeric($_POST["commentid"]) && isset($_POST["action"]) && $_POST["action"] == "Remove" && isset($_SESSION["username"]) && $_SESSION["access_lvl"] == 3) {
+		$id = mysql_real_escape_string($_POST["commentid"]);
+		
+		$sql = "SELECT spam_id FROM spam_grumble WHERE status_id = " . $id;
+		$result = mysql_query($sql, $conn) or die("Could not spam: " . mysql_error());
+		if(mysql_num_rows($result) != 0) {
+			$row = mysql_fetch_array($result);
+			$sql = "DELETE FROM spam_grumble WHERE spam_id = " . $row["spam_id"] . " LIMIT 1";
+			mysql_query($sql, $conn) or die("Could not spam: " . mysql_error());
+			echo 1;
+		}
 	}
 ?>

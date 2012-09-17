@@ -1,7 +1,6 @@
 <?php
 	require_once "conn.php";
 	require_once "http.php";
-	require_once "sendemail.php";
 	require_once "functions.php";
 	session_start();
 	if(isset($_REQUEST["action"])) {
@@ -11,8 +10,8 @@
 				// Unset the token, so that it cannot be used again.
 				unset($_SESSION['token']);
 				
-				$email = mysql_real_escape_string(strip_tags($_POST["email"]));
-				$password = mysql_real_escape_string(strip_tags($_POST["password"]));
+				$email = escapeAndStrip($_POST["email"]);
+				$password = escapeAndStrip($_POST["password"]);
 					
 				$sql = "SELECT user_id, access_lvl, username, user_password, user_salt, user_timezone " .
 					"FROM users_grumble " .
@@ -21,7 +20,7 @@
 				$row = mysql_fetch_array($result);
 				$hashed_pass = crypt($password, $row['user_salt']) . $row["user_salt"];
 				
-				$refer = strip_tags($_POST["referrer"]);
+				$refer = strip($_POST["referrer"]);
 				//email was entered wrong
 				if(mysql_num_rows($result) == 0) {
 					redirect("../login?login=failed&email=" . $email);
@@ -97,15 +96,15 @@
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token2']);
 					
-					$username = mysql_real_escape_string($_POST["username"]);
-					$username = str_replace(" ", "", $username);
-					$pass1 = mysql_real_escape_string($_POST["password"]);
-					$pass2 = mysql_real_escape_string($_POST["password2"]);
-					$firstname = mysql_real_escape_string($_POST["firstname"]);
-					$lastname = mysql_real_escape_string($_POST["lastname"]);
+					$username = escapeAndStrip($_POST["username"]);
+					$username = replaceSpaces($username);
+					$pass1 = escapeAndStrip($_POST["password"]);
+					$pass2 = escapeAndStrip($_POST["password2"]);
+					$firstname = escapeAndStrip($_POST["firstname"]);
+					$lastname = escapeAndStrip($_POST["lastname"]);
 					
-					$email = mysql_real_escape_string($_POST["email"]);
-					$timezone = mysql_real_escape_string($_POST["tz"]);
+					$email = escapeAndStrip($_POST["email"]);
+					$timezone = escapeAndStrip($_POST["tz"]);
 
 					//validate username further
 					if(strlen($username) >= 4 && strlen($username) <= 15 && !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬-]/', $username)
@@ -165,7 +164,7 @@
 				// Unset the token, so that it cannot be used again.
 				unset($_SESSION['token3']);
 				
-				$email = mysql_real_escape_string($_POST["email"]);
+				$email = escapeAndStrip($_POST["email"]);
 				
 				$sql = "SELECT user_email FROM users_grumble " . 
 					"WHERE user_email='" . $email . "' AND user_verified = 1 LIMIT 0,1";
@@ -221,9 +220,9 @@
 				// Unset the token, so that it cannot be used again.
 				unset($_SESSION['token3']);
 					
-				$email = mysql_real_escape_string($_POST["email"]);
-				$password = mysql_real_escape_string($_POST["password"]);
-				$hash = mysql_real_escape_string($_POST["hash"]);
+				$email = escapeAndStrip($_POST["email"]);
+				$password = escapeAndStrip($_POST["password"]);
+				$hash = escapeAndStrip($_POST["hash"]);
 				
 				$sql = "SELECT ug.user_id FROM temp_password_grumble AS tpg " .
 				"LEFT OUTER JOIN users_grumble AS ug ON ug.user_email = tpg.user_email " .
@@ -257,8 +256,8 @@
 			
 		case "verify" :
 			if(isset($_GET["hash"]) && strlen($_GET["hash"]) == 50 && isset($_GET["email"])) {	
-				$hash = mysql_real_escape_string($_GET["hash"]);
-				$email = mysql_real_escape_string($_GET["email"]);
+				$hash = escapeAndStrip($_GET["hash"]);
+				$email = escapeAndStrip($_GET["email"]);
 				
 				$sql = "SELECT ug.user_id, ug.username, ug.user_timezone FROM temp_password_grumble AS tpg " .
 				"LEFT OUTER JOIN users_grumble AS ug ON ug.user_email = tpg.user_email AND ug.user_verified = 0 " .

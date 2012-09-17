@@ -1,5 +1,5 @@
 <?php
-function outputComments($grumble, $comments = false, $loggedin = false) {
+function outputComments($grumble, $comments = false, $loggedin = false, $admin = false) {
 	global $conn;
 	if($grumble) {
 		if (isset($_SESSION["timezone"])) {
@@ -44,9 +44,12 @@ function outputComments($grumble, $comments = false, $loggedin = false) {
 					echo '<div class="embed-link"></div>';
 				echo '</div>';
 			echo '<div class="comment-extras">';
-			if(isset($_SESSION["username"]) && $_SESSION["username"] == $row["username"]) {
+			if(isset($_SESSION["username"]) && $_SESSION["username"] == $row["username"] || $admin) {
 				echo '<div class="comment-options">';
 				echo '<p class="comment-delete" title="Delete this Comment">Delete</p>';
+				if($admin) {
+					echo '<p class="comment-remove" title="Remove this comment from the spam list">Remove</p>';
+				}
 				echo '</div>';
 			}
 			else if(isset($_SESSION["username"])) {
