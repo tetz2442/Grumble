@@ -9,6 +9,7 @@ require_once "php/containerGrumbles.php";
 
     <p>Grumble is committed to protecting your privacy.</p>
     <p>This privacy policy describes the privacy practices for Grumble (the "Site"), located at www.grumbleonline.com).</p>
+    <p>Anything you post on Grumble is available to anyone on the internet. Your Grumbles and comments are public by default and can include links to other sites. Replies by default are only available to users who have signed up for Grumble.</p>
     <h2>Information we collect</h2>
     <p>We may collect the following information when your register on or fill out a form on our site:</p>
     <ul>

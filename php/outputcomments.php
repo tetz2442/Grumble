@@ -28,8 +28,13 @@ function outputComments($grumble, $comments = false, $loggedin = false, $admin =
 				echo '<div class="comment-inner-holder">';
 					echo '<div class="comment-header">';
 						echo '<a href="/profile/' . $row["username"] . '" data-id="' . $row["status_id"] . '" class="username" title="Visit profile"><strong>' . $row["username"] . '</strong></a>';
-						if (isset($_SESSION["timezone"]) || isset($_SESSION["time"])) {
+						if (isset($_SESSION["timezone"])) {
 							$formatted_date = convertToTimeZone($row["date_submitted"], $_SESSION["timezone"]);
+							//Sep 10, 2012 1:35 PM
+							echo '<span class="comment-time" title="' . $formatted_date . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($formatted_date) . '</a></span>';
+						}
+						else if(isset($_SESSION["time"])) {
+							$formatted_date = convertToTimeZone($row["date_submitted"], $_SESSION["time"]);
 							//Sep 10, 2012 1:35 PM
 							echo '<span class="comment-time" title="' . $formatted_date . '"><a href="/profile/' . $row["username"] . '/comment/' . $row["status_id"] . '" class="colored-link-1">' . time_ago($formatted_date) . '</a></span>';
 						}

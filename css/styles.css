@@ -46,6 +46,9 @@ table {
     border-spacing:0;
     width: 100%;
 }
+img {
+	border:none;
+}
 input, select {
     vertical-align:middle;
 }
@@ -421,7 +424,8 @@ html { overflow-y: scroll; }
 *grumble css
 ******/
 #grumble-header p {
-	margin-top:20px;	
+	margin-top:20px;
+	line-height: 1.2em;	
 }
 #grumble-header {
 	float:left;	
@@ -452,7 +456,7 @@ html { overflow-y: scroll; }
 	margin-top: 10px;
 }
 #share-category div {
-	margin-bottom: 5px !important;
+	margin-bottom: 10px !important;
 }
 #comments-left-header {
 	border-bottom:1px solid #666;
@@ -490,6 +494,10 @@ html { overflow-y: scroll; }
 }
 .comment-text-holder {
 	padding:5px 0;
+}
+.comment-text-holder, .reply-text, .grumble-text-holder p {
+	font-size: .95em;
+	line-height: 1.5em;	
 }
 .comment-extras {
 	margin-top:3px;
@@ -730,7 +738,7 @@ html { overflow-y: scroll; }
 	margin-right:100px;
 }
 .grumble-text-holder p {
-	margin-top:10px;	
+	margin-top:10px;
 }
 .grumble-comment-number {
 	float:right;
@@ -1266,7 +1274,7 @@ social tab
 	position: fixed;
 	z-index: 3000;
 	right: 0px;
-	top: 150px;
+	top: 240px;
 }
 #social-tab img {
 	display: block;

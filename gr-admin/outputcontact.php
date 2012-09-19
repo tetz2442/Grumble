@@ -9,7 +9,7 @@ function outputcontact($id) {
 		echo '<div class="contact-message">';
 		echo '<h4>' . $row["contact_message_type"] . '</h4>';
 		echo '<p><strong>' . $row["contact_name"] . " - " . $row["contact_email"] . '</strong></p>';
-		echo '<p class="contact-text">' . $row["contact_message"] . '</p>';
+		echo '<p class="contact-text">' . stripslashes($row["contact_message"]) . '</p>';
 		echo '<p class="contact-options" data-id="' . $row["contact_id"] . '"><a href="#">Resolved</a><a href="#">Delete</a><a href="#">Contact User</a></p>';
 		echo '</div>';
 	}

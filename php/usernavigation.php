@@ -28,6 +28,9 @@
             			echo "<li><a href='/contact'>Contact Us</a></li>";
                         echo '<li class="divider light"></li>';
             			echo "<li><a href='/profile/" . $_SESSION["username"] . "#settings' id='settings-dropdown'>Settings</a></li>";
+            			if($_SESSION["access_lvl"] == 3) {
+            				echo "<li><a href='/gr-admin'>Admin</a></li>";
+            			}
                         echo "<li><a href='/php/transact-user.php?action=Logout'>Logout</a></li>";
                     echo '</ul>';
                 echo '</li>';
