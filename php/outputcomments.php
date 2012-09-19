@@ -1,5 +1,5 @@
 <?php
-function outputComments($grumble, $comments = false, $loggedin = false, $admin = false) {
+function outputComments($grumble, $comments = false, $loggedin = false, $admin = false, $profile = false) {
 	global $conn;
 	if($grumble) {
 		if (isset($_SESSION["timezone"])) {
@@ -7,10 +7,11 @@ function outputComments($grumble, $comments = false, $loggedin = false, $admin =
 		}
 
 		$sql = "SELECT sg.status_id, sg.status_text, ug.username, sg.date_submitted, " . 
-			"ug.user_id, ug.username, COUNT(user_like_id) AS votes_up_count FROM status_grumble AS sg " . 
+			"ug.user_id, ug.username, COUNT(user_like_id) AS votes_up_count, scg.sub_category_name, scg.sub_category_id, scg.sub_category_url, cg.category_url FROM status_grumble AS sg " . 
 			"LEFT OUTER JOIN user_likes_grumble AS vg ON sg.status_id = vg.status_id " .
-			"LEFT OUTER JOIN users_grumble AS ug ON " .
-			"sg.user_id = ug.user_id " . 
+			"LEFT OUTER JOIN users_grumble AS ug ON sg.user_id = ug.user_id " . 
+			"LEFT OUTER JOIN sub_category_grumble AS scg ON scg.sub_category_id = sg.sub_category_id " .
+			"LEFT OUTER JOIN categories_grumble AS cg ON scg.category_id = cg.category_id " .
 			"WHERE sg.status_id = " . $grumble . 
 			" LIMIT 0, 1";	
 		$result = mysql_query($sql, $conn) or die("Error" . mysql_error());
@@ -27,7 +28,10 @@ function outputComments($grumble, $comments = false, $loggedin = false, $admin =
 			
 				echo '<div class="comment-inner-holder">';
 					echo '<div class="comment-header">';
-						echo '<a href="/profile/' . $row["username"] . '" data-id="' . $row["status_id"] . '" class="username" title="Visit profile"><strong>' . $row["username"] . '</strong></a>';
+						if(!$profile)
+							echo '<a href="/profile/' . $row["username"] . '" data-id="' . $row["status_id"] . '" class="username" title="Visit profile"><strong>' . $row["username"] . '</strong></a>';
+						else 
+							echo '<a href="/' . $row["category_url"] . '/' . $row["sub_category_url"] . '/' . $row["sub_category_id"] . '" data-id="' . $row["status_id"] . '" class="username" title="Go to Grumble"><strong>' . stripslashes($row["sub_category_name"]) . '</strong></a>';
 						if (isset($_SESSION["timezone"])) {
 							$formatted_date = convertToTimeZone($row["date_submitted"], $_SESSION["timezone"]);
 							//Sep 10, 2012 1:35 PM
