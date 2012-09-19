@@ -1,15 +1,5 @@
 // JavaScript Document
 //social code
-window.fbAsyncInit = function() {
-  FB.init({
-    appId      : '178795128911821', // App ID
-    channelUrl : '//www.' + window.location.hostname + '/php/transact-user.php', // Channel File
-    status     : true, // check login status
-    cookie     : true, // enable cookies to allow the server to access the session
-    xfbml      : true  // parse XFBML
-  });
-  // Additional initialization code here
-};
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
