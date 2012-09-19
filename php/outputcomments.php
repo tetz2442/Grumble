@@ -28,6 +28,7 @@ function outputComments($grumble, $comments = false, $loggedin = false, $admin =
 			
 				echo '<div class="comment-inner-holder">';
 					echo '<div class="comment-header">';
+						//if it is a users profile display the grumble
 						if(!$profile)
 							echo '<a href="/profile/' . $row["username"] . '" data-id="' . $row["status_id"] . '" class="username" title="Visit profile"><strong>' . $row["username"] . '</strong></a>';
 						else 
