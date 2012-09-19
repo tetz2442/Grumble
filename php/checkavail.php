@@ -35,23 +35,6 @@
 			echo 1;
 		}
 	}
-	else if(isset($_POST["emailsoon"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
-		//get the passed parameter
-		$email = mysql_real_escape_string($_POST["emailsoon"]);
-		
-		//send a request to the database
-		$sql = "SELECT soon_email FROM coming_soon WHERE soon_email = '" . $email . "'";
-		$result = mysql_query($sql, $conn) or die("Could not get username: " . mysql_error());
-		
-		if(mysql_num_rows($result) > 0) {
-			//email is already taken
-			echo 0;
-		}
-		else {
-			//email is available
-			echo 1;
-		}
-	}
 	else {
 		echo 0;	
 	}
