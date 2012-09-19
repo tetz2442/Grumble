@@ -51,7 +51,7 @@ else {
 			
 			if(mysql_num_rows($result) > 0) {
 				while($row = mysql_fetch_array($result)) {
-					outputComments($row["status_id"], false, $loggedin);
+					outputComments($row["status_id"], false, $loggedin, false, true);
 				}
 			}
 			else {

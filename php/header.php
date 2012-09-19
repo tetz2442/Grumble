@@ -123,6 +123,7 @@ else {
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 <script type="text/javascript">
 !window.jQuery && document.write('<script src="/javascript/jquery-1.8.1.min"><\/script>');
+<?php if(!isset($_SESSION["time"])) { ?>
 //gets timezone to display proper time for comments, this information is not collected
 if("<?php echo $_SESSION["time"]; ?>".length==0){
             var visitortime = new Date();
@@ -132,17 +133,18 @@ if("<?php echo $_SESSION["time"]; ?>".length==0){
             		location.reload();
             	});
         }
+<?php }?>
 </script>
-<script type="text/javascript" src="/javascript/script.js"></script>
+<script type="text/javascript" src="/javascript/script.min.js"></script>
 <?php
 if($filename == "create-account.php" && !isset($_SESSION["user_id"])) {
- echo '<script type="text/javascript" src="/javascript/formValidation.js"></script>';	
+ echo '<script type="text/javascript" src="/javascript/formValidation.min.js"></script>';	
 }
 if($filename == "contact.php") {
- echo '<script type="text/javascript" src="/javascript/contactvalidation.js"></script>';	
+ echo '<script type="text/javascript" src="/javascript/contactvalidation.min.js"></script>';	
 }
 if($filename == "profile.php" || $filename == "forgot-password.php") {
- echo '<script type="text/javascript" src="/javascript/settingsvalidation.js"></script>';	
+ echo '<script type="text/javascript" src="/javascript/settingsvalidation.min.js"></script>';	
 }
 ?>
 </head>

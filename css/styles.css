@@ -27,7 +27,7 @@ body {
 	background-image:url(../images/backgrounds/white-noise.jpg);
 	background-repeat:repeat;
 	min-width:875px;
-	font-family:"OpenSansLight", Helvetica;
+	font-family:"OpenSansLight", sans-serif;
 	color:#333;
 }
 a {
@@ -68,6 +68,7 @@ small {
 /* hand cursor on clickable input elements */
 label, input[type=button], input[type=submit], button { cursor: pointer; }
 html { overflow-y: scroll; }
+
 @font-face {
     font-family: 'OpenSansLight';
     src: url('opensans/OpenSans-Light-webfont.eot');
@@ -921,7 +922,7 @@ html { overflow-y: scroll; }
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
 	border:1px solid #ccc;
-	font-family: "OpenSansLight", Helvetica;
+	font-family: "OpenSansLight", sans-serif;
 }
 .textArea {
 	font-size:1em;	
@@ -929,7 +930,7 @@ html { overflow-y: scroll; }
 	-webkit-border-radius:3px;
 	-moz-border-radius:3px;
 	border:1px solid #ccc;
-	font-family: "OpenSansLight", Helvetica;
+	font-family: "OpenSansLight", sans-serif;
 }
 .error {
 	color:#F00;
