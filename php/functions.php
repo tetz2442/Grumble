@@ -102,6 +102,14 @@ function replaceSpaces($input) {
 	return str_replace(" ", "", $input);
 }
 
+//remove newline characters
+function removeNewLine($input) {
+	$output = str_replace("\r", "", $input);
+	$output = str_replace("\n", "", $output);
+	
+	return $output;
+}
+
 //email function
 function sendEmail($email, $sendfrom, $type, $parameters) {
 	if($type == "reply") {

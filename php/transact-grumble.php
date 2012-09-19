@@ -3,14 +3,13 @@
 	require_once "conn.php";
 	require_once "http.php";
 	require_once "functions.php";
-	require_once "sendemail.php";
 	
 	if(isset($_REQUEST["action"]) &&
 		isset($_SESSION["username"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		switch ($_REQUEST["action"]) {
 			case "Submit Comment" :
 			//this isnt used anymore, moved to commentajax.php
-				if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {
+				/*if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token4']);
 					
@@ -37,9 +36,9 @@
 						$sql =  "UPDATE sub_category_grumble SET grumble_number = grumble_number + 1 WHERE sub_category_id = " . $category;
 						mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 							
-						/*$sql = "INSERT INTO votes_up_grumble " . 
+						$sql = "INSERT INTO votes_up_grumble " . 
 							"(status_id) VALUES (" . $last_id_status . ")";
-						mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());*/
+						mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 						
 						$sql =  "SELECT scg.sub_category_url, cg.category_url, COUNT(sg.status_id) AS grumble_number, ug.user_email, ug.username FROM status_grumble AS sg " .
 						"LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = sg.user_id " .
@@ -64,7 +63,7 @@
 				}
 				else {
 					redirect("../");
-				}
+				}*/
 				break;
 			
 			case "Submit Grumble" :
@@ -73,14 +72,12 @@
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token4']);
 					
-					$grumble = mysql_real_escape_string(strip_tags($_POST["grumble"]));
-					$category = mysql_real_escape_string(strip_tags($_POST["category"]));
-					$description = mysql_real_escape_string(strip_tags($_POST["description"]));
+					$grumble = escapeAndStrip($_POST["grumble"]);
+					$category = escapeAndStrip($_POST["category"]);
+					$description = escapeAndStrip($_POST["description"]);
 					//remove spaces
-					$description = str_replace("\r", "", $description);
-					$description = str_replace("\n", "", $description);
-					$grumble = str_replace("\r", "", $grumble);
-					$grumble = str_replace("\n", "", $grumble);
+					$description = removeNewLine($description);
+					$grumble = removeNewLine($grumble);
 					
 					$sql = "SELECT category_url FROM categories_grumble WHERE category_id = " . $category;
 					$result = mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
