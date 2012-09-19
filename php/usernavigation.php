@@ -63,6 +63,9 @@
                             <input type="checkbox" name="remember-box" id="remember-checkbox"/><label for="remember-checkbox" class="colored-link-1">Remember me</label>
                             <input type="submit" name="action" class="submit-login button" value="Sign In"/>
                         </li>
+                        <li>
+                            <div class="fb-login-button">Login with Facebook</div>
+                        </li>
                          <li class="login-last">
                         	<a class="colored-link-1" href="/create-account">Create an account</a> | <a class="colored-link-1" href="/forgot-password">Forget password?</a>
                         </li>

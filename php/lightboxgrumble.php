@@ -15,18 +15,23 @@
         <textarea id="quick-description-textarea" class="textArea" title="Describe this Grumble" rows="3" name="description" placeholder="Description..."></textarea>
         <div id="lightbox-submit-padding">
         <select name="category" id="grumble-dropdown" <?php if(isset($_GET["cat"])) echo 'disabled="disabled"';?>>
-        	<option selected="selected" value="0">Choose a Category</option>
+        	
+        	<option <?php if(!isset($_GET["cat"])) echo 'selected="selected"';?> value="0">Choose a Category</option>
             <?php
+            	$id = 0;
 				$sql = "SELECT category_id, category_name, category_url FROM categories_grumble ORDER BY category_name ASC";
 				$result = mysql_query($sql, $conn);
 				while($row = mysql_fetch_array($result)) {
-					if(isset($_GET["cat"]) && $row["category_url"] == $_GET["cat"])
+					if(isset($_GET["cat"]) && $row["category_url"] == $_GET["cat"]) {
 						echo '<option selected="selected" value="' . $row["category_id"] . '">' . $row["category_name"] . '</option>';
+						$id = $row["category_id"];
+					}
 					else 
 						echo '<option value="' . $row["category_id"] . '">' . $row["category_name"] . '</option>';
 				}
 			?>
         </select>
+        <?php if(isset($_GET["cat"])) echo '<input type="hidden" name="category" value="' . $id .'" />';?>
         <input type="hidden" name="token" value="<?php echo $token; ?>" />
         <input type="submit" id="quick-description-submit" class="btn-normal button" value="Submit Grumble" name="action"/>
         <span id="character-count">40</span>
