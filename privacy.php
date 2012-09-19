@@ -9,7 +9,7 @@ require_once "php/containerGrumbles.php";
 
     <p>Grumble is committed to protecting your privacy.</p>
     <p>This privacy policy describes the privacy practices for Grumble (the "Site"), located at www.grumbleonline.com).</p>
-    <p>Anything you post on Grumble is available to anyone on the internet. Your Grumbles and comments are public by default and can include links to other sites. Replies by default are only available to users who have signed up for Grumble.</p>
+    <p>Anything you post on Grumble is available to anyone on the internet. Your Grumbles and comments are public by default and can include links to other sites. Replies, by default, are only available to users who have signed up for Grumble.</p>
     <h2>Information we collect</h2>
     <p>We may collect the following information when your register on or fill out a form on our site:</p>
     <ul>
@@ -28,6 +28,7 @@ require_once "php/containerGrumbles.php";
     <li>To improve our products or services based on your needs</li>
     <li>To help other users of Grumble identify you (by username only)</li>
     <li>To tailor times to your particular location/timezone</li>
+    <li>To provide you with an avatar through <a href="http://www.gravatar.com" target="_blank">gravatar.com</a>, using your provided email. (You can keep the default avatar, which provides no information as to who you are)</li>
     </ul>
     
     <h2>Collected information security</h2>
