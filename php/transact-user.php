@@ -106,53 +106,61 @@
 					
 					$email = escapeAndStrip($_POST["email"]);
 					$timezone = escapeAndStrip($_POST["tz"]);
-
-					//validate username further
-					if(strlen($username) >= 4 && strlen($username) <= 15 && !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬-]/', $username)
-						&& preg_match('/[A-Z]/', $pass1) && preg_match('/[0-9]/', $pass1) && checkTimeZone($_POST["tz"])) {
-						
-						$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
-						$Chars_Len = 63;
-						$Salt_Length = 21;
-						
-						$salt = "";
-	
-						for($i=0; $i<$Salt_Length; $i++)
-						{
-							$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+					
+					$sql = "SELECT user_email FROM users_grumble WHERE user_email = '" . $email . "'";
+					$result = mysql_query($sql, $conn);
+					//check if user email is taken
+					if(mysql_num_rows($result) == 0) {
+						//validate username further
+						if(strlen($username) >= 4 && strlen($username) <= 15 && !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬-]/', $username)
+							&& preg_match('/[A-Z]/', $pass1) && preg_match('/[0-9]/', $pass1) && checkTimeZone($_POST["tz"])) {
+							
+							$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+							$Chars_Len = 63;
+							$Salt_Length = 21;
+							
+							$salt = "";
+		
+							for($i=0; $i<$Salt_Length; $i++)
+							{
+								$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+							}
+							
+							$hashed_password = crypt($pass1, $salt) . $salt;
+							
+							$sql = "INSERT INTO users_grumble(username, user_firstname, user_lastname, user_password, user_salt, user_email, user_create_date, user_timezone) " . 
+								"VALUES('" . $username . "','" . $firstname . "','" . $lastname . "','" . $hashed_password . "','" . $salt . "','" . $email . "',UTC_TIMESTAMP(),'" . $timezone . "')";
+							mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
+							
+							$id = mysql_insert_id();
+							
+							$sql = "INSERT INTO settings_user_grumble(user_id) " . 
+								"VALUES(" . $id . ")";
+							mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
+							
+							//redo salt
+							$Salt_Length = 50;
+							$salt = "";
+		
+							for($i=0; $i<$Salt_Length; $i++)
+							{
+								$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+							}
+							
+							$sql = "INSERT INTO temp_password_grumble (user_email, temp_password, temp_create) VALUES('" . 
+								$email . "','" . $salt . "','" . date("Y-m-d H:i:s", time()) . "')";
+							mysql_query($sql, $conn) or die("Could not insert: " . mysql_error());
+							
+							$parameters = array("http://" . $_SERVER["HTTP_HOST"] . "/php/transact-user.php?email=" . $email . "&hash=" . $salt . "&action=verify");
+							sendEmail($email, "From: no-reply@grumbleonline.com", "verify", $parameters);
+							redirect("../create-account?user_created=1");
 						}
-						
-						$hashed_password = crypt($pass1, $salt) . $salt;
-						
-						$sql = "INSERT INTO users_grumble(username, user_firstname, user_lastname, user_password, user_salt, user_email, user_create_date, user_timezone) " . 
-							"VALUES('" . $username . "','" . $firstname . "','" . $lastname . "','" . $hashed_password . "','" . $salt . "','" . $email . "',UTC_TIMESTAMP(),'" . $timezone . "')";
-						mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
-						
-						$id = mysql_insert_id();
-						
-						$sql = "INSERT INTO settings_user_grumble(user_id) " . 
-							"VALUES(" . $id . ")";
-						mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
-						
-						//redo salt
-						$Salt_Length = 50;
-						$salt = "";
-	
-						for($i=0; $i<$Salt_Length; $i++)
-						{
-							$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+						else {
+							redirect("../create-account?create=fail&email=" . $email . "&fullname=" . $firstname . " " . $lastname . "&username=" . $username);
 						}
-						
-						$sql = "INSERT INTO temp_password_grumble (user_email, temp_password, temp_create) VALUES('" . 
-							$email . "','" . $salt . "','" . date("Y-m-d H:i:s", time()) . "')";
-						mysql_query($sql, $conn) or die("Could not insert: " . mysql_error());
-						
-						$parameters = array("http://" . $_SERVER["HTTP_HOST"] . "/php/transact-user.php?email=" . $email . "&hash=" . $salt . "&action=verify");
-						sendEmail($email, "From: no-reply@grumbleonline.com", "verify", $parameters);
-						redirect("../create-account?user_created=1");
 					}
 					else {
-						redirect("../create-account?create=fail&email=" . $email . "&fullname=" . $firstname . " " . $lastname . "&username=" . $username);
+						redirect("../create-account?create=fail");
 					}
 			}
 			else {

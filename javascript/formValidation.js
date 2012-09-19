@@ -267,29 +267,36 @@ function checkForm() {
 		//check username
 		chars = $('#username').val();
 		if(checkLength($('#username'), 3)) {
-		$.post("/php/checkavail.php", {username:chars},
-			  function(result) {
-				  if(result == 1) {
-					  //success
-					  usernameVal = 2;
-				  }
-				  else if(result == 0) {
-					  //not available
-					  usernameVal = 1;
-				  }
-				  else {
-					  usernameVal = 1;
-				  }
-				  
-				  if(usernameVal == 1) {
-					  $("#usernameError").html("Not available").addClass("error").removeClass("available");
-					  username = false;
-				  }
-				  else if(usernameVal == 2) {
-					  $("#usernameError").html("Available").addClass("available").removeClass("error");
-					  username = true;
-				  }
-		});
+			if(checkSC($('#username'))) {
+				$.post("/php/checkavail.php", {username:chars},
+					  function(result) {
+						  if(result == 1) {
+							  //success
+							  usernameVal = 2;
+						  }
+						  else if(result == 0) {
+							  //not available
+							  usernameVal = 1;
+						  }
+						  else {
+							  usernameVal = 1;
+						  }
+						  
+						  if(usernameVal == 1) {
+							  $("#usernameError").html("Not available").addClass("error").removeClass("available");
+							  username = false;
+						  }
+						  else if(usernameVal == 2) {
+							  $("#usernameError").html("Available").addClass("available").removeClass("error");
+							  username = true;
+						  }
+				});
+			}
+			else {
+				usernameVal = 0;
+				$("#usernameError").html("No special charaters").addClass("error").removeClass("available");
+				username = false;
+			}
 		}
 		else {
 			usernameVal = 0;
@@ -299,6 +306,7 @@ function checkForm() {
 		
 		//check email
 		if(checkEmail($("#emails"))) {
+			chars = $('#emails').val();
 			$.post("/php/checkavail.php", {email:chars},
 				  function(result) {
 					  if(result == 1) {

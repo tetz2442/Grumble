@@ -11,6 +11,7 @@ if(isset($_SESSION["username"]) && $_SESSION["access_lvl"] == 3) {
 		<a class="button" href="contact.php">Contact Messages</a>
 		<a class="button" href="spam.php">Spam</a>
 		<a class="button">Remove old Temp Passwords</a>
+		<a class="button" href="comingsoonadmin.php">Email coming soon</a>
 	</div>
 </div>
 <?php
