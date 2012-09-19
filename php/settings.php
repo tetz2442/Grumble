@@ -1,6 +1,6 @@
 <?php
 //get current settings
-$sql = "SELECT settings_email_thread, settings_email_comment FROM settings_user_grumble WHERE user_id = " . $_SESSION["user_id"];
+$sql = "SELECT sug.settings_email_thread, sug.settings_email_comment, ug.user_email FROM settings_user_grumble AS sug LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = sug.user_id WHERE sug.user_id = " . $_SESSION["user_id"];
 $result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
 $row = mysql_fetch_array($result);
 ?>
@@ -19,6 +19,11 @@ $row = mysql_fetch_array($result);
                 <div id="username-change" class="padding-top">
                     <label for="username-change-input" title="Change your username">Change Username</label><img src="/images/exclamation-red_1.png" alt="validation" class="validation-settings" width="16" height="16"/>
                     <input type="text" name="username-change-input" id="username-change-input" class="textInput" maxlength="15" value="<?php echo strip_tags($_GET["id"]); ?>"/>
+                </div>
+                <div id="gravatar-change" class="padding-top">
+                	<h4>Gravatar</h4>
+                	<?php echo '<img class="settings-user-image rounded-corners-medium" src="' . getGravatar($row["user_email"]) . '" width="45" height="45" alt="' .  $row["username"] . '">'; ?>
+					<p>To change the image used on your profile, visit <a href="http://www.gravatar.com" target="_blank">Gravatar</a>.</p>                	
                 </div>
             </div>
             <div id='tab6'>

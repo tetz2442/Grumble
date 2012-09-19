@@ -7,7 +7,7 @@ function outputComments($grumble, $comments = false, $loggedin = false, $admin =
 		}
 
 		$sql = "SELECT sg.status_id, sg.status_text, ug.username, sg.date_submitted, " . 
-			"ug.user_id, ug.username, COUNT(user_like_id) AS votes_up_count, scg.sub_category_name, scg.sub_category_id, scg.sub_category_url, cg.category_url FROM status_grumble AS sg " . 
+			"ug.user_id, ug.username, ug.user_email, COUNT(user_like_id) AS votes_up_count, scg.sub_category_name, scg.sub_category_id, scg.sub_category_url, cg.category_url FROM status_grumble AS sg " . 
 			"LEFT OUTER JOIN user_likes_grumble AS vg ON sg.status_id = vg.status_id " .
 			"LEFT OUTER JOIN users_grumble AS ug ON sg.user_id = ug.user_id " . 
 			"LEFT OUTER JOIN sub_category_grumble AS scg ON scg.sub_category_id = sg.sub_category_id " .
@@ -47,6 +47,7 @@ function outputComments($grumble, $comments = false, $loggedin = false, $admin =
 					echo '<div class="comment-text-holder">';
 						echo '<p class="comment-text">' . stripslashes($row["status_text"]) . '</p>';
 					echo '</div>';
+					echo '<a href="/profile/' . $row["username"] . '"><img class="user-image rounded-corners-medium" src="' . getGravatar($row["user_email"]) . '" width="45" height="45" alt="' .  $row["username"] . '"></a>';
 					echo '<div class="embed-link"></div>';
 				echo '</div>';
 			echo '<div class="comment-extras">';
