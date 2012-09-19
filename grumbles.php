@@ -15,7 +15,7 @@ if(isset($_GET["subcat"]) && is_numeric($_GET["subcat"])) {
 		" ORDER BY status_id DESC LIMIT 10";
 	$result = mysql_query($sql, $conn);
 	
-	$sql = "SELECT scg.sub_category_id, scg.sub_category_name, scg.grumble_number, scg.sub_category_description, scg.sub_category_url, cg.category_name, cg.category_id, cg.category_url, ug.username FROM sub_category_grumble AS scg " .
+	$sql = "SELECT scg.sub_category_id, scg.sub_category_name, scg.sub_category_created, scg.grumble_number, scg.sub_category_description, scg.sub_category_url, cg.category_name, cg.category_id, cg.category_url, ug.username FROM sub_category_grumble AS scg " .
 		"LEFT OUTER JOIN categories_grumble AS cg ON scg.category_id = cg.category_id " .
 		"LEFT OUTER JOIN users_grumble AS ug ON scg.user_id = ug.user_id " .
 		"WHERE sub_category_id = " . $subcat . " LIMIT 0,1";
@@ -32,6 +32,11 @@ if($exist) {
         <div id="category-header">
             <h1 id="subcat-id" data-id="<?php echo strip_tags($_GET["subcat"]);?>"><?php echo stripslashes($row["sub_category_name"]); ?></h1>
             <h4><a href="/category/<?php echo strtolower($row["category_name"]); ?>" class="colored-link-1"><?php echo stripslashes($row["category_name"]); ?></a> | Created by <a href="/profile/<?php echo $row["username"];?>" class="colored-link-1"><?php echo $row["username"];?></a></h4>
+            <?php if(isset($_SESSION["timezone"])) 
+            	echo '<small id="sub-category-created">Grumbled on ' . convertToTimeZone($row["sub_category_created"], $_SESSION["timezone"]) . '</small>';
+            else if(isset($_SESSION["time"]))
+            	echo '<small id="sub-category-created">Grumbled on ' . convertToTimeZone($row["sub_category_created"], $_SESSION["time"]) . '</small>';
+            ?>
             <p id="sub-category-desc"><?php echo stripslashes($row["sub_category_description"]);?></p>
         </div>
         <div id="share-category">

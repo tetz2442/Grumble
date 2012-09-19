@@ -23,8 +23,8 @@ if(isset($_GET["user"]) && isset($_GET["s"])) {
 		?>
         <div id="grumble-header">
             <div id="category-header">
-                <h1 id="subcat-id"><a href="/<?php echo strtolower($row["category_name"]) . "/" . $row["sub_category_url"] . "/" . $row["sub_category_id"]; ?>" class="colored-link-1"><?php echo stripslashes($row["sub_category_name"]); ?></h1>
-                <h4><a href="/category/<?php echo strtolower($row["category_name"]); ?>" class="colored-link-1"><?php echo stripslashes($row["category_name"]); ?></a></h4>
+                <h1 id="subcat-id"><a title="Go to Grumble page" href="/<?php echo strtolower($row["category_name"]) . "/" . $row["sub_category_url"] . "/" . $row["sub_category_id"]; ?>" class="colored-link-1"><?php echo stripslashes($row["sub_category_name"]); ?></h1>
+                <h4><a title="Go to category" href="/category/<?php echo strtolower($row["category_name"]); ?>" class="colored-link-1"><?php echo stripslashes($row["category_name"]); ?></a></h4>
             </div>
             <div id="share-category">
             <?php
