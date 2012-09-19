@@ -14,13 +14,13 @@ require_once "php/containerWide.php";
 	?>
         <ul>
             <li>
-                <textarea id="contact-textarea" class="textArea" title="Message" rows="10" placeholder="Message"></textarea>
+                <textarea id="contact-textarea" class="textArea" title="Message" rows="10" placeholder="Message... 255 character limit"></textarea>
             </li>
             <li>
                 <select class="contact-dropdown rounded-corners">
+                	<option selected="selected">Send Message</option>
                     <option>Request Feature</option>
                     <option>Report Bug</option>
-                    <option>Send Message</option>
                 </select>
                 <input type="hidden" id="contact-username" value="<?php echo $_SESSION["username"]; ?>"/>
                 <input type="submit" id="contact-send" class="push_button orange" name="action" value="Send Please!"/>
@@ -39,13 +39,13 @@ require_once "php/containerWide.php";
             <input type="text" id="email-contact" class="textInput margin-top" name="email" maxlength="255" placeholder="Email"/>
         </li>
         <li>
-            <textarea id="contact-textarea" class="margin-top textArea" title="Message" rows="10" name="message" placeholder="Message"></textarea>
+            <textarea id="contact-textarea" class="margin-top textArea" title="Message" rows="10" name="message" placeholder="Message... 255 character limit"></textarea>
         </li>
         <li>
         	<select class="contact-dropdown rounded-corners">
+        		<option selected="selected">Send Message</option>
         		<option>Request Feature</option>
                 <option>Report Bug</option>
-                <option>Send Message</option>
         	</select>
             <input type="submit" id="contact-send" class="push_button orange" name="action" value="Send Please!"/>
         </li>

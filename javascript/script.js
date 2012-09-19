@@ -432,7 +432,7 @@ $(document).ready(function() {
 	$(".button").mousedown(function(event) {
 		if($(this).val() == "View More" && canLoad) {
 			canLoad = false;
-			var $aactive = $(".tabs a.active");
+			var $aactive = $(".tabs a.active:first");
 			if($("#cat-header h1").length > 0)
 				var catID = $("#cat-header h1").attr("data-id");
 			if($(".user-name").length > 0)
@@ -455,11 +455,11 @@ $(document).ready(function() {
 				type = "recent-comment";
 				last = $("#tab4 .comment-holder:last").find(".username").attr("data-id");
 			}
-			else if($aactive.text == "Comments"){
-				type = "recent-grumble";
+			else if($aactive.text() == "Comments"){
+				type = "recent-comment";
 				last = $("#tab1 .comment-holder:last").find(".username").attr("data-id");
 			}
-			else if($aactive.text == "Grumbles"){
+			else if($aactive.text() == "Grumbles"){
 				type = "recent";
 				last = $("#tab2 .grumble-holder:last").find(".comment-text-holder a").attr("data-id");
 			}
@@ -508,7 +508,7 @@ $(document).ready(function() {
 			//grab for profile
 			else if(userID != undefined) {
 				$("#gif-loader").show();
-				if(type == "recent-grumble") {
+				if(type == "recent-comment") {
 					$.post("/php/commentloadajax.php", {userID:userID, type:type, last:last},
 					function(result) {
 						$("#gif-loader").hide();
@@ -675,6 +675,7 @@ $(document).ready(function() {
 						else {
 							$("<div id='comments-left-header'><h4>Comments</h4></div>").insertBefore("#grumble-comment");
 							$(result).insertAfter("#grumble-comment");
+							$("#comments-left .text-align-center").remove();
 							var newText = linkText($(".comment-text:first").text());
 							$(".comment-text:first").addClass("linked").html(newText);
 							shortenLink(".comment-text:first a");
@@ -687,6 +688,9 @@ $(document).ready(function() {
 		
 						$("#quick-compose-textarea").val("").css({"height":"20px","background-color":"#FFF9E8"});
 						$("#grumble-comment div").hide();
+						
+						$("#notification-bar p").html("Comment submitted.").removeClass("error").addClass("available");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 					}
 			});
 		}
