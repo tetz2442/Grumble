@@ -13,13 +13,13 @@ else if(isset($_POST["reply"]) && is_numeric($_POST["reply"]) && isset($_POST["t
 function retrieveReplies($voteid, $amount) {
 	global $conn;
 	if($amount == "few") {
-		$sql = "(SELECT cg.reply_id, cg.status_id, DATE_FORMAT(cg.reply_date, '%b %e, %Y %l:%i %p') AS reply_date, cg.reply_text, ug.username FROM replies_grumble AS cg" . 
+		$sql = "(SELECT cg.reply_id, cg.status_id, DATE_FORMAT(cg.reply_date, '%b %e, %Y %l:%i %p') AS reply_date, cg.reply_text, ug.username, ug.user_email FROM replies_grumble AS cg" . 
 			" LEFT OUTER JOIN users_grumble AS ug ON cg.reply_user = ug. user_id" . 
 			" WHERE status_id = " . $voteid . " ORDER BY cg.reply_date DESC LIMIT 2)" . 
 			" ORDER BY reply_id";
 	}
 	else if($amount = "all") {
-		$sql = "SELECT cg.reply_id, cg.status_id, DATE_FORMAT(cg.reply_date, '%b %e, %Y %l:%i %p') AS reply_date, cg.reply_text, ug.username FROM replies_grumble AS cg" . 
+		$sql = "SELECT cg.reply_id, cg.status_id, DATE_FORMAT(cg.reply_date, '%b %e, %Y %l:%i %p') AS reply_date, cg.reply_text, ug.username, ug.user_email FROM replies_grumble AS cg" . 
 			" LEFT OUTER JOIN users_grumble AS ug ON cg.reply_user = ug.user_id" . 
 			" WHERE status_id = " . $voteid . " ORDER BY cg.reply_id";
 	}
@@ -31,6 +31,7 @@ function retrieveReplies($voteid, $amount) {
 			echo '<a class="reply-username username" href="/profile/' . $row["username"] . '">' . $row["username"] . '</a>';
 			echo '<p class="reply-text">' . stripslashes($row["reply_text"]) . '</p>';
 			echo '<small class="reply-time">' . convertToTimeZone($row["reply_date"], $_SESSION["timezone"]) . '</small>';
+			echo '<a href="/profile/' . $row["username"] . '"><img class="reply-user-image rounded-corners-medium" src="' . getGravatar($row["user_email"]) . '" width="45" height="45" alt="' .  $row["username"] . '"></a>';
 			echo '</div>';
 			echo '</div>';
 		}
@@ -40,10 +41,9 @@ function retrieveReplies($voteid, $amount) {
 
 function enterReply($id, $text, $statususername) {
 	global $conn;
-	$id = mysql_real_escape_string(strip_tags($id));
-	$commenttext = str_replace("\r", "", $text);
-	$commenttext = str_replace("\n", "", $commenttext);
-	$commenttext = mysql_real_escape_string(strip_tags($commenttext));
+	$id = escapeAndStrip($id);
+	$commenttext = removeNewLine($text);
+	$commenttext = escapeAndStrip($commenttext);
 	
 	$sql = "SELECT status_id FROM status_grumble WHERE status_id = " . $id . " LIMIT 0,1";
 	$result = mysql_query($sql, $conn); 
@@ -58,6 +58,7 @@ function enterReply($id, $text, $statususername) {
 		echo '<a class="reply-username username" href="/profile/' . $_SESSION["username"] . '">' . $_SESSION["username"] . '</a>';
 		echo '<p class="reply-text">' . $commenttext . '</p>';
 		echo '<small class="reply-time">' . convertToTimeZone(gmdate("M d, o g:i A", time()), $_SESSION["timezone"]) . '</small>';
+		echo '<a href="/profile/' . $_SESSION["username"] . '"><img class="reply-user-image rounded-corners-medium" src="' . getGravatar($_SESSION["email"]) . '" width="45" height="45" alt="' .  $_SESSION["username"] . '"></a>';
 		echo '</div>';
 		echo '</div>';
 		

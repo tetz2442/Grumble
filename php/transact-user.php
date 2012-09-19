@@ -13,7 +13,7 @@
 				$email = escapeAndStrip($_POST["email"]);
 				$password = escapeAndStrip($_POST["password"]);
 					
-				$sql = "SELECT user_id, access_lvl, username, user_password, user_salt, user_timezone " .
+				$sql = "SELECT user_id, user_email, access_lvl, username, user_password, user_salt, user_timezone " .
 					"FROM users_grumble " .
 					"WHERE (user_email='" . $email . "' OR username = '" . $email . "') AND user_verified = 1 LIMIT 0,1";
 				$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
@@ -30,6 +30,7 @@
 					$_SESSION["user_id"] = $row["user_id"];
 					$_SESSION["access_lvl"] = $row["access_lvl"];
 					$_SESSION["username"] = $row["username"];	
+					$_SESSION["email"] = $row["user_email"];	
 					$_SESSION["timezone"] = $row["user_timezone"];
 					
 					//mysql_query("SET time_zone = " . $row["user_timezone"], $conn);
