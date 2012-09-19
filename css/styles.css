@@ -477,9 +477,10 @@ html { overflow-y: scroll; }
 .comment-holder {
 	padding:15px;
 	border-bottom:1px solid #e0e0e0;
+	position: relative;
 }
 .comment-inner-holder {
-	width:100%;
+	margin-left: 50px;
 }
 .comment-header {
 	width:100%;
@@ -495,6 +496,11 @@ html { overflow-y: scroll; }
 }
 .comment-text-holder {
 	padding:5px 0;
+}
+.user-image {
+	position: absolute;
+	top:15px;
+	left:5px;
 }
 .comment-text-holder, .reply-text, .grumble-text-holder p {
 	font-size: .95em;
@@ -691,15 +697,15 @@ html { overflow-y: scroll; }
 #cat-header button {
 	float:right;
 }
-.tabs, .tabs-settings {
+.tabs {
 	width:100%;	
 	margin-top:30px;
 }
-.tabs li, .tabs-settings li {
+.tabs li {
 	list-style:none;
 	display:inline;	
 }
-.tabs a, .tabs-settings a {
+.tabs a {
 	padding:5px 0;
 	display:inline-block;
 	text-decoration:none;
@@ -708,10 +714,10 @@ html { overflow-y: scroll; }
 	width:115px;
 	text-align:center;
 }
-.tabs a:hover, .tabs-settings a:hover {
+.tabs a:hover {
 	color:#333;	
 }
-.tabs a.active, .tabs-settings a.active {
+.tabs a.active {
 	color:#333;		
 }
 #arrow-top {
@@ -1015,11 +1021,19 @@ html { overflow-y: scroll; }
 	display:block;
 	width:90%;
 }
-#username-change, #password-change {
+#username-change, #password-change, #gravatar-change {
 	float:left;	
+	width: 75%;
+}
+#gravatar-change  {
+	margin-top:10px;
 }
 #pass-current {
 	margin-bottom:15px !important;	
+}
+.settings-user-image {
+	float:left;
+	margin-right:5px;
 }
 #button-controls {
 	float:left;

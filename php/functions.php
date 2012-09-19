@@ -12,6 +12,13 @@ function convertToUserTime($time, $offset) {
 	return date_format($newtime, "M d, Y g:iA");
 }
 
+//get gravatar
+function getGravatar($email, $size = 45) {
+	$default = "http://" . $_SERVER["HTTP_HOST"] . "/images/default.png";
+	
+	return "http://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size;
+}
+
 //returns the date as the time ago (1m, 1w, etc)
 function time_ago($date,$granularity=1) {
 	$retval = "";
