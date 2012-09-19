@@ -125,7 +125,7 @@ else {
 !window.jQuery && document.write('<script src="/javascript/jquery-1.8.1.min"><\/script>');
 if("<?php echo $_SESSION["time"]; ?>".length==0){
             var visitortime = new Date();
-            var visitortimezone = "GMT " + -visitortime.getTimezoneOffset()/60;
+            var visitortimezone = -visitortime.getTimezoneOffset()/60;
             $.post("/php/timezoneset.php",{time:visitortimezone}, 
             	function(result) {
             		location.reload();
