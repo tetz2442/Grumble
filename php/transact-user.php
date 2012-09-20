@@ -58,7 +58,7 @@
 							mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
 						}
 						
-						setcookie("user_grumble", $cookie_text, time()+7*24*60*60, '/', "www." . $_SERVER['HTTP_HOST']);
+						setcookie("user_grumble", $cookie_text, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
 					}
 
 					if(strpos($refer, "login.php") || strpos($refer, "index.php") || strpos($refer, "create-account.php") || strpos($refer, "forgot-password.php"))
@@ -193,7 +193,7 @@
 					$row = mysql_fetch_array($result);
 					$subject = "[Grumble] password change";
 					$body = "Change your password by following the link below.\n\nClick the link or paste it in your browser to reset your password:\n\n" . 
-					"http://www." . $_SERVER["HTTP_HOST"] . "/" . "forgot-password?hash=" . $salt . "&email=" . $email;
+					"http://" . $_SERVER["HTTP_HOST"] . "/" . "forgot-password?hash=" . $salt . "&email=" . $email;
 					
 					$sql = "SELECT user_email FROM temp_password_grumble " . 
 						"WHERE user_email='" . $email . "' LIMIT 0,1";
