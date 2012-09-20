@@ -1,11 +1,7 @@
 <?php
-function outputComments($grumble, $comments = false, $loggedin = false, $admin = false, $profile = false) {
+function outputComments($grumble, $comments = false, $loggedin = false, $admin = false, $profile = false, $homepage = false) {
 	global $conn;
 	if($grumble) {
-		if (isset($_SESSION["timezone"])) {
-			date_default_timezone_set($_SESSION["timezone"]);
-		}
-
 		$sql = "SELECT sg.status_id, sg.status_text, ug.username, sg.date_submitted, " . 
 			"ug.user_id, ug.username, ug.user_email, COUNT(user_like_id) AS votes_up_count, scg.sub_category_name, scg.sub_category_id, scg.sub_category_url, cg.category_url FROM status_grumble AS sg " . 
 			"LEFT OUTER JOIN user_likes_grumble AS vg ON sg.status_id = vg.status_id " .
@@ -29,10 +25,14 @@ function outputComments($grumble, $comments = false, $loggedin = false, $admin =
 				echo '<div class="comment-inner-holder">';
 					echo '<div class="comment-header">';
 						//if it is a users profile display the grumble
-						if(!$profile)
+						if(!$profile && !$homepage)
 							echo '<a href="/profile/' . $row["username"] . '" data-id="' . $row["status_id"] . '" class="username" title="Visit profile"><strong>' . $row["username"] . '</strong></a>';
+						else if($homepage)
+							echo '<a href="/profile/' . $row["username"] . '" data-id="' . $row["status_id"] . '" class="username" title="Visit profile"><strong>' . $row["username"] . '</strong></a><span class="splitter">in </span>' .
+							'<a href="/' . $row["category_url"] . '/' . $row["sub_category_url"] . '/' . $row["sub_category_id"] . '" class="username-grumble" title="Go to Grumble">' . stripslashes($row["sub_category_name"]) . '</a>';
 						else 
 							echo '<a href="/' . $row["category_url"] . '/' . $row["sub_category_url"] . '/' . $row["sub_category_id"] . '" data-id="' . $row["status_id"] . '" class="username" title="Go to Grumble"><strong>' . stripslashes($row["sub_category_name"]) . '</strong></a>';
+						
 						if (isset($_SESSION["timezone"])) {
 							$formatted_date = convertToTimeZone($row["date_submitted"], $_SESSION["timezone"]);
 							//Sep 10, 2012 1:35 PM

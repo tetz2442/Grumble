@@ -20,7 +20,7 @@
 		if(isset($_GET["user_created"]) && $_GET["user_created"] == 1) {
 ?>
 <div id="account-create-container">
-	<p class="content-padding text-align-center">An email has been sent to your entered email address. Before you can start using Grumble, you must verify this email (make sure to check your spam folder).</p>
+	<p class="content-padding text-align-center">An email has been sent to your entered email address (make sure to check your spam folder, especially Gmail). Before you can start using Grumble, you must verify this email.</p>
 </div>
 <?php
 		}

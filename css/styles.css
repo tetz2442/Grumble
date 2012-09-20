@@ -487,10 +487,13 @@ html { overflow-y: scroll; }
 	overflow:auto;
 	padding: 1px;
 }
-.comment-header a {
+.comment-header a, .comment-header span {
 	float:left;
 }
-.comment-header span {
+.splitter {
+	margin-left: 8px;
+}
+.comment-header .comment-time {
 	float:right;
 	padding:2px;
 }
@@ -540,13 +543,16 @@ html { overflow-y: scroll; }
 .comment-votes {
 	float:right;
 }
-.username, .username:visited {
+.username, .username:visited, .username-grumble {
 	color:#DE6C28;
 	text-decoration:none;
 }
-.username:hover {
+.username:hover, .username-grumble:hover {
 	text-decoration:underline;	
 	cursor:pointer;
+}
+.username-grumble {
+	margin-left: 8px;
 }
 .votes-up a, .votes a:visited, .replies-view a {
 	color:#F59A38;

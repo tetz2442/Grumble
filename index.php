@@ -85,7 +85,7 @@ else {
                 
                 if(mysql_num_rows($result) > 0) {
                     while($row2 = mysql_fetch_array($result)) {
-                        outputComments($row2["status_id"], false, $loggedin);	
+                        outputComments($row2["status_id"], false, $loggedin, false, false, true);	
                     }
                 }
                 else {
@@ -102,7 +102,7 @@ else {
             
             if(mysql_num_rows($result) > 0) {
                 while($row2 = mysql_fetch_array($result)) {
-                    outputComments($row2["status_id"], false, $loggedin);	
+                    outputComments($row2["status_id"], false, $loggedin, false, false, true);	
                 }
             }
             else {
