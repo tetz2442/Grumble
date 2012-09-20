@@ -62,7 +62,7 @@ if($exist) {
                         <input type="hidden" name="category" id="comment-category" value="<?php echo strip_tags($_GET["subcat"]); ?>"/>
                         <div>
                             <input type="submit" value="Submit Comment" name="action" id="quick-compose-submit" class="button"/>
-                            <span id="character-count">160</span>
+                            <span id="character-count">240</span>
                             <span id="gif-loader-comment"><img src="/images/ajax-loader.gif" width="16" height="16"/></span>
                             <span id="link-present">Link will be shortened.</span>
                         </div>
@@ -99,7 +99,7 @@ if($exist) {
                         <input type="hidden" name="category" id="comment-category" value="<?php echo strip_tags($_GET["subcat"]); ?>"/>
                         <div>
                             <input type="submit" value="Submit Comment" name="action" id="quick-compose-submit" class="button"/>
-                            <span id="character-count">160</span>
+                            <span id="character-count">240</span>
                             <span id="gif-loader-comment"><img src="/images/ajax-loader.gif" width="16" height="16"/></span>
                             <span id="link-present">Link will be shortened.</span>
                         </div>

@@ -306,7 +306,7 @@ $(document).ready(function() {
 		 else if(link == 0) {
 			 $("#link-present").fadeOut(50);
 		 }
-		 charLengthGrumble = 160 - chars.length + link;
+		 charLengthGrumble = 240 - chars.length + link;
 		 if(charLengthGrumble <= 0) {
 			 $(this).parent().find("#character-count").html(charLengthGrumble).css("color", "red");
 		 }
