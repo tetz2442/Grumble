@@ -7,7 +7,7 @@ require_once "php/containerGrumbles.php";
 	<div id="about-left">
     	<h2>So...what is Grumble?</h2>
         <p>Grumble is a place where you can discuss the topics that you feel are important and need attention.</p>
-        <p>The topics are broken down into threads. You can join in on an existing thread, or create your own.</p>
+        <p>The topics are broken down into Grumbles. You can join in on an existing Grumble, or create your own.</p>
         <p>Grumble simply to get something off your chest, or Grumble to raise awareness for a problem.</p>
         <p>You never know what could happen if enough people join together for something important.</p>
         <p>It's that simple. Grumble for you. Grumble for change.</p>
