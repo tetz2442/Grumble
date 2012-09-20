@@ -26,7 +26,7 @@ else {
 ?>
 <div id="user-info-holder">
     <div class="profile-user-info">
-    	<?php echo '<img class="settings-user-image rounded-corners-medium" src="' . getGravatar($row["user_email"], 60) . '" width="60" height="60" alt="' .  $row["username"] . '">'; ?>
+    	<?php echo '<img class="settings-user-image rounded-corners-medium" src="' . getGravatar($row["user_email"], 80) . '" alt="' .  $row["username"] . '">'; ?>
     	<h2 class="user-name" data-id="<?php echo $row["user_id"]; ?>"><?php echo $row["username"]; ?></h2>
         <?php if($userprofile) {?>
         <button class="button large" disabled="disabled"/>Settings</button>

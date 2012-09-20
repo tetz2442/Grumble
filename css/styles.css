@@ -426,7 +426,7 @@ html { overflow-y: scroll; }
 ******/
 #grumble-header p {
 	margin-top:20px;
-	line-height: 1.2em;	
+	line-height: 1.4em;	
 }
 #grumble-header {
 	float:left;	
@@ -501,6 +501,8 @@ html { overflow-y: scroll; }
 	position: absolute;
 	top:15px;
 	left:5px;
+	width:45px;
+	height:45px;
 }
 .comment-text-holder, .reply-text, .grumble-text-holder p {
 	font-size: .95em;
@@ -590,6 +592,8 @@ html { overflow-y: scroll; }
 	position: absolute;
 	top:3px;
 	left:3px;
+	width:45px;
+	height:45px;
 }
 .quick-reply {
 	padding:3px 0;	
@@ -965,6 +969,9 @@ html { overflow-y: scroll; }
 	padding:15px;
 	margin-bottom: 65px;
 }
+.profile-user-info h2 {
+	margin-left:90px;
+}
 .profile-user-info button {
 	float:right;
 	margin-top:-26px;
@@ -1042,6 +1049,8 @@ html { overflow-y: scroll; }
 .settings-user-image {
 	float:left;
 	margin-right:5px;
+	width:80px;
+	height:80px;
 }
 #button-controls {
 	float:left;
