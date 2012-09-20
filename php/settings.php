@@ -22,7 +22,7 @@ $row = mysql_fetch_array($result);
                 </div>
                 <div id="gravatar-change" class="padding-top">
                 	<h4>Gravatar</h4>
-                	<?php echo '<img class="settings-user-image rounded-corners-medium" src="' . getGravatar($row["user_email"]) . '" width="45" height="45" alt="' .  $row["username"] . '">'; ?>
+                	<?php echo '<img class="settings-user-image rounded-corners-medium" src="' . getGravatar($row["user_email"], 80) . '" alt="' .  $row["username"] . '">'; ?>
 					<p>To change the image used on your profile, visit <a href="http://www.gravatar.com" target="_blank" class="colored-link-1">Gravatar</a>.</p>      
 					<small>Note: Use the email you provided Grumble with if you are a new user.</small>          	
                 </div>

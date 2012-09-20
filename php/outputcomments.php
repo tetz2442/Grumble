@@ -47,7 +47,7 @@ function outputComments($grumble, $comments = false, $loggedin = false, $admin =
 					echo '<div class="comment-text-holder">';
 						echo '<p class="comment-text">' . stripslashes($row["status_text"]) . '</p>';
 					echo '</div>';
-					echo '<a href="/profile/' . $row["username"] . '"><img class="user-image rounded-corners-medium" src="' . getGravatar($row["user_email"]) . '" width="45" height="45" alt="' .  $row["username"] . '"></a>';
+					echo '<a href="/profile/' . $row["username"] . '"><img class="user-image rounded-corners-medium" src="' . getGravatar($row["user_email"]) . '" alt="' .  $row["username"] . '"></a>';
 					echo '<div class="embed-link"></div>';
 				echo '</div>';
 			echo '<div class="comment-extras">';
