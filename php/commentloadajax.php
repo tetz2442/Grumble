@@ -100,7 +100,7 @@
 		else if($type == "top-comment") {
 			$sql = "SELECT sg.status_id,(SELECT COUNT(user_like_id) FROM user_likes_grumble AS ulg WHERE sg.status_id = ulg.status_id) AS votes_up_count" .
 				" FROM status_grumble AS sg " . 
-                  "WHERE sg.date_submitted >= (UTC_TIMESTAMP() - INTERVAL 7 DAY) HAVING votes_up_count > 0" .
+                  "WHERE sg.date_submitted >= (UTC_TIMESTAMP() - INTERVAL 2 DAY) HAVING votes_up_count > 0" .
                   " ORDER BY votes_up_count DESC LIMIT 10 OFFSET " . $last;
 			$result = mysql_query($sql, $conn);
 			if(mysql_num_rows($result) == 0) {
