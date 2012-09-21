@@ -2,6 +2,7 @@
 function outputComments($grumble, $comments = false, $loggedin = false, $admin = false, $profile = false, $homepage = false) {
 	global $conn;
 	if($grumble) {
+		setTimezone();
 		$sql = "SELECT sg.status_id, sg.status_text, ug.username, sg.date_submitted, " . 
 			"ug.user_id, ug.username, ug.user_email, COUNT(user_like_id) AS votes_up_count, scg.sub_category_name, scg.sub_category_id, scg.sub_category_url, cg.category_url FROM status_grumble AS sg " . 
 			"LEFT OUTER JOIN user_likes_grumble AS vg ON sg.status_id = vg.status_id " .
