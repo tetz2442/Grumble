@@ -3,6 +3,7 @@
 	require_once "functions.php";
 	require_once "outputcomments.php";
 	session_start();
+	setTimezone();
 	if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && is_numeric($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		$comment = mysql_real_escape_string(strip_tags($_POST["comment"]));
 		$category = mysql_real_escape_string(strip_tags($_POST["category"]));

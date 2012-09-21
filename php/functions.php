@@ -19,6 +19,18 @@ function getGravatar($email, $size = 45) {
 	return "http://www.gravatar.com/avatar/" . md5(strtolower(trim($email))) . "?d=" . urlencode($default) . "&s=" . $size;
 }
 
+//set timezone
+function setTimezone() {
+	if (isset($_SESSION["timezone"])) {
+		date_default_timezone_set($_SESSION["timezone"]);
+	}
+	else if (isset($_SESSION["time"])) {
+		date_default_timezone_set($_SESSION["time"]);
+	}
+	else {
+		date_default_timezone_set("America/Chicago");
+	}
+}
 //returns the date as the time ago (1m, 1w, etc)
 function time_ago($date,$granularity=1) {
 	$retval = "";
