@@ -31,6 +31,7 @@ function setTimezone() {
 		date_default_timezone_set("America/Chicago");
 	}
 }
+
 //returns the date as the time ago (1m, 1w, etc)
 function time_ago($date,$granularity=1) {
 	$retval = "";
