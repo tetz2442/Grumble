@@ -20,10 +20,10 @@
 	}
 	else if(isset($_POST["email"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		//get the passed parameter
-		$email = mysql_real_escape_string($_POST["email"]);
+		$email = mysql_real_escape_string(strtolower($_POST["email"]));
 		
 		//send a request to the database
-		$sql = "SELECT user_email FROM users_grumble WHERE user_email = '" . $email . "'";
+		$sql = "SELECT user_email FROM users_grumble WHERE LOWER(user_email) = '" . $email . "'";
 		$result = mysql_query($sql, $conn) or die("Could not get username: " . mysql_error());
 		
 		if(mysql_num_rows($result) > 0) {

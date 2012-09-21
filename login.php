@@ -13,7 +13,7 @@ if(!isset($_SESSION["user_id"])) {
 <ul>
 <li>
     <label for="email" class="login-label">Email or Username:</label>
-    <input type="email" id="email" class="textInput" name="email" maxlength="100" value="<?php if(isset($_GET["email"])) echo strip_tags($_GET["email"]); ?>"/>
+    <input type="text" id="email" class="textInput" name="email" maxlength="100" value="<?php if(isset($_GET["email"])) echo strip_tags($_GET["email"]); ?>"/>
 </li>
 <li>
     <label for="password" class="login-label">Password:</label>

@@ -920,7 +920,7 @@ html { overflow-y: scroll; }
 #login-table li {
 	margin: 10px;
 }
-#login-table input[type="input"], #login-table input[type="password"], #login-table input[type="email"] {
+#login-table input[type="input"], #login-table input[type="password"], #login-table input[type="text"] {
 	width:100%;
 }
 #login-table input[type="submit"]{
