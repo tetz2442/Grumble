@@ -81,6 +81,9 @@ else if($filename == "how-it-works.php") {
 else if($filename == "noscript.php") {
 	echo " JavaScript not enabled";
 }
+else if($filename == "updates.php") {
+	echo " Updates";
+}
 else {
 	echo " Grumble for you. Grumble for change.";	
 }
@@ -111,6 +114,9 @@ else if($filename == "contact.php") {
 else if($filename == "noscript.php") {
 	echo "You must enable your JavaScript to be able to have the best viewing experience on Grumble.";
 }
+else if($filename == "updates.php"){
+	echo "Come here for updates on new things happening at Grumble. Grumble is a place where you can discuss the topics that you feel are important and need attention.";
+}
 else {
 	echo "Grumble is a place where you can discuss the topics that you feel are important and need attention. It's simple. Grumble for you. Grumble for change.";
 }
@@ -138,8 +144,11 @@ if("<?php echo $_SESSION["time"]; ?>".length==0){
 </script>
 <script type="text/javascript" src="/javascript/script.min.js"></script>
 <?php
-if($filename == "create-account.php" && !isset($_SESSION["user_id"])) {
+if($filename == "create-account.php" && !isset($_SESSION["user_id"]) && !isset($_GET["social_create"])) {
  echo '<script type="text/javascript" src="/javascript/formValidation.min.js"></script>';	
+}
+if($filename == "create-account.php" && !isset($_SESSION["user_id"]) && isset($_GET["social_create"])) {
+ echo '<script type="text/javascript" src="/javascript/formvalidationsocial.js"></script>';	
 }
 if($filename == "contact.php") {
  echo '<script type="text/javascript" src="/javascript/contactvalidation.min.js"></script>';	

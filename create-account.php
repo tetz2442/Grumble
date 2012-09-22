@@ -17,61 +17,6 @@
 	$token = md5(uniqid(rand(), true));
 	$_SESSION['token2'] = $token;
 	if(!isset($_SESSION["user_id"])) {
-		if(isset($_GET["user_created"]) && $_GET["user_created"] == 1) {
-?>
-<div id="account-create-container">
-	<p class="content-padding text-align-center">An email has been sent to your entered email address (make sure to check your spam folder, especially Gmail). Before you can start using Grumble, you must verify this email.</p>
-</div>
-<?php
-		}
-		else {
-?>
-<div id="account-create-container">
-	<div id="account-create-welcome">
-    	 <h1>Create an account on Grumble</h1>
-    </div>
-    <div id="login-grumble-info">
-        <p>Creating an account on Grumble will give you access to its many features.</p>
-        <p>Start new Grumble categories and inspire an action for change or simply Grumble about an issue that has been bothering you.</p>
-        <p>Welcome to Grumble!</p>
-    </div>
-    <div id="create-account-table" class="rounded-corners-large content-padding">	
-        <form method='post' action='/php/transact-user.php' onsubmit="return checkForm(this)" name='userForm'>
-        <ul>
-	        <li>
-	            <p class="column1"><label for="firstname">First name:</label></p>
-	            <p class="column2"><input type="text" id="firstname" class="textInput" name="firstname" maxlength="50" <?php echo "value='" . $name[0] . "'"; ?>/></p>
-	            <p class="column3"><span id="firstnameError"></span></p>
-	        <li>
-	        <li>
-	            <p class="column1"><label for="lastname">Last name:</label></p>
-	            <p class="column2"><input type="text" id="lastname" class="textInput" name="lastname" maxlength="50" <?php echo "value='" . $name[1] . "'"; ?>/></p>
-	            <p class="column3"><span id="lastnameError"></span></p>
-	        </li>
-	        <li>
-	            <p class="column1"><label for="username">Username:</label> (<span class="help-callout colored-link-1" data-id="3" title="Tips for creating a username on Grumble."><b>?</b></span>)</p>
-	            <p class="column2"><input type="text" id="username" class="textInput" name="username" maxlength="15" autocomplete="off"<?php if(isset($_GET["username"])) { echo "value='" . strip_tags($_GET["username"]) . "'";} ?>/></p>
-	            <p class="column3"><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="usernameError"></span></p>
-	        </li>
-	        <li>
-	            <p class="column1"><label for="email">Email Address:</label></p>
-	            <p class="column2"><input type="text" id="emails" class="textInput" name="email" maxlength="100" autocomplete="off" <?php if(isset($_POST["email"])) { echo "value='" . strip_tags($_POST["email"]) . "'";} else if(isset($_GET["email"])) {echo "value='" . strip_tags($_GET["email"]) . "'"; } ?>/></p>
-	            <p class="column3"><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="emailError"></span></p>
-	        </li>
-	        <li>
-	            <p class="column1"><label for="userpassword">Password:</label> (<span class="help-callout colored-link-1" data-id="4" title="Tips for creating a password on Grumble."><b>?</b></span>)</p>
-	            <p class="column2"><input type="password" id="userpassword" class="textInput" name="password" maxlength="50"/></p>
-	            <p class="column3"><span id="passError"></span></p>
-	        </li>
-	        <li>
-	            <p class="column1"><label for="userpassword2">Re-enter Password:</label></p> 
-	            <p class="column2"><input type="password" id="userpassword2" class="textInput" name="password2" maxlength="50"/></p>
-	            <p class="column3"><span id="pass2Error"></span></p>
-	        </li>
-	        <li>
-	            <p class="column1"><label for="tz">Select Timezone:</label></p> 
-	            <p class="column2">
-	            <?php
 				// create an array listing the time zones
 				$zonelist = array('Kwajalein' => '(GMT-12:00) International Date Line West',
 						'Pacific/Midway' => '(GMT-11:00) Midway Island',
@@ -199,7 +144,128 @@
 						'Asia/Kamchatka' => '(GMT+12:00) Kamchatka',
 						'Pacific/Auckland' => '(GMT+12:00) Auckland',
 						'Pacific/Tongatapu' => '(GMT+13:00) Nukualofa');
-					?>
+		if(isset($_GET["user_created"]) && $_GET["user_created"] == 1) {
+?>
+<div id="account-create-container">
+	<p class="content-padding text-align-center">An email has been sent to your entered email address (make sure to check your spam folder, especially Gmail). Before you can start using Grumble, you must verify this email.</p>
+</div>
+<?php
+		}
+		else if(isset($_GET["social_create"]) && $_GET["social_create"] == 1 && isset($_GET["username"]) && isset($_GET["token"])) {
+?>
+			<div id="account-create-container">
+	<div id="account-create-welcome">
+    	 <h1>Finish Registration</h1>
+    </div>
+    <div id="login-grumble-info">
+        <p class="text-align-center">Before you can start using Grumble there is just a few more things to do.</p>
+    </div>
+    <div id="create-account-table" class="rounded-corners-large content-padding">	
+        <form method='post' action='/php/transact-user.php' onsubmit="return checkForm(this)" name='userForm'>
+        <ul>
+	        <li>
+	            <p class="column1"><label for="username">Username:</label> (<span class="help-callout colored-link-1" data-id="3" title="Tips for creating a username on Grumble."><b>?</b></span>)</p>
+	            <p class="column2"><input type="text" id="username" class="textInput" name="username" maxlength="15" autocomplete="off"<?php if(isset($_GET["username"])) { echo "value='" . strip_tags($_GET["username"]) . "'";} ?>/></p>
+	            <p class="column3"><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="usernameError"></span></p>
+	        </li>
+	        <li>
+	            <p class="column1"><label for="userpassword">Password:</label> (<span class="help-callout colored-link-1" data-id="4" title="Tips for creating a password on Grumble."><b>?</b></span>)</p>
+	            <p class="column2"><input type="password" id="userpassword" class="textInput" name="password" maxlength="50"/></p>
+	            <p class="column3"><span id="passError"></span></p>
+	        </li>
+	        <li>
+	            <p class="column1"><label for="userpassword2">Re-enter Password:</label></p> 
+	            <p class="column2"><input type="password" id="userpassword2" class="textInput" name="password2" maxlength="50"/></p>
+	            <p class="column3"><span id="pass2Error"></span></p>
+	        </li>
+	        <li>
+	            <p class="column1"><label for="tz">Select Timezone:</label></p> 
+	            <p class="column2">
+	            	<select name="tz" id="tz">
+	                	<option value="none">Select Timezone</option>
+	                    <option value="Pacific/Honolulu">(GMT-10:00) Hawaii</option>
+	                    <option value="America/Anchorage">(GMT-09:00) Alaska</option>
+	                    <option value="America/Los_Angeles">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+	                    <option value="America/Phoenix">(GMT-07:00) Arizona</option>
+	                    <option value="America/Denver">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+	                    <option value="America/Chicago">(GMT-06:00) Central Time (US &amp; Canada)</option>
+	                    <option value="America/New_York">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+	                    <option value="America/Indiana/Indianapolis">(GMT-05:00) Indiana (East)</option>
+	                    <option disabled="disabled">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</option>
+						<?php
+	                    foreach($zonelist as $key => $value) {
+	                        echo '		<option value="' . $key . '">' . $value . '</option>' . "\n";
+	                    }
+	                    ?>
+	                </select>
+	            </p>
+	            <p class="column3"><span id="timezoneError"></span></p>
+	        </li>
+	        <li>
+	        	<p class="column1"></p>
+	            <p id="create-checkbox">
+	            	<input type="checkbox" name="terms" id="terms"/><label for="terms" class="terms">Agree to <a href="terms-of-service.php" class="colored-link-1" target="_blank">Terms of Service</a> & <a href="terms-of-service.php" class="colored-link-1" target="_blank">Privacy Policy</a></label>
+	            </p>
+	            <p class="column3"><span id="termsError"></span></p>
+	        </li>
+	        <li>
+	            <input type="hidden" name="token" value="<?php if(isset($_GET["token"])) { echo "value='" . strip_tags($_GET["token"]) . "'";} ?>" />
+	            <input type="submit" class="button orange" name="action" value="Finish Registration"/>
+	        </li>
+        </ul>
+        </form>
+    </div>
+</div>
+<?php
+		}
+		//a regular user is creating an account
+		else {
+?>
+<div id="account-create-container">
+	<div id="account-create-welcome">
+    	 <h1>Create an account on Grumble</h1>
+    </div>
+    <div id="login-grumble-info">
+        <p>Creating an account on Grumble will give you access to its many features.</p>
+        <p>Start new Grumble categories and inspire an action for change or simply Grumble about an issue that has been bothering you.</p>
+        <p>Welcome to Grumble!</p>
+    </div>
+    <div id="create-account-table" class="rounded-corners-large content-padding">	
+        <form method='post' action='/php/transact-user.php' onsubmit="return checkForm(this)" name='userForm'>
+        <ul>
+	        <li>
+	            <p class="column1"><label for="firstname">First name:</label></p>
+	            <p class="column2"><input type="text" id="firstname" class="textInput" name="firstname" maxlength="50" <?php echo "value='" . $name[0] . "'"; ?>/></p>
+	            <p class="column3"><span id="firstnameError"></span></p>
+	        <li>
+	        <li>
+	            <p class="column1"><label for="lastname">Last name:</label></p>
+	            <p class="column2"><input type="text" id="lastname" class="textInput" name="lastname" maxlength="50" <?php echo "value='" . $name[1] . "'"; ?>/></p>
+	            <p class="column3"><span id="lastnameError"></span></p>
+	        </li>
+	        <li>
+	            <p class="column1"><label for="username">Username:</label> (<span class="help-callout colored-link-1" data-id="3" title="Tips for creating a username on Grumble."><b>?</b></span>)</p>
+	            <p class="column2"><input type="text" id="username" class="textInput" name="username" maxlength="15" autocomplete="off"<?php if(isset($_GET["username"])) { echo "value='" . strip_tags($_GET["username"]) . "'";} ?>/></p>
+	            <p class="column3"><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="usernameError"></span></p>
+	        </li>
+	        <li>
+	            <p class="column1"><label for="email">Email Address:</label></p>
+	            <p class="column2"><input type="text" id="emails" class="textInput" name="email" maxlength="100" autocomplete="off" <?php if(isset($_POST["email"])) { echo "value='" . strip_tags($_POST["email"]) . "'";} else if(isset($_GET["email"])) {echo "value='" . strip_tags($_GET["email"]) . "'"; } ?>/></p>
+	            <p class="column3"><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="emailError"></span></p>
+	        </li>
+	        <li>
+	            <p class="column1"><label for="userpassword">Password:</label> (<span class="help-callout colored-link-1" data-id="4" title="Tips for creating a password on Grumble."><b>?</b></span>)</p>
+	            <p class="column2"><input type="password" id="userpassword" class="textInput" name="password" maxlength="50"/></p>
+	            <p class="column3"><span id="passError"></span></p>
+	        </li>
+	        <li>
+	            <p class="column1"><label for="userpassword2">Re-enter Password:</label></p> 
+	            <p class="column2"><input type="password" id="userpassword2" class="textInput" name="password2" maxlength="50"/></p>
+	            <p class="column3"><span id="pass2Error"></span></p>
+	        </li>
+	        <li>
+	            <p class="column1"><label for="tz">Select Timezone:</label></p> 
+	            <p class="column2">
 	            	<select name="tz" id="tz">
 	                	<option value="none">Select Timezone</option>
 	                    <option value="Pacific/Honolulu">(GMT-10:00) Hawaii</option>

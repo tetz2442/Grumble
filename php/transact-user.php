@@ -300,6 +300,146 @@
 			}
 			redirect("../");
 			break;
+
+		case "sociallogin" :
+			if(isset($_GET["provider"])) {	
+			   $config = dirname(__FILE__) . '/hybridauth/config.php';
+			   require_once( "hybridauth//Hybrid/Auth.php" );
+			 
+			   // the selected provider
+			   $provider_name = escapeAndStrip($_GET["provider"]);
+			 
+			   try{
+			       // initialize Hybrid_Auth with a given file
+			       $hybridauth = new Hybrid_Auth( $config );
+			 
+			       // try to authenticate with the selected provider
+			       $adapter = $hybridauth->authenticate( $provider_name );
+			 
+			       // then grab the user profile 
+			       $user_profile = $adapter->getUserProfile();
+				   
+				   //check if user is already in the DB
+			    	$sql = "SELECT user_id " .
+					"FROM authentications " .
+					"WHERE provider_uid = '" . crypt($user_profile->identifier) . "' AND provider = '" . $user_profile->provider . "' LIMIT 0,1";
+					//user does not exist, add them
+					if(mysql_num_rows($result) == 0) {
+						//check if user has already created an account
+						$sql = "SELECT user_id FROM users_grumble " .
+						"WHERE user_email = '" . $user_profile->emailVerified . "' LIMIT 0,1";
+						$result = mysql_query($sql, $conn) or die("Could not login: " . mysql_error());
+						//user has not created an account
+						if(mysql_num_rows($result) == 0) {
+							$username = $user_profile->firstName . $user_profile->lastName;
+							
+							$sql = "INSERT INTO users_grumble(username, user_firstname, user_lastname, user_password, user_salt, user_email, user_create_date, user_timezone) " . 
+								"VALUES('" . $username . "','" . $user_profile->firstName . "','" . $user_profile->lastName . "','" . "none" . "','" . "none" . "','" . $user_profile->emailVerified . "',UTC_TIMESTAMP(),'America/Chicago')";
+							mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
+							
+							$id = mysql_insert_id();
+							
+							$sql = "INSERT INTO settings_user_grumble(user_id) " . 
+								"VALUES(" . $id . ")";
+							mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
+	
+							$sql = "INSERT INTO authentications(user_id, provider, provider_uid, email, display_name, create_at) " . 
+								"VALUES(" . $id. ",'" . $provider_name . "','" . crypt($user_profile->identifier) . "','" . $user_profile->emailVerified . "','" . $user_profile->displayName . "',UTC_TIMESTAMP())";
+							mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
+							
+							$token = md5(uniqid(rand(), true));
+							$_SESSION["social_token"] = $token;
+							$_SESSION["verified_email"] = $user_profile->emailVerified;
+							redirect("../create-account?social_create=1&username=" . $username . "&token=" . $token);
+						}
+						//user has created an account already
+						else {
+							redirect("../login");
+						}
+						
+						//redirect("../create-account?social_create=1");
+					}
+					//log user in
+					else {
+						$row = mysql_fetch_array($result);
+						$sql = "SELECT user_id, user_email, access_lvl, username, user_password, user_salt, user_timezone " .
+						"FROM users_grumble " .
+						"WHERE user_id = " . $row["user_id"] . " AND user_verified = 1 LIMIT 0,1";
+						$result = mysql_query($sql, $conn) or die("Could not login: " . mysql_error());
+						if(mysql_num_rows($result) != 0) {
+							$row = mysql_fetch_array($result);
+							
+							$_SESSION["user_id"] = $row["user_id"];
+							$_SESSION["access_lvl"] = $row["access_lvl"];
+							$_SESSION["username"] = $row["username"];	
+							$_SESSION["email"] = $row["user_email"];	
+							$_SESSION["timezone"] = $row["user_timezone"];
+						}
+						redirect("../");
+					}
+			   }
+			   catch( Exception $e ){
+			       echo "Error: please try again!";
+			       echo "Original error message: " . $e->getMessage();
+			   }
+			}
+			//redirect("../");
+			break;
+			
+			case "Finish Registration" :
+			if(isset($_POST["username"]) && strlen($_POST["username"]) > 3 && isset($_POST["password"]) && strlen($_POST["password"]) > 5 && isset($_POST["password2"])
+				&& ($_POST["password"]) == $_POST["password2"] && isset($_POST["terms"]) && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['social_token']) && isset($_POST["tz"]) && $_POST["tz"] != "none") {
+					// Unset the token, so that it cannot be used again.
+					unset($_SESSION['social_token']);
+					
+					$username = escapeAndStrip($_POST["username"]);
+					$username = replaceSpaces($username);
+					$pass1 = escapeAndStrip($_POST["password"]);
+					$pass2 = escapeAndStrip($_POST["password2"]);
+					
+					$timezone = escapeAndStrip($_POST["tz"]);
+					
+					$sql = "SELECT user_email FROM users_grumble WHERE user_email = '" . $_SESSION["verified_email"] . "'";
+					$result = mysql_query($sql, $conn);
+					unset($_SESSION['verified_email']);
+					//check if user email is in db
+					if(mysql_num_rows($result) == 1) {
+						//validate username further
+						if(strlen($username) >= 4 && strlen($username) <= 15 && !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬-]/', $username)
+							&& preg_match('/[A-Z]/', $pass1) && preg_match('/[0-9]/', $pass1) && checkTimeZone($_POST["tz"])) {
+							$row = mysql_fetch_array($result);
+							$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+							$Chars_Len = 63;
+							$Salt_Length = 21;
+							
+							$salt = "";
+		
+							for($i=0; $i<$Salt_Length; $i++)
+							{
+								$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+							}
+							
+							$hashed_password = crypt($pass1, $salt) . $salt;
+							
+							//update user profile
+							$sql = "UPDATE users_grumble SET username = '" . $username . "', user_password = '" . $hashed_password . "', user_salt = '" . $salt . "', user_timezone = '" . $timezone . "' 
+							WHERE user_email = '" . $row["user_email"] . "' LIMIT 1";
+							mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
+							
+							redirect("../");
+						}
+						else {
+							redirect("../create-account");
+						}
+					}
+					else {
+						redirect("../");
+					}
+			}
+			else {
+				redirect("../create-account?create=fail");
+			}
+			break;
 		}
 	}
 	else {
