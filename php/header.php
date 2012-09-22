@@ -1,12 +1,12 @@
 <?php 
 session_start(); 
 //if cookie is set, set session variables
-if(isset($_COOKIE["user_grumble"]) && !isset($_SESSION["user_id"])) {
+if(isset($_COOKIE["user_grumble"]) && isset($_COOKIE["cookie_id"]) && !isset($_SESSION["user_id"])) {
 	require_once "conn.php";
 	$sql = "SELECT cg.cookie_id, ug.user_id, ug.user_email, ug.access_lvl, ug.username, ug.user_timezone " .
 			"FROM cookies_grumble AS cg " .
 			"LEFT OUTER JOIN users_grumble AS ug ON cg.user_id = ug.user_id " .
-			"WHERE cg.cookie_text='" . $_COOKIE["user_grumble"] . "' AND cg.cookie_expire >= '" . date("Y-m-d H:i:s", time()) . "' LIMIT 0,1";
+			"WHERE cg.cookie_text='" . $_COOKIE["user_grumble"] . "' AND cg.cookie_expire >= '" . date("Y-m-d H:i:s", time()) . "' AND cookie_id = " . $_COOKIE["cookie_id"] . " LIMIT 0,1";
 	$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
 	if(mysql_num_rows($result) != 0) {
 		$row = mysql_fetch_array($result);
