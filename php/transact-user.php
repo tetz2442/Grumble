@@ -37,7 +37,7 @@
 					if(isset($_POST["remember-box"])) {
 						$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
 						$Chars_Len = 63;
-						$Salt_Length = 25;
+						$Salt_Length = 50;
 						
 						$salt = "";
 	
@@ -47,18 +47,22 @@
 						}
 					
 						$cookie_text = crypt($salt);
-						$sql = "SELECT user_id FROM cookies_grumble WHERE user_id=" . $_SESSION["user_id"] . " LIMIT 0,1";
+						$sql = "SELECT cookie_id FROM cookies_grumble WHERE user_id=" . $_SESSION["user_id"] . " LIMIT 0,1";
 						$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
-						if(mysql_num_rows($result) == 0) {
+						$row = mysql_fetch_array($result);
+						if(mysql_num_rows($result) == 0 || (!isset($_COOKIE["user_grumble"]) && !isset($_COOKIE["cookie_id"]))) {
 							$sql = "INSERT INTO cookies_grumble(cookie_text, cookie_expire, user_id) VALUES('" . $cookie_text . "','" . date("Y-m-d H:i:s", time()+7*24*60*60) . "'," . $_SESSION["user_id"] . ")";
 							mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+							$id = mysql_insert_id();
 						}
 						else {
-							$sql = "UPDATE cookies_grumble SET cookie_text='" . $cookie_text . "', cookie_expire = '" . date("Y-m-d H:i:s", time()+7*24*60*60) . "' WHERE user_id = " . $_SESSION["user_id"];
+							$sql = "UPDATE cookies_grumble SET cookie_text='" . $cookie_text . "', cookie_expire = '" . date("Y-m-d H:i:s", time()+7*24*60*60) . "' WHERE user_id = " . $_SESSION["user_id"] . " AND cookie_id = " . $row["cookie_id"];
 							mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+							$id = $row["cookie_id"];
 						}
 						
 						setcookie("user_grumble", $cookie_text, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
+						setcookie("cookie_id", $id, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
 					}
 
 					if(strpos($refer, "login.php") || strpos($refer, "index.php") || strpos($refer, "create-account.php") || strpos($refer, "forgot-password.php"))
@@ -80,7 +84,12 @@
 		
 		case "Logout" :
 			if(isset($_SESSION["user_id"])) {
-				setcookie("user_grumble","", time()-7*24*60*60, "/", $_SERVER['HTTP_HOST']);
+				if(isset($_COOKIE["user_grumble"]) && isset($_COOKIE["cookie_id"])) {
+					$sql = "DELETE FROM cookies_grumble WHERE cookie_id = " . $_COOKIE["cookie_id"] . " AND cookie_text = '" . $_COOKIE["user_grumble"] . "'";
+					mysql_query($sql, $conn) or die("Error, could not logout: " . mysql_error());
+					setcookie("user_grumble","", time()-7*24*60*60, "/", $_SERVER['HTTP_HOST']);
+					setcookie("cookie_id","", time()-7*24*60*60, "/", $_SERVER['HTTP_HOST']);
+				}
 				session_unset();
 				session_destroy();
 				redirect("../");
