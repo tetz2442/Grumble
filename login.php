@@ -34,6 +34,11 @@ if(!isset($_SESSION["user_id"])) {
 <li>
     <a href="forgot-password" class="colored-link-1">Forgot your password?</a>
 </li>
+<li class="padding-top"><p class="padding-top">OR login with</p></li>
+<li class="padding-top social-login">
+	<a href="/php/transact-user.php?provider=facebook&action=sociallogin"><img src="/images/social/facebook.png" alt="Login with Facebook" title="Login with Facebook" /></a>
+	<a href="/php/transact-user.php?provider=google&action=sociallogin"><img src="/images/social/google.png" alt="Login with Google" title="Login with Google" /></a>
+</li>
 </ul>
 </form>
 </div>

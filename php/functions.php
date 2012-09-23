@@ -63,6 +63,17 @@ function time_ago($date,$granularity=1) {
     }
 }
 
+//check if username is allowed
+function checkUsername($input) {
+	$unallowed_username = array('slut','bitch','whore','fuck','motherfucker','cunt','asshole','damn','poop','shit','admin','moderator','ass');
+	$allowed = true;
+	foreach ($unallowed_username as $value) {
+		if(strpos($input, $value) !== false)
+			$allowed = false;
+	}
+	return $allowed;
+}
+
 /* takes the input, scrubs bad characters */
 function generate_seo_link($input,$replace = '-',$remove_words = true,$words_array = array())
 {
