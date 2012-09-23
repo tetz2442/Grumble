@@ -308,6 +308,9 @@ html { overflow-y: scroll; }
 	float: none;
 	position: relative;
 }
+.social-login img {
+	padding: 4px 5px 2px 0;
+}
 .divider {
 	height:1px;
 	padding:0 !important;
@@ -643,8 +646,9 @@ html { overflow-y: scroll; }
 }
 #character-count {
 	float:right;
-	margin-right:5px;
-	margin-top:4px;
+	margin:8px 5px 0;
+	color: #40B340;
+	font-size: .85em;
 }
 #gif-loader {
 	padding:1px;	
