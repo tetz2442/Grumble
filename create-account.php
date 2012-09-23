@@ -1,8 +1,8 @@
 <?php
 	require_once "php/conn.php";
-	require_once "php/http.php";
 	require_once "php/header.php";
 	require_once "php/containerWide.php";
+	require_once "php/functions.php";
 	$previousFill = false;
 	$name =  array("", "");
 	if(isset($_POST["fullname"])) {
@@ -144,6 +144,7 @@
 						'Asia/Kamchatka' => '(GMT+12:00) Kamchatka',
 						'Pacific/Auckland' => '(GMT+12:00) Auckland',
 						'Pacific/Tongatapu' => '(GMT+13:00) Nukualofa');
+		//user has just created an account, tell them to check there email
 		if(isset($_GET["user_created"]) && $_GET["user_created"] == 1) {
 ?>
 <div id="account-create-container">
@@ -151,71 +152,73 @@
 </div>
 <?php
 		}
-		else if(isset($_GET["social_create"]) && $_GET["social_create"] == 1 && isset($_GET["username"]) && isset($_GET["token"])) {
+		//someone just created an account with social media (facebook, google or twitter)
+		else if(isset($_GET["social_create"]) && $_GET["social_create"] == 1 && isset($_GET["username"]) && isset($_GET["token"]) && isset($_GET["provider"])) {
 ?>
-			<div id="account-create-container">
-	<div id="account-create-welcome">
-    	 <h1>Finish Registration</h1>
-    </div>
-    <div id="login-grumble-info">
-        <p class="text-align-center">Before you can start using Grumble there is just a few more things to do.</p>
-    </div>
-    <div id="create-account-table" class="rounded-corners-large content-padding">	
-        <form method='post' action='/php/transact-user.php' onsubmit="return checkForm(this)" name='userForm'>
-        <ul>
-	        <li>
-	            <p class="column1"><label for="username">Username:</label> (<span class="help-callout colored-link-1" data-id="3" title="Tips for creating a username on Grumble."><b>?</b></span>)</p>
-	            <p class="column2"><input type="text" id="username" class="textInput" name="username" maxlength="15" autocomplete="off"<?php if(isset($_GET["username"])) { echo "value='" . strip_tags($_GET["username"]) . "'";} ?>/></p>
-	            <p class="column3"><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="usernameError"></span></p>
-	        </li>
-	        <li>
-	            <p class="column1"><label for="userpassword">Password:</label> (<span class="help-callout colored-link-1" data-id="4" title="Tips for creating a password on Grumble."><b>?</b></span>)</p>
-	            <p class="column2"><input type="password" id="userpassword" class="textInput" name="password" maxlength="50"/></p>
-	            <p class="column3"><span id="passError"></span></p>
-	        </li>
-	        <li>
-	            <p class="column1"><label for="userpassword2">Re-enter Password:</label></p> 
-	            <p class="column2"><input type="password" id="userpassword2" class="textInput" name="password2" maxlength="50"/></p>
-	            <p class="column3"><span id="pass2Error"></span></p>
-	        </li>
-	        <li>
-	            <p class="column1"><label for="tz">Select Timezone:</label></p> 
-	            <p class="column2">
-	            	<select name="tz" id="tz">
-	                	<option value="none">Select Timezone</option>
-	                    <option value="Pacific/Honolulu">(GMT-10:00) Hawaii</option>
-	                    <option value="America/Anchorage">(GMT-09:00) Alaska</option>
-	                    <option value="America/Los_Angeles">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-	                    <option value="America/Phoenix">(GMT-07:00) Arizona</option>
-	                    <option value="America/Denver">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-	                    <option value="America/Chicago">(GMT-06:00) Central Time (US &amp; Canada)</option>
-	                    <option value="America/New_York">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-	                    <option value="America/Indiana/Indianapolis">(GMT-05:00) Indiana (East)</option>
-	                    <option disabled="disabled">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</option>
-						<?php
-	                    foreach($zonelist as $key => $value) {
-	                        echo '		<option value="' . $key . '">' . $value . '</option>' . "\n";
-	                    }
-	                    ?>
-	                </select>
-	            </p>
-	            <p class="column3"><span id="timezoneError"></span></p>
-	        </li>
-	        <li>
-	        	<p class="column1"></p>
-	            <p id="create-checkbox">
-	            	<input type="checkbox" name="terms" id="terms"/><label for="terms" class="terms">Agree to <a href="terms-of-service.php" class="colored-link-1" target="_blank">Terms of Service</a> & <a href="terms-of-service.php" class="colored-link-1" target="_blank">Privacy Policy</a></label>
-	            </p>
-	            <p class="column3"><span id="termsError"></span></p>
-	        </li>
-	        <li>
-	            <input type="hidden" name="token" value="<?php if(isset($_GET["token"])) { echo "value='" . strip_tags($_GET["token"]) . "'";} ?>" />
-	            <input type="submit" class="button orange" name="action" value="Finish Registration"/>
-	        </li>
-        </ul>
-        </form>
-    </div>
-</div>
+	<div id="account-create-container">
+		<div id="account-create-welcome">
+	    	 <h1>Welcome to Grumble!</h1>
+	    </div>
+	    <div id="login-grumble-info">
+	        <p class="text-align-center">Before you can start using Grumble there is just a few more things to do.</p>
+	        <p class="text-align-center">Entering a password will allow you to enter your account either with <strong><?php echo strip($_GET["provider"]);?></strong>, or by using your email/username and password.</p>
+	    </div>
+	    <div id="create-account-table" class="rounded-corners-large content-padding">	
+	        <form method='post' action='/php/transact-user.php' onsubmit="return checkForm(this)" name='userForm'>
+	        <ul>
+		        <li>
+		            <p class="column1"><label for="username">Username:</label> (<span class="help-callout colored-link-1" data-id="3" title="Tips for creating a username on Grumble."><b>?</b></span>)</p>
+		            <p class="column2"><input type="text" id="username" class="textInput" name="username" maxlength="15" autocomplete="off" <?php if(isset($_GET["username"])) { echo "value='" . strip_tags($_GET["username"]) . "'";} ?>/></p>
+		            <p class="column3"><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="usernameError"></span></p>
+		        </li>
+		        <li>
+		            <p class="column1"><label for="userpassword">Password:</label> (<span class="help-callout colored-link-1" data-id="4" title="Tips for creating a password on Grumble."><b>?</b></span>)</p>
+		            <p class="column2"><input type="password" id="userpassword" class="textInput" name="password" maxlength="50"/></p>
+		            <p class="column3"><span id="passError"></span></p>
+		        </li>
+		        <li>
+		            <p class="column1"><label for="userpassword2">Re-enter Password:</label></p> 
+		            <p class="column2"><input type="password" id="userpassword2" class="textInput" name="password2" maxlength="50"/></p>
+		            <p class="column3"><span id="pass2Error"></span></p>
+		        </li>
+		        <li>
+		            <p class="column1"><label for="tz">Select Timezone:</label></p> 
+		            <p class="column2">
+		            	<select name="tz" id="tz">
+		                	<option value="none">Select Timezone</option>
+		                    <option value="Pacific/Honolulu">(GMT-10:00) Hawaii</option>
+		                    <option value="America/Anchorage">(GMT-09:00) Alaska</option>
+		                    <option value="America/Los_Angeles">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+		                    <option value="America/Phoenix">(GMT-07:00) Arizona</option>
+		                    <option value="America/Denver">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+		                    <option value="America/Chicago">(GMT-06:00) Central Time (US &amp; Canada)</option>
+		                    <option value="America/New_York">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+		                    <option value="America/Indiana/Indianapolis">(GMT-05:00) Indiana (East)</option>
+		                    <option disabled="disabled">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</option>
+							<?php
+		                    foreach($zonelist as $key => $value) {
+		                        echo '		<option value="' . $key . '">' . $value . '</option>' . "\n";
+		                    }
+		                    ?>
+		                </select>
+		            </p>
+		            <p class="column3"><span id="timezoneError"></span></p>
+		        </li>
+		        <li>
+		        	<p class="column1"></p>
+		            <p id="create-checkbox">
+		            	<input type="checkbox" name="terms" id="terms"/><label for="terms" class="terms">Agree to <a href="terms-of-service.php" class="colored-link-1" target="_blank">Terms of Service</a> & <a href="terms-of-service.php" class="colored-link-1" target="_blank">Privacy Policy</a></label>
+		            </p>
+		            <p class="column3"><span id="termsError"></span></p>
+		        </li>
+		        <li>
+		            <input type="hidden" name="token" value="<?php if(isset($_GET["token"])) { echo "value='" . strip_tags($_GET["token"]) . "'";} ?>" />
+		            <input type="submit" class="button orange" name="action" value="Finish Registration"/>
+		        </li>
+	        </ul>
+	        </form>
+	    </div>
+	</div>
 <?php
 		}
 		//a regular user is creating an account
@@ -304,6 +307,7 @@
 <?php 
 		}
 }
+//a user is logged in and shouldnt be able to access this page
 else {
 ?>
 <div id="account-create-container">

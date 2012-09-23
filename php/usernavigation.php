@@ -66,8 +66,10 @@
                             <input type="checkbox" name="remember-box" id="remember-checkbox"/><label for="remember-checkbox" class="colored-link-1">Remember me</label>
                             <input type="submit" name="action" class="submit-login button" value="Sign In"/>
                         </li>
+                       <li class="padding-top"><p class="padding-top">OR login with</p></li>
                         <li class="padding-top">
-                        	<a href="/php/transact-user.php?provider=facebook&action=sociallogin">Login with Facebook</a>
+                        	<a href="/php/transact-user.php?provider=facebook&action=sociallogin"><img src="/images/social/facebook.png" alt="Login with Facebook" title="Login with Facebook" /></a>
+                        	<a href="/php/transact-user.php?provider=google&action=sociallogin"><img src="/images/social/google.png" alt="Login with Google" title="Login with Google" /></a>
                         </li>
                          <li class="login-last">
                         	<a class="colored-link-1" href="/create-account">Create an account</a> | <a class="colored-link-1" href="/forgot-password">Forget password?</a>
