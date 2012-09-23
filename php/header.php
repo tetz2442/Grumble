@@ -148,7 +148,7 @@ if($filename == "create-account.php" && !isset($_SESSION["user_id"]) && !isset($
  echo '<script type="text/javascript" src="/javascript/formValidation.min.js"></script>';	
 }
 if($filename == "create-account.php" && !isset($_SESSION["user_id"]) && isset($_GET["social_create"])) {
- echo '<script type="text/javascript" src="/javascript/formvalidationsocial.js"></script>';	
+ echo '<script type="text/javascript" src="/javascript/formvalidationsocial.min.js"></script>';	
 }
 if($filename == "contact.php") {
  echo '<script type="text/javascript" src="/javascript/contactvalidation.min.js"></script>';	
