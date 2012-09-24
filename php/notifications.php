@@ -6,7 +6,6 @@ session_start();
 if(isset($_POST["action"]) && $_POST["action"] == "markasread" && isset($_SESSION["user_id"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
 	$sql = "UPDATE notifications_grumble SET notification_read = 1 WHERE notification_read = 0 AND user_id = " . $_SESSION["user_id"]; 
 	mysql_query($sql, $conn) or die("Could not mark as read: " . mysql_error());
-	echo "poop";
 }
 else if(isset($_POST["action"]) && $_POST["action"] == "load" && isset($_POST["lastid"]) && is_numeric($_POST["lastid"]) && isset($_SESSION["user_id"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
 	$lastid = escapeAndStrip($_POST["lastid"]);
@@ -15,12 +14,7 @@ else if(isset($_POST["action"]) && $_POST["action"] == "load" && isset($_POST["l
 	$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
 	
 	if(mysql_num_rows($result) != 0) {
-		while($row = mysql_fetch_array($result)) {
-			echo '<li data-id="' . $row["notification_id"] .'" class="ind-notification">';
-				echo '<a href="' . $row["notification_url"] . '" class="colored-link-1">' . $row["notification_message"];
-				echo '<small>' . convertToTimeZone($row["notification_created"], $_SESSION["timezone"]) . '</small>'. '</a>';
-			echo '</li>';
-		}
+		outputNotifications($result);
 	}
 	else {
 		echo '0';
