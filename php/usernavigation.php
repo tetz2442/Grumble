@@ -2,7 +2,7 @@
 	<div id="nav-container">
     	<ul id="navigation">
             <li><a href="<?php echo "http://" . $_SERVER["HTTP_HOST"];?>">Home</a></li>
-            <li id="nav-category">Categories<img src="/images/arrow.png" alt="arrow" class="drop-image" width="10" height="10"/>
+            <li id="nav-category">Categories<img src="/images/arrow-down.png" alt="arrow" class="drop-image" width="10" height="10"/>
                 <ul id="sub-nav" class="rounded-corners-medium">
                     <li id="sub-nav-dropdown-arrow"><img src="/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/></li>
                 <?php
@@ -19,8 +19,43 @@
         <div id="user-info">
         <?php
         if(isset($_SESSION["username"])) {
+        	require_once 'functions.php';
             echo '<ul>';
-                echo '<li><span class="dropdown-login dropdown-shortlink">' . $_SESSION["username"] . '<img src="/images/arrow.png" alt="arrow" class="login-drop-image"/></span>';
+                $sql = "SELECT notification_id, notification_message, notification_url, notification_read, notification_created FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"] . " ORDER BY notification_created DESC LIMIT 10";
+				$result = mysql_query($sql, $conn);
+				$sql = "SELECT COUNT(notification_id) as number FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"] . " AND notification_read = 0";
+				$number = mysql_query($sql, $conn);
+				$row = mysql_fetch_array($number);
+                echo '<li class="user-inline"><span id="notification-number" title="Notifications">' . $row["number"] . '</span>';
+					echo '<ul id="notification-dropdown" class="rounded-corners-medium">';
+					echo ' <li id="dropdown-arrow-notifications"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
+					echo ' <li id="notification-header">Notifications</li>';
+					if(mysql_num_rows($result) != 0) {
+	                	while($row = mysql_fetch_array($result)) {
+	                		$formatted_date = convertToTimeZone($_row["notification_created"], $_SESSION["timezone"]);
+	                		if($row["notification_read"] == 0) {
+								echo '<li data-id="' . $row["notification_id"] .'" class="ind-notification">';
+									echo '<a href="' . $row["notification_url"] . '" class="colored-link-1 highlight">' . $row["notification_message"];
+									echo '<small>' . $formatted_date . '</small>'. '</a>';
+								echo '</li>';
+							}
+							else {
+								echo '<li data-id="' . $row["notification_id"] .'" class="ind-notification">';
+									echo '<a href="' . $row["notification_url"] . '" class="colored-link-1">' . $row["notification_message"];
+									echo '<small>' . $formatted_date . '</small>'. '</a>';
+								echo '</li>';
+							}
+						}
+					}
+					else {
+						echo '<li class="content-padding">No notifications</li>';
+					}
+					if(mysql_num_rows($result) == 10) {
+						echo ' <li id="notification-load"><a href="#" class="colored-link-1">Load more...</a></li>';
+					}
+					echo '</ul>';
+				echo '</li>';
+                echo '<li class="user-inline"><span class="dropdown-login dropdown-shortlink">' . $_SESSION["username"] . '<img src="/images/arrow-down.png" alt="arrow" class="login-drop-image"/></span>';
                     echo '<ul id="dropdown-sub-nav" class="rounded-corners-medium">';
                         echo '<li id="dropdown-arrow-short"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
                         echo "<li><a href='/profile/" . $_SESSION["username"] . "'>Profile</a></li>";
@@ -39,7 +74,7 @@
         else {
             echo '<ul>';
             echo '<li class="dropdown-login">';
-            echo '<span class="dropdown-shortlink" title="Login/Register">Login<img src="/images/arrow.png" alt="arrow" class="login-drop-image" width="10" height="10"/></span>';
+            echo '<span class="dropdown-shortlink" title="Login/Register">Login<img src="/images/arrow-down.png" alt="arrow" class="login-drop-image" width="10" height="10"/></span>';
             echo '<form action="/php/transact-user.php" method="post">';
 			$token = md5(uniqid(rand(), true));
 			$_SESSION['token'] = $token;

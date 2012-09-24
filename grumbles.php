@@ -53,7 +53,6 @@ if($exist) {
     if(mysql_num_rows($result) == 0) {
         echo '<div id="comments-left">';
         if(isset($_SESSION["username"])) {
-			require_once "php/notificationbar.php";
 			?>
             <div id="grumble-comment">
                     <form id="grumble-comment-form" method="post">
@@ -90,7 +89,6 @@ if($exist) {
             </div>
         <?php
         if(isset($_SESSION["username"])) {
-			require_once "php/notificationbar.php";
 			?>
             <div id="grumble-comment">
                     <form id="grumble-comment-form" method="post">

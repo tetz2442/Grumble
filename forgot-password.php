@@ -40,7 +40,6 @@ $_SESSION['token3'] = $token;
 				    <?php
 					}
 					else {
-						require_once "php/notificationbar.php";
 			?>
 						<br/><p>Reset your password below.</p><br/>
 						<p><label for="pass-forg">Password:</label>
@@ -67,6 +66,5 @@ $_SESSION['token3'] = $token;
 		}
 		//end forget-pass-holder and content-padding divs
 echo '</div></div>';
-require_once "php/notificationbar.php"; 
 require_once "php/footer.php"; 
 ?>

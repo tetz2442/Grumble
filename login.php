@@ -50,6 +50,5 @@ else {
 <p class="content-padding">Looks like you are already logged in. Get out there and start Grumbling!</p>
 <?php
 }
-require_once "php/notificationbar.php"; 
 require_once "php/footer.php"; 
 ?>
