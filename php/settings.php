@@ -31,7 +31,6 @@ $row = mysql_fetch_array($result);
                 <div id="email-change" class="padding-top">
                     <h4>Email Settings</h4>
                     <input type="checkbox" name="email-noti-thread" id="email-noti-thread" <?php if($row["settings_email_thread"] == 1) echo "checked='checked'";?>/><label for="email-noti-thread" class="colored-link-1" title="When your Grumble reaches a certian amount of Comments (15, 30, etc.)">On Grumbles</label>
-                    <input type="checkbox" name="email-noti-comment" id="email-noti-comment" <?php if($row["settings_email_comment"] == 1) echo "checked='checked'";?>/><label for="email-noti-comment" class="colored-link-1" title="When someone replies to your Comment">On Comments</label>
                 </div>
             </div>
             <div id='tab7'>

@@ -18,7 +18,7 @@ else if(isset($_POST["action"]) && $_POST["action"] == "load" && isset($_POST["l
 		while($row = mysql_fetch_array($result)) {
 			echo '<li data-id="' . $row["notification_id"] .'" class="ind-notification">';
 				echo '<a href="' . $row["notification_url"] . '" class="colored-link-1">' . $row["notification_message"];
-				echo '<small>' . convertToTimeZone($_row["notification_created"], $_SESSION["timezone"]) . '</small>'. '</a>';
+				echo '<small>' . convertToTimeZone($row["notification_created"], $_SESSION["timezone"]) . '</small>'. '</a>';
 			echo '</li>';
 		}
 	}
