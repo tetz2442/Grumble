@@ -1,3 +1,4 @@
+<?php require_once 'functions.php'; ?>
 <div id="user-navigation">
 	<div id="nav-container">
     	<ul id="navigation">
@@ -19,9 +20,8 @@
         <div id="user-info">
         <?php
         if(isset($_SESSION["username"])) {
-        	require_once 'functions.php';
             echo '<ul>';
-                $sql = "SELECT notification_id, notification_message, notification_url, notification_read, notification_created FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"] . " ORDER BY notification_created DESC LIMIT 10";
+                $sql = "SELECT notification_id, notification_message, notification_url, notification_created, notification_read FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"] . " ORDER BY notification_created DESC LIMIT 10";
 				$result = mysql_query($sql, $conn);
 				$sql = "SELECT COUNT(notification_id) as number FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"] . " AND notification_read = 0";
 				$number = mysql_query($sql, $conn);
@@ -32,7 +32,7 @@
 					echo ' <li id="notification-header">Notifications</li>';
 					if(mysql_num_rows($result) != 0) {
 	                	while($row = mysql_fetch_array($result)) {
-	                		$formatted_date = convertToTimeZone($_row["notification_created"], $_SESSION["timezone"]);
+	                		$formatted_date = convertToTimeZone($row["notification_created"], $_SESSION["timezone"]);
 	                		if($row["notification_read"] == 0) {
 								echo '<li data-id="' . $row["notification_id"] .'" class="ind-notification">';
 									echo '<a href="' . $row["notification_url"] . '" class="colored-link-1 highlight">' . $row["notification_message"];

@@ -239,7 +239,7 @@ html { overflow-y: scroll; }
 	display: inline-block;
 }
 .input-user-nav {
-	width:100%;	
+	width:97%;	
 }
 .login-drop-image {
 	margin-left:5px;
@@ -264,7 +264,7 @@ html { overflow-y: scroll; }
 }
 #dropdown-form-login {
 	width:285px;
-	padding:5px 10px;	
+	padding:10px;	
 	right: 0px;
 }
 #dropdown-form-login .colored-link-1 {
@@ -272,7 +272,7 @@ html { overflow-y: scroll; }
 }
 #dropdown-form-login #dropdown-arrow {
 	position:absolute;
-	margin-top:-21px;
+	margin-top:-25px;
 	margin-left:240px;	
 }
 #dropdown-form-login ul {

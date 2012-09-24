@@ -46,20 +46,14 @@ if(isset($_POST["user"]) && isset($_POST["username"]) && $_SESSION["username"] =
 	}
 }
 //email settings changed
-else if(isset($_POST["username"]) && isset($_POST["threadcheck"]) && isset($_POST["commentcheck"]) && $_SESSION["username"] == $_POST["username"] && $_SERVER['REQUEST_METHOD'] == "POST") {
+else if(isset($_POST["username"]) && isset($_POST["threadcheck"]) && $_SESSION["username"] == $_POST["username"] && $_SERVER['REQUEST_METHOD'] == "POST") {
 	if($_POST["threadcheck"] == "true")
 		$thread = 1;
 	else
 		$thread = 0;
-		
-	if($_POST["commentcheck"] == "true")
-		$comment = 1;
-	else
-		$comment = 0;
 
 	//username has not changed, insert email settings
-	$sql = "UPDATE settings_user_grumble SET settings_email_thread = " . $thread . ", settings_email_comment = " .
-	$comment . " WHERE user_id = " . $_SESSION["user_id"];
+	$sql = "UPDATE settings_user_grumble SET settings_email_thread = " . $thread . " WHERE user_id = " . $_SESSION["user_id"];
 	mysql_query($sql, $conn) or die("Error: " . mysql_error());
 	echo 3;
 }
