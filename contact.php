@@ -56,6 +56,5 @@ require_once "php/containerWide.php";
     </div>
 </div>
 <?php	
-require_once "php/notificationbar.php";
 require_once "php/footer.php"; 
 ?>

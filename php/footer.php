@@ -1,3 +1,4 @@
+<?php require_once 'php/notificationbar.php'; ?>
 </div>
 </div>
 <div id="lightbox-container"></div>

@@ -21,7 +21,6 @@ if(!isset($_SESSION["username"])) {
 <?php
 }
 else {
-	require_once "php/notificationbar.php";
 ?>
 <h2>Hey <a href="profile/<?php echo $_SESSION["username"]; ?>" class="colored-link-1"><?php echo $_SESSION["username"]; ?></a>! Got something to Grumble about? Let's hear it.</h2>
  <button class="push_button orange" id="start-new-grumble" title="New Grumble">New Grumble</button>

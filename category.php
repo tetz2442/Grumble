@@ -87,7 +87,6 @@ else {
 <?php
 if(isset($_SESSION["username"])) {
 	require_once "php/lightboxgrumble.php";
-	require_once "php/notificationbar.php";
 }
 require_once "php/footer.php"; 
 ?>

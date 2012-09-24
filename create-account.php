@@ -317,7 +317,6 @@ else {
 </div>
 <?php
 }
-require_once "php/notificationbar.php";
 require_once "php/helpcallout.php";
 require_once "php/footer.php"; 
 ?>

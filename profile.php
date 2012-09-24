@@ -94,7 +94,6 @@ else {
 }
 if($userprofile) {
 	require_once "php/settings.php"; 
-	require_once "php/notificationbar.php";
 	$settings = true;
 }
 require_once "php/footer.php"; 

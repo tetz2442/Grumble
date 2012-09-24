@@ -2,6 +2,7 @@
 require_once "conn.php";
 require_once "http.php";
 require_once "functions.php";
+require_once "notifications.php";
 session_start();
 if(isset($_POST["reply"]) && is_numeric($_POST["reply"]) && isset($_POST["type"]) && $_POST["type"] == "load" && isset($_POST["amount"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	retrieveReplies(mysql_real_escape_string($_POST["reply"]), mysql_real_escape_string($_POST["amount"]));
@@ -45,10 +46,12 @@ function enterReply($id, $text, $statususername) {
 	$commenttext = removeNewLine($text);
 	$commenttext = escapeAndStrip($commenttext);
 	
-	$sql = "SELECT status_id FROM status_grumble WHERE status_id = " . $id . " LIMIT 0,1";
+	$sql = "SELECT sg.status_id, ug.user_id, ug.username FROM status_grumble AS sg 
+	LEFT OUTER JOIN users_grumble AS ug ON sg.user_id = ug.user_id WHERE status_id = " . $id . " LIMIT 0,1";
 	$result = mysql_query($sql, $conn); 
 	
 	if(mysql_num_rows($result) != 0) {
+		$row = mysql_fetch_array($result);
 		$sql = "INSERT INTO replies_grumble (status_id, reply_date, reply_user, reply_text) " . 
 			"VALUES(" . $id . ",UTC_TIMESTAMP()," . $_SESSION["user_id"] . ",'" . $commenttext . "')";
 		mysql_query($sql, $conn) or die("Error: " . mysql_error());
@@ -62,7 +65,10 @@ function enterReply($id, $text, $statususername) {
 		echo '</div>';
 		echo '</div>';
 		
-		if($_SESSION["username"] != $statususername) {
+		if($_SESSION["user_id"] != $row["user_id"]) {
+			insertNotification($row["user_id"], $_SESSION["user_id"], $_SESSION["username"], "http://" . $_SERVER["HTTP_HOST"] . "/profile/" . $row["username"] . "/comment/" . $row["status_id"], "reply");
+		}
+		/*if($_SESSION["username"] != $statususername) {
 			$sql = "SELECT ug.user_email, ug.username, sg.status_id FROM status_grumble AS sg LEFT OUTER JOIN users_grumble AS ug " .
 			"ON ug.user_id = sg.user_id LEFT OUTER JOIN settings_user_grumble AS sug ON sug.user_id = ug.user_id WHERE sg.status_id = " . $id . " AND sug.settings_email_comment = 1";
 			$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
@@ -71,7 +77,7 @@ function enterReply($id, $text, $statususername) {
 				$parameters = array("http://" . $_SERVER["HTTP_HOST"] . "/profile/" . $row["username"] . "/comment/" . $row["status_id"], $statususername, $_SESSION["username"], $commenttext);
 				sendEmail($row["user_email"], "From: no-reply@grumbleonline.com", "reply", $parameters);
 			}
-		}
+		}*/
 	}
 }
 ?>
