@@ -1,4 +1,7 @@
-<?php require_once 'functions.php'; ?>
+<?php 
+require_once 'functions.php';
+require_once 'outputnotifications.php';
+ ?>
 <div id="user-navigation">
 	<div id="nav-container">
     	<ul id="navigation">
@@ -30,23 +33,8 @@
 					echo '<ul id="notification-dropdown" class="rounded-corners-medium">';
 					echo ' <li id="dropdown-arrow-notifications"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
 					echo ' <li id="notification-header">Notifications</li>';
-					if(mysql_num_rows($result) != 0) {
-	                	while($row = mysql_fetch_array($result)) {
-	                		$formatted_date = convertToTimeZone($row["notification_created"], $_SESSION["timezone"]);
-	                		if($row["notification_read"] == 0) {
-								echo '<li data-id="' . $row["notification_id"] .'" class="ind-notification">';
-									echo '<a href="' . $row["notification_url"] . '" class="colored-link-1 highlight">' . $row["notification_message"];
-									echo '<small>' . $formatted_date . '</small>'. '</a>';
-								echo '</li>';
-							}
-							else {
-								echo '<li data-id="' . $row["notification_id"] .'" class="ind-notification">';
-									echo '<a href="' . $row["notification_url"] . '" class="colored-link-1">' . $row["notification_message"];
-									echo '<small>' . $formatted_date . '</small>'. '</a>';
-								echo '</li>';
-							}
-						}
-					}
+					if(mysql_num_rows($result) != 0) 
+						outputNotifications($result);
 					else {
 						echo '<li class="content-padding">No notifications</li>';
 					}

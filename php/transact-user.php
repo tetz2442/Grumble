@@ -411,7 +411,7 @@
 							}
 						}
 					}
-					//log user in
+					//log user in, credentials are good
 					else {
 						$row = mysql_fetch_array($result);
 						$sql = "SELECT user_id, user_email, access_lvl, username, user_password, user_salt, user_timezone " .
