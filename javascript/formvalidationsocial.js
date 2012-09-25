@@ -103,7 +103,20 @@ $(document).ready(function() {
 			return results[1] || 0;
 		}
 	}
+
+	var submit = false;
+	$("#social-form").submit(function() {
+		submit = true;
+	});
+
+	window.onbeforeunload = confirmExit;
 });
+
+function confirmExit()
+{
+	if(!submit)
+		return "If you leave this page your account will not be created and you will lose all your changes. Are you sure you want to leave?";
+}
 
 function checkLength($element, chars_allowed) {
 	if($element.val().length > chars_allowed) {

@@ -358,7 +358,7 @@
 							$username = replaceSpaces($username);
 							
 							$sql = "INSERT INTO users_grumble(username, user_firstname, user_lastname, user_password, user_salt, user_email, user_create_date, user_timezone) " . 
-								"VALUES('','" . $user_profile->firstName . "','" . $user_profile->lastName . "','" . "none" . "','" . "none" . "','" . $email . "',UTC_TIMESTAMP(),'America/Chicago')";
+								"VALUES('" . $username . "','" . $user_profile->firstName . "','" . $user_profile->lastName . "','" . "none" . "','" . "none" . "','" . $email . "',UTC_TIMESTAMP(),'America/Chicago')";
 							mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
 							
 							$id = mysql_insert_id();
