@@ -164,7 +164,7 @@
 	        <p class="text-align-center">Entering a password will allow you to enter your account either with <strong><?php echo strip($_GET["provider"]);?></strong>, or by using your email/username and password.</p>
 	    </div>
 	    <div id="create-account-table" class="rounded-corners-large content-padding">	
-	        <form method='post' action='/php/transact-user.php' onsubmit="return checkForm(this)" name='userForm'>
+	        <form method='post' action='/php/transact-user.php' onsubmit="return checkForm(this)" name='userForm' id="social-form">
 	        <ul>
 		        <li>
 		            <p class="column1"><label for="username">Username:</label> (<span class="help-callout colored-link-1" data-id="3" title="Tips for creating a username on Grumble."><b>?</b></span>)</p>
