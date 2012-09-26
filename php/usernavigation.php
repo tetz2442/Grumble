@@ -29,10 +29,15 @@ require_once 'outputnotifications.php';
 				$sql = "SELECT COUNT(notification_id) as number FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"] . " AND notification_read = 0";
 				$number = mysql_query($sql, $conn);
 				$row = mysql_fetch_array($number);
-                echo '<li class="user-inline"><span id="notification-number" title="Notifications">' . $row["number"] . '</span>';
+                echo '<li class="user-inline">';
+					if ($row["number"] > 0) {
+						echo '<img id="notification-number" title="Notifications" src="/images/icons/notification.png" alt="notifications">';
+					} else {
+						echo '<img id="notification-number" title="Notifications" src="/images/icons/notification-none.png" alt="notifications">';
+					}
 					echo '<ul id="notification-dropdown" class="rounded-corners-medium">';
 					echo ' <li id="dropdown-arrow-notifications"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
-					echo ' <li id="notification-header">Notifications</li>';
+					echo ' <li id="notification-header">Notifications (' . $row["number"] . ' new)</li>';
 					if(mysql_num_rows($result) != 0) 
 						outputNotifications($result);
 					else {
@@ -46,15 +51,15 @@ require_once 'outputnotifications.php';
                 echo '<li class="user-inline"><span class="dropdown-login dropdown-shortlink">' . $_SESSION["username"] . '<img src="/images/arrow-down.png" alt="arrow" class="login-drop-image"/></span>';
                     echo '<ul id="dropdown-sub-nav" class="rounded-corners-medium">';
                         echo '<li id="dropdown-arrow-short"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
-                        echo "<li><a href='/profile/" . $_SESSION["username"] . "'>Profile</a></li>";
+                        echo '<li><a href="/profile/' . $_SESSION["username"] . '"><span id="profile-span">Profile</span></a></li>';
             			echo '<li class="divider light"></li>';
-            			echo "<li><a href='/contact'>Contact Us</a></li>";
+            			echo '<li><a href="/contact"><span id="contact-span">Contact Us</span></a></li>';
                         echo '<li class="divider light"></li>';
-            			echo "<li><a href='/profile/" . $_SESSION["username"] . "#settings' id='settings-dropdown'>Settings</a></li>";
+            			echo '<li><a href=""/profile/' . $_SESSION["username"] . '#settings" id="settings-dropdown"><span id="settings-span">Settings</span></a></li>';
             			if($_SESSION["access_lvl"] == 3) {
-            				echo "<li><a href='/gr-admin'>Admin</a></li>";
+            				echo '<li><a href="/gr-admin"><span id="admin-span">Admin</span></a></li>';
             			}
-                        echo "<li><a href='/php/transact-user.php?action=Logout'>Logout</a></li>";
+                        echo '<li><a href="/php/transact-user.php?action=Logout"><span id="logout-span">Logout</span></a></li>';
                     echo '</ul>';
                 echo '</li>';
             echo '</ul>';

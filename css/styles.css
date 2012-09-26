@@ -169,8 +169,8 @@ html { overflow-y: scroll; }
 #nav-category {
 	cursor:pointer;	
 }
-.drop-image {
-	margin-left:5px;
+.drop-image, .login-drop-image {
+	margin-left:4px;
 }
 
 #sub-nav {
@@ -236,13 +236,11 @@ html { overflow-y: scroll; }
 	list-style: none;
 }
 #user-info .user-inline {
-	display: inline-block;
+	float:left;
+	position:relative;
 }
 .input-user-nav {
 	width:97%;	
-}
-.login-drop-image {
-	margin-left:5px;
 }
 #dropdown-sub-nav, #dropdown-form-login, #notification-dropdown {
 	display:none;	
@@ -286,17 +284,25 @@ html { overflow-y: scroll; }
 	margin-top:-18px;
 	margin-left:85px;	
 }
+.dropdown-login {
+	padding:17px 10px 5px 15px;
+}
 .dropdown-login, #notification-number {
 	display:inline-block;
-	padding:17px 10px 5px 15px;
 }
 .dropdown-login:hover, #notification-number:hover {
 	color:#FFF;	
 	cursor:pointer;
 }
+#notification-number {
+	width:25px;
+	height: 25px;
+	display: block;
+	padding:14px 10px 0;
+}
 #notification-dropdown {
-	left:-75px;
-	width:200px;
+	left:-90px;
+	width:250px;
 	height:300px;
 	overflow: auto;
 	font-size:.8em;
@@ -315,22 +321,45 @@ html { overflow-y: scroll; }
 	color:#333;
 	display: block;
 	margin-top: 3px;
+	text-align: right;
 }
 #notification-dropdown li a.highlight {
-	background-color: #e9e9e9;
+	background-color: #FAE385;
 }
 #notification-dropdown li a:hover {
-	background-color:#fff;
+	background-color:#F8E8A7;
 }
 #dropdown-arrow-notifications {
 	position:fixed !important;
-	margin-top:-15px;
-	margin-left:87px;
+	margin: -15px 0 0 102px;
+}
+#dropdown-sub-nav #profile-span, #dropdown-sub-nav #contact-span, #dropdown-sub-nav #settings-span, #dropdown-sub-nav #admin-span, #dropdown-sub-nav #logout-span {
+	height: 16px;
+}
+#profile-span {
+	background:url(../images/icons/user_gray.png) no-repeat;
+}
+#contact-span {
+	background:url(../images/icons/contact.png) no-repeat;
+}
+#settings-span {
+	background:url(../images/icons/settings.png) no-repeat;
+}
+#admin-span {
+	background:url(../images/icons/admin.png) no-repeat;
+}
+#logout-span {
+	background:url(../images/icons/logout.png) no-repeat;
+}
+#dropdown-sub-nav a span {
+	padding-left:25px;
+	white-space: nowrap;
+	margin-left:5px;
 }
 #dropdown-sub-nav a {
 	text-decoration:none;
 	color:#333;
-	padding:5px 40px 5px 15px;
+	padding:5px 25px 5px 5px;
 	min-width: 70px;
 	font-size:.8em;
 	position: relative;
@@ -1516,12 +1545,10 @@ toast
 }
 .toast-message {
 }
-
     .toast-message a,
     .toast-message label {
         color: #FFF;
     }
-
         .toast-message a:hover {
             color: #CCC;
             text-decoration: none;
@@ -1537,6 +1564,11 @@ toast
 .toast-bottom-left {
     left: 12px;
     bottom: 12px;
+}
+.toast-center {
+    left: 50%;
+    top:48px;
+    margin-left:-150px;
 }
 #toast-container {
     position: fixed;
@@ -1554,10 +1586,10 @@ toast
         box-shadow: 0 0 12px #999999;
         color: #FFFFFF;
         margin: 0 0 6px;
-        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
-        filter: alpha(opacity=80);
-        -moz-opacity: 0.8;
-        opacity: 0.8;
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=90)";
+        filter: alpha(opacity=90);
+        -moz-opacity: 0.9;
+        opacity: 0.9;
         padding: 10px 10px 10px 50px;
         width: 300px;
     }
@@ -1577,7 +1609,7 @@ toast
     background-color: #F89406;
 }
 .toast-top-right {
-    top: 48px;
+    top: 50px;
     right: 12px;
 }
 #toast-container > :hover {

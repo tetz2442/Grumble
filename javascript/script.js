@@ -92,13 +92,11 @@ $(document).ready(function() {
 					$(result).insertAfter(".ind-notification:last");
 				}
 				else if(result == 0){
-					$("#notification-bar p").html("No more notifications to load.").removeClass("available").addClass("error");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					toastr.warning("No more notifications to load.");
 					$("#notification-load").remove();
 				}
 				else {
-					$("#notification-bar p").html("Could not load.").removeClass("available").addClass("error");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					toastr.error("Could not load.");
 				}
 			});
 	});
@@ -128,13 +126,11 @@ $(document).ready(function() {
 				function(result) {
 					$commentholder.find(".gif-loader-replies").hide();
 					if(result == 1) {
-						$("#notification-bar p").html("Comment deleted.").removeClass("error").addClass("available");
-						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						toastr.success("Comment deleted.");
 						$element.parents(".comment-holder").remove();
 					}
 					else {
-						$("#notification-bar p").html("Something went wrong. Could not delete.").removeClass("available").addClass("error");
-						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						toastr.error("Something went wrong. Could not delete.");
 					}
 				});
 			}
@@ -149,12 +145,10 @@ $(document).ready(function() {
 				function(result) {
 					$parent.find(".gif-loader-replies").hide();
 					if(result == 1) {
-						$("#notification-bar p").html("Comment reported as spam. Thank you.").removeClass("error").addClass("available");
-						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						toastr.success("Comment reported as spam. Thank you.");
 					}
 					else {
-						$("#notification-bar p").html("Something went wrong. Could not report.").removeClass("available").addClass("error");
-						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						toastr.error("Something went wrong. Could not report.");
 					}
 				});
 			}
@@ -168,14 +162,12 @@ $(document).ready(function() {
 				function(result) {
 					$parent.find(".gif-loader-replies").hide();
 					if(result == 1) {
-						$("#notification-bar p").html("Removed from spam list.").removeClass("error").addClass("available");
-						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						toastr.success("Removed from spam list.");
 						$element.closest(".spam-holder").remove();
 						$parent.remove();
 					}
 					else {
-						$("#notification-bar p").html("Something went wrong. Could not remove.").removeClass("available").addClass("error");
-						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						toastr.error("Something went wrong. Could not remove.");
 					}
 				});
 			}
@@ -186,7 +178,7 @@ $(document).ready(function() {
 		var $element = $(this).parent();
 		$(this).remove();
 		var votes = parseInt($element.find(".votes-up-number").text())
-		var htmlString = 'Votes up<img src="/images/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/>(<span class="votes-up-number">' + votes + '</span>)';
+		var htmlString = 'Votes up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/>(<span class="votes-up-number">' + votes + '</span>)';
 		$element.html(htmlString);
 		$element.parents(".comment-holder").find(".gif-loader-replies").show();
 		$.post("/php/votes.php", {vote_up:id},
@@ -283,12 +275,10 @@ $(document).ready(function() {
 		var id = $commentholder.find(".replies-view").attr("data-id");
 		var statususername = $commentholder.find(".username:first").text();
 		if($commentText == "") {
-			$("#notification-bar p").html("Reply cannot be empty.").addClass("error").removeClass("available");
-			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			toastr.warning("Reply cannot be empty.");
 		}
 		else if(charLengthReply < 0){
-			$("#notification-bar p").html("Too many characters to submit.").addClass("error").removeClass("available");
-			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			toastr.warning("Too many characters to submit.");
 		}
 		else {
 			$commentholder.find(".gif-loader-replies").show();
@@ -412,28 +402,24 @@ $(document).ready(function() {
 		if($("#quick-description-grumblename").val().length > 40) {
 			event.preventDefault();
 			
-			$("#notification-bar p").html("Too many characters in Grumble to submit.").addClass("error");
-			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			toastr.warning("Too many characters in Grumble to submit.");
 			$("#quick-description-grumblename").focus();
 		}
 		else if(charLengthThread < 0) {
 			event.preventDefault();
 			
-			$("#notification-bar p").html("Too many characters in Grumble Description to submit.").addClass("error");
-			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			toastr.warning("Too many characters in Grumble Description to submit.");
 			$('#quick-description-textarea').focus();
 		}
 		else if($("#quick-description-grumblename").val().length == 0 || $("#quick-description-textarea").val().length == 0) {
 			event.preventDefault();
 			
-			$("#notification-bar p").html("Grumble name/description cannot be empty.").addClass("error");
-			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			toastr.warning("Grumble name/description cannot be empty.");
 		}
 		else if($("#grumble-dropdown").val() == 0) {
 			event.preventDefault();
 			
-			$("#notification-bar p").html("A category must be selected.").addClass("error");
-			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			toastr.warning("A category must be selected.");
 		}
 	});
 	
@@ -678,12 +664,10 @@ $(document).ready(function() {
 		var element = $(this);
 		event.preventDefault();
 		if(charLengthGrumble < 0) {
-			$("#notification-bar p").html("Too many characters to submit.").addClass("error");
-			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			toastr.warning("Too many characters to submit.");
 		}
 		else if($("#quick-compose-textarea").val().length == 0) {
-			$("#notification-bar p").html("Grumble cannot be empty.").addClass("error");
-			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			toastr.warning("Grumble cannot be empty.");
 		}
 		else {
 			var commenttext = $("#quick-compose-textarea").val();
@@ -727,9 +711,6 @@ $(document).ready(function() {
 		
 						$("#quick-compose-textarea").val("").css({"height":"20px","background-color":"#FFF9E8"});
 						$("#grumble-comment div").hide();
-						
-						//$("#notification-bar p").html("Comment submitted.").removeClass("error").addClass("available");
-						//$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
 					}
 			});
 		}
@@ -783,8 +764,7 @@ $(document).ready(function() {
 							loadMore = false;
 							canLoad = false;
 							
-							$("#notification-bar p").html("No more comments to load.").addClass("error").removeClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+							toastr.warning("No more comments to load.");
 						}
 						else if(result != "") {
 							canLoad = true;
@@ -832,8 +812,7 @@ $(document).ready(function() {
 								$(result).insertAfter("#comments-left-header");
 						}
 						else {
-							$("#notification-bar p").html("No comments loaded.").addClass("error").removeClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+							toastr.error("No comments loaded.");
 						}
 				});
 			}
@@ -915,26 +894,21 @@ $(document).ready(function() {
 	}
 	
 	if($.urlParam("login") == "failed") {
-		$("#notification-bar p").html("Incorrect email/password entered.").addClass("error");
-		$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+		toastr.error("Incorrect email/password entered.");
 	}
 	
 	$("#forg-submit").click(function(event) {
 		if($("#pass-forg").val() == "" || $("#pass-forg2").val() == "") {
 			event.preventDefault();
-			$("#notification-bar p").html("Cannot leave a field blank.").addClass("error");
-			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			toastr.warning("Cannot leave a field blank.");
 		}
 		else if($("#pass-forg").val().length <= 5) {
 			event.preventDefault();
-			$("#notification-bar p").html("Password has to be longer than 5 characters.").addClass("error");
-			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			toastr.warning("Password has to be longer than 5 characters.");
 		}
 		else if($("#pass-forg").val() != $("#pass-forg2").val()) {
-			alert($("#pass-forg").val() + "," + $("#pass-forg2").val());
 			event.preventDefault();
-			$("#notification-bar p").html("Passwords have to match.").addClass("error");
-			$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+			toastr.warning("Passwords have to match.");
 		}
 	});
 	
@@ -1049,7 +1023,7 @@ function findLink(text) {
                 containerId: 'toast-container',
                 debug: false,
                 fadeIn: 300,
-                fadeOut: 1000,
+                fadeOut: 700,
                 extendedTimeOut: 1000,
                 iconClasses: {
                     error: 'toast-error',
@@ -1058,8 +1032,8 @@ function findLink(text) {
                     warning: 'toast-warning'
                 },
                 iconClass: 'toast-info',
-                positionClass: 'toast-top-right',
-                timeOut: 5000, // Set timeOut to 0 to make it sticky
+                positionClass: 'toast-center',
+                timeOut: 3000, // Set timeOut to 0 to make it sticky
                 titleClass: 'toast-title',
                 messageClass: 'toast-message'
             },
