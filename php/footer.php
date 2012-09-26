@@ -13,8 +13,8 @@
         <a class="colored-link-1" href="/contact">Contact Us</a>
     </div>
     <div id="social-icons">
-    	<a href="https://facebook.com/grumbleonline" target="_blank"><img src="/images/icons/facebook.png" width="25" height="25" alt="Facebook page" title="Facebook page"></a>
-    	<a href="https://twitter.com/grumbleonline" target="_blank"><img src="/images/icons/twitter.png" width="25" height="25" alt="Twitter" title="Twitter page"></a>
+    	<a href="https://facebook.com/grumbleonline" target="_blank"><img src="/images/icons/facebook-footer.png" width="25" height="25" alt="Facebook page" title="Facebook page"></a>
+    	<a href="https://twitter.com/grumbleonline" target="_blank"><img src="/images/icons/twitter-footer.png" width="25" height="25" alt="Twitter" title="Twitter page"></a>
     </div>
 </div>
 <div id="fb-root"></div>

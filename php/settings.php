@@ -17,7 +17,7 @@ $row = mysql_fetch_array($result);
         <div class="content-padding">
             <div id='tab5'>
                 <div id="username-change" class="padding-top">
-                    <label for="username-change-input" title="Change your username">Change Username</label><img src="/images/exclamation-red_1.png" alt="validation" class="validation-settings" width="16" height="16"/>
+                    <label for="username-change-input" title="Change your username">Change Username</label><img src="/images/icons/exclamation-red_1.png" alt="validation" class="validation-settings" width="16" height="16"/>
                     <input type="text" name="username-change-input" id="username-change-input" class="textInput" maxlength="15" value="<?php echo strip_tags($_GET["id"]); ?>"/>
                 </div>
                 <div id="gravatar-change" class="padding-top">
@@ -38,9 +38,9 @@ $row = mysql_fetch_array($result);
                     <h4>Password Change</h4>
                     <label for="pass-current" title="Your current password">Current Password</label>
                     <input type="password" name="pass-current" id="pass-current" class="textInput" maxlength="50"/>
-                    <label for="pass-change" title="Your new password">New Password</label><img src="/images/exclamation-red_1.png" alt="validation" class="validation-settings" width="16" height="16"/>
+                    <label for="pass-change" title="Your new password">New Password</label><img src="/images/icons/exclamation-red_1.png" alt="validation" class="validation-settings" width="16" height="16"/>
                     <input type="password" name="pass-change" id="pass-change" class="textInput" maxlength="50"/>
-                    <label for="pass-change2" class="margin-top" title="Your new password again">Verify Password</label><img src="/images/exclamation-red_1.png" alt="validation" class="validation-settings" width="16" height="16"/>
+                    <label for="pass-change2" class="margin-top" title="Your new password again">Verify Password</label><img src="/images/icons/exclamation-red_1.png" alt="validation" class="validation-settings" width="16" height="16"/>
                     <input type="password" name="pass-change2" id="pass-change2" class="textInput" maxlength="50"/>
                 </div>
             </div>

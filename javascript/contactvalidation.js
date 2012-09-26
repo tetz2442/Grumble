@@ -9,22 +9,18 @@ $(document).ready(function() {
 			if(!sending) {
 				if($("#fullname-contact").val() == "" || $("#email-contact").val() == "" || $("#contact-textarea").val() == "") {
 					//field not filled in
-					$("#notification-bar p").html("Cannot leave a field blank.").addClass("error").removeClass("available");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					toastr.warning("Cannot leave a field blank.");
 				}
 				else if($("#contact-textarea").val().length > 255) {
-					$("#notification-bar p").html("Message has to be less than 255 characters.").addClass("error").removeClass("available");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					toastr.warning("Message has to be less than 255 characters.");
 				}
 				else if(!checkEmail($("#email-contact"))) {
 					//email not valid
-					$("#notification-bar p").html("Email not valid.").addClass("error").removeClass("available");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					toastr.warning("Email not valid.");
 				}
 				else {
 					sending = true;
-					$("#notification-bar p").html("Sending...").removeClass("error").addClass("available");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(1000).fadeOut("slow");
+					toastr.success("Sending...");
 					
 					var name = $("#fullname-contact").val();
 					var email = $("#email-contact").val();
@@ -38,8 +34,7 @@ $(document).ready(function() {
 							$("#contact-form").addClass("text-align-center");
 						  }
 						  else {
-							$("#notification-bar p").html("Message could not send. Please Retry.").addClass("error").removeClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+							toastr.error("Message could not send. Please Retry.");
 						  }
 					});
 				}
@@ -50,17 +45,14 @@ $(document).ready(function() {
 			if(!sending) {
 				if($("#contact-textarea").val() == "") {
 					//field not filled in
-					$("#notification-bar p").html("Cannot leave a field blank.").addClass("error").removeClass("available");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					toastr.warning("Cannot leave a field blank.");
 				}
 				else if($("#contact-textarea").val().length > 255) {
-					$("#notification-bar p").html("Message has to be less than 255 characters.").addClass("error").removeClass("available");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					toastr.warning("Message has to be less than 255 characters.");
 				}
 				else {
 					sending = true;
-					$("#notification-bar p").html("Sending...").removeClass("error").addClass("available");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(1000).fadeOut("slow");
+					toastr.success("Sending...");
 					
 					var username = $("#contact-username").val();
 					var message = $("#contact-textarea").val();
@@ -73,8 +65,7 @@ $(document).ready(function() {
 							$("#contact-form").addClass("text-align-center");
 						  }
 						  else {
-							$("#notification-bar p").html("Message could not send. Please Retry.").addClass("error").removeClass("available");
-							$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+							toastr.error("Message could not send. Please Retry.");
 						  }
 					});
 				}

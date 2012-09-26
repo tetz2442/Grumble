@@ -142,7 +142,7 @@ if("<?php echo $_SESSION["time"]; ?>".length==0){
         }
 <?php }?>
 </script>
-<script type="text/javascript" src="/javascript/script.js"></script>
+<script type="text/javascript" src="/javascript/script.min.js"></script>
 <?php
 if($filename == "create-account.php" && !isset($_SESSION["user_id"]) && !isset($_GET["social_create"])) {
  echo '<script type="text/javascript" src="/javascript/formValidation.min.js"></script>';	
@@ -161,10 +161,5 @@ if($filename == "profile.php" || $filename == "forgot-password.php") {
 <body>
 <?php
 require_once "usernavigation.php";
-if($filename == "noscript.php") {
-	echo '<div id="maincolumn" style="display:block;">';
-}
-else {
-	echo '<div id="maincolumn">';
-}
+echo '<div id="maincolumn">';
 ?>
