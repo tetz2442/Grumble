@@ -26,7 +26,6 @@
 					redirect("../login?login=failed&email=" . $email);
 				}
 				else if($hashed_pass == $row["user_password"]) {
-					session_start();
 					$_SESSION["user_id"] = $row["user_id"];
 					$_SESSION["access_lvl"] = $row["access_lvl"];
 					$_SESSION["username"] = $row["username"];	
@@ -427,6 +426,35 @@
 							$_SESSION["email"] = $row["user_email"];	
 							$_SESSION["timezone"] = $row["user_timezone"];
 							$_SESSION["social"] = $provider_name;
+
+							$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+							$Chars_Len = 63;
+							$Salt_Length = 50;
+							
+							$salt = "";
+		
+							for($i=0; $i<$Salt_Length; $i++)
+							{
+								$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+							}
+						
+							$cookie_text = crypt($salt);
+							$sql = "SELECT cookie_id FROM cookies_grumble WHERE user_id=" . $_SESSION["user_id"] . " LIMIT 0,1";
+							$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+							$row = mysql_fetch_array($result);
+							if(mysql_num_rows($result) == 0 || (!isset($_COOKIE["user_grumble"]) && !isset($_COOKIE["cookie_id"]))) {
+								$sql = "INSERT INTO cookies_grumble(cookie_text, cookie_expire, user_id) VALUES('" . $cookie_text . "','" . date("Y-m-d H:i:s", time()+7*24*60*60) . "'," . $_SESSION["user_id"] . ")";
+								mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+								$id = mysql_insert_id();
+							}
+							else {
+								$sql = "UPDATE cookies_grumble SET cookie_text='" . $cookie_text . "', cookie_expire = '" . date("Y-m-d H:i:s", time()+7*24*60*60) . "' WHERE user_id = " . $_SESSION["user_id"] . " AND cookie_id = " . $row["cookie_id"];
+								mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+								$id = $row["cookie_id"];
+							}
+							
+							setcookie("user_grumble", $cookie_text, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
+							setcookie("cookie_id", $id, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
 						}
 						redirect("../");
 					}
@@ -474,7 +502,7 @@
 							$sql = "UPDATE users_grumble SET username = '" . $username . "', user_password = '" . $hashed_password . "', user_salt = '" . $salt . "', user_timezone = '" . $timezone . "', user_verified = 1 
 							WHERE user_email = '" . $row["user_email"] . "' LIMIT 1";
 							mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
-							
+							//create session variables
 							$_SESSION["user_id"] = $row["user_id"];
 							$_SESSION["access_lvl"] = $row["access_lvl"];
 							$_SESSION["username"] = $username;	
@@ -484,6 +512,36 @@
 							unset($_SESSION["provider"]);
 							unset($_SESSION['social_token']);
 							unset($_SESSION['social_query_string']);
+							//create cookie to login
+							$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+							$Chars_Len = 63;
+							$Salt_Length = 50;
+							
+							$salt = "";
+		
+							for($i=0; $i<$Salt_Length; $i++)
+							{
+								$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+							}
+						
+							$cookie_text = crypt($salt);
+							$sql = "SELECT cookie_id FROM cookies_grumble WHERE user_id=" . $_SESSION["user_id"] . " LIMIT 0,1";
+							$result = mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+							$row = mysql_fetch_array($result);
+							if(mysql_num_rows($result) == 0 || (!isset($_COOKIE["user_grumble"]) && !isset($_COOKIE["cookie_id"]))) {
+								$sql = "INSERT INTO cookies_grumble(cookie_text, cookie_expire, user_id) VALUES('" . $cookie_text . "','" . date("Y-m-d H:i:s", time()+7*24*60*60) . "'," . $_SESSION["user_id"] . ")";
+								mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+								$id = mysql_insert_id();
+							}
+							else {
+								$sql = "UPDATE cookies_grumble SET cookie_text='" . $cookie_text . "', cookie_expire = '" . date("Y-m-d H:i:s", time()+7*24*60*60) . "' WHERE user_id = " . $_SESSION["user_id"] . " AND cookie_id = " . $row["cookie_id"];
+								mysql_query($sql, $conn) or die("Could not look up user information: " . mysql_error());
+								$id = $row["cookie_id"];
+							}
+							
+							setcookie("user_grumble", $cookie_text, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
+							setcookie("cookie_id", $id, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
+
 							redirect("../");
 						}
 						else {
