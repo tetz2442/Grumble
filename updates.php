@@ -7,6 +7,12 @@ require_once "php/containerGrumbles.php";
 <div id="how-it-works-holder" class="content-padding">
 	<h1>Updates about Grumble</h1>
 	<p>On this page we will keep you up to date on new things happening on Grumble.</p>
+	    <h2>Notifications</h2>
+	    <p>Notifications are upon us! The newest addition to Grumble is the ability to receive notifications on Grumbles and comments. 
+	    	With these you will no longer have to search around for the latest reply or comment. To access your notifications, just click on the little conversation bubble 
+	    	next to your username in the navigation. After that you will be able to see your most recent notifications. Scroll down and click load for more.</p> 
+	    <p>If you have any troubles with your notifications, make sure to report it to us using our <a href="/contact" class="colored-link-1">contact form</a>.</p>
+	    <div class="divider light"></div>
 	    <h2>Social login</h2>
 	    <p>We are pleased to announce that you can use Facebook or Google to login or create an account with Grumble! This was made possible with the help of <a href="hybridauth.sourcefourge.net" target="_blank" class="colored-link-1">HybridAuth</a>. 
 	    	If you have any problems logging in with these services, be sure to let us know in the <a href="/contact" class="colored-link-1">contact form</a>.</p>
