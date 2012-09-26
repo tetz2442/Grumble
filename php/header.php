@@ -129,7 +129,7 @@ else {
 <?php //javascript files?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 <script type="text/javascript">
-!window.jQuery && document.write('<script src="/javascript/jquery-1.8.1.min"><\/script>');
+!window.jQuery && document.write('<script src="/javascript/jquery-1.8.1.min.js"><\/script>');
 <?php if(!isset($_SESSION["time"])) { ?>
 //gets timezone to display proper time for comments, this information is not collected
 if("<?php echo $_SESSION["time"]; ?>".length==0){
