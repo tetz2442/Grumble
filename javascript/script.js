@@ -77,6 +77,8 @@ $(document).ready(function() {
 			
 			if(unread != 0) {
 				$.post("/php/notifications.php", {action:"markasread"});
+				$("#notification-number").attr("src","/images/icons/notification-none.png");
+				$("#notification-header").html("Notifications (0 new)");
 			}
 		}
 		$("#dropdown-sub-nav").fadeOut(50);
