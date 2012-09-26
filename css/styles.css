@@ -83,7 +83,9 @@ html { overflow-y: scroll; }
 #maincolumn {
 	margin-top:49px;
 }
-
+.clear {
+	clear: both;
+}
 .padding-top {
 	padding-top:5px;	
 }
@@ -117,7 +119,6 @@ html { overflow-y: scroll; }
 #grumbles-status-container {
 	width:650px;
 	margin:auto;
-	overflow:auto;
 	margin-bottom: 35px;
 }
 /*header container for other pages*/

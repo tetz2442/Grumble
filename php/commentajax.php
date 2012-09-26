@@ -48,8 +48,8 @@
 				mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 				
 				$sql =  "SELECT scg.sub_category_url, cg.category_url, COUNT(sg.status_id) AS grumble_number, ug.user_email, ug.username, ug.user_id FROM status_grumble AS sg " .
-				"LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = sg.user_id " .
 				"LEFT OUTER JOIN sub_category_grumble AS scg ON scg.sub_category_id = sg.sub_category_id " .
+				"LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = scg.user_id " .
 				"LEFT OUTER JOIN categories_grumble AS cg ON cg.category_id = scg.category_id " .
 				"LEFT OUTER JOIN settings_user_grumble AS sug ON sug.user_id = ug.user_id " .
 				"WHERE sg.sub_category_id = " . $category . " AND sug.settings_email_thread = 1 LIMIT 0,1";

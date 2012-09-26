@@ -49,6 +49,7 @@ else {
 <?php
 }
 ?>
+<div class="clear"></div>
 </div>
  <script type="text/javascript">
  var loggedin = <?php echo $loggedin; ?>;

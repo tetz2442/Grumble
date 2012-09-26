@@ -7,6 +7,7 @@ require_once "php/containerGrumbles.php";
 <div id="how-it-works-holder" class="content-padding">
 	<h1>Updates about Grumble</h1>
 	<p>On this page we will keep you up to date on new things happening on Grumble.</p>
+	<div class="divider"></div>
 	    <h2>Notifications</h2>
 	    <p>Notifications are upon us! The newest addition to Grumble is the ability to receive notifications on Grumbles and comments. 
 	    	With these you will no longer have to search around for the latest reply or comment. To access your notifications, just click on the little conversation bubble 

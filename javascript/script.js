@@ -65,6 +65,9 @@ $(document).ready(function() {
 			$("#notification-dropdown li a").each(function() {
 				$(this).removeClass("highlight");
 			});
+			//change notification image
+			$("#notification-number").attr("src","/images/icons/notification-none.png");
+			$("#notification-header").html("Notifications (0 new)");
 		}
 		else {
 			$("#notification-dropdown").fadeIn(100).css("display","list-item");
@@ -76,9 +79,8 @@ $(document).ready(function() {
 			});
 			
 			if(unread != 0) {
+				//mark notifications as read
 				$.post("/php/notifications.php", {action:"markasread"});
-				$("#notification-number").attr("src","/images/icons/notification-none.png");
-				$("#notification-header").html("Notifications (0 new)");
 			}
 		}
 		$("#dropdown-sub-nav").fadeOut(50);
