@@ -83,6 +83,7 @@ else {
 <?php
 }
 ?>
+<div class="clear"></div>
 </div>
 <?php
 if(isset($_SESSION["username"])) {

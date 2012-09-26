@@ -115,7 +115,7 @@ if($exist) {
     if(preg_match("/\?create=new/", $_SERVER['REQUEST_URI']) == 1) {
         require_once "php/lightboxsharegrumble.php"; 
     }
-	
+	echo '<div class="clear"></div>';
 	if(mysql_num_rows($result) < 10)
 		require_once "php/footer.php"; 
 	else

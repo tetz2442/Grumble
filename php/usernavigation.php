@@ -55,7 +55,7 @@ require_once 'outputnotifications.php';
             			echo '<li class="divider light"></li>';
             			echo '<li><a href="/contact"><span id="contact-span">Contact Us</span></a></li>';
                         echo '<li class="divider light"></li>';
-            			echo '<li><a href=""/profile/' . $_SESSION["username"] . '#settings" id="settings-dropdown"><span id="settings-span">Settings</span></a></li>';
+            			echo '<li><a href="/profile/' . $_SESSION["username"] . '#settings" id="settings-dropdown"><span id="settings-span">Settings</span></a></li>';
             			if($_SESSION["access_lvl"] == 3) {
             				echo '<li><a href="/gr-admin"><span id="admin-span">Admin</span></a></li>';
             			}
