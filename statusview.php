@@ -55,8 +55,8 @@ else {
  var loggedin = <?php echo $loggedin; ?>;
  var statusid = <?php echo strip_tags($_GET["s"]); ?>;
 window.onload = function(){
-	var replynumber = parseInt($(".reply-view").attr("data-replies"));
-	if(loggedin && replynumber != 0) {
+	var replynumber = parseInt($(".replies-view").attr("data-replies"));
+	if(loggedin == 1 && replynumber != 0) {
 		$(".gif-loader-replies").show();
 		$.post("/php/repliesajax.php", {reply:statusid, type:"load", amount:"all"},
 				function(result) {
