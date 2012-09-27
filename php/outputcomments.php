@@ -93,7 +93,7 @@ function outputComments($grumble, $comments = false, $loggedin = false, $admin =
 				echo '<p class="votes-up" title="You have already voted up">Votes up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/><span class="votes-up-number">(' . $row["votes_up_count"] . ')</span></p>';
 			}
 			else if(!isset($_SESSION["user_id"])) {
-				echo '<p class="votes-up" title="You must log in to vote up">Vote(s) up(' . $row["votes_up_count"]  . ')</p>';
+				echo '<p class="votes-up" title="You must log in to vote up">Votes up(' . $row["votes_up_count"]  . ')</p>';
 			}
 			else {
 				echo '<p class="votes-up" title="Vote this grumble up"><a data-id="' . $row["status_id"] . '" href="#">Vote up</a><img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/>(<span class="votes-up-number">' . $row["votes_up_count"] . '</span>)</p>';

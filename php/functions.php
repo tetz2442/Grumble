@@ -142,14 +142,19 @@ function removeNewLine($input) {
 }
 
 //email function
+require_once "Mail.php"; 
 function sendEmail($email, $sendfrom, $type, $parameters) {
+	$send = false;
+	$subject ="";
+	$body ="";
 	if($type == "reply") {
 		$subject = "[Reply] to your Grumble!";
 		$body = "A new reply has been placed on your Grumble by " . $parameters[2] . "!\n\n" . 
 		"'" . $parameters[3] . "'\n\nClick the URL or paste it in your browser to view the reply.\n" . $parameters[0] . "\n\nThe Grumble Team\n\n"
 		. "To unsubscribe from these emails, change your settings here - http://" . $_SERVER['HTTP_HOST'] . "/profile/" . $parameters[1] . "#settings\n"
 		. "Then let us know what we are doing wrong - http://" . $_SERVER['HTTP_HOST'] . "/contact";
-		mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send email.");
+		$send = true;
+		//mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send email.");
 	}
 	else if($type == "grumble") {
 		//if the grumble number is divisible by 15, send an email
@@ -160,7 +165,11 @@ function sendEmail($email, $sendfrom, $type, $parameters) {
 			. "\n\nThe Grumble Team\n\n"
 			. "To unsubscribe from these emails, change your settings here - http://" . $_SERVER['HTTP_HOST'] . "/profile/" . $parameters[2] . "#settings\n"
 			. "Then let us know what we are doing wrong - http://" . $_SERVER['HTTP_HOST'] . "/contact";
-			mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send email.");
+			$send = true;
+			//mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send email.");
+		}
+		else {
+			$send = false;
 		}
 	}
 	else if($type == "verify") {
@@ -168,12 +177,38 @@ function sendEmail($email, $sendfrom, $type, $parameters) {
 		$body = "Thanks for signing up for Grumble!\n\n" .
 		"To verify this email please follow the link below by pasting it in your browser or clicking on it.\n\n" . 
 		$parameters[0] . "\n\nThe Grumble Team";
-		mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send email.");
+		$send = true;
+		//mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send email.");
+	}
+	else if($type == "resetpassword") {
+		$subject = "[Grumble] password change";
+		$body = "Change your password by following the link below.\n\nClick the link or paste it in your browser to reset your password:\n\n" . 
+		$parameters[0];
+		$send = true;
+		//mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send email.");
 	}
 	else if($type == "admin") {
 		$subject = $parameters[0];
 		$body = stripslashes($parameters[1]);
-		mail($email, $subject, $body, $sendfrom) or die("Could not send email.");
+		$send = true;
+		//mail($email, $subject, $body, $sendfrom) or die("Could not send email.");
+	}
+	
+	if($send) {
+		$from = "Grumble <" . $sendfrom . ">"; 
+		$to = "Grumbler <" . $email . ">"; 
+		$host = $_SERVER["HTTP_HOST"]; 
+		$username = "grumble1"; 
+		$password = "Clayweb2442!!"; 
+		$headers = array ('From' => $from, 
+		'To' => $to, 
+		'Subject' => $subject); 
+		$smtp = Mail::factory('smtp', 
+		array ('host' => $host, 
+		'auth' => true, 
+		'username' => $username, 
+		'password' => $password)); 
+		$mail = $smtp->send($to, $headers, $body); 
 	}
 }
 

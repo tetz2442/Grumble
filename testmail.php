@@ -1,7 +1,7 @@
 <?php 
 require_once "Mail.php"; 
-$from = "MyName <no-reply@grumbleonline.com>"; 
-$to = "TargetName <rschm874@gmail.com>"; 
+$from = "Grumble <no-reply@grumbleonline.com>"; 
+$to = "Grumbler <tetz2442@gmail.com>"; 
 $subject = "Hi!"; 
 $body = "Hi,\n\nHow are you?"; 
 $host = "test.grumbleonline.com"; 

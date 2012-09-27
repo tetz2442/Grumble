@@ -26,7 +26,7 @@ function insertNotification($user_id, $from_user_id, $username, $url, $type) {
 	global $conn;
 	//get type and compose message
 	if($type == "comment") {
-		$message = $username . " put a new comment on your Grumble";
+		$message = $username . " commented on your Grumble";
 	}
 	else if($type == "reply") {
 		$message = $username . " replied to your comment";
