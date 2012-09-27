@@ -1,2 +1,6 @@
 User-agent: *
-Disallow: /test/
+Disallow: /php/
+Disallow: /images/
+Disallow: /javascript/
+Disallow: /css/
+Disallow: /cgi-bin/
