@@ -68,7 +68,7 @@
 			
 			case "Submit Grumble" :
 				if(isset($_POST["grumble"]) && strlen($_POST["grumble"]) > 0 && strlen($_POST["grumble"]) <= 40 && isset($_POST["category"]) && $_POST["category"] != "Choose a Category" && 
-				isset($_POST["description"]) && strlen($_POST["description"]) > 0 && strlen($_POST["description"]) <= 400 && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {				
+				isset($_POST["description"]) && strlen($_POST["description"]) > 0 && strlen($_POST["description"]) <= 600 && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {				
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token4']);
 					

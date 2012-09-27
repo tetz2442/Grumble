@@ -91,8 +91,12 @@ else {
 </title>
 <meta name="description" content="<?php
 if(isset($_GET["subcat"])) {
-	if(strlen($row["sub_category_description"]) > 50)
+	$length = strlen($row["sub_category_description"]);
+	if($length > 50 && $length < 250)
 		echo stripslashes($row["sub_category_description"]);
+	else if(strlen($row["sub_category_description"]) > 50) {
+		echo stripslashes(substr($row["sub_category_description"], 0, 250)) . "...";
+	}
 	else
 		echo stripslashes($row["sub_category_description"]) . " | Grumble is a place where you can discuss the topics that you feel are important and need attention. It's simple. Grumble for you. Grumble for change.";
 }
