@@ -84,6 +84,9 @@ else if($filename == "noscript.php") {
 else if($filename == "updates.php") {
 	echo " Updates";
 }
+else if($filename == "forgot-password.php") {
+	echo " Forgot Password";
+}
 else {
 	echo " Grumble for you. Grumble for change.";	
 }
@@ -120,6 +123,18 @@ else if($filename == "noscript.php") {
 }
 else if($filename == "updates.php"){
 	echo "Come here for updates on new things happening at Grumble. Grumble is a place where you can discuss the topics that you feel are important and need attention.";
+}
+else if($filename == "about.php") {
+	echo "Find out a little more about Grumble on our about page. Grumble is a place where you can discuss the topics that you feel are important and need attention.";
+}
+else if($filename == "forgot-password.php") {
+	echo "Have you forgetten your password on Grumble? On this page you can reset your password through email. Simply enter it into the provided field.";
+}
+else if($filename == "category.php") {
+	echo stripslashes($row["category_name"]) . " is a category to place your Grumbles under. These categories will make it easier for users to find and like your Grumbles.";
+}
+else if($filename == "profile.php") {
+	echo strip_tags($_GET["id"]) . ". This is the profile of " . strip_tags($_GET["id"]) . " on Grumble. To create a profile on Grumble go to the create account page.";
 }
 else {
 	echo "Grumble is a place where you can discuss the topics that you feel are important and need attention. It's simple. Grumble for you. Grumble for change.";

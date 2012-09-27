@@ -8,6 +8,12 @@ require_once "php/containerGrumbles.php";
 	<h1>Updates about Grumble</h1>
 	<p>On this page we will keep you up to date on new things happening on Grumble.</p>
 	<div class="divider"></div>
+		<h2>Longer Grumble descriptions</h2>
+	    <p>You can now put almost double the characters in your descriptions! The most recent update includes a much longer description of your Grumble.
+	     We thought this will help you be better able to describe the Grumble you are creating. Also, when a description gets over a certain amount of 
+	     character, a more/less link will show up. This is to prevent the page from being overtaken by a particularly long description. Seeing the full 
+	     description is as easy as clicking the more link.</p> 
+	    <div class="divider light"></div>
 	    <h2>Notifications</h2>
 	    <p>Notifications are upon us! The newest addition to Grumble is the ability to receive notifications on Grumbles and comments. 
 	    	With these you will no longer have to search around for the latest reply or comment. To access your notifications, just click on the little conversation bubble 
@@ -22,11 +28,7 @@ require_once "php/containerGrumbles.php";
 	    <h2>Cookies</h2>
 	    <p>Cookies on Grumble have now been updated so you can keep yourself logged into multiple computers! An update was just pushed up and fixed the problem of deleting previous cookies. Sorry for any inconvenience this may have caused you.</p>
 	    <div class="divider light"></div>
-	    <h2>Email from Grumble</h2>
-	    <p>Unfortunately right now email from Grumble could be getting placed in your spam. We are working on a fix, so be sure to check your spam folders when signing up for Grumble.</p>
-	    <div class="divider light"></div>
 	    <p class="content-padding"><a href="/create-account" class="button orange">Create Account</a> <a href="<?php echo "http://" . $_SERVER["HTTP_HOST"]?>" class="button orange">Home</a></p>
-
 </div>
 
 </div>
