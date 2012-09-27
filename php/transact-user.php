@@ -178,7 +178,7 @@
 							mysql_query($sql, $conn) or die("Could not insert: " . mysql_error());
 							
 							$parameters = array("http://" . $_SERVER["HTTP_HOST"] . "/php/transact-user.php?email=" . $email . "&hash=" . $salt . "&action=verify");
-							sendEmail($email, "From: no-reply@grumbleonline.com", "verify", $parameters);
+							sendEmail($email, "no-reply@grumbleonline.com", "verify", $parameters);
 							redirect("../create-account?user_created=1");
 						}
 						else {
@@ -217,9 +217,6 @@
 					}
 					
 					$row = mysql_fetch_array($result);
-					$subject = "[Grumble] password change";
-					$body = "Change your password by following the link below.\n\nClick the link or paste it in your browser to reset your password:\n\n" . 
-					"http://" . $_SERVER["HTTP_HOST"] . "/" . "forgot-password?hash=" . $salt . "&email=" . $email;
 					
 					$sql = "SELECT user_email FROM temp_password_grumble " . 
 						"WHERE user_email='" . $email . "' LIMIT 0,1";
@@ -235,7 +232,8 @@
 						mysql_query($sql, $conn) or die("Could not insert: " . mysql_error());
 					}
 					
-					mail($email, $subject, $body, "From: no-reply@grumbleonline.com") or die("Could not send reminder email.");
+					$parameters = array("http://" . $_SERVER["HTTP_HOST"] . "/" . "forgot-password?hash=" . $salt . "&email=" . $email);
+					sendEmail($email, "no-reply@grumbleonline.com", "resetpassword", $parameters);
 					redirect("../forgot-password?success=1");
 				}
 				else {

@@ -57,7 +57,7 @@
 				$row = mysql_fetch_array($result);
 				if(mysql_num_rows($result) != 0) {
 					$parameters = array($row["grumble_number"], "http://" . $_SERVER["HTTP_HOST"] . "/" . $row["category_url"] . "/" . $row["sub_category_url"] . "/" . $category, $row["username"]);
-					sendEmail($row["user_email"], "From: no-reply@grumbleonline.com", "grumble", $parameters);
+					sendEmail($row["user_email"], "no-reply@grumbleonline.com", "grumble", $parameters);
 				}
 				
 				if($_SESSION["user_id"] != $row["user_id"]) {

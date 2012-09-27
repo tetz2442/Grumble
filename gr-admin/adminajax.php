@@ -26,7 +26,7 @@ if(isset($_SESSION["username"]) && $_SESSION["access_lvl"] == 3) {
 			$row = mysql_fetch_array($result);
 			$subject = "[Contact] Grumble admin";
 			$parameters = array($subject, $message);
-			sendEmail($row["contact_email"], "From: admin@grumbleonline.com", "admin", $parameters);
+			sendEmail($row["contact_email"], "admin@grumbleonline.com", "admin", $parameters);
 			echo 1;
 		}
 	}

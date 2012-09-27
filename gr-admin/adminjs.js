@@ -11,13 +11,11 @@ $(document).ready(function() {
 				$.post("adminajax.php", {contactid:id, action:"Delete"},
 				function(result) {
 					if(result == 1) {
-						$("#notification-bar p").html("Deleted.").removeClass("error").addClass("available");
-						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						toastr.success("Deleted.");
 						$parent.remove();
 					}
 					else {
-						$("#notification-bar p").html("Something went wrong. Could not delete.").removeClass("available").addClass("error");
-						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						toastr.error("Something went wrong. Could not delete.");
 					}
 				});
 			}
@@ -29,13 +27,11 @@ $(document).ready(function() {
 				$.post("adminajax.php", {contactid:id, action:"Resolved"},
 				function(result) {
 					if(result == 1) {
-						$("#notification-bar p").html("Marked as resolved.").removeClass("error").addClass("available");
-						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						toastr.success("Marked as resolved.");
 						$parent.remove();
 					}
 					else {
-						$("#notification-bar p").html("Something went wrong. Could not resolve.").removeClass("available").addClass("error");
-						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+						toastr.error("Something went wrong. Could not resolve.");
 					}
 				});
 			}
@@ -57,14 +53,12 @@ $(document).ready(function() {
 		$.post("adminajax.php", {contactid:contactid, message:message, action:"Contact"},
 			function(result) {
 				if(result == 1) {
-					$("#notification-bar p").html("Message sent.").removeClass("error").addClass("available");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					toastr.success("Message sent.");
 					$("#contact-lightbox").fadeOut("fast");
 					$("#compose-textarea").val("");
 				}
 				else {
-					$("#notification-bar p").html("Something went wrong. Could not send.").removeClass("available").addClass("error");
-					$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					toastr.error("Something went wrong. Could not send.");
 				}
 			});
 	});
