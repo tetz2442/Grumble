@@ -377,7 +377,7 @@ $(document).ready(function() {
 			 $("#link-present").fadeOut(50);
 		 }
 		 
-		 charLengthThread = 255 - chars.length + link;
+		 charLengthThread = 500 - chars.length + link;
 		 if(charLengthThread <= 0) {
 			 $(this).parent().find("#character-count").html(charLengthThread).css("color", "red");
 		 }
@@ -386,7 +386,7 @@ $(document).ready(function() {
 		 }
 	}).focusin(function () {
 		var chars = $(this).val();
-		charLengthThread = 255 - chars.length + link;
+		charLengthThread = 500 - chars.length + link;
 		if(charLengthThread <= 0) {
 			 $(this).parent().find("#character-count").html(charLengthThread).css("color", "red");
 		}
@@ -400,6 +400,11 @@ $(document).ready(function() {
 	}
 	if($("#login-refer").length > 0) {
 		$("#login-refer").val(".." + window.location.pathname);
+		$(".social-login a").each(function () {
+			var path = $(this).attr("href");
+			path = path + "&redirect=.." + window.location.pathname;
+			$(this).attr("href", path);
+		});
 	}
 	
 	$("#quick-description-submit").click(function(event) {
@@ -956,6 +961,8 @@ $(document).ready(function() {
 		$("#sub-category-desc").html(catText);
 		
 		shortenLink("#sub-category-desc a");
+		
+		$("#sub-category-desc").shorten({"showChars":190});
 	}
 	if($(".grumble-description").length > 0) {
 		$.each($(".grumble-description"), function() {
@@ -1185,3 +1192,43 @@ function findLink(text) {
         }
     })()
 } (window, jQuery));
+
+jQuery.fn.shorten = function(settings) {
+  var config = {
+    showChars : 100,
+    ellipsesText : "...",
+    moreText : "more",
+    lessText : "less"
+  };
+ 
+  if (settings) {
+    $.extend(config, settings);
+  }
+ 
+  $('.morelink').live('click', function() {
+    var $this = $(this);
+    if ($this.hasClass('less')) {
+      $this.removeClass('less');
+      $this.html(config.moreText);
+    } else {
+      $this.addClass('less');
+      $this.html(config.lessText);
+    }
+    $this.parent().prev().toggle();
+    $this.prev().toggle();
+    return false;
+  });
+ 
+  return this.each(function() {
+    var $this = $(this);
+ 
+    var content = $this.html();
+    if (content.length > config.showChars) {
+      var c = content.substr(0, config.showChars);
+      var h = content.substr(config.showChars , content.length - config.showChars);
+      var html = c + '<span class="moreellipses">' + config.ellipsesText + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="javascript://nop/" class="morelink colored-link-1">' + config.moreText + '</a></span>';
+      $this.html(html);
+      $(".morecontent span").hide();
+    }
+  });
+}

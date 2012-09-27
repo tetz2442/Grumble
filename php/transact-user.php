@@ -454,7 +454,11 @@
 							setcookie("user_grumble", $cookie_text, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
 							setcookie("cookie_id", $id, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
 						}
-						redirect("../");
+
+						if(isset($_GET["redirect"]))
+							redirect(strip_tags($_GET["redirect"]));
+						else 
+							redirect("../");
 					}
 			   }
 			   catch( Exception $e ){
