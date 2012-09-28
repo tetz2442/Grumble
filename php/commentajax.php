@@ -5,9 +5,10 @@
 	require_once "outputcomments.php";
 	session_start();
 	setTimezone();
+	//code for inserting a new comment on a grumble
 	if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && is_numeric($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
-		$comment = mysql_real_escape_string(strip_tags($_POST["comment"]));
-		$category = mysql_real_escape_string(strip_tags($_POST["category"]));
+		$comment = escapeAndStrip($_POST["comment"]);
+		$category = escapeAndStrip($_POST["category"]);
 		
 		$sql = "SELECT sub_category_id FROM sub_category_grumble WHERE sub_category_id = " . $category . " LIMIT 0,1";
 		$result = mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
@@ -55,17 +56,17 @@
 				"WHERE sg.sub_category_id = " . $category . " AND sug.settings_email_thread = 1 LIMIT 0,1";
 				$result = mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 				$row = mysql_fetch_array($result);
-				if(mysql_num_rows($result) != 0) {
+				//if grumble number is divisible by 15, send email
+				if(mysql_num_rows($result) != 0 && $row["grumble_number"] % 15 == 0 && $row["grumble_number"] != 0) {
 					$parameters = array($row["grumble_number"], "http://" . $_SERVER["HTTP_HOST"] . "/" . $row["category_url"] . "/" . $row["sub_category_url"] . "/" . $category, $row["username"]);
 					sendEmail($row["user_email"], "no-reply@grumbleonline.com", "grumble", $parameters);
 				}
-				
+				//insert a new notification
 				if($_SESSION["user_id"] != $row["user_id"]) {
 					insertNotification($row["user_id"], $_SESSION["user_id"], $_SESSION["username"], "http://" . $_SERVER["HTTP_HOST"] . "/" . $row["category_url"] . "/" . $row["sub_category_url"] . "/" . $category, "comment");
 				}
 				
 				outputComments($last_id_status, false, true);
-				
 			}
 			else {
 				echo 1;
