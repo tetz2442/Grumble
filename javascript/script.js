@@ -1,12 +1,3 @@
-  var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-33671147-1']);
-  _gaq.push(['_trackPageview']);
-
-(function() {
-	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
 //social code
 (function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
@@ -25,14 +16,16 @@
   })();
 
 $(document).ready(function() { 
+	//category dropdown
 	$("#nav-category").click(function() {
 		if($("#sub-nav").is(":visible")) {
 			$("#sub-nav").fadeOut(50);
 		}
 		else {
-			$("#sub-nav").fadeIn(100).css("display","list-item");
+			$("#sub-nav").fadeIn(100);
 		}
 	});
+	//link for opening the user menu/login dropdown
 	$(".dropdown-shortlink").mousedown(function() {
 		var $element = $(this);
 		var $dropdownform = $("#dropdown-sub-nav");
@@ -59,6 +52,7 @@ $(document).ready(function() {
 		}
 		$("#notification-dropdown").fadeOut(50);
 	});
+	//notification dropdown
 	$("#notification-number").mousedown(function() {
 		if($("#notification-dropdown").is(":visible")) {
 			$("#notification-dropdown").fadeOut(50);
@@ -70,7 +64,7 @@ $(document).ready(function() {
 			$("#notification-header").html("Notifications (0 new)");
 		}
 		else {
-			$("#notification-dropdown").fadeIn(100).css("display","list-item");
+			$("#notification-dropdown").fadeIn(100);
 			var unread = 0;
 			$("#notification-dropdown li a").each(function() {
 				if($(this).hasClass("highlight")) {
@@ -86,7 +80,7 @@ $(document).ready(function() {
 		$("#dropdown-sub-nav").fadeOut(50);
 		$("#dropdown-form-login").fadeOut(50);
 	});
-	
+	//loads more notifications
 	$("#notification-load a").click(function(event) {
 		event.preventDefault();
 		var lastid = $(".ind-notification:last").attr("data-id");
@@ -104,13 +98,9 @@ $(document).ready(function() {
 				}
 			});
 	});
-	
+	//if the main column is clicked, close all dropdowns
 	$("#maincolumn").click(function () {
-		$element = $("body");
-		$("#sub-nav").fadeOut(50);
-		$("#dropdown-sub-nav").fadeOut(50);
-		$("#dropdown-form-login").fadeOut(50);
-		$("#notification-dropdown").fadeOut(50);
+		$(".dropdown").fadeOut(50);
 	});
 	
 	$("div").on("mouseover", ".comment-holder", function () {

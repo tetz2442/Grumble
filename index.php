@@ -6,7 +6,6 @@ require_once "php/functions.php";
 require_once "php/outputgrumbles.php";
 require_once "php/outputcomments.php";
 ?>
-<div class="content-padding">
 <div id="grumble-home-info">
 <?php
 if(!isset($_SESSION["username"])) {
@@ -119,10 +118,10 @@ else {
 		?>
         </div>
     </div>
-    </div>
 </div>
 <?php	
 require_once "php/lightboxgrumble.php";
-require_once "php/socialtab.php";
+if(!mobile)
+    require_once "php/socialtab.php";
 require_once "php/footer.php"; 
 ?>

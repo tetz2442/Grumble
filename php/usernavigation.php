@@ -5,9 +5,11 @@ require_once 'outputnotifications.php';
 <div id="user-navigation">
 	<div id="nav-container">
     	<ul id="navigation">
+            <?php if(!$mobile) {?>
             <li><a href="<?php echo "http://" . $_SERVER["HTTP_HOST"];?>">Home</a></li>
+            <?php } ?>
             <li id="nav-category">Categories<img src="/images/arrow-down.png" alt="arrow" class="drop-image" width="10" height="10"/>
-                <ul id="sub-nav" class="rounded-corners-medium">
+                <ul id="sub-nav" class="dropdown rounded-corners-medium">
                     <li id="sub-nav-dropdown-arrow"><img src="/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/></li>
                 <?php
 					$sql = "SELECT category_id, category_name, category_url FROM categories_grumble ORDER BY category_name ASC";
@@ -19,7 +21,7 @@ require_once 'outputnotifications.php';
                 </ul>
             </li>
         </ul>
-        <a id="logo" href="<?php echo "http://" . $_SERVER["HTTP_HOST"]; ?>"><img src="/images/logo.png" height="51" width="275" alt="Grumble logo" title="Grumble home" onmouseover="this.src='/images/logo-hover.png'" onmouseout="this.src='/images/logo.png'"></a>
+        <a id="logo" href="<?php echo "http://" . $_SERVER["HTTP_HOST"]; ?>"><img src="/images/logo.png" alt="Grumble logo" title="Grumble home" onmouseover="this.src='/images/logo-hover.png'" onmouseout="this.src='/images/logo.png'"></a>
         <div id="user-info">
         <?php
         if(isset($_SESSION["username"])) {
@@ -35,7 +37,7 @@ require_once 'outputnotifications.php';
 					} else {
 						echo '<img id="notification-number" title="Notifications" src="/images/icons/notification-none.png" alt="notifications">';
 					}
-					echo '<ul id="notification-dropdown" class="rounded-corners-medium">';
+					echo '<ul id="notification-dropdown" class="dropdown rounded-corners-medium">';
 					echo ' <li id="dropdown-arrow-notifications"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
 					echo ' <li id="notification-header">Notifications (' . $row["number"] . ' new)</li>';
 					if(mysql_num_rows($result) != 0) 
@@ -49,7 +51,7 @@ require_once 'outputnotifications.php';
 					echo '</ul>';
 				echo '</li>';
                 echo '<li class="user-inline"><span class="dropdown-login dropdown-shortlink">' . $_SESSION["username"] . '<img src="/images/arrow-down.png" alt="arrow" class="login-drop-image"/></span>';
-                    echo '<ul id="dropdown-sub-nav" class="rounded-corners-medium">';
+                    echo '<ul id="dropdown-sub-nav" class="dropdown rounded-corners-medium">';
                         echo '<li id="dropdown-arrow-short"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
                         echo '<li><a href="/profile/' . $_SESSION["username"] . '"><span id="profile-span">Profile</span></a></li>';
             			echo '<li class="divider light"></li>';
@@ -72,7 +74,7 @@ require_once 'outputnotifications.php';
 			$token = md5(uniqid(rand(), true));
 			$_SESSION['token'] = $token;
             ?>
-                    <ul id="dropdown-form-login" class="rounded-corners-medium">
+                    <ul id="dropdown-form-login" class="dropdown rounded-corners-medium">
                         <li id="dropdown-arrow"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>
                         <li>
                             <label for="email">Email or Username</label>

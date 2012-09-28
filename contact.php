@@ -33,7 +33,9 @@ require_once "php/containerWide.php";
     <ul>
         <li>
             <input type="text" id="fullname-contact" class="textInput" name="fullname" maxlength="50" placeholder="Name"/>
-            <p>Have an account? Make this easier and <a class="dropdown-shortlink colored-link-1">Sign in</a></p>
+            <?php if(!$mobile) { ?>
+                <p>Have an account? Make this easier and <a class="dropdown-shortlink colored-link-1">Sign in</a></p>
+            <?php } ?>
         </li>
         <li>
             <input type="text" id="email-contact" class="textInput margin-top" name="email" maxlength="255" placeholder="Email"/>
