@@ -837,7 +837,7 @@ $(document).ready(function() {
 			else {
 				$(".view-more").slideUp("fast");
 			}
-			if($(this).html() == "Recent Grumbles")
+			/*if($(this).html() == "Recent Grumbles")
 				$("#arrow-top img").animate({"marginLeft":"169px"}, "normal");
 			else if($(this).html() == "Top Grumbles")
 				$("#arrow-top img").animate({"marginLeft":"48px"}, "normal");
@@ -848,7 +848,10 @@ $(document).ready(function() {
 			else if($(this).html() == "Grumbles")
 				$("#arrow-top-profile img").animate({"marginLeft":"169px"}, "normal");
 			else if($(this).html() == "Comments")
-				$("#arrow-top-profile img").animate({"marginLeft":"50px"}, "normal");
+				$("#arrow-top-profile img").animate({"marginLeft":"50px"}, "normal");*/
+			var margin = $(this).position();
+			margin = margin.left + ($(this).width() / 2) - ($("#arrow-top img").width() / 2);
+			$("#arrow-top img").animate({"marginLeft":margin}, "normal");
 			$active.removeClass('active');
 			$content.fadeOut("fast");
 	

@@ -27,6 +27,7 @@ else {
 <?php
 }
 ?>
+	<div class="clear"></div>
 	</div>
 </div>
 <div id="home-tabs-holder">

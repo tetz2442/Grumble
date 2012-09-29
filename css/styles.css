@@ -36,15 +36,6 @@ a {
     vertical-align:baseline;
     background:transparent;
 }
-abbr[title], dfn[title] {
-    border-bottom:1px dotted;
-    cursor:help;
-}
-table {
-    border-collapse:collapse;
-    border-spacing:0;
-    width: 100%;
-}
 img {
 	border:none;
 }
@@ -67,7 +58,6 @@ small {
 /* hand cursor on clickable input elements */
 label, input[type=button], input[type=submit], button { cursor: pointer; }
 html { overflow-y: scroll; }
-
 @font-face {
     font-family: 'OpenSansLight';
     src: url('opensans/OpenSans-Light-webfont.eot');
@@ -108,9 +98,6 @@ html { overflow-y: scroll; }
 	border-radius:10px;
 	-webkit-border-radius:10px;
 	-moz-border-radius:10px;
-}
-.content-padding {
-	padding:15px 15px 15px 15px;	
 }
 .float-left {
 	float:left;	
@@ -727,15 +714,6 @@ html { overflow-y: scroll; }
 .tabs li {
 	list-style:none;
 	display:inline;	
-}
-.tabs a {
-	padding:5px 0;
-	display:inline-block;
-	text-decoration:none;
-	color:#B5B2B2;
-	font-size:1.1em;
-	width:115px;
-	text-align:center;
 }
 .tabs a:hover {
 	color:#333;	
@@ -1550,6 +1528,9 @@ toast
 	body {
 		min-width:875px;
 	}
+	.content-padding {
+		padding:15px;	
+	}
 	#user-navigation {
 		font-size: 1.1em;
 	}
@@ -1647,6 +1628,15 @@ toast
 	.grumble-text-holder {
 		margin-right:100px;
 	}
+	.tabs a {
+		padding:5px 0;
+		display:inline-block;
+		text-decoration:none;
+		color:#B5B2B2;
+		font-size:1.1em;
+		width:115px;
+		text-align:center;
+	}
 	/********
 	*footer css
 	******/
@@ -1709,6 +1699,9 @@ toast
 	}
 }
 @media all and (max-width: 849px) and (min-width: 400px) {
+	.content-padding {
+		padding:15px;	
+	}
 	#navigation {
 		font-size: 1em;
 	}
@@ -1747,10 +1740,25 @@ toast
 		width:240px;
 		font-size: 1em !important;
 	}
+	.tabs a {
+		padding:5px 0;
+		display:inline-block;
+		text-decoration:none;
+		color:#B5B2B2;
+		font-size:1em;
+		width:100px;
+		text-align:center;
+	}
 }
 @media all and (max-width: 399px) and (min-width: 50px) {
-	#navigation {
+	.content-padding {
+		padding:7px;	
+	}
+	#nav-container {
 		font-size: .9em;
+	}
+	#nav-home {
+		display:none;
 	}
 	/*****
 	user-navigation
@@ -1759,7 +1767,7 @@ toast
 		position:absolute;
 		left:50%;
 		margin-left:-67px;
-		top:15px;
+		top:12px;
 	}
 	#logo img {
 		width:135px;
@@ -1791,5 +1799,14 @@ toast
 	****/
 	.grumble-text-holder {
 		margin-right:60px;
+	}
+	.tabs a {
+		padding:5px 0;
+		display:inline-block;
+		text-decoration:none;
+		color:#B5B2B2;
+		font-size:.8em;
+		width:65px;
+		text-align:center;
 	}
 }

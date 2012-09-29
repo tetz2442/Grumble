@@ -6,7 +6,7 @@ require_once 'outputnotifications.php';
 	<div id="nav-container">
     	<ul id="navigation">
             <?php if(!$mobile) {?>
-            <li><a href="<?php echo "http://" . $_SERVER["HTTP_HOST"];?>">Home</a></li>
+            <li id="nav-home"><a href="<?php echo "http://" . $_SERVER["HTTP_HOST"];?>">Home</a></li>
             <?php } ?>
             <li id="nav-category">Categories<img src="/images/arrow-down.png" alt="arrow" class="drop-image" width="10" height="10"/>
                 <ul id="sub-nav" class="dropdown rounded-corners-medium">
