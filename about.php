@@ -16,7 +16,7 @@ require_once "php/containerGrumbles.php";
     	<h2>Have something to Grumble about?</h2>
         <p>Start your sign up below and start Grumbling.</p>
         <div id="login-table-about" class="rounded-corners-large content-padding">	
-            <form method='post' action='/create-account' name='userForm'>
+            <form method='post' action='/create-account' name='userForm'
             <ul>
 	            <li>
 	            	<label for="fullname">Full Name: (ex. John Doe)</label>
@@ -28,6 +28,7 @@ require_once "php/containerGrumbles.php";
 	            </li>
 	            <li>
 	                <input type="submit" id="about-create" class="button orange" name="action" value="Create Account"/>
+	                <div class="clear"></div>
 	            </li>
             </ul>
             </form>

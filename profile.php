@@ -36,7 +36,7 @@ else {
         <li><a href='#tab1' class="active">Comments</a></li>
         <li><a href='#tab2'>Grumbles</a></li>
     </ul>
-    <div id="arrow-top-profile"><img src="/images/arrow-up.png" alt="arrow" width="15" height="15"/></div>
+    <div id="arrow-top"><img src="/images/arrow-up.png" alt="arrow" width="15" height="15"/></div>
     <div id='tab1'>
          <?php
 			if(isset($_GET["id"])) {
