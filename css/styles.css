@@ -383,7 +383,6 @@ html { overflow-y: scroll; }
 *homepage css
 ******/
 #grumble-home-info {
-	float:left;
 	width:100%;
 	text-align:center;
 	margin:45px 0;
@@ -710,6 +709,7 @@ html { overflow-y: scroll; }
 .tabs {
 	width:100%;	
 	margin-top:30px;
+	position:relative;
 }
 .tabs li {
 	list-style:none;
@@ -727,7 +727,6 @@ html { overflow-y: scroll; }
 }
 #arrow-top img {
 	margin-bottom:-4px;	
-	margin-left:47px;
 }
 .grumble-holder {
 	width:100%;
@@ -782,36 +781,25 @@ html { overflow-y: scroll; }
 #view-comments-header {
 	margin:15px 0px 15px 25px;	
 }
-
 /********
 *grumble about
 *******/
-#about-left {
-	float:left;
-	width:47%;
-	margin:20px 15px 20px 0;
-}
 #about-left p {
 	margin:15px 10px 10px 0;
 	font-size:1em;
 	line-height: 1.2em;
 }
-#about-right {
-	float:right;
-	width:48%;
-	margin:20px 0 20px 15px;
-}
-#about-right p {
-	margin:10px 10px 20px 0;
-}
 #login-table-about {
-	float:left;
-	margin-left:70px;	
-	width:220px;
 	background-color:#feeed3;
 	-webkit-box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 3px 0px rgba(0,0,0,.2);
     -moz-box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 3px 0px rgba(0,0,0,.2);
     box-shadow: inset 0px 1px rgba(255,255,255,0.6), 0px 0px 4px 0px rgba(0,0,0,.2);
+}
+#login-table-about label {
+	display: block;
+}
+#about-right p {
+	margin:10px 10px 20px 0;
 }
 #login-table-about ul li input {
 	padding:5px;	
@@ -824,9 +812,6 @@ html { overflow-y: scroll; }
 }
 #login-table-about input {
 	margin-top: 10px;
-}
-#login-table-about input[type="submit"]{
-	float:right;
 }
 /********
 *create account
@@ -940,14 +925,6 @@ html { overflow-y: scroll; }
 .profile-user-info button {
 	float:right;
 	margin-top:-26px;
-}
-#arrow-top-profile {
-	width:100%;
-	border-bottom:1px solid #7A7979;
-}
-#arrow-top-profile img {
-	margin-bottom:-4px;	
-	margin-left:50px;
 }
 /********
 *settings
@@ -1180,17 +1157,10 @@ html { overflow-y: scroll; }
 #contact-form ul {
 	list-style: none;
 }
-#contact-form select {
-	float:left;
-	width: 40%;
-}
 #contact-form p {
 	float:right;
 	width: 45%;
 	text-align: center;
-}
-#contact-form input[type=submit] {
-	float:right;
 }
 #contact-textarea {
 	width:100%;	
@@ -1586,7 +1556,6 @@ toast
 	#home-tabs-holder {
 		margin:auto;
 		width:670px;
-		margin-top:-30px;	
 	}
 	/****
 	create-account
@@ -1622,6 +1591,13 @@ toast
 		width:450px;	
 		margin:35px 0 35px 225px;
 	}
+	#contact-form select {
+		float:left;
+		width: 40%;
+	}
+	#contact-form input[type=submit] {
+		float:right;
+	}
 	/******
 	grumble holder
 	****/
@@ -1636,6 +1612,27 @@ toast
 		font-size:1.1em;
 		width:115px;
 		text-align:center;
+	}
+	/********
+	*grumble about
+	*******/
+	#about-left {
+		float:left;
+		width:47%;
+		margin:20px 15px 20px 0;
+	}
+	#about-right {
+		float:right;
+		width:48%;
+		margin:20px 0 20px 15px;
+	}
+	#login-table-about {
+		float:left;
+		margin-left:70px;	
+		width:220px;
+	}
+	#login-table-about input[type="submit"]{
+		float:right;
 	}
 	/********
 	*footer css
@@ -1671,6 +1668,9 @@ toast
 		width:100%;
 		height:48px;	
 	}
+	#nav-home {
+		display:none;
+	}
 	/*****
 	homepage
 	***/
@@ -1684,6 +1684,38 @@ toast
 	#contact-form {
 		width:90%;	
 		margin:35px 5px;
+	}
+	#contact-form p {
+		display:none;
+	}
+	#contact-form input[type=submit] {
+		margin:10px;
+	}
+	/********
+	*grumble about
+	*******/
+	#about-right {
+		margin:20px 0;
+	}
+	/****
+	create account
+	***/
+	#create-account-table {
+		width:95%;
+	}
+	#create-checkbox {
+		width: 95%;
+	}
+	.column1 {
+		width:95%;
+		font-size: 1.2em;
+	}
+	.column2 input, .column2 select {
+		width:95%;
+	}
+	.column3 {
+		width:95%;
+		font-size: 1em !important;
 	}
 	/********
 	*footer css
@@ -1722,24 +1754,6 @@ toast
 		width:60%;
 		right: 10px;
 	}
-	/****
-	create account
-	***/
-	#create-account-table p {
-		display: inline-block;
-	}
-	.column1 {
-		width:170px;
-		text-align: right;
-		font-size: 1.2em;
-	}
-	.column2 input, .column2 select {
-		width:205px;
-	}
-	.column3 {
-		width:240px;
-		font-size: 1em !important;
-	}
 	.tabs a {
 		padding:5px 0;
 		display:inline-block;
@@ -1756,9 +1770,6 @@ toast
 	}
 	#nav-container {
 		font-size: .9em;
-	}
-	#nav-home {
-		display:none;
 	}
 	/*****
 	user-navigation

@@ -827,8 +827,14 @@ $(document).ready(function() {
 		$links.not(':first').each(function () {
 			$($(this).attr('href')).hide();
 		});
-	
-		$(this).on('click', 'a', function(e){
+		
+		//set arrow to proper first position
+		var margin = $(".tabs a.active").position();
+		margin = margin.left + ($(".tabs a.active").width() / 2) - ($("#arrow-top img").width() / 2);
+		$("#arrow-top img").css("margin-left",margin);
+			
+		$(this).on('click', 'a', function(e) {
+			//check if the view more button should show up
 			if(($("#tab2 .grumble-holder").length >= 10 && $(this).html() == "Recent Grumbles" && !resultDone) || ($("#tab1 .grumble-holder").length >= 10 && $(this).html() == "Top Grumbles" && !topDone)
 			|| ($("#tab4 .comment-holder").length >= 10 && $(this).html() == "Recent Comments" && !resultGDone) || ($("#tab3 .comment-holder").length >= 10 && $(this).html() == "Top Comments" && !topGDone)
 			|| ($("#tab2 .grumble-holder").length >= 10 && $(this).html() == "Grumbles" && !topDone) || ($("#tab1 .comment-holder").length >= 10 && $(this).html() == "Comments" && !resultGDone)) {
@@ -837,21 +843,11 @@ $(document).ready(function() {
 			else {
 				$(".view-more").slideUp("fast");
 			}
-			/*if($(this).html() == "Recent Grumbles")
-				$("#arrow-top img").animate({"marginLeft":"169px"}, "normal");
-			else if($(this).html() == "Top Grumbles")
-				$("#arrow-top img").animate({"marginLeft":"48px"}, "normal");
-			else if($(this).html() == "Top Comments")
-				$("#arrow-top img").animate({"marginLeft":"286px"}, "normal");
-			else if($(this).html() == "Recent Comments")
-				$("#arrow-top img").animate({"marginLeft":"407px"}, "normal");
-			else if($(this).html() == "Grumbles")
-				$("#arrow-top-profile img").animate({"marginLeft":"169px"}, "normal");
-			else if($(this).html() == "Comments")
-				$("#arrow-top-profile img").animate({"marginLeft":"50px"}, "normal");*/
+			//animate arrow
 			var margin = $(this).position();
 			margin = margin.left + ($(this).width() / 2) - ($("#arrow-top img").width() / 2);
 			$("#arrow-top img").animate({"marginLeft":margin}, "normal");
+			
 			$active.removeClass('active');
 			$content.fadeOut("fast");
 	
@@ -864,6 +860,15 @@ $(document).ready(function() {
 			e.preventDefault();
 		});
 	});
+	//add a listener for document resize
+	if($("ul.tabs").length > 0) {
+		$(window).resize(function() {
+			//set arrow to proper first position
+			var margin = $(".tabs a.active").position();
+			margin = margin.left + ($(".tabs a.active").width() / 2) - ($("#arrow-top img").width() / 2);
+			$("#arrow-top img").css("margin-left",margin);
+		});
+	}
 	
 	//stores the url parameter
 	$.urlParam = function(name){
