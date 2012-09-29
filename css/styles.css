@@ -1,6 +1,5 @@
 @charset "utf-8";
-/* 
-html5doctor.com Reset Stylesheet
+/* html5doctor.com Reset Stylesheet
 v1.6.1
 Last Updated: 2010-09-17
 Author: Richard Clark - http://richclarkdesign.com 
@@ -142,8 +141,6 @@ html { overflow-y: scroll; }
 }
 #sub-nav-dropdown-arrow {
 	position:absolute !important;
-	margin-top: -18px;
-	margin-left:35px;	
 }
 #sub-nav li {
 	float: none;
@@ -180,7 +177,6 @@ html { overflow-y: scroll; }
 }
 #user-info .user-inline {
 	float:left;
-	position:relative;
 }
 .input-user-nav {
 	width:97%;	
@@ -199,10 +195,6 @@ html { overflow-y: scroll; }
 	font-size:1em;
 	border:1px solid #e8e8e8;
 }
-#dropdown-sub-nav {
-	right: 12px;
-	padding: 3px 0;
-}
 #dropdown-form-login {
 	padding:10px;	
 }
@@ -211,8 +203,6 @@ html { overflow-y: scroll; }
 }
 #dropdown-form-login #dropdown-arrow {
 	position:absolute;
-	margin-top:-25px;
-	margin-left:240px;	
 }
 #dropdown-form-login ul {
 	list-style:none;
@@ -222,16 +212,19 @@ html { overflow-y: scroll; }
 }
 #dropdown-arrow-short {
 	position:absolute !important;
-	margin-top:-18px;
-	margin-left:85px;	
 }
 .dropdown-login {
 	padding:17px 10px 5px 15px;
 }
-.dropdown-login, #notification-number {
+#mobile-dropdown {
+	width:32px;
+	height:32px;
+	padding:8px 5px 0 5px;
+}
+.dropdown-login, #mobile-dropdown, #notification-number {
 	display:inline-block;
 }
-.dropdown-login:hover, #notification-number:hover {
+.dropdown-login:hover, #notification-number:hover, #mobile-dropdown:hover {
 	color:#FFF;	
 	cursor:pointer;
 }
@@ -242,16 +235,18 @@ html { overflow-y: scroll; }
 	padding:14px 10px 0;
 }
 #notification-dropdown {
-	left:-90px;
-	width:250px;
-	height:300px;
-	overflow: auto;
 	font-size:.8em;
 	padding: 3px 0;
+	overflow: auto;
 }
 #notification-header {
-	padding: 5px;
+	padding: 10px 5px;
 	border-bottom:1px solid #999;
+}
+#notification-header a, #notification-header span {
+	display: inline !important;
+	padding:0 0 0 10px !important;
+	border:none !important;
 }
 #notification-dropdown li a {
 	padding:10px 5px;
@@ -272,7 +267,6 @@ html { overflow-y: scroll; }
 }
 #dropdown-arrow-notifications {
 	position:fixed !important;
-	margin: -15px 0 0 102px;
 }
 #dropdown-sub-nav #profile-span, #dropdown-sub-nav #contact-span, #dropdown-sub-nav #settings-span, #dropdown-sub-nav #admin-span, #dropdown-sub-nav #logout-span {
 	height: 16px;
@@ -300,7 +294,6 @@ html { overflow-y: scroll; }
 #dropdown-sub-nav a {
 	text-decoration:none;
 	color:#333;
-	padding:5px 25px 5px 5px;
 	min-width: 70px;
 	font-size:.8em;
 	position: relative;
@@ -435,18 +428,8 @@ html { overflow-y: scroll; }
 	padding-top:30px;
 	margin-bottom:50px;
 }
-#category-header {
-	float:left;	
-	width:75%;
-	margin:0 35px 0 5px;
-}
 #category-header h4 {
 	margin-top:3px;
-}
-#share-category {
-	float:left;
-	width:15%;
-	margin-top: 10px;
 }
 #share-category div {
 	margin-bottom: 10px !important;
@@ -654,7 +637,6 @@ html { overflow-y: scroll; }
 	border-bottom:1px solid #e0e0e0;
 }
 #grumble-comment textarea {
-	width:100%;
 	display:block;
 	margin:10px 0 5px;
 	height:20px;
@@ -1550,6 +1532,34 @@ toast
 		width:285px;
 		right: 0px;
 	}
+	#mobile-dropdown {
+		display: none;
+	}
+	#sub-nav-dropdown-arrow {
+		margin-top: -18px;
+		margin-left:35px;	
+	}
+	#dropdown-arrow-short {
+		margin-top:-18px;
+		margin-left:85px;	
+	}
+	#dropdown-form-login #dropdown-arrow {
+		margin-top:-25px;
+		margin-left:240px;	
+	}
+	#dropdown-arrow-notifications {
+		margin: -15px 0 0 102px;
+	}
+	#dropdown-sub-nav {
+		right: 12px;
+		padding: 3px 0;
+	}
+	#notification-dropdown {
+		left:-90px;
+		width:250px;
+		height:300px;
+		overflow: auto;
+	}
 	/*****
 	homepage
 	***/
@@ -1613,6 +1623,22 @@ toast
 		width:115px;
 		text-align:center;
 	}
+	/******
+	grumbles
+	****/
+	#category-header {
+		float:left;	
+		width:75%;
+		margin:0 35px 0 5px;
+	}
+	#share-category {
+		float:left;
+		width:15%;
+		margin-top: 10px;
+	}
+	#grumble-comment textarea {
+		width:100%;
+	}
 	/********
 	*grumble about
 	*******/
@@ -1657,12 +1683,10 @@ toast
 	/*****
 	user-navigation
 	***/
-	#sub-nav {
-		width:50%;
-	}
 	#sub-nav a {
-		width:95%;
+		width:89%;
 		font-size:.9em;
+		padding:10px 16px 10px 10px;
 	}
 	#nav-container {
 		width:100%;
@@ -1671,12 +1695,58 @@ toast
 	#nav-home {
 		display:none;
 	}
+	#sub-nav-dropdown-arrow {
+		margin-top: -15px;
+		margin-left:35px;	
+	}
+	#dropdown-arrow-short {
+		margin-top:-15px;
+		margin-left:90px;	
+	}
+	#dropdown-form-login #dropdown-arrow {
+		margin-top:-23px;
+		right:25px;	
+	}
+	#dropdown-arrow-notifications {
+		margin: -14px 0 0 170px;
+	}
+	#dropdown-sub-nav {
+		right: 5px;
+		padding: 3px 0;
+	}
+	#dropdown-sub-nav a {
+		padding:10px 25px 10px 5px;
+	}
+	#notification-dropdown {
+		right:5px;
+		width:60%;
+		height:300px;
+	}
 	/*****
 	homepage
 	***/
 	#home-tabs-holder {
 		width:100%;
 		margin-top:-30px;	
+	}
+	/*****
+	grumbles
+	***/
+	#category-header {
+		margin:0 35px 0 5px;
+	}
+	#share-category {
+		width:100%;
+		margin-top: 10px;
+	}
+	#share-category .fb-like {
+		margin-right:20px;
+	}
+	#grumble-comment {
+		margin-left:5px;
+	}
+	#grumble-comment textarea {
+		width:94%;
 	}
 	/******
 	contact
@@ -1730,7 +1800,7 @@ toast
 		text-align:center;
 	}
 }
-@media all and (max-width: 849px) and (min-width: 400px) {
+@media all and (max-width: 849px) and (min-width: 430px) {
 	.content-padding {
 		padding:15px;	
 	}
@@ -1750,9 +1820,15 @@ toast
 		width:175px;
 		height:35px;
 	}
+	#sub-nav {
+		width:40%;
+	}
 	#dropdown-form-login {
 		width:60%;
 		right: 10px;
+	}
+	#mobile-dropdown {
+		display: none;
 	}
 	.tabs a {
 		padding:5px 0;
@@ -1764,7 +1840,7 @@ toast
 		text-align:center;
 	}
 }
-@media all and (max-width: 399px) and (min-width: 50px) {
+@media all and (max-width: 429px) and (min-width: 50px) {
 	.content-padding {
 		padding:7px;	
 	}
@@ -1784,9 +1860,15 @@ toast
 		width:135px;
 		height:25px;
 	}
+	#sub-nav {
+		width:50%;
+	}
 	#dropdown-form-login {
 		width:85%;
 		right: 10px;
+	}
+	.dropdown-login {
+		display:none;
 	}
 	/****
 	create account

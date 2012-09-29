@@ -24,6 +24,9 @@ $(document).ready(function() {
 		else {
 			$("#sub-nav").fadeIn(100);
 		}
+		$("#dropdown-sub-nav").fadeOut(50);
+		$("#dropdown-form-login").fadeOut(50);
+		$("#notification-dropdown").fadeOut(50);
 	});
 	//link for opening the user menu/login dropdown
 	$(".dropdown-shortlink").mousedown(function() {
@@ -51,6 +54,7 @@ $(document).ready(function() {
 			}
 		}
 		$("#notification-dropdown").fadeOut(50);
+		$("#sub-nav").fadeOut(50);
 	});
 	//notification dropdown
 	$("#notification-number").mousedown(function() {
@@ -79,6 +83,7 @@ $(document).ready(function() {
 		}
 		$("#dropdown-sub-nav").fadeOut(50);
 		$("#dropdown-form-login").fadeOut(50);
+		$("#sub-nav").fadeOut(50);
 	});
 	//loads more notifications
 	$("#notification-load a").click(function(event) {
