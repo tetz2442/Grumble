@@ -39,7 +39,10 @@ require_once 'outputnotifications.php';
 					}
 					echo '<ul id="notification-dropdown" class="dropdown rounded-corners-medium">';
 					echo ' <li id="dropdown-arrow-notifications"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
-					echo ' <li id="notification-header">Notifications (' . $row["number"] . ' new)</li>';
+					echo ' <li id="notification-header"><span>Notifications (' . $row["number"] . ' new)</span>';
+					//if($mobile) 
+						echo '<a class="colored-link-1">See all</a>';
+					echo '</li>';
 					if(mysql_num_rows($result) != 0) 
 						outputNotifications($result);
 					else {
@@ -50,7 +53,9 @@ require_once 'outputnotifications.php';
 					}
 					echo '</ul>';
 				echo '</li>';
-                echo '<li class="user-inline"><span class="dropdown-login dropdown-shortlink">' . $_SESSION["username"] . '<img src="/images/arrow-down.png" alt="arrow" class="login-drop-image"/></span>';
+				//if mobile, do an icon instead of the username
+				 echo '<li class="user-inline"><span class="dropdown-login dropdown-shortlink">' . $_SESSION["username"] . '<img src="/images/arrow-down.png" alt="arrow" class="login-drop-image"/>
+				 </span><img id="mobile-dropdown" class="dropdown-shortlink" title="User dropdown" src="/images/icons/user-big.png" alt="user dropdown">';
                     echo '<ul id="dropdown-sub-nav" class="dropdown rounded-corners-medium">';
                         echo '<li id="dropdown-arrow-short"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
                         echo '<li><a href="/profile/' . $_SESSION["username"] . '"><span id="profile-span">Profile</span></a></li>';
