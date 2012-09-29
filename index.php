@@ -7,6 +7,7 @@ require_once "php/outputgrumbles.php";
 require_once "php/outputcomments.php";
 ?>
 <div id="grumble-home-info">
+	<div class="content-padding">
 <?php
 if(!isset($_SESSION["username"])) {
 ?>
@@ -26,6 +27,7 @@ else {
 <?php
 }
 ?>
+	</div>
 </div>
 <div id="home-tabs-holder">
     <ul class="tabs">
