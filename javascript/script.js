@@ -767,7 +767,49 @@ $(document).ready(function() {
 							//no more are available
 							loadMore = false;
 							canLoad = false;
+							$("#load-more-grumbles").hide();
+							toastr.warning("No more comments to load.");
+						}
+						else if(result != "") {
+							canLoad = true;
+							loadMore = true;
+							pageNumber++;
+		
+							//insert
+							$(result).insertAfter($(".comment-holder:last"));
 							
+							$.each($(".comment-text"), function() {
+								if(!$(this).hasClass("linked")) {
+									var newText = linkText($(this).html());
+									$(this).addClass("linked").html(newText);
+								}
+							});
+							
+							shortenLink(".comment-text a");
+						}
+				});
+			}
+		});
+		$("#load-more-grumbles").click(function() {
+			if(canLoad) {
+				canLoad = false;
+				subCat = $("#subcat-id").attr("data-id");
+				if(subCat == null) {
+					subCat = $.urlParam("id");
+				}
+				if(loadedtype == "recent") 
+					var lastid = $(".username:last").attr("data-id");
+				else
+					var lastid = $(".comment-holder").length;
+				$("#gif-loader").fadeIn(50);
+				$.post("/php/commentloadajax.php", {typescroll:loadedtype ,pagenumber:pageNumber, number:10, subCat:subCat, lastid:lastid},
+					function(result) {
+						$("#gif-loader").fadeOut(50);
+						if(result == "none") {
+							//no more are available
+							loadMore = false;
+							canLoad = false;
+							$("#load-more-grumbles").hide();
 							toastr.warning("No more comments to load.");
 						}
 						else if(result != "") {
