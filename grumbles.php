@@ -109,6 +109,8 @@ if($exist) {
             outputComments($row["status_id"], false, $loggedin);	
         }
         echo '<div id="gif-loader"><img src="/images/ajax-loader2.gif" alt="loader" width="32" height="32"/></div>';
+		if($mobile)
+			echo '<div id="load-more-grumbles"><p class="colored-link-1">Load more</p></div>';
         echo '</div>';
     }	
 	

@@ -8,6 +8,11 @@ require_once "php/containerGrumbles.php";
 	<h1>Updates about Grumble</h1>
 	<p>On this page we will keep you up to date on new things happening on Grumble.</p>
 	<div class="divider"></div>
+		<h2>Mobile Grumble</h2>
+	    <p>Accessing Grumble from your phone is now simpler than ever! With the newest update Grumble is responsive to the size of your screen. This will allow you to access and post on Grumble wherever you are and no matter what device you are
+	    	using. This was all made possible with the power of responsive CSS.</p> 
+	    <p>If you have any troubles accessing Grumble on your phone, make sure to report it to us using our <a href="/contact" class="colored-link-1">contact form</a>.</p>
+	    <div class="divider light"></div>
 		<h2>Longer Grumble descriptions</h2>
 	    <p>You can now put almost double the characters in your descriptions! The most recent update includes a much longer description of your Grumble.
 	     We thought this will help you be better able to describe the Grumble you are creating. Also, when a description gets over a certain amount of 

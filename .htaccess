@@ -6,6 +6,7 @@ RewriteCond %{HTTP_HOST} !^www\.
 RewriteRule ^(.*)$ http://www.%{HTTP_HOST}/$1 [R=301,L]
 
 RewriteRule ^profile/([a-zA-Z0-9_-]+)/comment/([0-9]+) statusview.php?s=$2&user=$1
+RewriteRule ^profile/([a-zA-Z0-9_-]+)/notifications notifications.php?userid=$1
 RewriteRule ^profile/([a-zA-Z0-9_-]+) profile.php?id=$1
 RewriteRule ^create-account create-account.php
 RewriteRule ^forgot-password forgot-password.php
