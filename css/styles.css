@@ -355,9 +355,6 @@ html {
 /********
  *footer css
  ******/
-#footer-links {
-	padding: 2px 0px 5px 2px;
-}
 #footer-links a {
 	padding: 0 5px 0 0;
 }
@@ -366,7 +363,6 @@ html {
 }
 #footer-copyright {
 	color: #634328;
-	margin-bottom: 12px;
 }
 #social-icons {
 	margin: auto;
@@ -449,7 +445,6 @@ to {
 #grumble-header {
 	float: left;
 	width: 100%;
-	margin: 20px 0 20px 0;
 }
 #grumble-header h3 {
 	margin-bottom: 5px;
@@ -855,8 +850,6 @@ to {
 	margin: 10px;
 }
 #login-table {
-	margin: auto;
-	width: 350px;
 	margin-bottom: 40px;
 	padding: 15px 15px 15px 15px;
 	background-color: #feeed3;
@@ -920,17 +913,8 @@ to {
 #user-info-holder {
 	margin-top: 15px;
 }
-
-.profile-user-info {
-	padding: 15px;
-	margin-bottom: 65px;
-}
 .profile-user-info h2 {
 	margin-left: 90px;
-}
-.profile-user-info button {
-	float: right;
-	margin-top: -26px;
 }
 /********
  *settings
@@ -1544,7 +1528,7 @@ a.button {
  ********************************************************/
 @media all and (min-width: 850px) {
 	body {
-		min-width: 875px;
+		min-width: 850px;
 	}
 	.content-padding {
 		padding: 15px;
@@ -1620,6 +1604,9 @@ a.button {
 		right: 12px;
 		padding: 3px 0;
 	}
+	#dropdown-sub-nav a {
+		padding: 5px 25px 5px 5px;
+	}
 	#notification-dropdown {
 		left: -90px;
 		width: 250px;
@@ -1647,6 +1634,17 @@ a.button {
 	}
 	#cat-header button {
 		float: right;
+	}
+	/****
+	 profile
+	 ***/
+	.profile-user-info button {
+		float: right;
+		margin-top: -26px;
+	}
+	.profile-user-info {
+		padding: 15px;
+		margin-bottom: 65px;
 	}
 	/****
 	 create-account
@@ -1712,6 +1710,9 @@ a.button {
 		width: 75%;
 		margin: 0 35px 0 5px;
 	}
+	#grumble-header {
+		margin: 20px 0 20px 0;
+	}
 	#share-category {
 		float: left;
 		width: 15%;
@@ -1773,6 +1774,28 @@ a.button {
 		max-width: 495px;
 	}
 	/********
+	 *login
+	 *******/
+	#login-table {
+		margin: auto;
+		width: 350px;
+	}
+	/*******
+	 *works 
+	 */
+	#works-image1 {
+		width:700px;
+		height:150px;
+	}
+	#works-image2 {
+		width:700px;
+		height:306px;
+	}
+	#works-image3 {
+		width:700px;
+		height:244px;
+	}
+	/********
 	 *footer css
 	 ******/
 	#footer {
@@ -1785,6 +1808,12 @@ a.button {
 		border-top: 1px solid #e0e0e0;
 		text-align: center;
 	}
+	#footer-links {
+		padding: 2px 0px 5px 2px;
+	}
+	#footer-copyright {
+		margin-bottom: 12px;
+	}
 }
 @media all and (max-width: 849px) and (min-width: 100px) {
 	/*header container for smaller size pages*/
@@ -1796,9 +1825,9 @@ a.button {
 	 user-navigation
 	 ***/
 	#sub-nav a {
-		width: 89%;
+		width: 87%;
 		font-size: .9em;
-		padding: 10px 16px 10px 10px;
+		padding: 7px 16px 7px 10px;
 	}
 	#nav-container {
 		width: 100%;
@@ -1842,23 +1871,21 @@ a.button {
 		margin-top: -30px;
 	}
 	/*****
-	 ctegory page
+	 category page
 	 ***/
 	#cat-header {
-		width: 100%;
+		width: 98%;
+		float:left;
 		margin: 30px 0;
-	}
-	#cat-header h1 {
-		font-size: 2em;
-	}
-	#cat-header button {
-		margin: 25px 0;
 	}
 	/*****
 	 grumbles
 	 ***/
 	#category-header {
 		margin: 0 35px 0 5px;
+	}
+	#grumble-header {
+		margin: 20px 0 20px 5px;
 	}
 	#share-category {
 		width: 100%;
@@ -1938,6 +1965,12 @@ a.button {
 		border-top: 1px solid #e0e0e0;
 		text-align: center;
 	}
+	#footer-links {
+		padding: 5px 0px 12px 2px;
+	}
+	#footer-copyright {
+		margin-bottom: 18px;
+	}
 }
 @media all and (max-width: 849px) and (min-width: 430px) {
 	.content-padding {
@@ -1978,6 +2011,27 @@ a.button {
 		width: 100px;
 		text-align: center;
 	}
+	/****
+	 profile
+	 ***/
+	.profile-user-info button {
+		float: right;
+		margin-top: -26px;
+	}
+	.profile-user-info {
+		padding: 15px;
+		margin-bottom: 65px;
+	}
+	/********
+	 *category page
+	 *******/
+	#cat-header h1 {
+		font-size: 2em;
+		float: left;
+	}
+	#cat-header button {
+		float: right;
+	}
 	/********
 	 *lightbox
 	 *******/
@@ -1988,6 +2042,28 @@ a.button {
 	#grumble-share {
 		width: 92%;
 		margin-left: 5px;
+	}
+	/********
+	 *login
+	 *******/
+	#login-table {
+		width: 90%;
+		margin-left:5px;
+	}
+	/*******
+	 *works 
+	 */
+	#works-image1 {
+		width:400px;
+		height:85px;
+	}
+	#works-image2 {
+		width:400px;
+		height:174px;
+	}
+	#works-image3 {
+		width:400px;
+		height:139px;
 	}
 }
 @media all and (max-width: 429px) and (min-width: 100px) {
@@ -2017,7 +2093,7 @@ a.button {
 		width: 85%;
 		right: 10px;
 	}
-	.dropdown-login {
+	.user-inline .dropdown-login {
 		display: none;
 	}
 	/****
@@ -2037,6 +2113,15 @@ a.button {
 		width: 95%;
 		font-size: 1em !important;
 	}
+	/****
+	 profile
+	 ***/
+	.profile-user-info button {
+		margin: 20px 0 0 5px;
+	}
+	.profile-user-info {
+		padding: 15px;
+	}
 	/******
 	 grumble holder
 	 ****/
@@ -2051,6 +2136,22 @@ a.button {
 		font-size: .8em;
 		width: 65px;
 		text-align: center;
+	}
+	/******
+	category page
+	 ****/
+	#cat-header h1 {
+		font-size: 2em;
+	}
+	#cat-header button {
+		margin: 25px 0 25px 5px;
+	}
+	/********
+	 *login
+	 *******/
+	#login-table {
+		width: 85%;
+		margin-left:5px;
 	}
 	/********
 	 *lightbox
@@ -2069,5 +2170,20 @@ a.button {
 	}
 	#footer-links {
 		font-size: 1.1em;
+	}
+	/*******
+	 *works 
+	 */
+	#works-image1 {
+		width:250px;
+		height:50px;
+	}
+	#works-image2 {
+		width:250px;
+		height:99px;
+	}
+	#works-image3 {
+		width:250px;
+		height:85px;
 	}
 }

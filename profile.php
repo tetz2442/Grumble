@@ -88,8 +88,8 @@ else {
 	else 
 		echo '<input type="button" class="button view-more" value="View More"/>';
 	?>
-	<div class="clear"></div>
     </div>
+    <div class="clear"></div>
 </div>
 <?php 
 }
