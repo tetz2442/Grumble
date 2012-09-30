@@ -40,7 +40,7 @@ require_once 'outputnotifications.php';
 					echo '<ul id="notification-dropdown" class="dropdown rounded-corners-medium">';
 					echo ' <li id="dropdown-arrow-notifications"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>';
 					echo ' <li id="notification-header"><span>Notifications (' . $row["number"] . ' new)</span>';
-					//if($mobile) 
+					if($mobile) 
 						echo '<a class="colored-link-1">See all</a>';
 					echo '</li>';
 					if(mysql_num_rows($result) != 0) 
