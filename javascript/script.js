@@ -724,6 +724,13 @@ $(document).ready(function() {
 	$("button").removeAttr("disabled");
 
 	$("#start-new-grumble").mousedown(function() {
+		var wheight = $(window).height();
+		if(wheight < 450 && wheight >= 360) {
+			$("#grumble-lightbox").css("top", "50px");
+		}
+		else if(wheight < 360) {
+			$("#grumble-lightbox").css("top", "5px");
+		}
 		$("#lightbox-container").fadeIn(100);
 		$("#grumble-lightbox").fadeIn(100, function() {
 			$("#quick-description-grumblename").focus();

@@ -13,7 +13,7 @@ require_once "php/containerWide.php";
 	<p>Below we will take you through the inner workings of Grumble.</p>
 	<div class="content-padding">
 	    <h2>A. Grumbles</h2>
-	    <p><img src="/images/works/howitworks-subcat.jpg" alt="Grumble how to" width="700" height="150" /></p>
+	    <p><img src="/images/works/howitworks-subcat.jpg" id="works-image1" alt="Grumble how to" /></p>
 	    <ul>
 		    <li>Grumble title</li>
 		    <li>The category that the Grumble belongs to.</li>
@@ -23,7 +23,7 @@ require_once "php/containerWide.php";
 	    </ul>
 	    <div class="divider light"></div>
 	    <h2>B. Comments</h2>
-	    <p><img src="/images/works/howitworks-comment.jpg" alt="Grumble how to" width="700" height="306" /></p>
+	    <p><img src="/images/works/howitworks-comment.jpg" id="works-image2" alt="Grumble how to" /></p>
 	    <ul>
 		    <li>Start a new comment.</li>
 		    <li>User who created the comment.</li>
@@ -34,7 +34,7 @@ require_once "php/containerWide.php";
 	    </ul>
 	    <div class="divider light"></div>
 	    <h2>C. Replies</h2>
-	    <p><img src="/images/works/howitworks-reply.jpg" alt="Grumble how to" width="700" height="244" /></p>
+	    <p><img src="/images/works/howitworks-reply.jpg" id="works-image3" alt="Grumble how to" /></p>
 	    <ul>
 		    <li>Reply contents. A reply contains the user who created it, the reply text, and the time it was sumbitted.</li>
 		    <li>The textfield at the bottom lets you type a new reply.</li>
