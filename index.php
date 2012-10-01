@@ -123,7 +123,7 @@ else {
 </div>
 <?php	
 require_once "php/lightboxgrumble.php";
-if(!mobile)
+if(!$mobile)
     require_once "php/socialtab.php";
 require_once "php/footer.php"; 
 ?>

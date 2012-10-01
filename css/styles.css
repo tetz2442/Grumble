@@ -788,7 +788,7 @@ to {
 #about-left p {
 	margin: 15px 10px 10px 0;
 	font-size: 1em;
-	line-height: 1.2em;
+	line-height: 1.3em;
 }
 #login-table-about {
 	background-color: #feeed3;
@@ -798,6 +798,9 @@ to {
 }
 #login-table-about label {
 	display: block;
+}
+#login-table-about input[type=text] {
+	width:97%;
 }
 #about-right p {
 	margin: 10px 10px 20px 0;
@@ -1971,6 +1974,10 @@ a.button {
 	#footer-copyright {
 		margin-bottom: 18px;
 	}
+	
+	#social-tab {
+		display:none;
+	}
 }
 @media all and (max-width: 849px) and (min-width: 430px) {
 	.content-padding {
@@ -2064,6 +2071,13 @@ a.button {
 	#works-image3 {
 		width:400px;
 		height:139px;
+	}
+	/*******
+	 *grumble about
+	 */
+	#login-table-about {
+		width:220px;
+		margin:0 auto 0 auto;
 	}
 }
 @media all and (max-width: 429px) and (min-width: 100px) {
@@ -2185,5 +2199,11 @@ a.button {
 	#works-image3 {
 		width:250px;
 		height:85px;
+	}
+	/*******
+	 *grumble about
+	 */
+	#login-table-about {
+		width:95%;
 	}
 }
