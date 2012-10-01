@@ -37,7 +37,7 @@ if(preg_match('/android.+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|f
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link type="text/css" href="/css/styles.min.css" rel="stylesheet" media="all">
+<link type="text/css" href="/css/styles.css" rel="stylesheet" media="all">
 <noscript>
     <meta http-equiv="Refresh" content="0; url=/noscript.php">
 </noscript>
@@ -177,7 +177,7 @@ if("<?php echo $_SESSION["time"]; ?>".length==0){
         }
 <?php }?>
 </script>
-<script type="text/javascript" src="/javascript/script.min.js"></script>
+<script type="text/javascript" src="/javascript/script.js"></script>
 <?php
 if($filename == "create-account.php" && !isset($_SESSION["user_id"]) && !isset($_GET["social_create"])) {
  echo '<script type="text/javascript" src="/javascript/formValidation.min.js"></script>';	

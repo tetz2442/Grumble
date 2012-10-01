@@ -307,6 +307,24 @@ $(document).ready(function() {
 			});
 		}
 	});
+
+	$(".grumble-like-number").click(function() {
+		var $element = $(this);
+		var id = $("#subcat-id").attr("data-id");
+		$.post("/php/transact-grumble.php", {action:"voteup", subcatid:id},
+			function(result) {
+				alert(result);
+				if(result == 1) {
+					
+				}
+				else if(result == 0 || result == "") {
+
+				}
+				else {
+
+				}
+			});
+	});
 	
 	var link = 0;
 	var charLengthGrumble = 0;

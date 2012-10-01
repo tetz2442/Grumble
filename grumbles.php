@@ -15,10 +15,13 @@ if(isset($_GET["subcat"]) && is_numeric($_GET["subcat"])) {
 		" ORDER BY status_id DESC LIMIT 10";
 	$result = mysql_query($sql, $conn);
 	
-	$sql = "SELECT scg.sub_category_id, scg.sub_category_name, scg.sub_category_created, scg.grumble_number, scg.sub_category_description, scg.sub_category_url, cg.category_name, cg.category_id, cg.category_url, ug.username FROM sub_category_grumble AS scg " .
+	$sql = "SELECT scg.sub_category_id, scg.sub_category_name, scg.sub_category_created, scg.grumble_number, " .
+        "scg.sub_category_description, scg.sub_category_url, cg.category_name, cg.category_id, cg.category_url, " .
+        "ug.username, COUNT(ugl.grumble_like_id) AS votes_up FROM sub_category_grumble AS scg " .
 		"LEFT OUTER JOIN categories_grumble AS cg ON scg.category_id = cg.category_id " .
 		"LEFT OUTER JOIN users_grumble AS ug ON scg.user_id = ug.user_id " .
-		"WHERE sub_category_id = " . $subcat . " LIMIT 0,1";
+        "LEFT OUTER JOIN user_grumble_likes AS ugl ON ugl.sub_category_id = scg.sub_category_id " .
+		"WHERE scg.sub_category_id = " . $subcat . " LIMIT 0,1";
 	$result2 = mysql_query($sql, $conn);
 	
 	if(mysql_num_rows($result2) != 0)
@@ -40,12 +43,23 @@ if($exist) {
             <p id="sub-category-desc"><?php echo stripslashes($row["sub_category_description"]);?></p>
         </div>
         <div id="share-category">
+            <div class="grumble-like-number grumble-vote-up" <?php if(isset($_SESSION["user_id"])) { echo 'title="Vote up"'; } ?>>
+                <?php if(isset($_SESSION["user_id"])) { ?>
+                <p class="colored-link-1">Vote up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
+                <?php } else { ?>
+                <p class="grumble-vote-up" title="You must be logged in to vote">Vote up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
+                <?php } ?>
+                <p class="grumble-vote-font"><?php echo $row["votes_up"]; ?></p>
+                <div class="clear"></div>
+            </div>
             <?php
             $new_url = "http://".$_SERVER['HTTP_HOST']. "/" . $row["category_url"] . "/" . $row["sub_category_url"] . "/" . $row["sub_category_id"];
             ?>
-            <div class="g-plusone" data-href="<?php echo $new_url;?>" data-size="medium"></div>
-            <div class="fb-like" data-href="<?php echo $new_url;?>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-action="like"></div>
-            <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $new_url;?>" data-via="grumbleonline" data-text="Come check out <?php echo $row["sub_category_name"];?>" data-related="grumbleonline" data-hashtags="grumble">Tweet</a>
+            <div id="share-category-social">
+                <div class="g-plusone" data-href="<?php echo $new_url;?>" data-size="medium"></div>
+                <div class="fb-like" data-href="<?php echo $new_url;?>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-action="like"></div>
+                <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $new_url;?>" data-via="grumbleonline" data-text="Come check out <?php echo $row["sub_category_name"];?>" data-related="grumbleonline" data-hashtags="grumble">Tweet</a>
+            </div>
         </div>
     </div>
     <?php
