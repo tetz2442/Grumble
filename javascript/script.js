@@ -199,7 +199,7 @@ $(document).ready(function() {
 			 $(this).parent().find(".link-present").fadeOut(50);
 		 }
 		 
-		 charLengthReply = 160 - chars.length + link;
+		 charLengthReply = 240 - chars.length + link;
 		 if(charLengthReply <= 0) {
 			 $(this).parent().find(".reply-character-count").html(charLengthReply).css("color", "red");
 		 }
@@ -273,7 +273,7 @@ $(document).ready(function() {
 		var $commentholder = $(this).parents(".comment-holder");
 		var id = $commentholder.find(".replies-view").attr("data-id");
 		var statususername = $commentholder.find(".username:first").text();
-		if($commentText == "") {
+		if($commentText == "" || $commentText.match(/^\s*$/)) {
 			toastr.warning("Reply cannot be empty.");
 		}
 		else if(charLengthReply < 0){
@@ -324,7 +324,7 @@ $(document).ready(function() {
 		 else if(link == 0) {
 			 $("#link-present").fadeOut(50);
 		 }
-		 charLengthGrumble = 240 - chars.length + link;
+		 charLengthGrumble = 500 - chars.length + link;
 		 if(charLengthGrumble <= 0) {
 			 $(this).parent().find("#character-count").html(charLengthGrumble).css("color", "red");
 		 }
@@ -415,7 +415,7 @@ $(document).ready(function() {
 			toastr.warning("Too many characters in Grumble Description to submit.");
 			$('#quick-description-textarea').focus();
 		}
-		else if($("#quick-description-grumblename").val().length == 0 || $("#quick-description-textarea").val().length == 0) {
+		else if($("#quick-description-grumblename").val().length == 0 || $("#quick-description-textarea").val().length == 0 || $("#quick-description-grumblename").val().match(/^\s*$/) || $("#quick-description-textarea").val().match(/^\s*$/)) {
 			event.preventDefault();
 			
 			toastr.warning("Grumble name/description cannot be empty.");
@@ -670,8 +670,8 @@ $(document).ready(function() {
 		if(charLengthGrumble < 0) {
 			toastr.warning("Too many characters to submit.");
 		}
-		else if($("#quick-compose-textarea").val().length == 0) {
-			toastr.warning("Grumble cannot be empty.");
+		else if($("#quick-compose-textarea").val().length == 0 || $("#quick-compose-textarea").val().match(/^\s*$/)) {
+			toastr.warning("Comment cannot be empty.");
 		}
 		else {
 			var commenttext = $("#quick-compose-textarea").val();

@@ -6,7 +6,7 @@
 	session_start();
 	setTimezone();
 	//code for inserting a new comment on a grumble
-	if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && is_numeric($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+	if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 600 && isset($_POST["category"]) && is_numeric($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		$comment = escapeAndStrip($_POST["comment"]);
 		$category = escapeAndStrip($_POST["category"]);
 		

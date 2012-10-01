@@ -114,7 +114,7 @@ function outputComments($grumble, $comments = false, $loggedin = false, $admin =
 						echo '<div class="reply-btn-holder">';
 							echo '<span class="link-present">Link will be shortened.</span>';
 							echo '<input type="button" value="Send" class="quick-reply-button button"/>';
-							echo '<span class="reply-character-count">160</span>';
+							echo '<span class="reply-character-count">240</span>';
 						echo '</div>';
 					echo '</div>';
 				echo '</div>';
