@@ -438,7 +438,7 @@ to {
 /********
  *grumble css
  ******/
-#grumble-header p {
+#grumble-header #sub-category-desc {
 	margin-top: 20px;
 	line-height: 1.4em;
 }
@@ -459,7 +459,7 @@ to {
 #category-header h4 {
 	margin-top: 3px;
 }
-#share-category div {
+#share-category #share-category-social div {
 	margin-bottom: 10px !important;
 }
 #comments-left-header {
@@ -749,6 +749,27 @@ to {
 }
 .grumble-comment-font {
 	float: right;
+}
+.grumble-like-number {
+	margin-bottom: 25px;
+}
+.grumble-like-number:hover {
+	cursor: pointer;
+}
+.grumble-like-number .grumble-vote-up {
+	float: left;
+}
+.grumble-like-number .colored-link-1 img {
+	margin-left: 5px;
+}
+.grumble-like-number .colored-link-1 {
+	font-size: .8em;
+}
+.grumble-vote-font {
+	margin: 5px 0 0 8px;
+	float: left;
+}
+.grumble-comment-font, .grumble-vote-font {
 	text-align: center;
 	font-size: 1.4em;
 	min-width: 25px;
@@ -1719,7 +1740,6 @@ a.button {
 	#share-category {
 		float: left;
 		width: 15%;
-		margin-top: 10px;
 	}
 	#grumble-comment textarea {
 		width: 100%;
