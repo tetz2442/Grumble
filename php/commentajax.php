@@ -6,7 +6,7 @@
 	session_start();
 	setTimezone();
 	//code for inserting a new comment on a grumble
-	if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 600 && isset($_POST["category"]) && is_numeric($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+	if(isset($_POST["comment"]) && strlen(trim($_POST["comment"])) > 0 && strlen($_POST["comment"]) <= 600 && isset($_POST["category"]) && is_numeric($_POST["category"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		$comment = escapeAndStrip($_POST["comment"]);
 		$category = escapeAndStrip($_POST["category"]);
 		
@@ -15,8 +15,7 @@
 		//check if the entered category is valid
 		if(mysql_num_rows($result) != 0) {
 			//remove spaces
-			$comment = str_replace("\r", "", $comment);
-			$comment = str_replace("\n", "", $comment);
+			$comment = trim(removeNewLine($comment));
 			
 			$sql = "SELECT status_id FROM status_grumble WHERE sub_category_id = " . $category .
 			" AND status_text = '" . $comment . "' AND date_submitted >= (UTC_TIMESTAMP() - INTERVAL 2 MINUTE) LIMIT 0,1";
