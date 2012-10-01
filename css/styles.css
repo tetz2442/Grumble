@@ -1479,7 +1479,7 @@ a.button {
 	.toast-center {
 		left: 50%;
 		top: 48px;
-		margin-left: -38px;
+		margin-left: -70px;
 	}
 }
 @media all and (min-width: 241px) and (max-width: 320px) {
@@ -1490,7 +1490,7 @@ a.button {
 	.toast-center {
 		left: 50%;
 		top: 48px;
-		margin-left: -98px;
+		margin-left: -80px;
 	}
 }
 @media all and (min-width: 321px) and (max-width: 480px) {
@@ -1501,7 +1501,7 @@ a.button {
 	.toast-center {
 		left: 50%;
 		top: 48px;
-		margin-left: -80px;
+		margin-left: -112px;
 	}
 }
 @media all and (min-width: 481px) and (max-width: 768px) {
@@ -1512,7 +1512,7 @@ a.button {
 	.toast-center {
 		left: 50%;
 		top: 48px;
-		margin-left: -130px;
+		margin-left: -180px;
 	}
 }
 @media all and (min-width: 769px) {
@@ -1523,7 +1523,7 @@ a.button {
 	.toast-center {
 		left: 50%;
 		top: 48px;
-		margin-left: -130px;
+		margin-left: -180px;
 	}
 }
 /*******************************************************

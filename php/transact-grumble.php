@@ -67,8 +67,8 @@
 				break;
 			
 			case "Submit Grumble" :
-				if(isset($_POST["grumble"]) && strlen($_POST["grumble"]) > 0 && strlen($_POST["grumble"]) <= 40 && isset($_POST["category"]) && $_POST["category"] != "Choose a Category" && 
-				isset($_POST["description"]) && strlen($_POST["description"]) > 0 && strlen($_POST["description"]) <= 600 && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {				
+				if(isset($_POST["grumble"]) && strlen(trim($_POST["grumble"])) > 0 && strlen($_POST["grumble"]) <= 40 && isset($_POST["category"]) && $_POST["category"] != "Choose a Category" && 
+				isset($_POST["description"]) && strlen(trim($_POST["description"])) > 0 && strlen($_POST["description"]) <= 600 && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {				
 					// Unset the token, so that it cannot be used again.
 					unset($_SESSION['token4']);
 					
@@ -76,8 +76,8 @@
 					$category = escapeAndStrip($_POST["category"]);
 					$description = escapeAndStrip($_POST["description"]);
 					//remove spaces
-					$description = removeNewLine($description);
-					$grumble = removeNewLine($grumble);
+					$description = removeNewLine(trim($description));
+					$grumble = removeNewLine(trim($grumble));
 					
 					$sql = "SELECT category_url FROM categories_grumble WHERE category_id = " . $category;
 					$result = mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
