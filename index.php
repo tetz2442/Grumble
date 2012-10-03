@@ -41,8 +41,11 @@ else {
         <div id='tab1'>
              <?php
                 //top grumbles
-                $sql = "SELECT sub_category_id FROM sub_category_grumble" .
-                " WHERE grumble_number > 0 AND sub_category_created >= (UTC_TIMESTAMP() - INTERVAL 4 DAY) ORDER BY grumble_number DESC LIMIT 10";
+                $sql = "SELECT sub_category_id, " . 
+                "((SELECT COUNT(DISTINCT ugl.grumble_like_id) FROM user_grumble_likes AS ugl WHERE ugl.sub_category_id = scg.sub_category_id) + " . 
+                "(SELECT COUNT(DISTINCT sg.status_id) FROM status_grumble AS sg WHERE sg.sub_category_id = scg.sub_category_id)) AS grumble_number" . 
+                " FROM sub_category_grumble AS scg" .
+                " WHERE sub_category_created >= (UTC_TIMESTAMP() - INTERVAL 4 DAY) HAVING grumble_number > 0 ORDER BY grumble_number DESC LIMIT 10";
                 $result = mysql_query($sql, $conn);
                 
 				$topnumber = mysql_num_rows($result);

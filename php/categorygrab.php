@@ -1,11 +1,12 @@
 <?php
 require_once "conn.php";
+require_once "functions.php";
 require_once "outputgrumbles.php";
 
-if(isset($_POST["catID"]) && isset($_POST["type"]) && isset($_POST["last"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+if(isset($_POST["catID"]) && is_numeric($_POST["catID"]) && isset($_POST["type"]) && isset($_POST["last"]) && is_numeric($_POST["last"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	
-	$catid = intval(mysql_real_escape_string($_POST["catID"]));
-	$last = intval(mysql_real_escape_string($_POST["last"]));
+	$catid = escape($_POST["catID"]);
+	$last = escape($_POST["last"]);
 	
 	if($_POST["type"] == "recent") {
 		$sql = "SELECT sub_category_id FROM sub_category_grumble" .
@@ -21,11 +22,16 @@ if(isset($_POST["catID"]) && isset($_POST["type"]) && isset($_POST["last"]) && $
 		}
 	}
 	else if($_POST["type"] == "top") {
-		$sql = "SELECT sub_category_id FROM sub_category_grumble" .
-			" WHERE category_id = " . $catid . " AND grumble_number > 0 ORDER BY grumble_number DESC LIMIT 10 OFFSET " . $last;
+		//$sql = "SELECT sub_category_id FROM sub_category_grumble" .
+		//	" WHERE category_id = " . $catid . " AND grumble_number > 0 ORDER BY grumble_number DESC LIMIT 10 OFFSET " . $last;
+		$sql = "SELECT sub_category_id, " . 
+        "((SELECT COUNT(DISTINCT ugl.grumble_like_id) FROM user_grumble_likes AS ugl WHERE ugl.sub_category_id = scg.sub_category_id) + " . 
+        "(SELECT COUNT(DISTINCT sg.status_id) FROM status_grumble AS sg WHERE sg.sub_category_id = scg.sub_category_id)) AS grumble_number" . 
+        " FROM sub_category_grumble AS scg" .
+        " WHERE category_id = " . $catid. " HAVING grumble_number > 0 ORDER BY grumble_number DESC LIMIT 10 OFFSET " . $last;
 		$result = mysql_query($sql, $conn);
 		if(mysql_num_rows($result) == 0) {
-			echo "none";	
+			echo "noner";	
 		}
 		else {
 			while($row = mysql_fetch_array($result)) {
@@ -36,7 +42,7 @@ if(isset($_POST["catID"]) && isset($_POST["type"]) && isset($_POST["last"]) && $
 	else
 		echo "none";
 }
-else if(isset($_POST["type"]) && isset($_POST["last"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+else if(isset($_POST["type"]) && isset($_POST["last"]) && is_numeric($_POST["last"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	$last = intval(mysql_real_escape_string($_POST["last"]));
 	
 	if($_POST["type"] == "recent") {
@@ -53,8 +59,13 @@ else if(isset($_POST["type"]) && isset($_POST["last"]) && $_SERVER['REQUEST_METH
 		}
 	}
 	else if($_POST["type"] == "top") {
-		$sql = "SELECT sub_category_id FROM sub_category_grumble" .
-                " WHERE grumble_number > 0 && sub_category_created >= (UTC_TIMESTAMP() - INTERVAL 4 DAY) ORDER BY grumble_number DESC LIMIT 10 OFFSET " .$last;
+		//$sql = "SELECT sub_category_id FROM sub_category_grumble" .
+       //         " WHERE grumble_number > 0 && sub_category_created >= (UTC_TIMESTAMP() - INTERVAL 4 DAY) ORDER BY grumble_number DESC LIMIT 10 OFFSET " .$last;
+		$sql = "SELECT sub_category_id, " . 
+        "((SELECT COUNT(DISTINCT ugl.grumble_like_id) FROM user_grumble_likes AS ugl WHERE ugl.sub_category_id = scg.sub_category_id) + " . 
+        "(SELECT COUNT(DISTINCT sg.status_id) FROM status_grumble AS sg WHERE sg.sub_category_id = scg.sub_category_id)) AS grumble_number" . 
+        " FROM sub_category_grumble AS scg" .
+        " WHERE sub_category_created >= (UTC_TIMESTAMP() - INTERVAL 4 DAY) HAVING grumble_number > 0 ORDER BY grumble_number DESC LIMIT 10 OFFSET " . $last;
 		$result = mysql_query($sql, $conn);
 		if(mysql_num_rows($result) == 0) {
 			echo "none";	

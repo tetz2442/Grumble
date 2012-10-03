@@ -44,8 +44,8 @@
 				mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 				$last_id_status = mysql_insert_id();	
 				
-				$sql =  "UPDATE sub_category_grumble SET grumble_number = grumble_number + 1 WHERE sub_category_id = " . $category;
-				mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
+				//$sql =  "UPDATE sub_category_grumble SET grumble_number = grumble_number + 1 WHERE sub_category_id = " . $category;
+				//mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 				
 				$sql =  "SELECT scg.sub_category_url, cg.category_url, COUNT(sg.status_id) AS grumble_number, ug.user_email, ug.username, ug.user_id FROM status_grumble AS sg " .
 				"LEFT OUTER JOIN sub_category_grumble AS scg ON scg.sub_category_id = sg.sub_category_id " .

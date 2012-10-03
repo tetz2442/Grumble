@@ -148,9 +148,6 @@ else {
 }
 ?>
 ">
-<!--[if IE]
-	<script src="http://html5shiv.googlecode.com/svn/trunk/html.js"></script>
-    <![endif]-->
 <link rel="Shortcut Icon" href="/favicon.ico">
 <?php //javascript files?>
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
