@@ -313,15 +313,16 @@ $(document).ready(function() {
 		var id = $("#subcat-id").attr("data-id");
 		$.post("/php/transact-grumble.php", {action:"voteup", subcatid:id},
 			function(result) {
-				alert(result);
 				if(result == 1) {
-					
+					var likes = parseInt($(".grumble-vote-font").text());
+					likes++;
+					$(".grumble-vote-font").html(likes);
 				}
 				else if(result == 0 || result == "") {
-
+					toastr.warning("You have already voted up.");
 				}
 				else {
-
+					taostr.error("Something went wrong.");
 				}
 			});
 	});
