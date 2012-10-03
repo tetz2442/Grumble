@@ -119,6 +119,27 @@
 					redirect("../");
 				}
 				break;
+				
+				case "voteup" :
+				if(isset($_SESSION["user_id"]) && isset($_POST["subcatid"]) && is_numeric($_POST["subcatid"])) {
+					$id = escapeAndStrip($_POST["subcatid"]);
+					
+					$sql = "SELECT sub_category_id FROM sub_category_grumble WHERE sub_category_id = " . $id . " LIMIT 0,1";
+					$result = mysql_query($sql, $conn) or die("Could not like Grumble: " . mysql_error());
+					$sql = "SELECT grumble_like_id FROM user_grumble_likes " .
+						"WHERE sub_category_id = " . $id . " AND " . 
+						"user_id = " . $_SESSION["user_id"] . " LIMIT 0,1";
+					$result2 = mysql_query($sql, $conn) or die("Could not like Grumble: " . mysql_error());
+					if(mysql_num_rows($result) != 0 && mysql_num_rows($result2) != 1) {
+						$sql = "INSERT INTO user_grumble_likes(user_id, sub_category_id) VALUES(" . $_SESSION["user_id"] . "," . $id . ")";
+						$result = mysql_query($sql, $conn) or die("Could not like Grumble: " . mysql_error());
+						echo 1;
+					}
+					else {
+						echo 0;
+					}
+				}
+				break;
 		}
 	}
 	else {

@@ -43,7 +43,7 @@ if($exist) {
             <p id="sub-category-desc"><?php echo stripslashes($row["sub_category_description"]);?></p>
         </div>
         <div id="share-category">
-            <div class="grumble-like-number grumble-vote-up" <?php if(isset($_SESSION["user_id"])) { echo 'title="Vote up"'; } ?>>
+            <div class="grumble-like-number grumble-vote-up" <?php if(isset($_SESSION["user_id"])) { echo 'title="Vote up"'; } else { echo 'title="YOu must be logged in to vote up."'; } ?>>
                 <?php if(isset($_SESSION["user_id"])) { ?>
                 <p class="colored-link-1">Vote up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
                 <?php } else { ?>
@@ -75,7 +75,7 @@ if($exist) {
                         <input type="hidden" name="category" id="comment-category" value="<?php echo strip_tags($_GET["subcat"]); ?>"/>
                         <div>
                             <input type="submit" value="Submit Comment" name="action" id="quick-compose-submit" class="button"/>
-                            <span id="character-count">500</span>/span>
+                            <span id="character-count">500</span>
                             <span id="gif-loader-comment"><img src="/images/ajax-loader.gif" width="16" height="16"/></span>
                             <span id="link-present">Link will be shortened.</span>
                         </div>
