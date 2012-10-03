@@ -9,7 +9,7 @@ require_once "php/containerGrumbles.php";
 	<p>On this page we will keep you up to date on new things happening on Grumble.</p>
 	<div class="divider"></div>
 		<h2>Liking Grumbles</h2>
-	    <p>Our newest feature includes liking a Grumble! This has been requested by a few of our users and we are glad to be able to now provide this new experience. To try it out simply head over to a Grumble and click "Vote up".</p> 
+	    <p>Our newest feature includes voting up a Grumble! This has been requested by a few of our users and we are glad to be able to now provide this new experience. To try it out simply head over to a Grumble and click "Vote up".</p> 
 	    <div class="divider light"></div>
 		<h2>Mobile Grumble</h2>
 	    <p>Accessing Grumble from your phone is now simpler than ever! With the newest update Grumble is responsive to the size of your screen. This will allow you to access and post on Grumble wherever you are and no matter what device you are

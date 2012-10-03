@@ -3,69 +3,11 @@
 	require_once "conn.php";
 	require_once "http.php";
 	require_once "functions.php";
+	require_once "notifications.php";
 	
 	if(isset($_REQUEST["action"]) &&
 		isset($_SESSION["username"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		switch ($_REQUEST["action"]) {
-			case "Submit Comment" :
-			//this isnt used anymore, moved to commentajax.php
-				/*if(isset($_POST["comment"]) && strlen($_POST["comment"]) > 0 && strlen($_POST["comment"]) <= 400 && isset($_POST["category"]) && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {
-					// Unset the token, so that it cannot be used again.
-					unset($_SESSION['token4']);
-					
-					$grumble = mysql_real_escape_string(strip_tags($_POST["grumble"]));
-					$category = mysql_real_escape_string(strip_tags($_POST["category"]));
-					
-					$sql = "SELECT sub_category_id FROM sub_category_grumble WHERE sub_category_id = " . $category . " LIMIT 0,1";
-					$result = mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
-					
-					//check if the entered category is valid
-					if(mysql_num_rows($result) != 0) {
-						//remove spaces
-						$grumble = str_replace("\r", "", $grumble);
-						$grumble = str_replace("\n", "", $grumble);
-						
-						$sql = "INSERT INTO status_grumble " .
-							"(status_text, sub_category_id, date_submitted, user_id) " .
-							"VALUES ('" . $grumble . "'," . $category . 
-							",'" . date("Y-m-d H:i:s", time()) . 
-							"'," . $_SESSION["user_id"] . ")"; 
-						mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
-						$last_id_status = mysql_insert_id();	
-						
-						$sql =  "UPDATE sub_category_grumble SET grumble_number = grumble_number + 1 WHERE sub_category_id = " . $category;
-						mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
-							
-						$sql = "INSERT INTO votes_up_grumble " . 
-							"(status_id) VALUES (" . $last_id_status . ")";
-						mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
-						
-						$sql =  "SELECT scg.sub_category_url, cg.category_url, COUNT(sg.status_id) AS grumble_number, ug.user_email, ug.username FROM status_grumble AS sg " .
-						"LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = sg.user_id " .
-						"LEFT OUTER JOIN sub_category_grumble AS scg ON scg.sub_category_id = sg.sub_category_id " .
-						"LEFT OUTER JOIN categories_grumble AS cg ON cg.category_id = scg.category_id " .
-						"LEFT OUTER JOIN settings_user_grumble AS sug ON sug.user_id = ug.user_id " .
-						"WHERE sg.sub_category_id = " . $category . " AND sug.settings_email_thread = 1 LIMIT 0,1";
-						$result = mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
-						
-						if(mysql_num_rows($result) != 0) {
-							$row = mysql_fetch_array($result);
-							$parameters = array($row["grumble_number"], "http://" . $_SERVER["HTTP_HOST"] . "/" . $row["category_url"] . "/" . $row["sub_category_url"] . "/" . $category, $row["username"]);
-							sendEmail($row["user_email"], "From: no-reply@grumbleonline.com", "grumble", $parameters);
-						}
-						
-						$refer = ".." . strip_tags($_POST["referrer"]);
-						redirect($refer);
-					}
-					else {
-						redirect("../");
-					}
-				}
-				else {
-					redirect("../");
-				}*/
-				break;
-			
 			case "Submit Grumble" :
 				if(isset($_POST["grumble"]) && strlen(trim($_POST["grumble"])) > 0 && strlen($_POST["grumble"]) <= 40 && isset($_POST["category"]) && $_POST["category"] != "Choose a Category" && 
 				isset($_POST["description"]) && strlen(trim($_POST["description"])) > 0 && strlen($_POST["description"]) <= 600 && ( !empty($_POST['token']) || $_POST['token'] == $_SESSION['token4'] )) {				
@@ -124,15 +66,27 @@
 				if(isset($_SESSION["user_id"]) && isset($_POST["subcatid"]) && is_numeric($_POST["subcatid"])) {
 					$id = escapeAndStrip($_POST["subcatid"]);
 					
-					$sql = "SELECT sub_category_id FROM sub_category_grumble WHERE sub_category_id = " . $id . " LIMIT 0,1";
+					//see if sub category exists
+					$sql = "SELECT scg.sub_category_id, scg.sub_category_url, cg.category_url, ug.user_id FROM sub_category_grumble AS scg " .
+						"LEFT OUTER JOIN categories_grumble AS cg ON cg.category_id = scg.category_id " .
+						"LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = scg.user_id " .
+						"WHERE scg.sub_category_id = " . $id . " LIMIT 0,1";
 					$result = mysql_query($sql, $conn) or die("Could not like Grumble: " . mysql_error());
+					$row = mysql_fetch_array($result);
+					//see if user has already liked
 					$sql = "SELECT grumble_like_id FROM user_grumble_likes " .
 						"WHERE sub_category_id = " . $id . " AND " . 
 						"user_id = " . $_SESSION["user_id"] . " LIMIT 0,1";
 					$result2 = mysql_query($sql, $conn) or die("Could not like Grumble: " . mysql_error());
 					if(mysql_num_rows($result) != 0 && mysql_num_rows($result2) != 1) {
+						//insert into grumble likes table
 						$sql = "INSERT INTO user_grumble_likes(user_id, sub_category_id) VALUES(" . $_SESSION["user_id"] . "," . $id . ")";
 						$result = mysql_query($sql, $conn) or die("Could not like Grumble: " . mysql_error());
+						//if user did not like his own Grumble, insert notification
+						if($_SESSION["user_id"] != $row["user_id"]) {
+							$url = "http://" . $_SERVER["HTTP_HOST"] . "/" . $row["category_url"] . "/" . $row["sub_category_url"] . "/" . $row["sub_category_id"];
+							insertNotification($row["user_id"], $_SESSION["user_id"], $_SESSION["username"], $url, "grumbleupvote");
+						}
 						echo 1;
 					}
 					else {

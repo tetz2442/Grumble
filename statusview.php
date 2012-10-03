@@ -30,7 +30,7 @@ if(isset($_GET["user"]) && isset($_GET["s"])) {
             <?php
             $new_url = "http://".$_SERVER['HTTP_HOST']. "/profile/" . $user . "/grumble/" . $statusid;
             ?>
-                <div>
+                <div id="share-category-social">
                     <div class="g-plusone" data-href="<?php echo $new_url;?>" data-size="medium"></div>
                     <div class="fb-like" data-href="<?php echo $new_url;?>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-action="like"></div>
                     <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $new_url;?>" data-via="grumbleonline" data-text="Come check out <?php echo $user . "'s";?> comment!" data-related="grumbleonline" data-hashtags="grumble">Tweet</a>

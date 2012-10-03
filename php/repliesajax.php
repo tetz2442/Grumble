@@ -27,19 +27,6 @@ function retrieveReplies($voteid, $amount) {
 	}
 	$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
 	outputReplies($result);
-	/*if(mysql_num_rows($result) != 0) {
-		while($row = mysql_fetch_array($result)) {
-			echo '<div class="ind-reply">';
-			echo '<div class="reply-padding">';
-			echo '<a class="reply-username username" href="/profile/' . $row["username"] . '">' . $row["username"] . '</a>';
-			echo '<p class="reply-text">' . stripslashes($row["reply_text"]) . '</p>';
-			echo '<small class="reply-time">' . convertToTimeZone($row["reply_date"], $_SESSION["timezone"]) . '</small>';
-			echo '<a href="/profile/' . $row["username"] . '"><img class="reply-user-image rounded-corners-medium" src="' . getGravatar($row["user_email"]) . '" width="45" height="45" alt="' .  $row["username"] . '"></a>';
-			echo '</div>';
-			echo '</div>';
-		}
-	}
-	echo '</div>';*/
 }
 
 function enterReply($id, $text, $statususername) {
@@ -50,7 +37,7 @@ function enterReply($id, $text, $statususername) {
 	
 	$sql = "SELECT sg.status_id, ug.user_id, ug.username FROM status_grumble AS sg 
 	LEFT OUTER JOIN users_grumble AS ug ON sg.user_id = ug.user_id WHERE status_id = " . $id . " LIMIT 0,1";
-	$result = mysql_query($sql, $conn); 
+	$result = mysql_query($sql, $conn) or die("Error: " . mysql_error()); 
 	
 	if(mysql_num_rows($result) != 0) {
 		$row = mysql_fetch_array($result);
@@ -67,19 +54,30 @@ function enterReply($id, $text, $statususername) {
 		echo '</div>';
 		echo '</div>';
 		
+		$sql = "SELECT reply_user FROM replies_grumble WHERE status_id = " . $id . " GROUP BY reply_user";
+		$result = mysql_query($sql, $conn) or die("Error: " . mysql_error()); 
+		//someone replied, notify everyone else who also replied
 		if($_SESSION["user_id"] != $row["user_id"]) {
-			insertNotification($row["user_id"], $_SESSION["user_id"], $_SESSION["username"], "http://" . $_SERVER["HTTP_HOST"] . "/profile/" . $row["username"] . "/comment/" . $row["status_id"], "reply");
-		}
-		/*if($_SESSION["username"] != $statususername) {
-			$sql = "SELECT ug.user_email, ug.username, sg.status_id FROM status_grumble AS sg LEFT OUTER JOIN users_grumble AS ug " .
-			"ON ug.user_id = sg.user_id LEFT OUTER JOIN settings_user_grumble AS sug ON sug.user_id = ug.user_id WHERE sg.status_id = " . $id . " AND sug.settings_email_comment = 1";
-			$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
-			if(mysql_num_rows($result) != 0) {
-				$row = mysql_fetch_array($result);
-				$parameters = array("http://" . $_SERVER["HTTP_HOST"] . "/profile/" . $row["username"] . "/comment/" . $row["status_id"], $statususername, $_SESSION["username"], $commenttext);
-				sendEmail($row["user_email"], "From: no-reply@grumbleonline.com", "reply", $parameters);
+			while($row2 = mysql_fetch_array($result)) {
+				//owner of comment
+				if($row["user_id"] == $row2["reply_user"]) {
+					insertNotification($row["user_id"], $_SESSION["user_id"], $_SESSION["username"], "http://" . $_SERVER["HTTP_HOST"] . "/profile/" . $row["username"] . "/comment/" . $row["status_id"], "reply");
+				}
+				//other users who replied
+				else if($row2["reply_user"] != $_SESSION["user_id"]) {
+					insertNotification($row2["reply_user"], $_SESSION["user_id"], $_SESSION["username"], "http://" . $_SERVER["HTTP_HOST"] . "/profile/" . $row["username"] . "/comment/" . $row["status_id"], "reply-other");
+				}
 			}
-		}*/
+		}
+		//user commented on his own reply, notify everyone else but him
+		else {
+			while($row2 = mysql_fetch_array($result)) {
+				//notify everone but owner
+				if($row["user_id"] != $row2["reply_user"]) {
+					insertNotification($row2["reply_user"], $_SESSION["user_id"], $_SESSION["username"], "http://" . $_SERVER["HTTP_HOST"] . "/profile/" . $row["username"] . "/comment/" . $row["status_id"], "reply-other");
+				}
+			}
+		}
 	}
 }
 ?>
