@@ -322,7 +322,7 @@ $(document).ready(function() {
 					toastr.warning("You have already voted up.");
 				}
 				else {
-					taostr.error("Something went wrong.");
+					toastr.error("Something went wrong.");
 				}
 			});
 	});
