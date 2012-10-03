@@ -31,8 +31,14 @@ function insertNotification($user_id, $from_user_id, $username, $url, $type) {
 	else if($type == "reply") {
 		$message = $username . " replied to your comment";
 	}
+	else if($type == "reply-other") {
+		$message = $username . " replied to the same comment";
+	}
 	else if($type == "upvote") {
 		$message = $username . " voted up your comment";
+	}
+	else if($type == "grumbleupvote") {
+		$message = $username . " voted up your Grumble";
 	}
 	
 	$sql = "INSERT INTO notifications_grumble " .
