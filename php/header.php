@@ -61,7 +61,16 @@ else if(isset($_GET["cat"])) {
 	$row = mysql_fetch_array($result);
 	echo " " . stripslashes($row["category_name"]);
 }
-else if(isset($_GET["id"])) {
+else if(isset($_GET["s"]) && isset($_GET["user"])) { //statusview
+	$id = mysql_real_escape_string($_GET["s"]);
+	$sql = "SELECT sg.status_text FROM status_grumble AS sg " .
+		"LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = sg.user_id " .
+		"WHERE sg.status_id = " . $id;
+	$result = mysql_query($sql, $conn) or die("Could not look up information: " . mysql_error());
+	$row = mysql_fetch_array($result);
+	echo " " . strip_tags($_GET["user"]);
+}
+else if(isset($_GET["id"])) { //profile
 	echo " " . strip_tags($_GET["id"]);
 }
 else if($filename == "create-account.php") {
@@ -110,6 +119,10 @@ if(isset($_GET["subcat"])) {
 	else
 		echo stripslashes($row["sub_category_description"]) . " | Grumble is a place where you can discuss the topics that you feel are important and need attention. It's simple. Grumble for you. Grumble for change.";
 }
+else if(isset($_GET["cat"])) {
+	$catname = stripslashes($row["category_name"]);
+	echo $catname . " is a category on Grumble. Categories are full of Grumbles that relate to that specific category. Place a Grumble into the category that you feel relates best.";
+}
 else if($filename == "create-account.php") {
 	echo "Create Account an account on Grumble to access its many features. Join today and inspire an action for change or simply get something off of your chest. ";
 }
@@ -137,10 +150,15 @@ else if($filename == "about.php") {
 else if($filename == "forgot-password.php") {
 	echo "Have you forgetten your password on Grumble? On this page you can reset your password through email. Simply enter it into the provided field.";
 }
-else if($filename == "category.php") {
-	echo stripslashes($row["category_name"]) . " is a category to place your Grumbles under. These categories will make it easier for users to find and like your Grumbles.";
+else if(isset($_GET["s"]) && isset($_GET["user"])) { //statusview
+	$length = strlen(stripslashes($row["status_text"]));
+	if($length < 250)
+		echo strip_tags($_GET["user"]) . "'s comment, '" . stripslashes($row["status_text"]) . "'";
+	else {
+		echo strip_tags($_GET["user"]) . "'s comment, '" . stripslashes(substr($row["status_text"], 0, 250)) . "...'";
+	}
 }
-else if($filename == "profile.php") {
+else if(isset($_GET["id"])) { //profile
 	echo strip_tags($_GET["id"]) . ". This is the profile of " . strip_tags($_GET["id"]) . " on Grumble. To create a profile on Grumble go to the create account page.";
 }
 else {
@@ -174,7 +192,7 @@ if("<?php echo $_SESSION["time"]; ?>".length==0){
         }
 <?php }?>
 </script>
-<script type="text/javascript" src="/javascript/script.js"></script>
+<script type="text/javascript" src="/javascript/script.min.js"></script>
 <?php
 if($filename == "create-account.php" && !isset($_SESSION["user_id"]) && !isset($_GET["social_create"])) {
  echo '<script type="text/javascript" src="/javascript/formValidation.min.js"></script>';	
