@@ -37,7 +37,7 @@ if(preg_match('/android.+mobile|avantgo|bada\/|blackberry|blazer|compal|elaine|f
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link type="text/css" href="/css/styles.min.css" rel="stylesheet" media="all">
+<link type="text/css" href="/css/styles.css" rel="stylesheet" media="all">
 <noscript>
     <meta http-equiv="Refresh" content="0; url=/noscript.php">
 </noscript>
@@ -171,7 +171,7 @@ else {
 <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
 <script type="text/javascript">
 !window.jQuery && document.write('<script src="/javascript/jquery-1.8.1.min.js"><\/script>');
-/*var _gaq = _gaq || [];
+var _gaq = _gaq || [];
   _gaq.push(['_setAccount', 'UA-33671147-1']);
   _gaq.push(['_trackPageview']);
 
@@ -179,7 +179,7 @@ else {
 	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
 	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
 	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();*/
+})();
 <?php if(!isset($_SESSION["time"]) && !isset($_SESSION["timezone"])) { ?>
 //gets timezone to display proper time for comments, this information is not collected
 if("<?php echo $_SESSION["time"]; ?>".length==0){
