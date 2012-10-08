@@ -1,6 +1,7 @@
 <?php
 require_once "conn.php";
 require_once "functions.php";
+require_once "outputnotifications.php";
 
 session_start();
 if(isset($_POST["action"]) && $_POST["action"] == "markasread" && isset($_SESSION["user_id"]) && $_SERVER["REQUEST_METHOD"] == "POST") {
@@ -45,10 +46,5 @@ function insertNotification($user_id, $from_user_id, $username, $url, $type) {
 		"(user_id, from_user_id, notification_message, notification_url, notification_created) " .
 		"VALUES (" . $user_id . "," . $from_user_id . ",'" . $message . "','" . $url . "',UTC_TIMESTAMP())"; 
 	mysql_query($sql, $conn) or die("Could not insert: " . mysql_error());
-}
-
-//mark as read
-function clearNotifications($user_id) {
-	
 }
 ?>
