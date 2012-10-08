@@ -311,20 +311,25 @@ $(document).ready(function() {
 	$(".grumble-like-number").click(function() {
 		var $element = $(this);
 		var id = $("#subcat-id").attr("data-id");
-		$.post("/php/transact-grumble.php", {action:"voteup", subcatid:id},
-			function(result) {
-				if(result == 1) {
-					var likes = parseInt($(".grumble-vote-font").text());
-					likes++;
-					$(".grumble-vote-font").html(likes);
-				}
-				else if(result == 0 || result == "") {
-					toastr.warning("You have already voted up.");
-				}
-				else {
-					toastr.error("Something went wrong.");
-				}
-			});
+		if($(".user-inline .dropdown-login").length == 1) {
+			$.post("/php/transact-grumble.php", {action:"voteup", subcatid:id},
+				function(result) {
+					if(result == 1) {
+						var likes = parseInt($(".grumble-vote-font").text());
+						likes++;
+						$(".grumble-vote-font").html(likes);
+					}
+					else if(result == 0 || result == "") {
+						toastr.warning("You have already voted up.");
+					}
+					else {
+						toastr.error("Something went wrong.");
+					}
+				});
+		}
+		else {
+			toastr.warning("You must be logged in to vote.");
+		}
 	});
 	
 	var link = 0;
@@ -1033,7 +1038,7 @@ $(document).ready(function() {
 		
 		shortenLink("#sub-category-desc a");
 		
-		$("#sub-category-desc").shorten({"showChars":190});
+		$("#sub-category-desc").shorten({"showChars":250});
 	}
 	if($(".grumble-description").length > 0) {
 		$.each($(".grumble-description"), function() {
