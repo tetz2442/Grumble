@@ -34,7 +34,7 @@ if($exist) {
     <div id="grumble-header">
         <div id="category-header">
             <h1 id="subcat-id" data-id="<?php echo strip_tags($_GET["subcat"]);?>"><?php echo stripslashes($row["sub_category_name"]); ?></h1>
-            <h4><a href="/category/<?php echo strtolower($row["category_name"]); ?>" class="colored-link-1"><?php echo stripslashes($row["category_name"]); ?></a> | Created by <a href="/profile/<?php echo $row["username"];?>" class="colored-link-1"><?php echo $row["username"];?></a></h4>
+            <h4><a href="/category/<?php echo $row["category_url"]; ?>" class="colored-link-1"><?php echo stripslashes($row["category_name"]); ?></a> | Created by <a href="/profile/<?php echo $row["username"];?>" class="colored-link-1"><?php echo $row["username"];?></a></h4>
             <?php if(isset($_SESSION["timezone"])) 
             	echo '<small id="sub-category-created">Grumbled on ' . convertToTimeZone($row["sub_category_created"], $_SESSION["timezone"]) . '</small>';
             else if(isset($_SESSION["time"]))
@@ -43,11 +43,11 @@ if($exist) {
             <p id="sub-category-desc"><?php echo stripslashes($row["sub_category_description"]);?></p>
         </div>
         <div id="share-category">
-            <div class="grumble-like-number grumble-vote-up" <?php if(isset($_SESSION["user_id"])) { echo 'title="Vote up"'; } else { echo 'title="YOu must be logged in to vote up."'; } ?>>
+            <div class="grumble-like-number grumble-vote-up<?php if(isset($_SESSION["user_id"])) { echo '" title="Vote Grumble up"'; } else { echo ' dropdown-shortlink" title="You must be logged in to vote up."'; } ?>>
                 <?php if(isset($_SESSION["user_id"])) { ?>
                 <p class="colored-link-1">Vote up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
                 <?php } else { ?>
-                <p class="grumble-vote-up" title="You must be logged in to vote">Vote up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
+                <p class="colored-link-1">Vote up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
                 <?php } ?>
                 <p class="grumble-vote-font"><?php echo $row["votes_up"]; ?></p>
                 <div class="clear"></div>
