@@ -11,8 +11,8 @@ $(document).ready(function() {
 					//field not filled in
 					toastr.warning("Cannot leave a field blank.");
 				}
-				else if($("#contact-textarea").val().length > 255) {
-					toastr.warning("Message has to be less than 255 characters.");
+				else if($("#contact-textarea").val().length > 500) {
+					toastr.warning("Message has to be less than 500 characters.");
 				}
 				else if(!checkEmail($("#email-contact"))) {
 					//email not valid
@@ -30,8 +30,7 @@ $(document).ready(function() {
 					  function(result) {
 						  sending = false;
 						  if(result == 1) {
-							$("#contact-form").html("Message sent successfully. Thank you.");
-							$("#contact-form").addClass("text-align-center");
+							$("#contact-form").html("Message sent successfully. Thank you.").addClass("text-align-center");
 						  }
 						  else {
 							toastr.error("Message could not send. Please Retry.");
@@ -47,8 +46,8 @@ $(document).ready(function() {
 					//field not filled in
 					toastr.warning("Cannot leave a field blank.");
 				}
-				else if($("#contact-textarea").val().length > 255) {
-					toastr.warning("Message has to be less than 255 characters.");
+				else if($("#contact-textarea").val().length > 500) {
+					toastr.warning("Message has to be less than 500 characters.");
 				}
 				else {
 					sending = true;
@@ -61,8 +60,7 @@ $(document).ready(function() {
 					  function(result) {
 						  sending = false;
 						  if(result == 1) {
-							$("#contact-form").html("Message sent successfully. Thank you.");
-							$("#contact-form").addClass("text-align-center");
+							$("#contact-form").html("Message sent successfully. Thank you.").addClass("text-align-center");
 						  }
 						  else {
 							toastr.error("Message could not send. Please Retry.");

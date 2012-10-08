@@ -1178,17 +1178,17 @@ to {
 	font-family: Helvetica, Arial, sans-serif;
 	line-height: 1.2;
 }
-#terms-privacy-holder p, #how-it-works-holder p {
+#terms-privacy-holder p, #how-it-works-holder p, #updates-holder p {
 	margin: 5px 0 15px 15px;
 }
-#terms-privacy-holder ul, #how-it-works-holder ul {
+#terms-privacy-holder ul, #how-it-works-holder ul, #updates-holder ul {
 	margin: 5px 0 15px 30px;
 }
-#how-it-works-holder {
+#how-it-works-holder, #updates-holder {
 	margin-top: 25px;
 	line-height: 1.2;
 }
-#how-it-works-holder h1 {
+#how-it-works-holder h1, #updates-holder h1 {
 	margin-bottom: 15px;
 }
 #how-it-works-holder h2 {
@@ -1196,6 +1196,13 @@ to {
 }
 #how-it-works-holder ul {
 	list-style-type: decimal;
+}
+#updates-holder time {
+	font-size: .8em;
+	margin:0 0 10px 5px;	
+}
+#updates-holder h2 {
+	margin:35px 0 5px;
 }
 /********
  no script

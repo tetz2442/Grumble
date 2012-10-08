@@ -14,7 +14,7 @@ require_once "php/containerWide.php";
 	?>
         <ul>
             <li>
-                <textarea id="contact-textarea" class="textArea" title="Message" rows="10" placeholder="Message... 255 character limit"></textarea>
+                <textarea id="contact-textarea" class="textArea" title="Message" rows="10" placeholder="Message... 500 character limit"></textarea>
             </li>
             <li>
                 <select class="contact-dropdown rounded-corners">
@@ -41,7 +41,7 @@ require_once "php/containerWide.php";
             <input type="text" id="email-contact" class="textInput margin-top" name="email" maxlength="255" placeholder="Email"/>
         </li>
         <li>
-            <textarea id="contact-textarea" class="margin-top textArea" title="Message" rows="10" name="message" placeholder="Message... 255 character limit"></textarea>
+            <textarea id="contact-textarea" class="margin-top textArea" title="Message" rows="10" name="message" placeholder="Message... 500 character limit"></textarea>
         </li>
         <li>
         	<select class="contact-dropdown rounded-corners">
