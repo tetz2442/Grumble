@@ -187,6 +187,11 @@ function sendEmail($email, $sendfrom, $type, $parameters) {
 		$send = true;
 		//mail($email, $subject, $body, $sendfrom) or die("Could not send email.");
 	}
+	else if($type == "admincontact") {
+		$subject = "[Grumble] Contact";
+		$body = "A new contact message has been filled out by a user. Please check as soon as possible.";
+		$send = true;
+	}
 	
 	if($send) {
 		$from = "Grumble <" . $sendfrom . ">"; 

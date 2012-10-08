@@ -22,6 +22,8 @@ $loggedin = false;
 //if $_SESSION['username'] is false, we know the user is not logged in
 if(isset($_SESSION['username'])) {
     $loggedin = true;
+    $sql = "SELECT COUNT(notification_id) as number FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"] . " AND notification_read = 0";
+	$number = mysql_query($sql, $conn);
 }
 else {
     $loggedin = false;	
