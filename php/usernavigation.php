@@ -28,7 +28,7 @@ require_once 'outputnotifications.php';
             echo '<ul>';
                 $sql = "SELECT notification_id, notification_message, notification_url, notification_created, notification_read FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"] . " ORDER BY notification_created DESC LIMIT 10";
 				$result = mysql_query($sql, $conn);
-				$sql = "SELECT COUNT(notification_id) as number FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"] . " AND notification_read = 0";
+				$sql = "SELECT COUNT(notification_id) AS number FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"] . " AND notification_read = 0";
 				$number = mysql_query($sql, $conn);
 				$row = mysql_fetch_array($number);
                 echo '<li class="user-inline">';
