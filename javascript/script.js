@@ -1268,7 +1268,7 @@ function findLink(text) {
         }
     })()
 } (window, jQuery));
-
+//shorten grumble description
 jQuery.fn.shorten = function(settings) {
   var config = {
     showChars : 100,
@@ -1299,9 +1299,9 @@ jQuery.fn.shorten = function(settings) {
     var $this = $(this);
  
     var content = $this.html();
-    if (content.length > config.showChars) {
+    if (content.length > config.showChars && $(this).find("a").length == 0) {
       var c = content.substr(0, config.showChars);
-      var h = content.substr(config.showChars , content.length - config.showChars);
+      var h = content.substr(config.showChars, content.length - config.showChars);
       var html = c + '<span class="moreellipses">' + config.ellipsesText + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="javascript://nop/" class="morelink colored-link-1">' + config.moreText + '</a></span>';
       $this.html(html);
       $(".morecontent span").hide();
