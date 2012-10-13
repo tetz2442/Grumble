@@ -39,7 +39,7 @@ require_once "php/containerGrumbles.php";
 	    <div class="divider light"></div>
 	    <h2>Social login</h2>
 		<time>Sep. 22nd, 2012</time>
-	    <p>We are pleased to announce that you can use Facebook or Google to login or create an account with Grumble! This was made possible with the help of <a href="hybridauth.sourcefourge.net" target="_blank" class="colored-link-1">HybridAuth</a>. 
+	    <p>We are pleased to announce that you can use Facebook or Google to login or create an account with Grumble! This was made possible with the help of <a href="http://hybridauth.sourceforge.net/" target="_blank" class="colored-link-1">HybridAuth</a>. 
 	    	If you have any problems logging in with these services, be sure to let us know in the <a href="/contact" class="colored-link-1">contact form</a>.</p>
 	    <p>Right now you must log in every time you come to Grumble if you choose to register/login socially. Hopefully in the future we will be able to let you log in for extended periods of time.</p>
 	    <div class="divider light"></div>
