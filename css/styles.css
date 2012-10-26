@@ -451,7 +451,7 @@ to {
 }
 #comments-left {
 	width: 100%;
-	margin: auto;
+	float: left;
 	overflow: auto;
 	margin-bottom: 50px;
 }
