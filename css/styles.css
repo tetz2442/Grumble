@@ -110,6 +110,26 @@ html {
 	float: left;
 	width: 100%;
 }
+/*header container for smaller size pages*/
+#grumbles-container {
+	width:100%;
+	max-width: 850px;
+	margin: 0px auto 80px auto;
+	overflow: auto;
+}
+#grumbles-status-container {
+	width:100%;
+	max-width: 650px;
+	margin: auto;
+	margin-bottom: 35px;
+}
+/*header container for other pages*/
+#grumble-wide-container {
+	width:100%;
+	max-width: 900px;
+	margin: auto;
+	overflow: auto;
+}
 /********
  *header css
  ******/
@@ -1563,23 +1583,6 @@ a.button {
 	#user-navigation {
 		font-size: 1.1em;
 	}
-	/*header container for smaller size pages*/
-	#grumbles-container {
-		width: 850px;
-		margin: 0px auto 80px auto;
-		overflow: auto;
-	}
-	#grumbles-status-container {
-		width: 650px;
-		margin: auto;
-		margin-bottom: 35px;
-	}
-	/*header container for other pages*/
-	#grumble-wide-container {
-		width: 900px;
-		margin: auto;
-		overflow: auto;
-	}
 	/*****
 	 user-navigation
 	 ***/
@@ -1850,7 +1853,6 @@ a.button {
 @media all and (max-width: 849px) and (min-width: 100px) {
 	/*header container for smaller size pages*/
 	#grumbles-container, #grumble-status-container, #grumble-wide-container {
-		width: 100%;
 		overflow: auto;
 	}
 	/*****
