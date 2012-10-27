@@ -512,7 +512,7 @@ $(document).ready(function() {
 			}
 			else if($aactive.text() == "Grumbles"){
 				type = "recent";
-				last = $("#tab2 .grumble-holder:last").find(".comment-text-holder a").attr("data-id");
+				last = $("#tab2 .grumble-holder:last").find(".grumble-text-holder a").attr("data-id");
 			}
 			
 			//load for category page
@@ -576,7 +576,7 @@ $(document).ready(function() {
 				}
 				else if(type == "recent") {
 					$("#gif-loader").show();
-					$.post("/php/categorygrab.php", {userID:userID, catID:catID, type:type, last:last},
+					$.post("/php/categorygrab.php", {userID:userID, type:type, last:last},
 					function(result) {
 						$("#gif-loader").hide();
 						canLoad = true;
