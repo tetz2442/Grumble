@@ -125,6 +125,21 @@ else {
     </div>
 </div>
 <?php	
+//include homepage cover
+if(!isset($_SESSION["username"])) {
+?>
+<div id="homepage-cover">
+    <div>
+        <div id="grumble-monster-home">
+            <img src="/images/grumble-monster-large.png" alt="grumble monster"/>
+        </div>
+        <div id="cover-text">
+            <p>grumble </p>
+        <div>
+    </div>
+</div>
+<?php
+}
 require_once "php/lightboxgrumble.php";
 if(!$mobile)
     require_once "php/socialtab.php";
