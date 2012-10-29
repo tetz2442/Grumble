@@ -455,6 +455,67 @@ to {
 	margin-top: -7px;
 	margin-left: 15px;
 }
+#homepage-cover {
+	position:fixed;
+	right:0;
+	left:0;
+	bottom:0;
+	top:0;
+	z-index: 1998;
+	background: url(/images/backgrounds/pinstripe.png) repeat;
+}
+#cover-content-holder {
+	width:100%;
+	max-width:900px;
+	margin:60px auto 0 auto;
+}
+#grumble-monster-home {
+	float:left;
+	width:45%;
+}
+#cover-text {
+	float:left;
+	width:55%;
+	margin-top: 45px;
+}
+#cover-text p {
+	word-wrap:break-word;
+}
+.definition, .definition-header {
+	font-family: Georgia;
+}
+.definition-header h3 {
+	display: inline;
+}
+.definition {
+	margin:5px 0;
+	padding:10px 0;
+	border-bottom: 1px solid #e8e8e8;
+	color:#999;
+}
+.definition span {
+	color:#333;
+	margin-left:10px;
+}
+#cover-about-text {
+	margin-top: 15px;
+}
+#cover-about-text p {
+	margin:15px 0;
+}
+#cover-about-text p a {
+	margin-top:10px;
+}
+#cover-bottom-bar {
+	clear:both;
+	position: absolute;
+	bottom:0;
+	left:0;
+	right:0;
+	height:10%;
+	border-top: 2px solid #999;
+	background: url(/images/backgrounds/shl.png) repeat;
+}
 /********
  *grumble css
  ******/
@@ -1263,7 +1324,7 @@ to {
  ************/
 #social-tab {
 	position: fixed;
-	z-index: 3000;
+	z-index: 1997;
 	right: 0px;
 	top: 240px;
 }
