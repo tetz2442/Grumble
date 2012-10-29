@@ -129,13 +129,24 @@ else {
 if(!isset($_SESSION["username"])) {
 ?>
 <div id="homepage-cover">
-    <div>
+    <div id="cover-content-holder">
         <div id="grumble-monster-home">
-            <img src="/images/grumble-monster-large.png" alt="grumble monster"/>
+            <img src="/images/grumblemonster.png" alt="grumble monster"/>
         </div>
         <div id="cover-text">
-            <p>grumble </p>
-        <div>
+            <div class="definition-header"><h3>grum·ble</h3> <span>/’grəmbəl/</span></div>
+            <div class="definition"><p>Verb: <span>Complain or protest about something in a bad-tempered but typically muted way.</span></p></div>
+            <div class="definition"><p>Noun: <span>A complaint.</span></p></div>
+            <div id="cover-about-text">
+                <p>Grumble lets you discuss topics that you feel are important and need attention.</p>
+                <p>Create a new Grumble and start Grumbling!</p>
+                <p><a href="/about" class="button orange">About</a> | <a href="/create-account" class="button orange">Create Account</a></p>
+            </div>
+        </div>
+        <div id="clear"></div>
+    </div>
+    <div id="cover-bottom-bar">
+        <img src=""/>
     </div>
 </div>
 <?php
