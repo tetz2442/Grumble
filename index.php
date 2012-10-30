@@ -7,7 +7,7 @@ require_once "php/outputgrumbles.php";
 require_once "php/outputcomments.php";
 
 //include homepage cover
-if(!isset($_SESSION["username"])) {
+if(!isset($_SESSION["username"]) && !$mobile) {
 ?>
 <div id="homepage-cover">
     <div id="cover-content-holder">
@@ -21,7 +21,7 @@ if(!isset($_SESSION["username"])) {
             <div id="cover-about-text">
                 <p>Grumble lets you discuss topics that you feel are important and need attention.</p>
                 <p>Create a new Grumble and start Grumbling!</p>
-                <p><a href="/about" class="button orange">About</a> | <a href="/create-account" class="button orange">Create Account</a></p>
+                <p class="cover-buttons"><a href="/about" class="button orange">About</a> <a href="/create-account" class="button orange">Create Account</a></p>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -39,8 +39,10 @@ if(!isset($_SESSION["username"])) {
 if(!isset($_SESSION["username"])) {
 ?>
         <h2>Hey there! Got something to Grumble about? Let's hear it.</h2>
+        <?php if($mobile) { ?>
         <p>Grumble lets you discuss topics that you feel are important and need attention.</p>
         <p>Create a new Grumble and start Grumbling!</p>
+        <?php } ?>
         <p>
         	<a href='about' class="colored-link-1">About</a> |
         	<a href="create-account" class="colored-link-1">Create account</a>
