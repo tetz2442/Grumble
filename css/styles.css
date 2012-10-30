@@ -483,23 +483,24 @@ to {
 }
 #cover-content-holder {
 	width:100%;
-	max-width:900px;
-	margin:60px auto 0 auto;
+	max-width:775px;
+	position: absolute;
+	display: none;
 }
 #grumble-monster-home {
 	float:left;
-	width:45%;
+	width:40%;
 }
 #cover-text {
 	float:left;
-	width:55%;
-	margin-top: 45px;
+	width:60%;
+	margin-top: 30px;
 }
 #cover-text p {
 	word-wrap:break-word;
 }
 .definition, .definition-header {
-	font-family: Georgia;
+	font-family: arial,sans-serif;
 }
 .definition-header h3 {
 	display: inline;
@@ -508,17 +509,20 @@ to {
 	margin:5px 0;
 	padding:10px 0;
 	border-bottom: 1px solid #e8e8e8;
-	color:#999;
+	color:#666;
 }
 .definition span {
 	color:#333;
 	margin-left:10px;
 }
+.cover-buttons {
+	margin-top:35px !important;
+}
 #cover-about-text {
 	margin-top: 15px;
 }
 #cover-about-text p {
-	margin:15px 0;
+	margin:20px 0;
 }
 #cover-about-text p a {
 	margin-top:10px;
@@ -531,6 +535,7 @@ to {
 	right:0;
 	height:50px;
 	border-top: 2px solid #999;
+	border-bottom: 2px solid #999;
 	background: url(/images/backgrounds/shl.png) repeat;
 }
 #cover-bottom-bar img { 

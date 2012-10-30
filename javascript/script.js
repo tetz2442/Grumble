@@ -1,11 +1,11 @@
 //social code
-(function(d, s, id) {
+/*(function(d, s, id) {
   var js, fjs = d.getElementsByTagName(s)[0];
   if (d.getElementById(id)) return;
   js = d.createElement(s); js.id = id;
   js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=340665976008804";
   fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));
+}(document, 'script', 'facebook-jssdk'));*/
 //twitter
 !function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="//platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");
 //google plus 1
@@ -1070,16 +1070,73 @@ $(document).ready(function() {
 	}
 
 	if($("#cover-bottom-bar").length > 0) {
-		$("#cover-bottom-bar img").click(function() {
-			var $cover = $("#homepage-cover");
-			var $bottombarimage = $("#cover-bottom-bar img");
-			$cover.css({width:$(window).width(),height:$(window).height()});
-			$cover.animate({marginTop:-$cover.height() + 48}, 2000);
-			$bottombarimage.animate({marginTop:"8px"});
-			$bottombarimage.rotate({angle:0, animateTo:180});
+		//fix for image caching in IE
+		if($.browser.msie) {
+			$("#grumble-monster-home img").attr("src", $("#grumble-monster-home img").attr("src") + "?random=" + Math.floor(Math.random()*11));
+		}
+		$("#grumble-monster-home img").load(function() {
+			var $contentholder = $('#cover-content-holder');
+			$contentholder.fadeIn("normal").animate({
+				left: $(window).width() / 2 - $contentholder.width() / 2,
+				top: $(window).height() / 2 - $contentholder.height() / 2
+			});
 		});
+		$("body").css("height",$(window).height());
+		$("#cover-bottom-bar img").click(function() {
+			animateHomeCover();
+		});
+
+		$(window).resize(function(){
+			var $contentholder = $('#cover-content-holder');
+			var $cover = $("#homepage-cover");
+			//cover is down
+			if(parseInt($cover.css("marginTop")) == 0) {
+				$("body").css("height",$(window).height());
+				$cover.css({
+					width:$(window).width(),
+					height:$(window).height(),
+					marginTop:0
+				});
+			}
+			else {
+				$("body").css("height","");
+				$cover.css({
+					width:$(window).width(),
+					height:$(window).height(),
+					marginTop:-$cover.height() + 48
+				});
+			}
+			$contentholder.css({
+				left: $(window).width() / 2 - $contentholder.width() / 2,
+				top: ($(window).height() / 2 - $contentholder.height() / 2) - 20
+			});
+		});
+
+		// To initially run the function:
+		$(window).resize();
 	}
 });
+
+function animateHomeCover() {
+	var $cover = $("#homepage-cover");
+	var $bottombarimage = $("#cover-bottom-bar img");
+	//cover is down
+	if(parseInt($cover.css("marginTop")) == 0) {
+		$("body").css("height",$(window).height());
+		$cover.css({width:$(window).width(),height:$(window).height()});
+		$cover.stop().animate({marginTop:-$cover.height() + 48}, 2000);
+		$bottombarimage.stop().animate({marginTop:"10px"}, 2000);
+		$bottombarimage.rotate({angle:0, animateTo:180});
+	}
+	//cover is up
+	else {
+		$("body").css("height","");
+		$cover.css({width:$(window).width(),height:$(window).height()});
+		$cover.stop().animate({marginTop:0}, 2000);
+		$bottombarimage.stop().animate({marginTop:"-42.5px"}, 2000);
+		$bottombarimage.rotate({angle:180, animateTo:0});
+	}
+}
 
 function linkText(inputText) {
     var replaceText, replacePattern1, replacePattern2, replacePattern3;
