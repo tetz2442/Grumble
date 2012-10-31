@@ -163,7 +163,7 @@
 	        <p class="text-align-center">Before you can start using Grumble there is just a few more things to do.</p>
 	        <p class="text-align-center">Entering a password will allow you to enter your account either with <strong><?php echo strip($_GET["provider"]);?></strong>, or by using your email/username and password.</p>
 	    </div>
-	    <div id="create-account-table" class="rounded-corners-large content-padding">	
+	    <div id="create-account-table" class="rounded-corners-large content-padding table-box-shadow">	
 	        <form method='post' action='/php/transact-user.php' onsubmit="return checkForm(this)" name='userForm' id="social-form">
 	        <ul>
 		        <li>
@@ -235,7 +235,7 @@
         <p><a href="/php/transact-user.php?provider=facebook&action=sociallogin"><img src="/images/social/facebook.png" alt="Register with Facebook" title="Register with Facebook" /></a>
            <a href="/php/transact-user.php?provider=google&action=sociallogin"><img src="/images/social/google.png" alt="Register with Google" title="Register with Google" /></a></p>
     </div>
-    <div id="create-account-table" class="rounded-corners-large content-padding">	
+    <div id="create-account-table" class="rounded-corners-large content-padding table-box-shadow">	
         <form method='post' action='/php/transact-user.php' onsubmit="return checkForm(this)" name='userForm'>
         <ul>
 	        <li>
