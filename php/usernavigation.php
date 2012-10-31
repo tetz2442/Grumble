@@ -12,7 +12,7 @@ require_once 'outputnotifications.php';
                 <ul id="sub-nav" class="dropdown rounded-corners-medium">
                     <li id="sub-nav-dropdown-arrow"><img src="/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/></li>
                 <?php
-					$sql = "SELECT category_id, category_name, category_url FROM categories_grumble ORDER BY category_name ASC";
+					$sql = "SELECT * FROM categories_grumble ORDER BY category_name ASC";
 					$result = mysql_query($sql, $conn);
 					while($row = mysql_fetch_array($result)) {
 						echo '<li><a href="/category/' . $row["category_url"] . '">' . $row["category_name"] . '</a></li>';

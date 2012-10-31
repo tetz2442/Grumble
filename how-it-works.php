@@ -18,7 +18,7 @@ require_once "php/containerWide.php";
 		    <li>Grumble title</li>
 		    <li>The category that the Grumble belongs to.</li>
 		    <li>The user that created this Grumble.</li>
-		    <li>The description of this Grumble.</li>
+		    <li>Vote up a Grumble.</li>
 		    <li>Options for sharing a Grumble.</li>
 	    </ul>
 	    <div class="divider light"></div>
@@ -27,7 +27,6 @@ require_once "php/containerWide.php";
 	    <ul>
 		    <li>Start a new comment.</li>
 		    <li>User who created the comment.</li>
-		    <li>Comment text.</li>
 		    <li>Comment options. If you own the comment, you can delete it, otherwise you can report a comment as spam.</li>
 		    <li>How long ago the comment was created. You can also click the time to open the status and see it individually.</li>
 		    <li>More comment options. From here you can either vote up a comment or enter a reply (more information below).</li>
@@ -39,7 +38,7 @@ require_once "php/containerWide.php";
 		    <li>Reply contents. A reply contains the user who created it, the reply text, and the time it was sumbitted.</li>
 		    <li>The textfield at the bottom lets you type a new reply.</li>
 		    <li>After opening the replies, you can close them simply by clicking the "Close" link.</li>
-		    <li>The numbers to the right of the reply textfield show how many characters there are left that you can type.</li>
+		    <li>The numbers to the left of the send button show how many characters are left.</li>
 	    </ul>
 	    <div class="divider light"></div>
 	    <p class="content-padding"><a href="/create-account" class="button orange">Create Account</a> <a href="<?php echo "http://" . $_SERVER["HTTP_HOST"]?>" class="button orange">Home</a></p>

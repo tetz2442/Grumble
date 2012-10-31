@@ -8,7 +8,7 @@ if(!isset($_SESSION["user_id"])) {
 ?>
  <h1>Login</h1>
     </div>
-<div id="login-table">
+<div id="login-table" class="rounded-corners-medium table-box-shadow">
 <form method="post" action="php/transact-user.php">
 <ul>
 <li>

@@ -80,9 +80,7 @@ $(document).ready(function() {
 	$("#notification-number").mousedown(function() {
 		if($("#notification-dropdown").is(":visible")) {
 			$("#notification-dropdown").fadeOut(50);
-			$("#notification-dropdown li a").each(function() {
-				$(this).removeClass("highlight");
-			});
+			$("#notification-dropdown li a").removeClass("highlight");
 			//change notification image
 			$("#notification-number").attr("src","/images/icons/notification-none.png");
 			$("#notification-header").html("Notifications (0 new)");
@@ -274,9 +272,7 @@ $(document).ready(function() {
 			function(result) {
 				$element.parents(".comment-holder").find(".gif-loader-replies").hide();
 				if(result != "") {
-					$.each($(".ind-reply"), function() {
-						$(this).remove();
-					});
+					$(".ind-reply").remove();
 					$(result).insertBefore($element.parents(".comment-holder").find(".quick-reply-input"));
 					$element.hide();
 					
@@ -439,11 +435,7 @@ $(document).ready(function() {
 	}
 	if($("#login-refer").length > 0) {
 		$("#login-refer").val(".." + window.location.pathname);
-		$(".social-login a").each(function () {
-			var path = $(this).attr("href");
-			path = path + "&redirect=.." + window.location.pathname;
-			$(this).attr("href", path);
-		});
+		$(".social-login a").attr("href", $(".social-login a").attr("href") + "&redirect=.." + window.location.pathname);
 	}
 	
 	$("#quick-description-submit").click(function(event) {
@@ -894,9 +886,7 @@ $(document).ready(function() {
 				canLoad2 = false;
 				loadMore = true;
 				canLoad = true;
-				$(".comment-holder").each(function () {
-					$(this).remove();
-				});
+				$(".comment-holder").remove();
 				$("#gif-loader").show();
 				$.post("/php/commentloadajax.php", {type:type, subCat:subCat},
 					function(result) {
@@ -1057,8 +1047,6 @@ $(document).ready(function() {
 		$("#sub-category-desc").html(catText);
 		
 		shortenLink("#sub-category-desc a");
-		
-		$("#sub-category-desc").shorten({"showChars":250});
 	}
 	if($(".grumble-description").length > 0) {
 		$.each($(".grumble-description"), function() {
@@ -1115,6 +1103,10 @@ $(document).ready(function() {
 		// To initially run the function:
 		$(window).resize();
 	}
+	
+	$("#social-icons img").hover(function() {
+		$(this).rotate({angle:0, animateTo:360});
+	});
 });
 
 function animateHomeCover() {
@@ -1356,43 +1348,3 @@ function findLink(text) {
         }
     })()
 } (window, jQuery));
-//shorten grumble description
-jQuery.fn.shorten = function(settings) {
-  var config = {
-    showChars : 100,
-    ellipsesText : "...",
-    moreText : "more",
-    lessText : "less"
-  };
- 
-  if (settings) {
-    $.extend(config, settings);
-  }
- 
-  $('.morelink').live('click', function() {
-    var $this = $(this);
-    if ($this.hasClass('less')) {
-      $this.removeClass('less');
-      $this.html(config.moreText);
-    } else {
-      $this.addClass('less');
-      $this.html(config.lessText);
-    }
-    $this.parent().prev().toggle();
-    $this.prev().toggle();
-    return false;
-  });
- 
-  return this.each(function() {
-    var $this = $(this);
- 
-    var content = $this.html();
-    if (content.length > config.showChars && $(this).find("a").length == 0) {
-      var c = content.substr(0, config.showChars);
-      var h = content.substr(config.showChars, content.length - config.showChars);
-      var html = c + '<span class="moreellipses">' + config.ellipsesText + '&nbsp;</span><span class="morecontent"><span>' + h + '</span>&nbsp;&nbsp;<a href="javascript://nop/" class="morelink colored-link-1">' + config.moreText + '</a></span>';
-      $this.html(html);
-      $(".morecontent span").hide();
-    }
-  });
-}
