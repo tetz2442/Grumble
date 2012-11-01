@@ -1,8 +1,8 @@
 <?php
 require_once "php/conn.php";
+require_once "php/functions.php";
 require_once "php/header.php";
 require_once "php/containerStatus.php";
-require_once "php/functions.php";
 require_once "php/outputcomments.php";
 
 $grumble = true;

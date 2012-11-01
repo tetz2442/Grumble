@@ -1,7 +1,7 @@
 <?php
 require_once "php/conn.php";
-require_once "php/header.php";
 require_once "php/functions.php";
+require_once "php/header.php";
 require_once "php/outputgrumbles.php";
 require_once "php/outputcomments.php";
 require_once "php/containerStatus.php";
@@ -51,7 +51,7 @@ else {
 			
 			if(mysql_num_rows($result) > 0) {
 				while($row = mysql_fetch_array($result)) {
-					outputComments($row["status_id"], false, $loggedin, false, true);
+					outputComments($row["status_id"], false, $loggedin, false, true, true);
 				}
 			}
 			else {
