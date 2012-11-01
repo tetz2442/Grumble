@@ -1332,7 +1332,7 @@ html[xmlns] .clearfix {
  ************/
 #social-tab {
 	position: fixed;
-	z-index: 1997;
+	z-index: 1999;
 	right: 0px;
 	top: 240px;
 }

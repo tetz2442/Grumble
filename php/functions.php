@@ -140,9 +140,144 @@ function removeNewLine($input) {
 	return $output;
 }
 
+//get title for page
+function getTitle($pagename) {
+	global $conn;
+	//dynamically change title
+	if(isset($_GET["subcat"])) {
+		$sql = "SELECT sub_category_name, sub_category_description FROM sub_category_grumble " .
+			"WHERE sub_category_id = " . mysql_real_escape_string($_GET["subcat"]);
+		$result = mysql_query($sql, $conn) or die("Could not look up information: " . mysql_error());
+		$row = mysql_fetch_array($result);
+		echo " " . stripslashes($row["sub_category_name"]);
+	}
+	else if(isset($_GET["cat"])) {
+		$category = strtolower(mysql_real_escape_string($_GET["cat"]));
+		$sql = "SELECT category_name FROM categories_grumble " .
+			"WHERE category_url = '" . $category . "'";
+		$result = mysql_query($sql, $conn) or die("Could not look up information: " . mysql_error());
+		$row = mysql_fetch_array($result);
+		echo " " . stripslashes($row["category_name"]);
+	}
+	else if(isset($_GET["s"]) && isset($_GET["user"])) { //statusview
+		echo " " . strip_tags($_GET["user"]);
+	}
+	else if(isset($_GET["id"])) { //profile
+		echo " " . strip_tags($_GET["id"]);
+	}
+	else if($pagename == "create-account.php") {
+		echo " Create Account";
+	}
+	else if($pagename == "about.php") {
+		echo " About";
+	}
+	else if($pagename == "privacy.php") {
+		echo " Privacy Policy";
+	}
+	else if($pagename == "terms-of-service.php") {
+		echo " Terms of Service";
+	}
+	else if($pagename == "login.php") {
+		echo " Login";
+	}
+	else if($pagename == "contact.php") {
+		echo " Contact Us";
+	}
+	else if($pagename == "how-it-works.php") {
+		echo " How it works";
+	}
+	else if($pagename == "noscript.php") {
+		echo " JavaScript not enabled";
+	}
+	else if($pagename == "updates.php") {
+		echo " Updates";
+	}
+	else if($pagename == "forgot-password.php") {
+		echo " Forgot Password";
+	}
+	else {
+		echo " Grumble for you. Grumble for change.";	
+	}
+}
+
+//get descriptions for page 
+function getDescription($pagename) {
+	global $conn;
+	if(isset($_GET["subcat"])) {
+		$sql = "SELECT sub_category_name, sub_category_description FROM sub_category_grumble " .
+			"WHERE sub_category_id = " . mysql_real_escape_string($_GET["subcat"]);
+		$result = mysql_query($sql, $conn) or die("Could not look up information: " . mysql_error());
+		$row = mysql_fetch_array($result);
+		$length = strlen($row["sub_category_description"]);
+		if($length > 50 && $length < 250)
+			echo stripslashes($row["sub_category_description"]);
+		else if(strlen($row["sub_category_description"]) > 50) {
+			echo stripslashes(substr($row["sub_category_description"], 0, 250)) . "...";
+		}
+		else
+			echo stripslashes($row["sub_category_description"]) . " | Grumble is a place where you can discuss the topics that you feel are important and need attention. It's simple. Grumble for you. Grumble for change.";
+	}
+	else if(isset($_GET["cat"])) {
+		$category = strtolower(mysql_real_escape_string($_GET["cat"]));
+		$sql = "SELECT category_name FROM categories_grumble " .
+			"WHERE category_url = '" . $category . "'";
+		$result = mysql_query($sql, $conn) or die("Could not look up information: " . mysql_error());
+		$row = mysql_fetch_array($result);
+		$catname = stripslashes($row["category_name"]);
+		echo $catname . " is a category on Grumble. Categories are full of Grumbles that relate to that specific category. Place a Grumble into the category that you feel relates best.";
+	}
+	else if($pagename == "create-account.php") {
+		echo "Create Account an account on Grumble to access its many features. Join today and inspire an action for change or simply get something off of your chest. ";
+	}
+	else if($pagename == "privacy.php") {
+		echo "What you say on Grumble will be accessible by anyone with an Internet connection. Read more of this document to find out more.";
+	}
+	else if($pagename == "terms-of-service.php") {
+		echo "Terms of Service.  These Terms of Service explain how Grumble works. Read more of this document for more information.";
+	}
+	else if($pagename == "login.php") {
+		echo "Login in to Grumble with your user account. ";
+	}
+	else if($pagename == "contact.php") {
+		echo "Contact Grumble. Use this page to suggest a feature, report a bug, or just send us a message. We will get back to you as soon as possible.";
+	}
+	else if($pagename == "noscript.php") {
+		echo "You must enable your JavaScript to be able to have the best viewing experience on Grumble.";
+	}
+	else if($pagename == "updates.php"){
+		echo "Come here for updates on new things happening at Grumble. Grumble is a place where you can discuss the topics that you feel are important and need attention.";
+	}
+	else if($pagename == "about.php") {
+		echo "Find out a little more about Grumble on our about page. Grumble is a place where you can discuss the topics that you feel are important and need attention.";
+	}
+	else if($pagename == "forgot-password.php") {
+		echo "Have you forgetten your password on Grumble? On this page you can reset your password through email. Simply enter it into the provided field.";
+	}
+	else if(isset($_GET["s"]) && isset($_GET["user"])) { //statusview
+		$id = mysql_real_escape_string($_GET["s"]);
+		$sql = "SELECT sg.status_text FROM status_grumble AS sg " .
+			"LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = sg.user_id " .
+			"WHERE sg.status_id = " . $id;
+		$result = mysql_query($sql, $conn) or die("Could not look up information: " . mysql_error());
+		$row = mysql_fetch_array($result);
+		$length = strlen(stripslashes($row["status_text"]));
+		if($length < 250)
+			echo strip_tags($_GET["user"]) . "'s comment, '" . stripslashes($row["status_text"]) . "'";
+		else {
+			echo strip_tags($_GET["user"]) . "'s comment, '" . stripslashes(substr($row["status_text"], 0, 250)) . "...'";
+		}
+	}
+	else if(isset($_GET["id"])) { //profile
+		echo strip_tags($_GET["id"]) . ". This is the profile of " . strip_tags($_GET["id"]) . " on Grumble. To create a profile on Grumble go to the create account page.";
+	}
+	else {
+		echo "Grumble is a place where you can discuss the topics that you feel are important and need attention. It's simple. Grumble for you. Grumble for change.";
+	}
+}
+
 //email function
-require_once "Mail.php"; 
 function sendEmail($email, $sendfrom, $type, $parameters) {
+	require_once "Mail.php"; 
 	$send = false;
 	$subject ="";
 	$body ="";
