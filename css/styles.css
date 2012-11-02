@@ -929,17 +929,14 @@ html[xmlns] .clearfix {
  *create account
  *******/
 #account-create-container {
-	float: left;
-	padding: 20px 15px 15px 15px;
+	padding: 15px;
 }
 #account-create-welcome {
 	text-align: center;
-	float: left;
 	width: 100%;
 	margin-bottom: 25px;
 }
 #login-grumble-info {
-	float: left;
 	padding: 0px 15px;
 }
 #login-grumble-info p {
@@ -956,6 +953,16 @@ html[xmlns] .clearfix {
 }
 #create-account-table ul li {
 	margin: 10px;
+}
+#account-create-buttons {
+	margin-top: 25px !important;
+}
+#account-create-buttons a {
+	display: list-item;
+	margin:10px 0;
+	width: 200px;
+	text-align: center;
+	list-style: none;
 }
 #login-table {
 	margin-bottom: 40px;
