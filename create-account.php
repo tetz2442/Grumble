@@ -221,19 +221,15 @@ if(!isset($_SESSION["user_id"])) {
 	</div>
 <?php
 		}
-		//a regular user is creating an account
-		else {
+		//user is creating an account with the grumble form
+		else if(isset($_GET["type"]) && $_GET["type"] == "grumble") {
 ?>
 <div id="account-create-container">
 	<div id="account-create-welcome">
     	 <h1>Create an account on Grumble</h1>
     </div>
     <div id="login-grumble-info">
-        <p>Creating an account on Grumble will give you access to its many features.</p>
-        <p>Start new Grumble categories and inspire an action for change or simply Grumble about an issue that has been bothering you.</p>
-        <p>Welcome to Grumble!</p>
-        <p><a href="/php/transact-user.php?provider=facebook&action=sociallogin"><img src="/images/social/facebook.png" alt="Register with Facebook" title="Register with Facebook" /></a>
-           <a href="/php/transact-user.php?provider=google&action=sociallogin"><img src="/images/social/google.png" alt="Register with Google" title="Register with Google" /></a></p>
+        <p>Fill out the form below and start Grumbling!</p>
     </div>
     <div id="create-account-table" class="rounded-corners-large content-padding table-box-shadow">	
         <form method='post' action='/php/transact-user.php' onsubmit="return checkForm(this)" name='userForm'>
@@ -306,6 +302,25 @@ if(!isset($_SESSION["user_id"])) {
         </form>
     </div>
 </div>
+<?php
+		}
+		//display options for creating an account
+		else {
+?>
+<div id="account-create-container">
+	<div id="account-create-welcome">
+    	 <h1>Create an account on Grumble</h1>
+    </div>
+    <div id="login-grumble-info">
+        <p>Creating an account on Grumble will give you access to its many features.</p>
+        <p>Start new Grumble categories and inspire an action for change or simply Grumble about an issue that has been bothering you.</p>
+        <p>Welcome to Grumble!</p>
+        <p id="account-create-buttons">
+        	<a href="/php/transact-user.php?provider=facebook&action=sociallogin" class="button">Register with Facebook</a>
+           <a href="/php/transact-user.php?provider=google&action=sociallogin" class="button">Register with Google</a>
+           <a href="/create-account?type=grumble" class="button">Register with Grumble</a>
+        </p>
+    </div>
 <?php 
 		}
 }
