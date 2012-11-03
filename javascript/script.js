@@ -435,7 +435,9 @@ $(document).ready(function() {
 	}
 	if($("#login-refer").length > 0) {
 		$("#login-refer").val(".." + window.location.pathname);
-		$(".social-login a").attr("href", $(".social-login a").attr("href") + "&redirect=.." + window.location.pathname);
+		$(".social-login a").each(function() {
+			$(this).attr("href", $(this).attr("href") + "&redirect=.." + window.location.pathname);
+		});
 	}
 	
 	$("#quick-description-submit").click(function(event) {
