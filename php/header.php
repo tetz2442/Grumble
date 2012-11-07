@@ -3,9 +3,9 @@ session_start();
 //check if cookie is set
 checkCookie();
 $loggedin = is_user_logged_in();
+//get user notification number if logged in
 if($loggedin)
 	$number = notificationNumber();
-
 //detect mobile browser
 $mobile = isMobile();
 ?>
@@ -14,6 +14,7 @@ $mobile = isMobile();
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <link type="text/css" href="/css/styles.css" rel="stylesheet" media="all">
+<?php //if the user does not have javascript enabled, redirect them ?>
 <noscript>
     <meta http-equiv="Refresh" content="0; url=/noscript.php">
 </noscript>
@@ -23,7 +24,7 @@ $mobile = isMobile();
 <meta name="description" content="<?php getDescription($filename); ?>">
 <link rel="Shortcut Icon" href="/favicon.ico">
 <?php //javascript files?>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 <script type="text/javascript">
 !window.jQuery && document.write('<script src="/javascript/jquery-1.8.1.min.js"><\/script>');
 var _gaq = _gaq || [];
