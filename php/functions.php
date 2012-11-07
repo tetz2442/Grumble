@@ -1,4 +1,7 @@
 <?php
+/***
+ * utility functions for grumble
+ */
 //user is logged in and timezone is set
 function convertToTimeZone($time, $tz) {
 	$newtime = new DateTime($time . " UTC");
@@ -65,7 +68,7 @@ function time_ago($date,$granularity=1) {
 
 //check if username is allowed
 function checkUsername($input) {
-	$unallowed_username = array('slut','bitch','whore','fuck','motherfucker','cunt','asshole','damn','poop','shit','admin','moderator','ass');
+	$unallowed_username = array('slut','bitch','whore','fuck','motherfucker','cunt','asshole','damn','poop','shit','admin','moderator','ass','fucker');
 	foreach ($unallowed_username as $value) {
 		if(strpos($input, $value) !== false)
 			return false;

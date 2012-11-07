@@ -5,8 +5,7 @@
 	require_once "functions.php";
 	require_once "notifications.php";
 	
-	if(isset($_REQUEST["action"]) &&
-		isset($_SESSION["username"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+	if(isset($_REQUEST["action"]) && isset($_SESSION["username"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 		switch ($_REQUEST["action"]) {
 			case "Submit Grumble" :
 				if(isset($_POST["grumble"]) && strlen(trim($_POST["grumble"])) > 0 && strlen($_POST["grumble"]) <= 40 && isset($_POST["category"]) && $_POST["category"] != "Choose a Category" && 
