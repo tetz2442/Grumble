@@ -45,7 +45,7 @@ function time_ago($date,$granularity=1) {
         'h' => 3600,
         'm' => 60,
         's' => 1);
-    if ($difference <= 59) { // less than 5 seconds ago, let's say "just now"
+    if ($difference <= 59) { // less than 59 seconds ago, let's say "just now"
         $retval = "just now";
         return $retval;
     } else {                            
