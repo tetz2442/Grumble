@@ -9,7 +9,7 @@ $grumble = true;
 if(isset($_GET["user"]) && isset($_GET["s"])) {
 	$statusid = mysql_real_escape_string(strip_tags($_GET["s"]));
 	$user = mysql_real_escape_string(strip_tags($_GET["user"]));
-	$sql = "SELECT scg.sub_category_id, scg.sub_category_name, scg.sub_category_url, cg.category_name FROM sub_category_grumble AS scg " .
+	$sql = "SELECT scg.sub_category_id, scg.sub_category_name, scg.sub_category_url, cg.category_name, cg.category_url FROM sub_category_grumble AS scg " .
 		"LEFT OUTER JOIN status_grumble AS sg ON sg.status_id = " . $statusid . 
 		" LEFT OUTER JOIN categories_grumble AS cg ON cg.category_id = scg.category_id" .
 		" WHERE scg.sub_category_id = sg.sub_category_id";
@@ -23,8 +23,8 @@ if(isset($_GET["user"]) && isset($_GET["s"])) {
 		?>
         <div id="grumble-header">
             <div id="category-header">
-                <h1 id="subcat-id"><a title="Go to Grumble page" href="/<?php echo strtolower($row["category_name"]) . "/" . $row["sub_category_url"] . "/" . $row["sub_category_id"]; ?>" class="colored-link-1"><?php echo stripslashes($row["sub_category_name"]); ?></h1>
-                <h4><a title="Go to category" href="/category/<?php echo strtolower($row["category_name"]); ?>" class="colored-link-1"><?php echo stripslashes($row["category_name"]); ?></a></h4>
+                <h1 id="subcat-id"><a title="Go to Grumble page" href="/<?php echo strtolower($row["category_url"]) . "/" . $row["sub_category_url"] . "/" . $row["sub_category_id"]; ?>" class="colored-link-1"><?php echo stripslashes($row["sub_category_name"]); ?></h1>
+                <h4><a title="Go to category" href="/category/<?php echo $row["category_url"]; ?>" class="colored-link-1"><?php echo stripslashes($row["category_name"]); ?></a></h4>
             </div>
             <div id="share-category">
             <?php
