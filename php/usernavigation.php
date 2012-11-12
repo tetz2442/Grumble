@@ -80,34 +80,32 @@ require_once 'outputnotifications.php';
             ?>
                     <ul id="dropdown-form-login" class="dropdown rounded-corners-medium">
                         <li id="dropdown-arrow"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>
-                        <li>
-                            <label for="email">Email or Username</label>
-                            <input type="text" id="email" name="email" maxlength="255" class="input-user-nav textInput"/>
-                        </li>
-                        <li class="padding-top">
-                            <label for="password">Password</label>
-                            <input type="password" name="password" id="password" maxlength="50" class="input-user-nav textInput"/>
-                            <?php
-							/*$refer = "../" . basename($_SERVER['PHP_SELF']);
-							if($_SERVER['QUERY_STRING'] != "") {
-								$refer = $refer . "?" . $_SERVER['QUERY_STRING'];	
-							}*/
-							?>
-                            <input type="hidden" name="referrer" id="login-refer" value=""/>
-                        </li>
-                        <li class="padding-top">
-                        	<input type="hidden" name="token" value="<?php echo $token; ?>" />
-                            <input type="checkbox" name="remember-box" id="remember-checkbox"/><label for="remember-checkbox" class="colored-link-1">Remember me</label>
-                            <input type="submit" name="action" class="submit-login button" value="Sign In"/>
-                        </li>
-                       <li class="padding-top"><p class="padding-top">OR login with</p></li>
-                        <li class="padding-top social-login">
-                        	<a href="/php/transact-user.php?provider=facebook&action=sociallogin"><img src="/images/social/facebook.png" alt="Login with Facebook" title="Login with Facebook" /></a>
-                        	<a href="/php/transact-user.php?provider=google&action=sociallogin"><img src="/images/social/google.png" alt="Login with Google" title="Login with Google" /></a>
-                        </li>
-                         <li class="login-last">
-                        	<a class="colored-link-1" href="/create-account">Create an account</a> | <a class="colored-link-1" href="/forgot-password">Forget password?</a>
-                        </li>
+                       <li class="social-login">
+					       <a href="/php/transact-user.php?provider=facebook&action=sociallogin" class="button">Login with Facebook</a>
+					       <a href="/php/transact-user.php?provider=google&action=sociallogin" class="button">Login with Google</a>
+					       <a href="/login" class="button grumble-login">Login with Grumble</a>
+                       </li>
+                       <li class="login-last">
+                       		<a class="colored-link-1" href="/create-account">Create an account</a> | <a class="colored-link-1" href="/forgot-password">Forget password?</a>
+                       </li>
+                       <li class="hidden">
+                       	<ul>
+                       		<li>
+	                            <label for="email">Email or Username</label>
+	                            <input type="text" id="email" name="email" maxlength="255" class="input-user-nav textInput"/>
+	                        </li>
+	                        <li class="padding-top">
+	                            <label for="password">Password</label>
+	                            <input type="password" name="password" id="password" maxlength="50" class="input-user-nav textInput"/>
+	                            <input type="hidden" name="referrer" id="login-refer" value=""/>
+	                        </li>
+	                        <li class="padding-top">
+	                        	<input type="hidden" name="token" value="<?php echo $token; ?>" />
+	                            <input type="checkbox" name="remember-box" id="remember-checkbox"/><label for="remember-checkbox" class="colored-link-1">Remember me</label>
+	                            <input type="submit" name="action" class="submit-login button" value="Sign In"/>
+	                        </li>
+	                    </ul>
+                       </li>
                     </ul>
             <?php
             echo '</form></li>';
