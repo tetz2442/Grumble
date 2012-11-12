@@ -76,6 +76,12 @@ $(document).ready(function() {
 		$("#notification-dropdown").fadeOut(50);
 		$("#sub-nav").fadeOut(50);
 	});
+	$(".social-login .grumble-login").click(function(event) {
+		event.preventDefault();
+		$($(this).parents("li").find(".hidden ul li")).insertAfter($(this).parents("li").find("li:first"));
+		$(this).parent().remove();
+		$("#email").focus();
+	});
 	//notification dropdown
 	$("#notification-number").mousedown(function() {
 		if($("#notification-dropdown").is(":visible")) {
@@ -436,7 +442,8 @@ $(document).ready(function() {
 	if($("#login-refer").length > 0) {
 		$("#login-refer").val(".." + window.location.pathname);
 		$(".social-login a").each(function() {
-			$(this).attr("href", $(this).attr("href") + "&redirect=.." + window.location.pathname);
+			if(!$(this).hasClass("grumble-login"))
+				$(this).attr("href", $(this).attr("href") + "&redirect=.." + window.location.pathname);
 		});
 	}
 	

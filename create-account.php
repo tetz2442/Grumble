@@ -315,11 +315,11 @@ if(!isset($_SESSION["user_id"])) {
         <p>Creating an account on Grumble will give you access to its many features.</p>
         <p>Start new Grumble categories and inspire an action for change or simply Grumble about an issue that has been bothering you.</p>
         <p>Welcome to Grumble!</p>
-        <p id="account-create-buttons">
+        <div id="account-create-buttons">
         	<a href="/php/transact-user.php?provider=facebook&action=sociallogin" class="button">Register with Facebook</a>
            <a href="/php/transact-user.php?provider=google&action=sociallogin" class="button">Register with Google</a>
            <a href="/create-account?type=grumble" class="button">Register with Grumble</a>
-        </p>
+        </div>
     </div>
 <?php 
 		}
