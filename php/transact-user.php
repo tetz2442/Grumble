@@ -182,15 +182,15 @@
 							redirect("../create-account?user_created=1");
 						}
 						else {
-							redirect("../create-account?create=fail&email=" . $email . "&fullname=" . $firstname . " " . $lastname . "&username=" . $username);
+							redirect("../create-account?type=grumble&create=fail&email=" . $email . "&fullname=" . $firstname . " " . $lastname . "&username=" . $username);
 						}
 					}
 					else {
-						redirect("../create-account?create=fail");
+						redirect("../create-account?type=grumble&create=fail");
 					}
 			}
 			else {
-				redirect("../create-account?create=fail");
+				redirect("../create-account?type=grumble&create=fail");
 			}
 			break;
 			
@@ -355,7 +355,7 @@
 							$username = replaceSpaces($username);
 							
 							$sql = "INSERT INTO users_grumble(username, user_firstname, user_lastname, user_password, user_salt, user_email, user_create_date, user_timezone) " . 
-								"VALUES('" . $username . "','" . $user_profile->firstName . "','" . $user_profile->lastName . "','" . "none" . "','" . "none" . "','" . $email . "',UTC_TIMESTAMP(),'America/Chicago')";
+								"VALUES('gg','" . $user_profile->firstName . "','" . $user_profile->lastName . "','" . "none" . "','" . "none" . "','" . $email . "',UTC_TIMESTAMP(),'America/Chicago')";
 							mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
 							
 							$id = mysql_insert_id();

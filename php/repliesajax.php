@@ -1,15 +1,20 @@
 <?php
 require_once "conn.php";
-require_once "http.php";
 require_once "functions.php";
 require_once "notifications.php";
 require_once "outputreplies.php";
 session_start();
+//retrieve replies
 if(isset($_POST["reply"]) && is_numeric($_POST["reply"]) && isset($_POST["type"]) && $_POST["type"] == "load" && isset($_POST["amount"]) && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
-	retrieveReplies(mysql_real_escape_string($_POST["reply"]), mysql_real_escape_string($_POST["amount"]));
+	retrieveReplies(escape($_POST["reply"]), escape($_POST["amount"]));
 }
+//enter a reply into db
 else if(isset($_POST["reply"]) && is_numeric($_POST["reply"]) && isset($_POST["type"]) && $_POST["type"] == "enter" && isset($_POST["text"]) && isset($_POST["statususername"]) && strlen(trim($_POST["text"])) > 0 && strlen($_POST["text"]) < 340 && isset($_SESSION["user_id"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	enterReply($_POST["reply"], trim($_POST["text"]), $_POST["statususername"]);
+}
+//delete reply
+else if(isset($_POST["id"]) && is_numeric($_POST["id"]) && $_POST["action"] == "Delete") {
+	deleteReply(escape($_POST["id"]));
 }
 
 function retrieveReplies($voteid, $amount) {
@@ -78,6 +83,32 @@ function enterReply($id, $text, $statususername) {
 				}
 			}
 		}
+	}
+}
+
+function deleteReply($id) {
+	global $conn;
+	
+	//check if status is there and user is owner
+	$sql = "SELECT ug.username, rg.reply_id FROM replies_grumble AS rg " .
+	"LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = rg.reply_user " . 
+	"WHERE rg.reply_id = " . $id . " LIMIT 0,1";
+	$result = mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	if(mysql_num_rows($result) != 0) {
+		$row = mysql_fetch_array($result);
+		if($row["username"] == $_SESSION["username"]) {
+			//delete everything associated with grumble (grumble, comments, votes)
+			$sql = "DELETE FROM replies_grumble WHERE reply_id = " . $id . " LIMIT 1";
+			mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+			
+			echo 1;
+		}
+		else {
+			echo 0;	
+		}
+	}
+	else {
+		echo 0;	
 	}
 }
 ?>

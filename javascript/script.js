@@ -76,6 +76,7 @@ $(document).ready(function() {
 		$("#notification-dropdown").fadeOut(50);
 		$("#sub-nav").fadeOut(50);
 	});
+	//change login when user clicks grumble login
 	$(".social-login .grumble-login").click(function(event) {
 		event.preventDefault();
 		$($(this).parents("li").find(".hidden ul li")).insertAfter($(this).parents("li").find("li:first"));
@@ -131,13 +132,62 @@ $(document).ready(function() {
 	$("#maincolumn").click(function () {
 		$(".dropdown").fadeOut(50);
 	});
-	
+	//show grumble delete on category-header hover
+	$("#category-header").mouseover(function() {
+		$("#grumble-delete").show();
+	}).mouseleave(function() {
+		$("#grumble-delete").hide();
+	});
+	//show reply delete onind-reply hover
+	$("body").on("mouseover", ".ind-reply", function() {
+		$(this).find(".reply-delete").show();
+	}).on("mouseleave", ".ind-reply", function() {
+		$(this).find(".reply-delete").hide();
+	});
+	//user wants to delete a reply
+	$("body").on("click", ".reply-delete", function() {
+		if(confirm("Are you sure you want to delete this reply? **It cannot be undone**")) {
+			var id = $(this).attr("data-id");
+			var $reply = $(this).parents(".ind-reply");
+			$.post("/php/repliesajax.php", {id:id, action:"Delete"},
+			function(result) {
+				if(result == 1) {
+					toastr.success("Reply deleted.");
+					$reply.remove();
+				}
+				else {
+					toastr.error("Something went wrong. Could not delete.");
+				}
+			});
+		}
+	});
+	//user wants to delete grumble
+	$("#grumble-delete").click(function() {
+		if(confirm("Are you sure you want to delete this Grumble? **All comments and replies will be deleted also**")) {
+			var id = $(this).attr("data-id");
+			$.post("/php/transact-grumble.php", {id:id, action:"Delete"},
+			function(result) {
+				if(result == 1) {
+					toastr.success("Grumble deleted. Redirecting...");
+					setTimeout(function() {
+						window.location = "http://" + window.location.hostname;
+					}, 1000);
+				}
+				else {
+					toastr.error("Something went wrong. Could not delete.");
+				}
+			});
+		}
+	});
+	//show comment options on comment hover
 	$("div").on("mouseover", ".comment-holder", function () {
 		$(this).find(".comment-options").show();
 	}).mouseout(function () {
 		$(this).find(".comment-options").hide();
 	});
-	var charLengthReply = 160;
+	//variable for length of reply
+	var charLengthReply = 240;
+	//user has clicked on grumble options
 	$("body").on("click", ".comment-options p", function () {
 		var $element = $(this);
 		var $commentholder = $element.parents(".comment-holder");
