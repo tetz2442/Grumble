@@ -93,6 +93,51 @@
 					}
 				}
 				break;
+				
+				case "Delete" :
+					if(isset($_POST["id"]) && is_numeric($_POST["id"])) {
+						$id = mysql_real_escape_string($_POST["id"]);
+			
+						//check if status is there and user is owner
+						$sql = "SELECT ug.username, scg.sub_category_id FROM sub_category_grumble AS scg " .
+						"LEFT OUTER JOIN users_grumble AS ug ON ug.user_id = scg.user_id " . 
+						"WHERE scg.sub_category_id = " . $id . " LIMIT 0,1";
+						$result = mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+						if(mysql_num_rows($result) != 0) {
+							$row = mysql_fetch_array($result);
+							if($row["username"] == $_SESSION["username"]) {
+								//delete (grumble (grumble votes))
+								$sql = "DELETE FROM sub_category_grumble WHERE sub_category_id = " . $id;
+								mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+								$sql = "DELETE FROM user_grumble_likes WHERE sub_category_id = " . $id;
+								mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+								
+								$sql = "SELECT status_id FROM status_grumble WHERE sub_category_id = " . $id;
+								$result = mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+								while($row = mysql_fetch_array($result)) {
+									//delete comments (replies, votes up)
+									$sql = "DELETE FROM status_grumble WHERE status_id = " . $row["status_id"] . " LIMIT 1";
+									mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+									$sql = "DELETE FROM replies_grumble WHERE status_id = " . $row["status_id"];
+									mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+									$sql = "DELETE FROM user_likes_grumble WHERE status_id = " . $row["status_id"];
+									mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+								}
+								
+								echo 1;
+							}
+							else {
+								echo 0;	
+							}
+						}
+						else {
+							echo 0;	
+						}
+					}
+					else {
+						echo 0;	
+					}
+				break;
 		}
 	}
 	else {

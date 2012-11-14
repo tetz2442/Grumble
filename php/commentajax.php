@@ -95,8 +95,6 @@
 				mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
 				$sql = "DELETE FROM user_likes_grumble WHERE status_id = " . $id;
 				mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
-				$sql =  "UPDATE sub_category_grumble SET grumble_number = grumble_number - 1 WHERE sub_category_id = " . $row["sub_category_id"];
-				mysql_query($sql, $conn) or die("Could not submit grumble: " . mysql_error());
 				
 				echo 1;
 			}

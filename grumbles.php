@@ -39,7 +39,10 @@ if($exist) {
             	echo '<small id="sub-category-created">Grumbled on ' . convertToTimeZone($row["sub_category_created"], $_SESSION["timezone"]) . '</small>';
             else if(isset($_SESSION["time"]))
             	echo '<small id="sub-category-created">Grumbled on ' . convertToTimeZone($row["sub_category_created"], $_SESSION["time"]) . '</small>';
+            if($row["username"] == $_SESSION["username"]) {
             ?>
+            <small id="grumble-delete" title="Delete this Grumble and all the comments and replies. This cannot be undone." data-id="<?php echo $row["sub_category_id"]; ?>">Delete</small>
+            <?php } ?>
             <p id="sub-category-desc"><?php echo stripslashes($row["sub_category_description"]);?></p>
         </div>
         <div id="share-category">
