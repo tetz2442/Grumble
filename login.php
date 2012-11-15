@@ -1,7 +1,7 @@
 <?php 
 require_once "php/functions.php";
 require_once "php/header.php";
-require_once "php/containerWide.php";
+require_once "php/containerGrumbles.php";
  ?>
  <div class="content-padding text-align-center">
 <?php

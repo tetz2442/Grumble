@@ -147,13 +147,6 @@ html[xmlns] .clearfix {
 	margin: auto;
 	margin-bottom: 35px;
 }
-/*header container for other pages*/
-#grumble-wide-container {
-	width:100%;
-	max-width: 900px;
-	margin: auto;
-	overflow: auto;
-}
 /********
  *header css
  ******/

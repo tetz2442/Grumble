@@ -15,6 +15,7 @@ class DB {
 	public function query($sql) {
 		$this->_result = mysql_query($sql, $this->_link);
 		$this->_numRows = mysql_num_rows($this->_result);
+		return $result;
 	}
 
 	public function numRows() {
