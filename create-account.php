@@ -316,9 +316,9 @@ if(!isset($_SESSION["user_id"])) {
         <p>Start new Grumble categories and inspire an action for change or simply Grumble about an issue that has been bothering you.</p>
         <p>Welcome to Grumble!</p>
         <div id="account-create-buttons">
-        	<a href="/php/transact-user.php?provider=facebook&action=sociallogin" class="button">Register with Facebook</a>
-           <a href="/php/transact-user.php?provider=google&action=sociallogin" class="button">Register with Google</a>
-           <a href="/create-account?type=grumble" class="button">Register with Grumble</a>
+        	<a href="/php/transact-user.php?provider=facebook&action=sociallogin" class="zocial facebook"><span>Register with Facebook</span></a>
+           <a href="/php/transact-user.php?provider=google&action=sociallogin" class="zocial google"><span>Register with Google</span></a>
+           <a href="/create-account?type=grumble" class="zocial grumble"><span>Register with Grumble</span></a>
         </div>
     </div>
 <?php 
@@ -333,5 +333,5 @@ else {
 <?php
 }
 require_once "php/helpcallout.php";
-require_once "php/footer.php"; 
+getFooter($filename); 
 ?>

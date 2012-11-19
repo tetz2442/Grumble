@@ -95,5 +95,5 @@ else {
 if(isset($_SESSION["username"])) {
 	require_once "php/lightboxgrumble.php";
 }
-require_once "php/footer.php"; 
+getFooter($filename);
 ?>

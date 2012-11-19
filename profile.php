@@ -97,5 +97,5 @@ if($userprofile) {
 	require_once "php/settings.php"; 
 	$settings = true;
 }
-require_once "php/footer.php"; 
+getFooter($filename);
 ?>

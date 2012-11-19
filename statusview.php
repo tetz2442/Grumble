@@ -79,4 +79,4 @@ window.onload = function(){
 }
  
 </script>
-<?php require_once "php/footer.php"; ?>
+<?php getFooter($filename); ?>

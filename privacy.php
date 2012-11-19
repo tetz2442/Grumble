@@ -52,5 +52,5 @@ require_once "php/containerGrumbles.php";
 
 </div>
 <?php
-require_once "php/footer.php"; 
+getFooter($filename);
 ?>

@@ -1,8 +1,8 @@
 <?php
 require_once "../php/conn.php";
+require_once "../php/functions.php";
 require_once "../php/header.php";
 require_once "../php/containerGrumbles.php";
-require_once "../php/functions.php";
 require_once "outputspam.php";
 require_once "../php/outputcomments.php";
 require_once "adminincludes.php";
@@ -18,7 +18,6 @@ if(isset($_SESSION["username"]) && $_SESSION["access_lvl"] == 3) {
 	<div>
 		<a class="button" href="contact.php">Contact Messages</a>
 		<a class="button" href="spam.php">Spam</a>
-		<a class="button">Remove old Temp Passwords</a>
 	</div>
     	<?php
     	if(mysql_num_rows($result) != 0) {
@@ -34,5 +33,5 @@ if(isset($_SESSION["username"]) && $_SESSION["access_lvl"] == 3) {
 <?php	
 }
 require_once "../php/notificationbar.php";
-require_once "../php/min-footer.php"; 
+getFooter($filename, true);
 ?>

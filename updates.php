@@ -9,6 +9,11 @@ require_once "php/containerGrumbles.php";
 	<h1>Updates about Grumble</h1>
 	<p>On this page we will keep you up to date on new things happening on Grumble.</p>
 	<div class="divider"></div>
+		<h2>New Social Buttons, Ability to Delete Your Grumbles and Replies</h2>
+		<time>Nov. 18th, 2012</time>
+	    <p>Say hello to new social login buttons! Not only have we came up with some new buttons, but we have made them more prominent when creating an account and logging in. This makes logging in and creating an account with social media that much easier and quicker. You can still easily log in with Grumble by simply clicking "Login with Grumble".</p> 
+	    <p>Besides the great new buttons we have introduced the ability to delete your Grumbles and replies. If you made a mistake or feel that you content should not be available anymore you can easily delete them. Navigate to the Grumble or reply, hover over them, and click the delete link.</p>
+	    <div class="divider light"></div>
 		<h2>New ranking system for Grumbles</h2>
 		<time>Oct. 3rd, 2012</time>
 	    <p>Grumbles will now be ranked not only by the number of comments on them, but also by the number of votes. This will help provide a more realistic view of how popular a Grumble really is. Take advantage of this new feature by creating
@@ -53,5 +58,5 @@ require_once "php/containerGrumbles.php";
 
 </div>
 <?php
-require_once "php/footer.php"; 
+getFooter($filename);
 ?>

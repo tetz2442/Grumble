@@ -81,9 +81,9 @@ require_once 'outputnotifications.php';
                     <ul id="dropdown-form-login" class="dropdown rounded-corners-medium">
                         <li id="dropdown-arrow"><img alt="arrow" src="/images/dropdown-arrow.png" width="15" height="8"/></li>
                        <li class="social-login">
-					       <a href="/php/transact-user.php?provider=facebook&action=sociallogin" class="button">Login with Facebook</a>
-					       <a href="/php/transact-user.php?provider=google&action=sociallogin" class="button">Login with Google</a>
-					       <a href="/login" class="button grumble-login">Login with Grumble</a>
+					       <a href="/php/transact-user.php?provider=facebook&action=sociallogin" class="zocial facebook"><span>Login with Facebook</span></a>
+					       <a href="/php/transact-user.php?provider=google&action=sociallogin" class="zocial google"><span>Login with Google</span></a>
+					       <a href="/login" class="zocial grumble grumble-login"><span>Login with Grumble</span></a>
                        </li>
                        <li class="login-last">
                        		<a class="colored-link-1" href="/create-account">Create an account</a> | <a class="colored-link-1" href="/forgot-password">Forget password?</a>

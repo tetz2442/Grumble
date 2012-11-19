@@ -18,19 +18,22 @@
     </div>
 </div>
 <div id="fb-root"></div>
-<script type="text/javascript" src="/javascript/script.js"></script>
+<script type="text/javascript" src="/javascript/script.js" async="async"></script>
 <?php
 if($filename == "create-account.php" && !isset($_SESSION["user_id"]) && !isset($_GET["social_create"])) {
- echo '<script type="text/javascript" src="/javascript/formValidation.min.js"></script>';   
+ echo '<script type="text/javascript" src="/javascript/formValidation.min.js" async="async"></script>';   
 }
 if($filename == "create-account.php" && !isset($_SESSION["user_id"]) && isset($_GET["social_create"])) {
- echo '<script type="text/javascript" src="/javascript/formvalidationsocial.min.js"></script>'; 
+ echo '<script type="text/javascript" src="/javascript/formvalidationsocial.min.js" async="async"></script>'; 
 }
 if($filename == "contact.php") {
- echo '<script type="text/javascript" src="/javascript/contactvalidation.min.js"></script>';    
+ echo '<script type="text/javascript" src="/javascript/contactvalidation.min.js" async="async"></script>';    
 }
 if($filename == "profile.php" || $filename == "forgot-password.php") {
- echo '<script type="text/javascript" src="/javascript/settingsvalidation.min.js"></script>';   
+ echo '<script type="text/javascript" src="/javascript/settingsvalidation.min.js" async="async"></script>';   
+}
+if(($filename == "index.php" && !$mobile) || $filename == "grumbles.php" || $filename == "statusview.php") {
+    echo '<script type="text/javascript" src="/javascript/socialscript.js" async="async"></script>'; 
 }
 ?>
 </body>

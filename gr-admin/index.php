@@ -1,5 +1,6 @@
 <?php
 require_once "../php/conn.php";
+require_once "../php/functions.php";
 require_once "../php/header.php";
 require_once "../php/containerGrumbles.php";
 require_once "adminincludes.php";
@@ -10,23 +11,27 @@ if(isset($_SESSION["username"]) && $_SESSION["access_lvl"] == 3) {
 	<div>
 		<a class="button" href="contact.php">Contact Messages</a>
 		<a class="button" href="spam.php">Spam</a>
-		<a class="button" href="sitemap.php">Create sitemap</a>
 	</div>
 	<?php
-	/*$sql = "SELECT COUNT(DISTINCT ug.user_id) AS users, COUNT(DISTINCT scg.sub_category_id) AS grumbles, COUNT(DISTINCT sg.status_id) AS comments " .
-		"FROM users_grumble AS ug " . 
-		"LEFT OUTER JOIN sub_category_grumble AS scg " . 
-		"LEFT OUTER JOIN status_grumble AS sg";
+	$sql = "SELECT COUNT(user_id) AS users FROM users_grumble";
 	$result = mysql_query($sql, $conn) or die("Error: " . mysql_error());
-	$row = mysql_fetch_array($result);*/
+	$row = mysql_fetch_array($result);
+
+	$sql = "SELECT COUNT(sub_category_id) AS grumbles FROM sub_category_grumble";
+	$result2 = mysql_query($sql, $conn) or die("Error: " . mysql_error());
+	$row2 = mysql_fetch_array($result2);
+
+	$sql = "SELECT COUNT(status_id) AS comments FROM status_grumble";
+	$result3 = mysql_query($sql, $conn) or die("Error: " . mysql_error());
+	$row3 = mysql_fetch_array($result3);
 	?>
-	<!--<div>
+	<div>
 		<ul>
-			<li>Users: <?php// echo $row["users"]?></li>
-			<li>Grumbles: <?php// echo $row["grumbles"]?></li>
-			<li>Comments: <?php //echo $row["comments"]?></li>
+			<li>Users: <?php echo $row["users"]?></li>
+			<li>Grumbles: <?php echo $row2["grumbles"]?></li>
+			<li>Comments: <?php echo $row3["comments"]?></li>
 		</ul>
-	</div>-->
+	</div>
 </div>
 <?php
 }
@@ -54,5 +59,5 @@ else {
 ?>
 
 <?php	
-require_once "../php/min-footer.php"; 
+getFooter($filename, true);
 ?>

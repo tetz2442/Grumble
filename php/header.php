@@ -13,7 +13,7 @@ $mobile = isMobile();
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-<link type="text/css" href="/css/styles.css" rel="stylesheet" media="all">
+<link type="text/css" href="/css/styles.min.css" rel="stylesheet" media="all">
 <?php //if the user does not have javascript enabled, redirect them ?>
 <noscript>
     <meta http-equiv="Refresh" content="0; url=/noscript.php">

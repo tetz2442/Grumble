@@ -67,5 +67,5 @@ $_SESSION['token3'] = $token;
 		}
 		//end forget-pass-holder and content-padding divs
 echo '</div></div>';
-require_once "php/footer.php"; 
+getFooter($filename);
 ?>

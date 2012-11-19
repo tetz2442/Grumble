@@ -136,15 +136,15 @@ if($exist) {
     }
 	echo '<div class="clear"></div>';
 	if(mysql_num_rows($result) < 10)
-		require_once "php/footer.php"; 
+		getFooter($filename);
 	else
-		require_once "php/min-footer.php"; 
+		getFooter($filename, true);
 }
 //subcat doesnt exist
 else {
 	?>
     <div class="content-padding"><p class="text-align-center">This Grumble doesn't exist. Please check your URL.</p></div>
     <?php
-	require_once "php/footer.php"; 
+	getFooter($filename);
 }
 ?>

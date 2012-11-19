@@ -34,5 +34,5 @@ else {
 <div class="content-padding"><p class="text-align-center content-padding">This user does not exist. Please check your URL.</p></div>
 <?php
 }
-require_once "php/min-footer.php"; 
+getFooter($filename, true);
 ?>
