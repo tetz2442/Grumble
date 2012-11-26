@@ -333,7 +333,7 @@
 			 
 			       // then grab the user profile 
 			       $user_profile = $adapter->getUserProfile();
-				   
+				  
 				   $email = $user_profile->emailVerified;
 				   if(strlen($email) == 0)
 				   	$email = $user_profile->email;
@@ -351,11 +351,21 @@
 						$result = mysql_query($sql, $conn) or die("Could not login: " . mysql_error());
 						//user has not created an account
 						if(mysql_num_rows($result) == 0) {
-							$username = $user_profile->firstName . $user_profile->lastName;
-							$username = replaceSpaces($username);
+							//$username = $user_profile->firstName . $user_profile->lastName;
+							//$username = replaceSpaces($username);
+							$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.';
+							$Chars_Len = 63;
+							$Salt_Length = 15;
+							
+							$salt = "";
+			
+							for($i=0; $i<$Salt_Length; $i++)
+							{
+								$salt .= $Allowed_Chars[mt_rand(0,$Chars_Len)];
+							}
 							
 							$sql = "INSERT INTO users_grumble(username, user_firstname, user_lastname, user_password, user_salt, user_email, user_create_date, user_timezone) " . 
-								"VALUES('gg','" . $user_profile->firstName . "','" . $user_profile->lastName . "','" . "none" . "','" . "none" . "','" . $email . "',UTC_TIMESTAMP(),'America/Chicago')";
+								"VALUES('" . $salt . "','" . $user_profile->firstName . "','" . $user_profile->lastName . "','" . "none" . "','" . "none" . "','" . $email . "',UTC_TIMESTAMP(),'America/Chicago')";
 							mysql_query($sql, $conn) or die("Could not create user account: " . mysql_error());
 							
 							$id = mysql_insert_id();
@@ -376,6 +386,7 @@
 							$_SESSION["verified_email"] = $user_profile->emailVerified;
 							$_SESSION["provider"] = $provider_name;
 							$_SESSION["social_query_string"] = "?social_create=1&username=" . $username . "&token=" . $token . "&provider=" . $provider_name;
+							
 							redirect("../create-account?social_create=1&username=" . $username . "&token=" . $token . "&provider=" . $provider_name);
 						}
 						//user has created an account already with grumble, enter them into the authenticated table
@@ -454,7 +465,7 @@
 							setcookie("user_grumble", $cookie_text, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
 							setcookie("cookie_id", $id, time()+7*24*60*60, '/', $_SERVER['HTTP_HOST']);
 						}
-
+						
 						if(isset($_GET["redirect"]))
 							redirect(strip_tags($_GET["redirect"]));
 						else 
