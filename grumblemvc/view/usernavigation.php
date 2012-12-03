@@ -1,4 +1,4 @@
-<div id="user-navigation">
+<nav>
 	<div>
     	<ul id="navigation">
             <?php if(!MOBILE) {?>
@@ -110,4 +110,4 @@
         ?>
         </div>
     </div>
-</div>
+</nav>

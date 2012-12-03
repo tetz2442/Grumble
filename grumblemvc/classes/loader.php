@@ -23,12 +23,12 @@ class Loader {
 			require("controller/home.php");
 		}
 		else {
-			$this->controller = $this->urlvalues["controller"];
+			$this->controller = $this->urlvalues["controller"] . "controller";
 			//require correct controller and model based on url
 			//model filenames should go "model/[viewname]model.php"
 			//controller filenames should go "controller/[viewname].php"
 			require("model/" . $this->urlvalues["controller"] . "model.php");
-			require("controller/" . $this->urlvalues["controller"] . ".php");
+			require("controller/" . $this->urlvalues["controller"] . "controller.php");
 		}
 		if($this->urlvalues["action"] == "") {
 			$this->action = "index";

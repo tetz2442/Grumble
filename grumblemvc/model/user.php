@@ -1,28 +1,24 @@
 <?php
-//class to hold user information
-class User extends BaseModel {
-	protected $access_lvl, $username, $id, $email;
+class User {
+	public $id, $username, $email, $url;
 	
-	public function checkPassword($password) {
-		$sql = "";
-		$this->db->query($sql);
+	public function __construct($id = 0, $username = null, $email = null) {
+		$this->id = $id;
+		$this->username = $username;
+		$this->email = $email;
+		$this->url = "/profile/" . $username;
 	}
-
-	//get user id
-	public function id() {
-		return $this->id;
+	
+	public function update() {
+		
 	}
-	//get username
-	public function username() {
-		return $this->username;
+	
+	public function save() {
+		
 	}
-	//get email address 
-	public function email() {
-		return $this->email;
-	}
-	//get access level
-	public function access_lvl() {
-		return $this->access_lvl;
+	
+	public function delete() {
+		
 	}
 }
 ?>

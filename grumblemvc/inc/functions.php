@@ -2,13 +2,6 @@
 /***
  * utility functions for grumble
  */
-//user is logged in and timezone is set
-function convertToTimeZone($time, $tz) {
-	$newtime = new DateTime($time . " UTC");
-	$newtime->setTimezone(new DateTimeZone($tz));
-	return date_format($newtime, "M d, Y g:iA");
-}
-
 //user is not logged in and offset was grabbed
 function convertToUserTime($time, $offset) {
 	$newtime = new DateTime($time . " " . $offset);

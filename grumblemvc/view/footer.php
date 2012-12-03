@@ -3,7 +3,7 @@
 <div id="lightbox-container"></div>
 <?php //min footer without the link
 //if(!$min) { ?>
-<div id="footer">
+<footer>
 	<div id="footer-links">
     	<div id="footer-copyright">© 2012 Grumble</div>
     	<a class="colored-link-1" href="/about">About</a>|
@@ -17,7 +17,7 @@
     	<a href="https://facebook.com/grumbleonline" target="_blank"><img src="/images/icons/facebook-footer.png" width="25" height="25" alt="Facebook page" title="Facebook page"></a>
     	<a href="https://twitter.com/grumbleonline" target="_blank"><img src="/images/icons/twitter-footer.png" width="25" height="25" alt="Twitter" title="Twitter page"></a>
     </div>
-</div>
+</footer>
 <div id="fb-root"></div>
 <script type="text/javascript" src="/javascript/script.min.js" async="async"></script>
 <?php
