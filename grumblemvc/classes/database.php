@@ -16,7 +16,7 @@ class DB {
 		$this->_result = mysql_query($sql, $this->_link);
 		$this->_numRows = mysql_num_rows($this->_result);
 		//return array
-		return $this->rows();
+		return mysql_fetch_array($this->_result);
 	}
 	//return number of rows
 	public function numRows() {
@@ -24,12 +24,12 @@ class DB {
 	}
 	//return array
 	public function rows() {
-		/*$rows = array();
-		for ($i=0; $i < $this->_numRows; $i++) { 
+		$rows = array();
+		for ($i=1; $i < $this->_numRows; $i++) { 
 			$rows[] = mysql_fetch_assoc($this->_result);
 		}
-		return $rows;*/
-		return mysql_fetch_array($this->_result);
+		return $rows;
+		//return mysql_fetch_array($this->_result);
 	}
 	//escape string
 	public function escape($input) {

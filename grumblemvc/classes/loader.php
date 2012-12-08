@@ -6,11 +6,12 @@ require("basemodel.php");
 require("inc/functions.php");
 //require defined
 require("inc/config.php");
+//require classes that will be used application wide
+require("model/usermodel.php");
+require("model/categorymodel.php");
 
 class Loader {
-	private $controller;
-	private $action;
-	private $urlvalues;
+	private $controller, $action, $urlvalues;
 
 	//store the URL values on creation
 	public function __construct($urlvalues) {

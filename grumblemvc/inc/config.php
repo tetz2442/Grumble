@@ -10,6 +10,8 @@ $mobile = isMobile();
 define("MOBILE", $mobile);
 //define grumble url
 define("SITE_URL", "http://" . $_SERVER["HTTP_HOST"]);
+//define view URL
+define("TEMPLATE_PATH", "http://" . $_SERVER["HTTP_HOST"] . "/view");
 //start the session
 session_start();
 //set timezone

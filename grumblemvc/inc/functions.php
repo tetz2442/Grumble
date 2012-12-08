@@ -376,7 +376,7 @@ function isMobile() {
 }
 
 //get header file in view
-function getHeader() { 
+function getHeader($categories, $notifications) { 
 	require("view/header.php");
 }
 //get footer file in view

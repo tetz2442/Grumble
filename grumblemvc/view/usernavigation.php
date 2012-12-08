@@ -2,22 +2,20 @@
 	<div>
     	<ul id="navigation">
             <?php if(!MOBILE) {?>
-            <li id="nav-home"><a href="<?php echo URL;?>">Home</a></li>
+            <li id="nav-home"><a href="<?php echo SITE_URL;?>">Home</a></li>
             <?php } ?>
-            <li id="nav-category">Categories<img src="/images/arrow-down.png" alt="arrow" class="drop-image" width="10" height="10"/>
-                <ul id="sub-nav" class="dropdown rounded-corners-medium">
-                    <li id="sub-nav-dropdown-arrow"><img src="/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/></li>
+            <li id="nav-category">Categories<img src="<?php echo TEMPLATE_PATH; ?>/images/arrow-down.png" alt="arrow" class="drop-image" width="10" height="10"/>
+                <ul class="dropdown rounded-corners-medium">
+                    <li><img src="<?php echo TEMPLATE_PATH; ?>/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/></li>
                 <?php
-					/*$sql = "SELECT * FROM categories_grumble ORDER BY category_name ASC";
-					$result = mysql_query($sql, $conn);
-					while($row = mysql_fetch_array($result)) {
-						echo '<li><a href="/category/' . $row["category_url"] . '">' . $row["category_name"] . '</a></li>';
-					}*/
+	                foreach ($categories as $category) {
+						echo '<li><a href="/category/' . $category["category_url"] . '">' . $category["category_name"] . '</a></li>';
+	                }
 				?>
                 </ul>
             </li>
         </ul>
-        <a id="logo" href="<?php echo URL; ?>"><img src="/images/logo.png" alt="Grumble logo" title="Grumble home" onmouseover="this.src='/images/logo-hover.png'" onmouseout="this.src='/images/logo.png'"></a>
+        <a id="logo" href="<?php echo SITE_URL; ?>"><img src="<?php echo TEMPLATE_PATH; ?>/images/logo.png" alt="Grumble logo" title="Grumble home" onmouseover="this.src='<?php echo TEMPLATE_PATH; ?>/images/logo-hover.png'" onmouseout="this.src='<?php echo TEMPLATE_PATH; ?>/images/logo.png'"></a>
         <div id="user-info">
         <?php
         /*if(isset($_SESSION["username"])) {
