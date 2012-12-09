@@ -44,11 +44,16 @@ class Grumble extends BaseModel {
 		$this->category_url = $result["category_url"];
 		$this->grumble_url = "/" . $this->category_url . "/" . $this->shorturl . "/" . $this->id;
 		$this->owner_username = $result["username"];
+		
+		//create title and description
+		$this->createTitle($this->name);
+		$this->createDescription($this->description);
+		
 		//format time returned
 		if(isset($_SESSION["timezone"])) 
-        	$this->created = convertToTimeZone($result["sub_category_created"], $_SESSION["timezone"]);
+        	$this->created = $this->convertToTimeZone($result["sub_category_created"], $_SESSION["timezone"]);
         else if(isset($_SESSION["time"]))
-            $this->created = convertToTimeZone($result["sub_category_created"], $_SESSION["time"]);
+            $this->created = $this->convertToTimeZone($result["sub_category_created"], $_SESSION["time"]);
 
 		return $this;
 	}

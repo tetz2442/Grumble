@@ -6,14 +6,15 @@ define ("SQL_USER", "root");
 define ("SQL_PASS", "");
 define ("SQL_DB", "grumble");
 //detect mobile browser
-$mobile = isMobile();
-define("MOBILE", $mobile);
+define("MOBILE", isMobile());
 //define grumble url
 define("SITE_URL", "http://" . $_SERVER["HTTP_HOST"]);
 //define view URL
-define("TEMPLATE_PATH", "http://" . $_SERVER["HTTP_HOST"] . "/view");
+define("TEMPLATE_PATH", "http://" . $_SERVER["HTTP_HOST"] . "/grumble/view");
 //start the session
 session_start();
 //set timezone
 setTimezone();
+//hooks
+$hooks["register_scripts"] = array();
 ?>

@@ -20,10 +20,8 @@ function setTimezone() {
 	if (isset($_SESSION["timezone"])) {
 		date_default_timezone_set($_SESSION["timezone"]);
 	}
-	else if (isset($_SESSION["time"])) {
-		date_default_timezone_set($_SESSION["time"]);
-	}
 	else {
+		$_SESSION["time"] = "America/Chicago";
 		date_default_timezone_set("America/Chicago");
 	}
 }
@@ -106,19 +104,6 @@ function remove_words($input,$replace,$words_array = array(),$unique_words = tru
 
 	//return good words separated by dashes
 	return implode($replace,$return);
-}
-
-//replace spaces
-function replaceSpaces($input) {
-	return str_replace(" ", "", $input);
-}
-
-//remove newline characters
-function removeNewLine($input) {
-	$output = str_replace("\r", "", $input);
-	$output = str_replace("\n", "", $output);
-	
-	return $output;
 }
 
 //get title for page
@@ -348,17 +333,6 @@ function checkCookie() {
 	}
 }
 
-//check if user is logged in
-function is_user_logged_in() {
-	//if $_SESSION['username'] is false, we know the user is not logged in
-	if(isset($_SESSION['username'])) {
-	    return true;
-	}
-	else {
-	    return false;	
-	}
-}
-
 //get notification number
 function notificationNumber() {
 	global $conn;
@@ -376,15 +350,24 @@ function isMobile() {
 }
 
 //get header file in view
-function getHeader($categories, $notifications) { 
+function getHeader($data) {
+	extract($data);
 	require("view/header.php");
 }
 //get footer file in view
-function getFooter() { 
+function getFooter($user, $min = false) { 
 	require("view/footer.php");
 }
-function getUserNavigation() {
-	require("view/usernavigation.php");
+
+/* add_action functionality */  
+function add_action($on, $file) {  
+  global $hooks;  
+  array_push($hooks[$on], $file);  
+}  
+
+//get action hooks
+function grumble_foot() {
+	require_once("inc/applyHooks");
 }
 
 //check if timezone exists

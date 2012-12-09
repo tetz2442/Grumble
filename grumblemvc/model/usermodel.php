@@ -1,6 +1,6 @@
 <?php
 class User extends BaseModel {
-	public $url;
+	public $url, $username;
 	
 	//load user with id or username
 	protected function load($id) {
@@ -26,6 +26,11 @@ class User extends BaseModel {
 			return true;
 		else
 			return false;
+	}
+	//getusername
+	public function username() {
+		if(isset($_SESSION["username"]))
+			return $_SESSION["username"];
 	}
 	
 	public function update() {

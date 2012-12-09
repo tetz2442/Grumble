@@ -1,14 +1,13 @@
 <?php
 //require the general classes
-require("basecontroller.php");
-require("basemodel.php");
+require_once("basecontroller.php");
+require_once("basemodel.php");
 //require utility functions
-require("inc/functions.php");
+require_once("inc/functions.php");
 //require defined
-require("inc/config.php");
+require_once("inc/config.php");
 //require classes that will be used application wide
-require("model/usermodel.php");
-require("model/categorymodel.php");
+require_once("model/usermodel.php");
 
 class Loader {
 	private $controller, $action, $urlvalues;
@@ -18,18 +17,27 @@ class Loader {
 		$this->urlvalues = $urlvalues;
 		if($this->urlvalues["controller"] == "") {
 			$this->controller = "home";
+			$this->urlvalues["controller"] = "home";
 			//require the model class
-			require("model/homemodel.php");
+			require_once("model/categorymodel.php");
+			require_once("model/grumblemodel.php");
 			//require the controller class
-			require("controller/home.php");
+			require_once("controller/homecontroller.php");
 		}
 		else {
 			$this->controller = $this->urlvalues["controller"] . "controller";
 			//require correct controller and model based on url
 			//model filenames should go "model/[viewname]model.php"
 			//controller filenames should go "controller/[viewname].php"
-			require("model/" . $this->urlvalues["controller"] . "model.php");
-			require("controller/" . $this->urlvalues["controller"] . "controller.php");
+			if(file_exists("model/" . $this->urlvalues["controller"] . "model.php")) {
+				require_once("model/" . $this->urlvalues["controller"] . "model.php");
+				require_once("controller/" . $this->urlvalues["controller"] . "controller.php");
+			}
+			//file is simple and doesn't need a model
+			else {
+				require_once("controller/simplecontroller.php");
+				$this->controller = "simplecontroller";
+			}
 		}
 		if($this->urlvalues["action"] == "") {
 			$this->action = "index";

@@ -1,20 +1,22 @@
 <!DOCTYPE html>  
-<html>
+<!--[if IE 8]> <html class="ie8" lang="en"> <![endif]-->
+<!--[if IE 9]> <html class="ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<link type="text/css" href="<?php echo TEMPLATE_PATH; ?>/css/styles.css" rel="stylesheet" media="all">
-	<?php //if the user does not have javascript enabled, redirect them ?>
+	<?php //if the user does not have javascript enabled, redirect them SHOULD REMOVE, server side validation should be fine?>
 	<noscript>
 	    <meta http-equiv="Refresh" content="0; url=/noscript.php">
 	</noscript>
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<!--
-		getTitle and description do not currently work, most likely will be replaced by data returned from the view
-	-->
-	<title>Grumble | <?php //getTitle($filename); ?></title>
-	<meta name="description" content="<?php //getDescription($filename); ?>">
+	<title><?php echo $siteTitle; ?></title>
+	<meta name="description" content="<?php echo $siteDescription; ?>">
 	<link rel="Shortcut Icon" href="/favicon.ico">
 	<?php //javascript files?>
+	<!--[if IE 8|IE 7]>
+		<script src="<?php echo TEMPLATE_URL; ?>/js/html5shiv.js"></script>
+	<![endif]-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
 	<script type="text/javascript">
 	!window.jQuery && document.write('<script src="<?php echo TEMPLATE_PATH; ?>/javascript/jquery-1.8.1.min.js"><\/script>');
@@ -27,9 +29,9 @@
             <?php if(!MOBILE) {?>
             <li id="nav-home"><a href="<?php echo SITE_URL;?>">Home</a></li>
             <?php } ?>
-            <li id="nav-category">Categories<img src="<?php echo TEMPLATE_PATH; ?>/images/arrow-down.png" alt="arrow" class="drop-image" width="10" height="10"/>
+            <li id="nav-category">Categories <span>▼</span>
                 <ul class="dropdown rounded-corners-medium">
-                    <li><img src="<?php echo TEMPLATE_PATH; ?>/images/dropdown-arrow.png" alt="arrow" width="15" height="8"/></li>
+                    <li><img src="<?php echo TEMPLATE_PATH; ?>/images/dropdown-arrow.png" alt="arrow"/></li>
                 <?php
 	                foreach ($categories as $category) {
 						echo '<li><a href="/category/' . $category["category_url"] . '">' . $category["category_name"] . '</a></li>';
@@ -91,13 +93,13 @@
         else {
             echo '<ul>';
             echo '<li class="dropdown-login">';
-            echo '<span class="dropdown-shortlink" title="Login/Register">Login<img src="' . TEMPLATE_PATH . '/images/arrow-down.png" alt="arrow" class="login-drop-image" width="10" height="10"/></span>';
+            echo '<span class="dropdown-shortlink" title="Login/Register">Login<span>▼</span></span>';
             echo '<form action="' . SITE_URL . '/php/transact-user.php" method="post">';
 			$token = md5(uniqid(rand(), true));
 			$_SESSION['token'] = $token;
             ?>
                     <ul id="dropdown-form-login" class="dropdown rounded-corners-medium">
-                        <li id="dropdown-arrow"><img alt="arrow" src="<?php echo TEMPLATE_PATH; ?>/images/dropdown-arrow.png" width="15" height="8"/></li>
+                        <li id="dropdown-arrow"><img alt="arrow" src="<?php echo TEMPLATE_PATH; ?>/images/dropdown-arrow.png"/></li>
                        <li class="social-login">
 					       <a href="/php/transact-user.php?provider=facebook&action=sociallogin" class="zocial facebook"><span>Login with Facebook</span></a>
 					       <a href="/php/transact-user.php?provider=google&action=sociallogin" class="zocial google"><span>Login with Google</span></a>

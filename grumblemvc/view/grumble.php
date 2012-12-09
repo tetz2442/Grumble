@@ -1,5 +1,5 @@
 <?php 
-getHeader($categories, $notifications); 
+getHeader($data); 
 ?>
 <div id="grumble-header">
     <div id="category-header">
@@ -12,8 +12,8 @@ getHeader($categories, $notifications);
         <p><?php echo $grumble->description;?></p>
     </div>
     <div id="share-category">
-        <div class="grumble-like-number grumble-vote-up<?php if(isset($_SESSION["user_id"])) { echo '" title="Vote Grumble up"'; } else { echo ' dropdown-shortlink" title="You must be logged in to vote up."'; } ?>>
-            <?php if(isset($_SESSION["user_id"])) { ?>
+        <div class="grumble-like-number grumble-vote-up<?php if($user->is_logged_in()) { echo '" title="Vote Grumble up"'; } else { echo ' dropdown-shortlink" title="You must be logged in to vote up."'; } ?>>
+            <?php if($user->is_logged_in()) { ?>
             <p class="colored-link-1">Vote up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
             <?php } else { ?>
             <p class="colored-link-1">Vote up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
