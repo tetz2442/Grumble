@@ -1103,15 +1103,12 @@ $(document).ready(function() {
 	if($("#cover-bottom-bar").length > 0) {
 		//fix for image caching in IE
 		if($.browser.msie) {
-			$("#grumble-monster-home img").attr("src", $("#grumble-monster-home img").attr("src") + "?random=" + Math.floor(Math.random()*11));
+			$("#grumble-monster-home img").attr("src", $("#grumble-monster-home img").attr("src") + "?random=" + Math.random().toString(36).substring(7));
 		}
 		$("#grumble-monster-home img").load(function() {
-			var $contentholder = $('#cover-content-holder');
-			$contentholder.fadeIn("normal").animate({
-				left: $(window).width() / 2 - $contentholder.width() / 2,
-				top: $(window).height() / 2 - $contentholder.height() / 2
-			});
+			showGrumbly();
 		});
+		setTimeout(showGrumbly, 3000);
 		$("body").css("height",$(window).height());
 		$("#cover-bottom-bar img").click(function() {
 			animateHomeCover();
@@ -1151,6 +1148,17 @@ $(document).ready(function() {
 		$(this).rotate({angle:0, animateTo:360});
 	});
 });
+var grumbly = false;
+function showGrumbly() {
+	if(!grumbly) {
+		grumbly = true;
+		var $contentholder = $('#cover-content-holder');
+		$contentholder.fadeIn("normal").animate({
+			left: $(window).width() / 2 - $contentholder.width() / 2,
+			top: $(window).height() / 2 - $contentholder.height() / 2
+		});
+	}
+}
 
 function animateHomeCover() {
 	var $cover = $("#homepage-cover");
