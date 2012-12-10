@@ -4,23 +4,18 @@
 <!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-	<link type="text/css" href="<?php echo TEMPLATE_PATH; ?>/css/styles.css" rel="stylesheet" media="all">
-	<?php //if the user does not have javascript enabled, redirect them SHOULD REMOVE, server side validation should be fine?>
-	<noscript>
-	    <meta http-equiv="Refresh" content="0; url=/noscript.php">
-	</noscript>
+	<link href="<?php echo TEMPLATE_PATH; ?>/css/styles.css" rel="stylesheet" media="all">
 	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-	<title><?php echo $siteTitle; ?></title>
-	<meta name="description" content="<?php echo $siteDescription; ?>">
+	<title><?php //echo $siteTitle; ?></title>
+	<meta name="description" content="<?php //echo $siteDescription; ?>">
 	<link rel="Shortcut Icon" href="/favicon.ico">
 	<?php //javascript files?>
 	<!--[if IE 8|IE 7]>
-		<script src="<?php echo TEMPLATE_URL; ?>/js/html5shiv.js"></script>
+		<script src="<?php echo TEMPLATE_PATH; ?>/js/html5shiv.js"></script>
 	<![endif]-->
 	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-	<script type="text/javascript">
-	!window.jQuery && document.write('<script src="<?php echo TEMPLATE_PATH; ?>/javascript/jquery-1.8.1.min.js"><\/script>');
-	</script>
+	<script type="text/javascript">!window.jQuery && document.write('<script src="<?php echo TEMPLATE_PATH; ?>/javascript/jquery-1.8.1.min.js"><\/script>');</script>
+	<?php grumble_head();?>
 </head>
 <body>
 <nav>

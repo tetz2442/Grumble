@@ -14,16 +14,16 @@ if(!$min) { ?>
         <a class="colored-link-1" href="/contact">Contact Us</a>
     </div>
     <div id="social-icons">
-    	<a href="https://facebook.com/grumbleonline" target="_blank"><img src="<?php echo TEMPLATE_PATH; ?>/images/icons/facebook-footer.png" width="25" height="25" alt="Facebook page" title="Facebook page"></a>
-    	<a href="https://twitter.com/grumbleonline" target="_blank"><img src="<?php echo TEMPLATE_PATH; ?>/images/icons/twitter-footer.png" width="25" height="25" alt="Twitter" title="Twitter page"></a>
+    	<a href="https://facebook.com/grumbleonline" target="_blank"><img src="<?php echo TEMPLATE_PATH; ?>/images/icons/facebook-footer.png" alt="Facebook page"></a>
+    	<a href="https://twitter.com/grumbleonline" target="_blank"><img src="<?php echo TEMPLATE_PATH; ?>/images/icons/twitter-footer.png" alt="Twitter"></a>
     </div>
 </footer>
 <?php } ?>
 <div id="fb-root"></div>
-<script type="text/javascript" src="<?php echo TEMPLATE_PATH; ?>/javascript/script.min.js" async="async"></script>
+<?php grumble_foot(); ?>
+<script type="text/javascript" src="<?php echo TEMPLATE_PATH; ?>/javascript/script.min.js" async></script>
 <?php
 //get needed files
-grumble_foot();
 /*if(__FILE__ == "create-account.php" && !$user->is_logged_in() && !isset($_GET["social_create"])) {
  echo '<script type="text/javascript" src="/javascript/formValidation.min.js" async="async"></script>';   
 }

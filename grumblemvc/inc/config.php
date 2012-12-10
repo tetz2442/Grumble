@@ -16,5 +16,6 @@ session_start();
 //set timezone
 setTimezone();
 //hooks
-$hooks["register_scripts"] = array();
+$hooks["register_script"] = array();
+$hooks["register_style"] = array();
 ?>

@@ -1,15 +1,5 @@
 <?php
 getHeader($data);
-$previousFill = false;
-$name =  array("", "");
-if(isset($_POST["fullname"])) {
-	$previousFill = true;
-	$name = explode(" ", strip_tags($_POST["fullname"]));
-}
-else if (isset($_GET["fullname"])) {
-	$previousFill = true;
-	$name = explode(" ", strip_tags($_GET["fullname"]));
-}
 
 $token = md5(uniqid(rand(), true));
 $_SESSION['token2'] = $token;
@@ -229,73 +219,58 @@ if(!isset($_SESSION["user_id"])) {
         <p>Fill out the form below and start Grumbling!</p>
     </div>
     <div id="create-account-table" class="rounded-corners-large content-padding table-box-shadow">	
-        <form method='post' action='/php/transact-user.php' name='userForm'>
-        <ul>
-	        <li>
-	            <p><label for="firstname">First name:</label></p>
-	            <p><input type="text" id="firstname" class="textInput" name="firstname" maxlength="50" <?php echo "value='" . $name[0] . "'"; ?>/></p>
-	            <p><span id="firstnameError"></span></p>
-	        </li>
-	        <li>
-	            <p><label for="lastname">Last name:</label></p>
-	            <p><input type="text" id="lastname" class="textInput" name="lastname" maxlength="50" <?php echo "value='" . $name[1] . "'"; ?>/></p>
-	            <p><span id="lastnameError"></span></p>
-	        </li>
-	        <li>
-	            <p><label for="username">Username:</label></p>
-	            <p><input type="text" id="username" class="textInput" name="username" maxlength="15" autocomplete="off"<?php if(isset($_GET["username"])) { echo "value='" . strip_tags($_GET["username"]) . "'";} ?>/></p>
-	            <p><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="usernameError"></span></p>
-	        </li>
-	        <li>
-	            <p><label for="email">Email Address:</label></p>
-	            <p><input type="text" id="emails" class="textInput" name="email" maxlength="100" autocomplete="off" <?php if(isset($_POST["email"])) { echo "value='" . strip_tags($_POST["email"]) . "'";} else if(isset($_GET["email"])) {echo "value='" . strip_tags($_GET["email"]) . "'"; } ?>/></p>
-	            <p><img src="/images/ajax-loader.gif" width="16" height="16" class="gif-loader" style="display:none;"/><span id="emailError"></span></p>
-	        </li>
-	        <li>
-	            <p><label for="userpassword">Password:</label></p>
-	            <p><input type="password" id="userpassword" class="textInput" name="password" maxlength="50"/></p>
-	            <p><span id="passError"></span></p>
-	        </li>
-	        <li>
-	            <p><label for="userpassword2">Re-enter Password:</label></p> 
-	            <p><input type="password" id="userpassword2" class="textInput" name="password2" maxlength="50"/></p>
-	            <p><span id="pass2Error"></span></p>
-	        </li>
-	        <li>
-	            <p><label for="tz">Select Timezone:</label></p> 
-	            <p>
-	            	<select name="tz" id="tz">
-	                	<option value="none">Select Timezone</option>
-	                    <option value="Pacific/Honolulu">(GMT-10:00) Hawaii</option>
-	                    <option value="America/Anchorage">(GMT-09:00) Alaska</option>
-	                    <option value="America/Los_Angeles">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
-	                    <option value="America/Phoenix">(GMT-07:00) Arizona</option>
-	                    <option value="America/Denver">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
-	                    <option value="America/Chicago">(GMT-06:00) Central Time (US &amp; Canada)</option>
-	                    <option value="America/New_York">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
-	                    <option value="America/Indiana/Indianapolis">(GMT-05:00) Indiana (East)</option>
-	                    <option disabled="disabled">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</option>
-						<?php
-	                    foreach($zonelist as $key => $value) {
-	                        echo '		<option value="' . $key . '">' . $value . '</option>' . "\n";
-	                    }
-	                    ?>
-	                </select>
-	            </p>
-	            <p><span id="timezoneError"></span></p>
-	        </li>
-	        <li>
-	        	<p></p>
-	            <p id="create-checkbox">
-	            	<input type="checkbox" name="terms" id="terms"/><label for="terms" class="terms">Agree to <a href="terms-of-service.php" class="colored-link-1" target="_blank">Terms of Service</a> & <a href="terms-of-service.php" class="colored-link-1" target="_blank">Privacy Policy</a></label>
-	            </p>
-	            <p><span id="termsError"></span></p>
-	        </li>
-	        <li>
-	            <input type="hidden" name="token" value="<?php echo $token; ?>" />
+        <form method='post' id="userForm" action='/php/transact-user.php' name='userForm'>
+	        <div>
+	            <label for="firstname">First name:</label>
+	            <input type="text" id="firstname" name="firstname" maxlength="50"/>
+	        </div>
+	        <div>
+	            <label for="lastname">Last name:</label>
+	            <input type="text" id="lastname" name="lastname" maxlength="50"/>
+	        </div>
+	        <div>
+	            <label for="username">Username:</label>
+	            <input type="text" id="username" name="username" maxlength="15" autocomplete="off"<?php if(isset($_GET["username"])) { echo "value='" . strip_tags($_GET["username"]) . "'";} ?>/>
+	        </div>
+	        <div>
+	            <label for="email">Email Address:</label>
+	            <input type="text" id="emails" name="email" maxlength="100" autocomplete="off" <?php if(isset($_GET["email"])) {echo "value='" . strip_tags($_GET["email"]) . "'"; } ?>/>
+	        </div>
+	        <div>
+	            <label for="userpassword">Password:</label>
+	            <input type="password" id="userpassword" name="password" maxlength="50"/>
+	        </div>
+	        <div>
+	            <label for="userpassword2">Re-enter Password:</label>
+	            <input type="password" id="userpassword2" name="password2" maxlength="50"/>
+	        </div>
+	        <div>
+	            <label for="tz">Select Timezone:</label>
+            	<select name="tz" id="tz">
+                	<option value="none">Select Timezone</option>
+                    <option value="Pacific/Honolulu">(GMT-10:00) Hawaii</option>
+                    <option value="America/Anchorage">(GMT-09:00) Alaska</option>
+                    <option value="America/Los_Angeles">(GMT-08:00) Pacific Time (US &amp; Canada)</option>
+                    <option value="America/Phoenix">(GMT-07:00) Arizona</option>
+                    <option value="America/Denver">(GMT-07:00) Mountain Time (US &amp; Canada)</option>
+                    <option value="America/Chicago">(GMT-06:00) Central Time (US &amp; Canada)</option>
+                    <option value="America/New_York">(GMT-05:00) Eastern Time (US &amp; Canada)</option>
+                    <option value="America/Indiana/Indianapolis">(GMT-05:00) Indiana (East)</option>
+                    <option disabled="disabled">&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211;</option>
+					<?php
+                    foreach($zonelist as $key => $value) {
+                        echo '		<option value="' . $key . '">' . $value . '</option>' . "\n";
+                    }
+                    ?>
+                </select>
+	        </div>
+	        <div>
+	        	<label for="terms" class="terms"><input type="checkbox" name="terms" id="terms"/>Agree to <a href="terms-of-service.php" class="colored-link-1" target="_blank">Terms of Service</a> & <a href="terms-of-service.php" class="colored-link-1" target="_blank">Privacy Policy</a></label>
+	        </div>
+	        <div>
 	            <input type="submit" class="button orange" name="action" value="Create Account"/>
-	        </li>
-        </ul>
+	        </div>
+            <input type="hidden" name="token" value="<?php echo $token; ?>" />
         </form>
     </div>
 </div>
@@ -315,7 +290,7 @@ if(!isset($_SESSION["user_id"])) {
         <div id="account-create-buttons">
         	<a href="/php/transact-user.php?provider=facebook&action=sociallogin" class="zocial facebook"><span>Register with Facebook</span></a>
            <a href="/php/transact-user.php?provider=google&action=sociallogin" class="zocial google"><span>Register with Google</span></a>
-           <a href="/create-account?type=grumble" class="zocial grumble"><span>Register with Grumble</span></a>
+           <a href="<?php echo SITE_URL; ?>/create-account?type=grumble" class="zocial grumble"><span>Register with Grumble</span></a>
         </div>
     </div>
 <?php 

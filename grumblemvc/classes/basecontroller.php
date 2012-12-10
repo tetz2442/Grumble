@@ -7,8 +7,6 @@ abstract class BaseController {
 	protected $category, $user, $notification, $db;
 	//variable for holding data
 	protected $data;
-	//other vars
-	protected $title, $description;
 	
 	public function __construct($action, $urlvalues) {
 		$this->action = $action;

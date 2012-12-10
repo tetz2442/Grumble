@@ -35,6 +35,7 @@ class Loader {
 			}
 			//file is simple and doesn't need a model
 			else {
+				require_once("model/simplemodel.php");
 				require_once("controller/simplecontroller.php");
 				$this->controller = "simplecontroller";
 			}

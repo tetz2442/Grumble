@@ -360,14 +360,20 @@ function getFooter($user, $min = false) {
 }
 
 /* add_action functionality */  
-function add_action($on, $file) {  
+function add_action($action, $file) {  
   global $hooks;  
-  array_push($hooks[$on], $file);  
+  array_push($hooks[$action], $file);  
 }  
 
 //get action hooks
 function grumble_foot() {
-	require_once("inc/applyHooks");
+	global $hooks;
+	require_once("inc/applyHooksFooter.php");
+}
+
+function grumble_head() {
+	global $hooks;
+	require_once("inc/applyHooksHeader.php");
 }
 
 //check if timezone exists
