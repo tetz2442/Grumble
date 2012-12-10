@@ -27,3 +27,62 @@ h3 {
 h4 {
 	font-size: 1.2em;
 }
+a {
+	text-decoration: none;
+}
+/*
+Utility classes, can be used application wide
+*/
+.display-inline {
+	display: inline-block;
+}
+.hide {
+	position: absolute;
+	left:-9999px;
+}
+.remove {
+	display: none;
+}
+.colored-link-1 {
+
+}
+.colored-link-1:hover {
+	cursor: pointer;
+}
+.colored-link-2 {
+	color: #333;
+}
+.colored-link-2:hover {
+	cursor: pointer;
+	color: #fff;
+}
+/*
+Header and navigation
+*/
+header {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	background-color: #F59A38;
+	background-image: url(../images/backgrounds/bg.png);
+}
+nav {
+	width: 100%;
+	max-width: 850px;
+	margin: auto;
+}
+nav > ul {
+	display: inline-block;
+	list-style: none;
+}
+nav > ul > li {
+	display: inline-block;
+	font-size: 1.1em;
+}
+/*
+Body and maincolumn
+*/
+#maincolumn {
+	width:100%;
+	margin-top: 50px;
+}

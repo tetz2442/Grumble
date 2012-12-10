@@ -1,6 +1,6 @@
 <?php
 class User extends BaseModel {
-	public $url, $username;
+	public $url;
 	
 	//load user with id or username
 	protected function load($id) {
@@ -21,8 +21,8 @@ class User extends BaseModel {
 			return false;
 	}
 	//check username equality
-	public function checkUsername($username) {
-		if($username === $_SESSION["username"])
+	public function checkUsername($user) {
+		if(isset($_SESSION["username"]) && $user === $_SESSION["username"])
 			return true;
 		else
 			return false;
@@ -35,45 +35,40 @@ class User extends BaseModel {
 	
 	public function checkEmailAvailability() {
 		//get the passed parameter
-		$email = $this->db->escape($_POST["email"]);
+		$email = $this->db->escape(strtolower($_POST["email"]));
 		
 		//send a request to the database
-		$sql = "SELECT user_email FROM users_grumble";
-		$emails = $this->db->query($sql);
+		$sql = "SELECT user_email FROM users_grumble WHERE LOWER(user_email) = '" . $email . "'";
+		$this->db->query($sql);
 		
-		//if($this->db->numRows() > 0) {
+		if($this->db->numRows() > 0) {
 			//email is already taken
-			echo json_encode(!in_array($email, $emails));
-		//}
-		//else {
+			echo json_encode(false);
+		}
+		else {
 			//email is available
-			//echo 1;
-		//}
+			echo json_encode(true);
+		}
 	}
 
 	public function checkUsernameAvailability() {
 		//get the passed parameter
-		$username = $this->db->escape($_POST["username"]);
+		$username = $this->db->escape(strtolower($_POST["username"]));
 		
 		//check if username is allowed
 		if(checkUsername($username)) {
 			//send a request to the database
-			$sql = "SELECT username FROM users_grumble";
-			$result = $this->db->query($sql);
-			$usernames = array();
-			foreach ($result as $username) {
-				$usernames[] = $username["username"];
-			}
+			$sql = "SELECT username FROM users_grumble WHERE LOWER(username) = '" . $username . "'";
+			$this->db->query($sql);
 			
-			echo json_encode(!in_array($username, $usernames));
-			/*if($this->db->numRows() > 0) {
+			if($this->db->numRows() > 0) {
 				//email is already taken
-				echo 0;
+				echo json_encode(false);
 			}
 			else {
 				//email is available
-				echo 1;
-			}*/
+				echo json_encode(true);
+			}
 		}
 		else {
 			echo json_encode(false);

@@ -1,21 +1,14 @@
 <?php
 class Error {
-	private $urlvalues;
+	private $urlvalues, $type;
 
 	//store the URL values on creation
 	public function __construct($type, $urlvalues) {
 		$this->urlvalues = $urlvalues;
-		if($this->urlvalues["controller"] == "") {
-			
-		}
-		else {
-			
-		}
-		if($this->urlvalues["action"] == "") {
-			
-		}
-		else {
-			
+		$this->type = $type;
+
+		if($type == "badurl") {
+			require_once("views/404.php");
 		}
 	}
 }

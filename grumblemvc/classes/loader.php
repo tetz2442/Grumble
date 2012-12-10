@@ -2,6 +2,7 @@
 //require the general classes
 require_once("basecontroller.php");
 require_once("basemodel.php");
+require_once("error.php");
 //require utility functions
 require_once("inc/functions.php");
 //require defined
@@ -33,7 +34,7 @@ class Loader {
 				require_once("model/" . $this->urlvalues["controller"] . "model.php");
 				require_once("controller/" . $this->urlvalues["controller"] . "controller.php");
 			}
-			//file is simple and doesn't need a model
+			//file is simple and only needs a simplemodel
 			else {
 				require_once("model/simplemodel.php");
 				require_once("controller/simplecontroller.php");

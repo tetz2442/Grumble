@@ -18,14 +18,14 @@
 	<?php grumble_head();?>
 </head>
 <body>
-<nav>
-	<div>
-    	<ul id="navigation">
+<header>
+	<nav>
+    	<ul>
             <?php if(!MOBILE) {?>
-            <li id="nav-home"><a href="<?php echo SITE_URL;?>">Home</a></li>
+            <li><a href="<?php echo SITE_URL;?>" class="colored-link-2">Home</a></li>
             <?php } ?>
-            <li id="nav-category">Categories <span>▼</span>
-                <ul class="dropdown rounded-corners-medium">
+            <li class="colored-link-2">Categories <span>▼</span>
+                <ul class="dropdown rounded-corners-medium hide">
                     <li><img src="<?php echo TEMPLATE_PATH; ?>/images/dropdown-arrow.png" alt="arrow"/></li>
                 <?php
 	                foreach ($categories as $category) {
@@ -35,8 +35,7 @@
                 </ul>
             </li>
         </ul>
-        <a id="logo" href="<?php echo SITE_URL; ?>"><img src="<?php echo TEMPLATE_PATH; ?>/images/logo.png" alt="Grumble logo" title="Grumble home" onmouseover="this.src='<?php echo TEMPLATE_PATH; ?>/images/logo-hover.png'" onmouseout="this.src='<?php echo TEMPLATE_PATH; ?>/images/logo.png'"></a>
-        <div id="user-info">
+        <a id="logo" href="<?php echo SITE_URL; ?>" class="display-inline"><img src="<?php echo TEMPLATE_PATH; ?>/images/logo.png" alt="Grumble logo" title="Grumble home" onmouseover="this.src='<?php echo TEMPLATE_PATH; ?>/images/logo-hover.png'" onmouseout="this.src='<?php echo TEMPLATE_PATH; ?>/images/logo.png'"></a>
         <?php
         if(isset($notifications) && isset($_SESSION["username"])) {
             echo '<ul>';
@@ -87,13 +86,13 @@
         }
         else {
             echo '<ul>';
-            echo '<li class="dropdown-login">';
-            echo '<span class="dropdown-shortlink" title="Login/Register">Login<span>▼</span></span>';
+            echo '<li class="colored-link-2" title="Login/Register">';
+            echo 'Login<span>▼</span>';
             echo '<form action="' . SITE_URL . '/php/transact-user.php" method="post">';
 			$token = md5(uniqid(rand(), true));
 			$_SESSION['token'] = $token;
             ?>
-                    <ul id="dropdown-form-login" class="dropdown rounded-corners-medium">
+                    <ul id="dropdown-form-login" class="dropdown rounded-corners-medium hide">
                         <li id="dropdown-arrow"><img alt="arrow" src="<?php echo TEMPLATE_PATH; ?>/images/dropdown-arrow.png"/></li>
                        <li class="social-login">
 					       <a href="/php/transact-user.php?provider=facebook&action=sociallogin" class="zocial facebook"><span>Login with Facebook</span></a>
@@ -127,7 +126,6 @@
             echo '</ul>';
         }
         ?>
-        </div>
-    </div>
-</nav>
+	</nav>
+</header>
 <div id="maincolumn">

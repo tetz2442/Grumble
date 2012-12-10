@@ -4,8 +4,8 @@ getHeader($data);
 <div id="grumble-header">
     <div id="category-header">
         <h1 data-id="<?php echo $grumble->id; ?>"><?php echo $grumble->name; ?></h1>
-        <h4><a href="/category/<?php echo $grumble->category_url; ?>" class="colored-link-1"><?php echo $grumble->category_name; ?></a> | Created by <a href="/profile/<?php echo $grumble->owner_username;?>" class="colored-link-1"><?php echo $grumble->owner_username;?></a></h4>
-        <small>Grumbled on <?php echo $grumble->created; ?></small>';
+        <h4><a href="<?php echo SITE_URL; ?>/category/<?php echo $grumble->category_url; ?>" class="colored-link-1"><?php echo $grumble->category_name; ?></a> | Created by <a href="<?php echo SITE_URL; ?>/profile/<?php echo $grumble->owner_username;?>" class="colored-link-1"><?php echo $grumble->owner_username;?></a></h4>
+        <small>Grumbled on <?php echo $grumble->created; ?></small>
         <?php if($user->checkUsername($grumble->owner_username)) { ?>
         <small id="grumble-delete" title="Delete this Grumble and all the comments and replies. This cannot be undone." data-id="<?php echo $grumble->id; ?>">Delete</small>
         <?php } ?>
@@ -14,9 +14,9 @@ getHeader($data);
     <div id="share-category">
         <div class="grumble-like-number grumble-vote-up<?php if($user->is_logged_in()) { echo '" title="Vote Grumble up"'; } else { echo ' dropdown-shortlink" title="You must be logged in to vote up."'; } ?>>
             <?php if($user->is_logged_in()) { ?>
-            <p class="colored-link-1">Vote up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
+            <p class="colored-link-1">Vote up<img src="<?php echo TEMPLATE_PATH; ?>/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
             <?php } else { ?>
-            <p class="colored-link-1">Vote up<img src="/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
+            <p class="colored-link-1">Vote up<img src="<?php echo TEMPLATE_PATH; ?>/images/icons/thumb-up_1.jpg" alt="Vote up" width="14" height="14"/></p>
             <?php } ?>
             <p class="grumble-vote-font"><?php echo $grumble->likes; ?></p>
             <div class="clear"></div>
@@ -31,4 +31,4 @@ getHeader($data);
         </div>
     </div>
 </div>
-<?php getFooter(); ?>
+<?php getFooter($user); ?>

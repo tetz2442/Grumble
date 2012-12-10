@@ -54,7 +54,7 @@ class Grumble extends BaseModel {
         	$this->created = $this->convertToTimeZone($result["sub_category_created"], $_SESSION["timezone"]);
         else if(isset($_SESSION["time"]))
             $this->created = $this->convertToTimeZone($result["sub_category_created"], $_SESSION["time"]);
-
+        
 		return $this;
 	}
 	
