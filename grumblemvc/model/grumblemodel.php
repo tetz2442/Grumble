@@ -69,5 +69,34 @@ class Grumble extends BaseModel {
 		 
 		 return $this->db->query($sql);
 	}
+
+	//load top grumbles
+	public function loadTopGrumbles($limit = 10, $offset = null, $interval = 25) {
+		if($offset != null && is_numeric($offset))
+			$offset = " OFFSET " . $offset;
+		else
+			$offset = "";  
+		//top grumbles
+		$sql = "SELECT scg.sub_category_id, cg.category_name, cg.category_url, scg.sub_category_name, 
+		scg.sub_category_description, scg.sub_category_url, 
+		((SELECT COUNT(DISTINCT ugl.grumble_like_id ) FROM user_grumble_likes AS ugl WHERE ugl.sub_category_id = scg.sub_category_id) + 
+		( SELECT COUNT(DISTINCT sg.status_id ) FROM status_grumble AS sg WHERE sg.sub_category_id = scg.sub_category_id ) ) 
+		AS grumble_number, DATE_FORMAT( scg.sub_category_created,'%b %e, %Y %l:%i %p') AS sub_category_created
+		FROM sub_category_grumble AS scg
+		LEFT OUTER JOIN categories_grumble AS cg ON cg.category_id = scg.category_id
+		WHERE sub_category_created >= ( UTC_TIMESTAMP()-INTERVAL " . $interval . " DAY) 
+		HAVING grumble_number >0
+		ORDER BY grumble_number DESC 
+		LIMIT " . $limit . $offset;
+		//store each grumble in an object with the certain properties
+	    return $this->db->query($sql);
+	}
+
+	//load recent grumbles
+	public function loadRecentGrumbles() {
+		$sql = "SELECT sub_category_id FROM sub_category_grumble" .
+        " ORDER BY sub_category_id DESC LIMIT 10";
+        $result = $this->db->query($sql);
+	}
 }
 ?>

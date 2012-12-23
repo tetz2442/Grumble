@@ -60,7 +60,7 @@ Utility classes, can be used application wide
 Header and navigation
 */
 header {
-	position: absolute;
+	position: fixed;
 	top: 0;
 	width: 100%;
 	background-color: #F59A38;
@@ -70,6 +70,7 @@ nav {
 	width: 100%;
 	max-width: 850px;
 	margin: auto;
+	position: relative;
 }
 nav > ul {
 	display: inline-block;
@@ -78,6 +79,10 @@ nav > ul {
 nav > ul > li {
 	display: inline-block;
 	font-size: 1.1em;
+}
+#logo {
+	position: absolute;
+	margin: auto;
 }
 /*
 Body and maincolumn

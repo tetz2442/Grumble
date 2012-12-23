@@ -1,7 +1,7 @@
 <?php 
 getHeader($data); 
 ?>
-<div id="grumble-header">
+<article id="grumble-header">
     <div id="category-header">
         <h1 data-id="<?php echo $grumble->id; ?>"><?php echo $grumble->name; ?></h1>
         <h4><a href="<?php echo SITE_URL; ?>/category/<?php echo $grumble->category_url; ?>" class="colored-link-1"><?php echo $grumble->category_name; ?></a> | Created by <a href="<?php echo SITE_URL; ?>/profile/<?php echo $grumble->owner_username;?>" class="colored-link-1"><?php echo $grumble->owner_username;?></a></h4>
@@ -30,5 +30,13 @@ getHeader($data);
             <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $new_url;?>" data-via="grumbleonline" data-text="Come check out <?php echo $grumble->name;?>" data-related="grumbleonline" data-hashtags="grumble">Tweet</a>
         </div>
     </div>
-</div>
+</article>
+<?php //comments section ?>
+<aside>
+	<?php
+	require_once("classes/contentoutputter.php");
+	$comm = new Outputter();
+	$comm->outputComments($comments);
+	?>
+</aside>
 <?php getFooter($user); ?>

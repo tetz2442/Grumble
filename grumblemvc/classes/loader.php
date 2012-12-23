@@ -18,7 +18,7 @@ class Loader {
 		$this->urlvalues = $urlvalues;
 		if($this->urlvalues["controller"] == "") {
 			$this->controller = "home";
-			$this->urlvalues["controller"] = "home";
+			$this->urlvalues["controller"] = "index";
 			//require the model class
 			require_once("model/categorymodel.php");
 			require_once("model/grumblemodel.php");

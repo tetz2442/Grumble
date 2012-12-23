@@ -3,9 +3,11 @@ class Home extends BaseController {
 	protected function index() {
 		$categories = new Category($this->db);
 		$grumble = new Grumble($this->db);
+		
+		$this->data["topgrumbles"] = $grumble->loadTopGrumbles();
 		//get site title and description
-		$this->data["siteDescription"] = $grumble->createDescription();
-		$this->data["siteTitle"] = $grumble->createTitle();
+		//$this->data["siteDescription"] = $grumble->createDescription();
+		//$this->data["siteTitle"] = $grumble->createTitle();
 		//get page data, this is not an ajax call
 		$this->buildPageData();
 		
