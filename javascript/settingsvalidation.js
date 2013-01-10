@@ -226,11 +226,13 @@ $(document).ready(function() {
 			var deleteAccount = confirm("Are you sure you want to delete your Grumble account?\n\n All of your Grumbles, Comments, Replies, and settings data will be PERMANENTALY deleted.");
 			if(deleteAccount && !deleting) {
 				deleting = true;
+				$("#notification-bar p").html("Deleting account...").removeClass("error").addClass("available");
+				$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(1000).fadeOut("slow");
 				$.post("/php/settingsajax.php", {action:"Delete"},
 					function(result) {
 					if(result == 1) {
 						$("#notification-bar p").html("Success, account deleted.").removeClass("error").addClass("available");
-						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(2000).queue(function() {
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2000).queue(function() {
 							location = "http://" + window.location.hostname;
 						});
 					}

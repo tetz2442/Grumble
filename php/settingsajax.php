@@ -120,15 +120,35 @@ else if(isset($_POST["username"]) && $_SESSION["username"] == $_POST["username"]
  * User wants to delete their account
  */
 if(isset($_POST["action"]) && $_POST["action"] == "Delete" && isset($_SESSION["user_id"])) {
-	//delete settings
-	$sql = "DELETE FROM settings_user_grumble WHERE user_id = " . $_SESSION["user_id"];
-	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
 	//delete notifications
 	$sql = "DELETE FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"];
 	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	//delete grumbles (comments, replies, likes with each)
+	$sql = "SELECT sub_category_id FROM sub_category_grumble WHERE user_id = " . $_SESSION["user_id"];
+	$result = mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	//loop through each Grumble
+	while($row = mysql_fetch_array($result)) {
+		$id = $row["sub_category_id"];
+		//delete likes
+		$sql = "DELETE FROM user_grumble_likes WHERE sub_category_id = " . $id;
+		mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+		//select all statuses that are linked to Grumble
+		$sql = "SELECT status_id FROM status_grumble WHERE sub_category_id = " . $id;
+		$result = mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+		while($row = mysql_fetch_array($result)) {
+			//delete comments (replies, votes up)
+			$sql = "DELETE FROM status_grumble WHERE status_id = " . $row["status_id"] . " LIMIT 1";
+			mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+			$sql = "DELETE FROM replies_grumble WHERE status_id = " . $row["status_id"];
+			mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+			$sql = "DELETE FROM user_likes_grumble WHERE status_id = " . $row["status_id"];
+			mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+		}
+	}
 	//delete grumbles
 	$sql = "DELETE FROM sub_category_grumble WHERE user_id = " . $_SESSION["user_id"];
 	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	
 	//delete comments
 	$sql = "DELETE FROM status_grumble WHERE user_id = " . $_SESSION["user_id"];
 	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
@@ -143,6 +163,12 @@ if(isset($_POST["action"]) && $_POST["action"] == "Delete" && isset($_SESSION["u
 	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
 	//delete cookies
 	$sql = "DELETE FROM cookies_grumble WHERE user_id = " . $_SESSION["user_id"];
+	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	//delete from users
+	$sql = "DELETE FROM users_grumble WHERE user_id = " . $_SESSION["user_id"];
+	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	//delete settings
+	$sql = "DELETE FROM settings_user_grumble WHERE user_id = " . $_SESSION["user_id"];
 	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
 	
 	//destry session and log user out
