@@ -9,6 +9,10 @@ require_once "php/containerGrumbles.php";
 	<h1>Updates about Grumble</h1>
 	<p>On this page we will keep you up to date on new things happening on Grumble.</p>
 	<div class="divider"></div>
+		<h2>Deletetion of Account Option</h2>
+		<time>Jan. 10th, 2012</time>
+	    <p>Grumblers can now completely delete their account and all of the data associated with it by visiting their settings. The only data that will be left will be likes of either Grumbles or comments that you have not created. There is no identifying data left over after deletion of an account. We will miss you Grumbling if you choose this new option!</p> 
+	    <div class="divider light"></div>
 		<h2>New Social Buttons, Ability to Delete Your Grumbles and Replies</h2>
 		<time>Nov. 18th, 2012</time>
 	    <p>Say hello to new social login buttons! Not only have we came up with some new buttons, but we have made them more prominent when creating an account and logging in. This makes logging in and creating an account with social media that much easier and quicker. You can still easily log in with Grumble by simply clicking "Login with Grumble".</p> 
