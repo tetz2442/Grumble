@@ -1102,6 +1102,10 @@ html[xmlns] .clearfix {
 	float: right;
 	margin-right: 10px;
 }
+#button-controls .red {
+	float: left;
+	margin-top: 8px;
+}
 #gif-loader-settings {
 	float: right;
 	margin: 5px 10px 0 0;
@@ -1492,12 +1496,17 @@ a.button {
 .button.orange {
 	color: #FFF;
 	text-shadow: 0 -1px rgba(0,0,0,0.15);
-}
-.button.orange {
 	background-color: #FF5C00;
 }
 .button.orange:hover, .button.orange:active {
 	background-color: #FF782F;
+}​
+.button.red {
+	color: #FFF;
+	background-color: #BD362F;
+}
+.button.red:hover, .button.red:active {
+	background-color: #E34138;
 }​
 
 body .zocial {

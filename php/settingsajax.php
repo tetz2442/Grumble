@@ -116,6 +116,65 @@ else if(isset($_POST["username"]) && $_SESSION["username"] == $_POST["username"]
 	}
 }
 
+/*
+ * User wants to delete their account
+ */
+if(isset($_POST["action"]) && $_POST["action"] == "Delete" && isset($_SESSION["user_id"])) {
+	//delete settings
+	$sql = "DELETE FROM settings_user_grumble WHERE user_id = " . $_SESSION["user_id"];
+	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	//delete notifications
+	$sql = "DELETE FROM notifications_grumble WHERE user_id = " . $_SESSION["user_id"];
+	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	//delete grumbles
+	$sql = "DELETE FROM sub_category_grumble WHERE user_id = " . $_SESSION["user_id"];
+	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	//delete comments
+	$sql = "DELETE FROM status_grumble WHERE user_id = " . $_SESSION["user_id"];
+	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	//delete replies
+	$sql = "DELETE FROM replies_grumble WHERE reply_user = " . $_SESSION["user_id"];
+	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	//delete contact messages
+	$sql = "DELETE FROM contact_grumble WHERE contact_user_id = " . $_SESSION["user_id"];
+	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	//delete (grumble (grumble votes))
+	$sql = "DELETE FROM authentications WHERE user_id = " . $_SESSION["user_id"];
+	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	//delete cookies
+	$sql = "DELETE FROM cookies_grumble WHERE user_id = " . $_SESSION["user_id"];
+	mysql_query($sql, $conn) or die("Could not delete: " . mysql_error());
+	
+	//destry session and log user out
+	if(isset($_COOKIE["user_grumble"]) && isset($_COOKIE["cookie_id"])) {
+		$sql = "DELETE FROM cookies_grumble WHERE cookie_id = " . $_COOKIE["cookie_id"] . " AND cookie_text = '" . $_COOKIE["user_grumble"] . "'";
+		mysql_query($sql, $conn) or die("Error, could not logout: " . mysql_error());
+		setcookie("user_grumble","", time()-7*24*60*60, "/", $_SERVER['HTTP_HOST']);
+		setcookie("cookie_id","", time()-7*24*60*60, "/", $_SERVER['HTTP_HOST']);
+	}
+	//if logged in socially, destroy session
+	if(isset($_SESSION["social"])) {
+		$config = dirname(__FILE__) . '/hybridauth/config.php';
+	    require_once( "hybridauth//Hybrid/Auth.php" );
+	    try{
+	       // initialize Hybrid_Auth with a given file
+	       $hybridauth = new Hybrid_Auth( $config );
+	 
+	       // try to authenticate with the selected provider
+	       $adapter = $hybridauth->authenticate( $_SESSION["social"]);
+	 
+	       $adapter->logout();
+	    }
+	    catch( Exception $e ){
+	       echo "Error: " . $e->getMessage();
+	    }
+	}
+	
+	session_unset();
+	session_destroy();
+	//success
+	echo 1;
+}
 /*if(isset($_POST["user"]) && isset($_POST["username"]) && isset($_POST["threadcheck"]) && isset($_POST["commentcheck"]) && isset($_POST["currentpass"]) && isset($_POST["newpass"])
  && isset($_POST["newpass2"]) && isset($_SESSION["username"]) && $_SESSION["username"] == $_POST["username"] && isset($_POST["timezone"]) && isset($_POST["changes"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	//everything has changed

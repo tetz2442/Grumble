@@ -221,6 +221,27 @@ $(document).ready(function() {
 				event.preventDefault();
 			}
 		}
+		else if ($(this).text() == "Delete Account") {
+			var deleting = false;
+			var deleteAccount = confirm("Are you sure you want to delete your Grumble account?\n\n All of your Grumbles, Comments, Replies, and settings data will be PERMANENTALY deleted.");
+			if(deleteAccount && !deleting) {
+				deleting = true;
+				$.post("/php/settingsajax.php", {action:"Delete"},
+					function(result) {
+					if(result == 1) {
+						$("#notification-bar p").html("Success, account deleted.").removeClass("error").addClass("available");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).delay(2000).queue(function() {
+							location = "http://" + window.location.hostname;
+						});
+					}
+					else {
+						deleting = false;
+						$("#notification-bar p").html("Error. Please try again.").addClass("error").removeClass("available");
+						$("#notification-bar").css("marginLeft",-($("#notification-bar").width() / 2)).fadeIn("fast").delay(2500).fadeOut("slow");
+					}
+				});
+			}
+		}
 	});
 	
 	$("#settings-dropdown").click(function () {
