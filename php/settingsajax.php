@@ -13,8 +13,8 @@ return
 6 - 
 */
 //username changed
-if(isset($_POST["user"]) && isset($_POST["username"]) && $_SESSION["username"] == $_POST["username"] && $_SERVER['REQUEST_METHOD'] == "POST") {
-	$username = mysql_real_escape_string($_POST["user"]);
+if(isset($_POST["user"]) && isset($_SESSION["username"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+	$username = escape($_POST["user"]);
 	if($_POST["user"] != $_SESSION["username"]) {
 		if(strlen($username) >= 4 && strlen($username) <= 15 && !preg_match('/[\'^£$%&*()}{@#~?><>,|=+¬-]/', $username)) {
 			//check if the username has been taken (user could have falsified)
@@ -46,7 +46,7 @@ if(isset($_POST["user"]) && isset($_POST["username"]) && $_SESSION["username"] =
 	}
 }
 //email settings changed
-else if(isset($_POST["username"]) && isset($_POST["threadcheck"]) && $_SESSION["username"] == $_POST["username"] && $_SERVER['REQUEST_METHOD'] == "POST") {
+else if(isset($_SESSION["username"]) && isset($_POST["threadcheck"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	if($_POST["threadcheck"] == "true")
 		$thread = 1;
 	else
@@ -58,13 +58,12 @@ else if(isset($_POST["username"]) && isset($_POST["threadcheck"]) && $_SESSION["
 	echo 3;
 }
 //pasword changed
-else if(isset($_POST["username"]) && isset($_POST["currentpass"]) && $_SESSION["username"] == $_POST["username"] && isset($_POST["newpass"])
- && isset($_POST["newpass2"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
-	$currentpass = mysql_real_escape_string($_POST["currentpass"]);
-	$changepass = mysql_real_escape_string($_POST["newpass"]);
-	$changepass2 = mysql_real_escape_string($_POST["newpass2"]);
+else if(isset($_SESSION["username"]) && isset($_POST["currentpass"]) && isset($_POST["newpass"]) && isset($_POST["newpass2"])) {
+	$currentpass = escape($_POST["currentpass"]);
+	$changepass = escape($_POST["newpass"]);
+	$changepass2 = escape($_POST["newpass2"]);
 
-	if(strlen($changepass) > 5 && strlen($changepass2) > 5 && strlen($currentpass) > 5 && $changepass == $changepass2) {
+	if(strlen($changepass) > 5 && $changepass == $changepass2) {
 		//insert into users with new passwords, username hasnt changed
 		$sql = "SELECT user_password, user_salt " .
 			"FROM users_grumble " .
@@ -74,7 +73,7 @@ else if(isset($_POST["username"]) && isset($_POST["currentpass"]) && $_SESSION["
 			$row = mysql_fetch_array($result);
 			$hashed_pass = crypt($currentpass, $row['user_salt']) . $row["user_salt"];
 			if($row["user_password"] == $hashed_pass) {
-				$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789./';
+				$Allowed_Chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789.';
 				$Chars_Len = 63;
 				$Salt_Length = 21;
 				
@@ -100,9 +99,11 @@ else if(isset($_POST["username"]) && isset($_POST["currentpass"]) && $_SESSION["
 			echo 0;	
 		}
 	}
+	else 
+		echo "fail";
 }
 //timezone changed
-else if(isset($_POST["username"]) && $_SESSION["username"] == $_POST["username"] && isset($_POST["timezone"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
+else if(isset($_SESSION["username"])  && isset($_POST["timezone"]) && $_SERVER['REQUEST_METHOD'] == "POST") {
 	$timezone = mysql_real_escape_string($_POST["timezone"]);
 
 	if(checkTimeZone($timezone)) {
