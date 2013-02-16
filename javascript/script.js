@@ -1107,14 +1107,10 @@ $(document).ready(function() {
 	}
 
 	if($("#cover-bottom-bar").length > 0) {
-		//fix for image caching in IE
-		if($.support.cssFloat) {
-			$("#grumble-monster-home img").attr("src", $("#grumble-monster-home img").attr("src") + "?random=" + Math.random().toString(36).substring(7));
-		}
 		$("#grumble-monster-home img").load(function() {
 			showGrumbly();
 		});
-		setTimeout(showGrumbly, 3000);
+		setTimeout(showGrumbly, 1000);
 		$("body").css("height",$(window).height());
 		$("#cover-bottom-bar img").click(function() {
 			animateHomeCover();
