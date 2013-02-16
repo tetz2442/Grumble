@@ -52,16 +52,28 @@ if(!isset($_SESSION["username"])) {
 else {
 ?>
 <h2>Hey <a href="profile/<?php echo $_SESSION["username"]; ?>" class="colored-link-1"><?php echo $_SESSION["username"]; ?></a>! Got something to Grumble about? Let's hear it.</h2>
- <button class="push_button orange" id="start-new-grumble" title="New Grumble">New Grumble</button>
+ <button class="push_button orange new-grumble" id="start-new-grumble" title="New Grumble">New Grumble</button>
 <?php
 }
 ?>
 	</div>
 </div>
 <div id="home-tabs-holder">
+	<?php
+	//top grumbles
+    $sql = "SELECT sub_category_id, " . 
+    "((SELECT COUNT(DISTINCT ugl.grumble_like_id) FROM user_grumble_likes AS ugl WHERE ugl.sub_category_id = scg.sub_category_id) + " . 
+    "(SELECT COUNT(DISTINCT sg.status_id) FROM status_grumble AS sg WHERE sg.sub_category_id = scg.sub_category_id)) AS grumble_number" . 
+    " FROM sub_category_grumble AS scg" .
+    " WHERE sub_category_created >= (UTC_TIMESTAMP() - INTERVAL 5 DAY) HAVING grumble_number > 0 ORDER BY grumble_number DESC LIMIT 10";
+    $result = mysql_query($sql, $conn);
+    
+	$topnumber = mysql_num_rows($result);
+	
+	?>
     <ul class="tabs">
-        <li><a href='#tab1' class="active">Top Grumbles</a></li>
-        <li><a href='#tab2'>Recent Grumbles</a></li>
+        <li><a href='#tab1' <?php if($topnumber > 0) echo 'class="active"'; ?>>Top Grumbles</a></li>
+        <li><a href='#tab2' <?php if($topnumber == 0) echo 'class="active"'; ?>>Recent Grumbles</a></li>
         <li><a href='#tab3'>Top Comments</a></li>
         <li><a href='#tab4'>Recent Comments</a></li>
     </ul>
@@ -69,23 +81,13 @@ else {
     <div class="float-left">
         <div id='tab1'>
              <?php
-                //top grumbles
-                $sql = "SELECT sub_category_id, " . 
-                "((SELECT COUNT(DISTINCT ugl.grumble_like_id) FROM user_grumble_likes AS ugl WHERE ugl.sub_category_id = scg.sub_category_id) + " . 
-                "(SELECT COUNT(DISTINCT sg.status_id) FROM status_grumble AS sg WHERE sg.sub_category_id = scg.sub_category_id)) AS grumble_number" . 
-                " FROM sub_category_grumble AS scg" .
-                " WHERE sub_category_created >= (UTC_TIMESTAMP() - INTERVAL 4 DAY) HAVING grumble_number > 0 ORDER BY grumble_number DESC LIMIT 10";
-                $result = mysql_query($sql, $conn);
-                
-				$topnumber = mysql_num_rows($result);
-			
                 if(mysql_num_rows($result) > 0) {
                     while($row2 = mysql_fetch_array($result)) {
                         outputGrumbles($row2["sub_category_id"], true);	
                     }
                 }
                 else {
-                    echo '<p class="content-padding">No top grumbles at this time.</p>';	
+                    echo '<p class="content-padding">No top grumbles at this time. How about you <a href="#" class="colored-link-1 new-grumble">create one</a>?</p>';	
                 }
             ?>
         </div>
