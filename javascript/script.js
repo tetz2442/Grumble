@@ -1108,7 +1108,7 @@ $(document).ready(function() {
 
 	if($("#cover-bottom-bar").length > 0) {
 		//fix for image caching in IE
-		if($.browser.msie) {
+		if($.support.cssFloat) {
 			$("#grumble-monster-home img").attr("src", $("#grumble-monster-home img").attr("src") + "?random=" + Math.random().toString(36).substring(7));
 		}
 		$("#grumble-monster-home img").load(function() {
