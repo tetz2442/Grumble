@@ -24,30 +24,25 @@ $mobile = isMobile();
 <meta name="description" content="<?php getDescription($filename); ?>">
 <link rel="Shortcut Icon" href="/favicon.ico">
 <?php //javascript files?>
-<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
-<script type="text/javascript">
-!window.jQuery && document.write('<script src="/javascript/jquery-1.8.1.min.js"><\/script>');
-var _gaq = _gaq || [];
-  _gaq.push(['_setAccount', 'UA-33671147-1']);
-  _gaq.push(['_trackPageview']);
+<script src="/javascript/ga.js"></script>
 
-(function() {
-	var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-	ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-	var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-})();
-<?php if(!isset($_SESSION["time"]) && !isset($_SESSION["timezone"])) { ?>
+<?php 
+//set timezone
+if(!isset($_SESSION["time"]) && !isset($_SESSION["timezone"])) { 
+	$_SESSION["time"] == "America/Chicago";
+}
+?>
+<?php
 //gets timezone to display proper time for comments, this information is not collected
-if("<?php echo $_SESSION["time"]; ?>".length==0){
-            var visitortime = new Date();
-            var visitortimezone = -visitortime.getTimezoneOffset()/60;
-            $.post("/php/timezoneset.php",{time:visitortimezone}, 
-            	function(result) {
-            		location.reload();
-            	});
-        }
-<?php }?>
-</script>
+// if(" echo $_SESSION["time"]; ".length==0){
+            // var visitortime = new Date();
+            // var visitortimezone = -visitortime.getTimezoneOffset()/60;
+            // $.post("/php/timezoneset.php",{time:visitortimezone}, 
+            	// function(result) {
+            		// location.reload();
+            	// });
+        // }
+ ?>
 </head>
 <body>
 <?php require_once "usernavigation.php"; ?>

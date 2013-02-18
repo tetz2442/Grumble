@@ -1144,7 +1144,7 @@ a.red:hover {
 }
 #grumble-lightbox {
 	top: 150px;
-	position: fixed;
+	position: absolute;
 	padding: 10px 15px 10px 15px;
 	background-color: #FAF7F7;
 	z-index: 6002;
@@ -1156,7 +1156,7 @@ a.red:hover {
 }
 #grumble-share {
 	top: 150px;
-	position: fixed;
+	position: absolute;
 	padding: 10px 15px 10px 15px;
 	background-color: #FAF7F7;
 	z-index: 6003;
@@ -2027,7 +2027,7 @@ button::-moz-focus-inner {
 	#grumble-share {
 		width: 400px;
 		left: 50%;
-		margin-left: -150px;
+		margin-left: -200px;
 	}
 	#quick-description-grumblename {
 		max-width: 495px;

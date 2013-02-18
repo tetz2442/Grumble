@@ -1,3 +1,7 @@
+/*
+ * SICK TAT BRO
+ */
+
   // VERSION: 2.2 LAST UPDATE: 13.03.2012
 /* 
  * Licensed under the MIT license: http://www.opensource.org/licenses/mit-license.php
@@ -802,7 +806,8 @@ $(document).ready(function() {
 	
 	$("button").removeAttr("disabled");
 
-	$("#start-new-grumble").mousedown(function() {
+	$(".new-grumble").mousedown(function(event) {
+		event.preventDefault();
 		var wheight = $(window).height();
 		if(wheight < 450 && wheight >= 360) {
 			$("#grumble-lightbox").css("top", "50px");
@@ -952,11 +957,12 @@ $(document).ready(function() {
 	$('ul.tabs').each(function(){
 		var $active, $content, $links = $(this).find('a');
 	
-		$active = $links.first().addClass('active');
+		$active = $(this).find('a.active');
 		$content = $($active.attr('href'));
 	
-		$links.not(':first').each(function () {
-			$($(this).attr('href')).hide();
+		$links.each(function () {
+			if($(this).attr("href") != $active.attr("href"))
+				$($(this).attr('href')).hide();
 		});
 		
 		//set arrow to proper first position
@@ -1101,14 +1107,10 @@ $(document).ready(function() {
 	}
 
 	if($("#cover-bottom-bar").length > 0) {
-		//fix for image caching in IE
-		if($.browser.msie) {
-			$("#grumble-monster-home img").attr("src", $("#grumble-monster-home img").attr("src") + "?random=" + Math.random().toString(36).substring(7));
-		}
 		$("#grumble-monster-home img").load(function() {
 			showGrumbly();
 		});
-		setTimeout(showGrumbly, 3000);
+		setTimeout(showGrumbly, 1000);
 		$("body").css("height",$(window).height());
 		$("#cover-bottom-bar img").click(function() {
 			animateHomeCover();

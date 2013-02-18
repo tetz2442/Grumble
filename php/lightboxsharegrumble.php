@@ -10,8 +10,8 @@
 	$new_url = preg_replace('/\?create=new/', '', $new_url);
 	?>
     <div>
+        <div class="fb-like" data-href="<?php echo $new_url;?>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-action="like"></div>
         <div class="g-plusone" data-href="<?php echo $new_url;?>" data-size="medium"></div>
         <a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $new_url;?>" data-via="grumbleonline" data-text="I just created a new Grumble!" data-related="grumbleonline" data-hashtags="grumble">Tweet</a>
-        <div class="fb-like" data-href="<?php echo $new_url;?>" data-send="false" data-layout="button_count" data-width="90" data-show-faces="false" data-action="like"></div>
     </div>
 </div>

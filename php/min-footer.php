@@ -3,6 +3,10 @@
 </div>
 </div>
 <div id="fb-root"></div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript">
+!window.jQuery && document.write('<script src="/javascript/jquery-1.8.1.min.js"><\/script>');
+</script>
 <script type="text/javascript" src="/javascript/script.js"></script>
 <?php
 if($filename == "create-account.php" && !isset($_SESSION["user_id"]) && !isset($_GET["social_create"])) {
