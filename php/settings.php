@@ -191,7 +191,7 @@ $row = mysql_fetch_array($result);
         </div>
         <div id="button-controls">
         	<div class="divider light"></div>
-            <button class="button red"/>Delete Account</button>
+            <a href="#" class="red"/>Delete Account</a>
             <button class="button large"/>Close</button>
         	<button class="button large orange"/>Save</button>
             <img src="/images/ajax-loader2.gif" id="gif-loader-settings" width="32" height="32"/>

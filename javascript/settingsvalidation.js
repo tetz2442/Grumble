@@ -221,8 +221,12 @@ $(document).ready(function() {
 				event.preventDefault();
 			}
 		}
-		else if ($(this).text() == "Delete Account") {
+	});
+	
+	$("a.red").click(function() {
+		if($(this).text() == "Delete Account") {
 			var deleting = false;
+			event.preventDefault();
 			var deleteAccount = confirm("Are you sure you want to delete your Grumble account?\n\n All of your Grumbles, Comments, Replies, and settings data will be PERMANENTALY deleted.");
 			if(deleteAccount && !deleting) {
 				deleting = true;

@@ -4,7 +4,7 @@
 <div id="lightbox-container"></div>
 <div id="footer">
 	<div id="footer-links">
-    	<div id="footer-copyright">© 2012 Grumble</div>
+    	<div id="footer-copyright">© 2013 Grumble</div>
     	<a class="colored-link-1" href="/about">About</a>|
     	<a class="colored-link-1" href="/how-it-works">How it works</a>|
     	<a class="colored-link-1" href="/updates">Updates</a>|

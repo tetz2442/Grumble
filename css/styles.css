@@ -1104,7 +1104,15 @@ html[xmlns] .clearfix {
 }
 #button-controls .red {
 	float: left;
-	margin-top: 8px;
+	margin-top: 12px;
+}
+a.red, a.red:visited {
+	color: #333;
+	text-decoration: none;
+}
+a.red:hover {
+	color:#BD362F;
+	text-decoration: underline;
 }
 #gif-loader-settings {
 	float: right;

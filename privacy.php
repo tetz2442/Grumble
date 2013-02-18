@@ -24,7 +24,7 @@ require_once "php/containerGrumbles.php";
     <p>Any information provided by you is used to understand your needs and provide a better service. We may use your information for the following reasons:</p>
     <ul>
     <li>To send periodic e-mails and to contact you for market research purposes</li>
-    <li>To notify you when your Grumble's have reached a certain amount of comments, or when a reply has been places on your comment</li>
+    <li>To notify you when your Grumble's have reached a certain amount of comments</li>
     <li>To personalize your website experience according to your interests</li>
     <li>To improve our products or services based on your needs</li>
     <li>To help other users of Grumble identify you (by username only)</li>
@@ -42,12 +42,12 @@ require_once "php/containerGrumbles.php";
     <p>The Site may contain links to other websites of interest. We cannot be responsible for the protection and privacy of any information which you provide while visiting such sites; such sites are not goverened by this privacy statement.</p>
     
     <h2>Our policy towards children</h2>
-    <p>Grumble is meant for persons over the age of 13. We do not knowingly collect personal information from children under the age of 13. If we become aware that a person under the age of 13 is using our Services, we will take steps to remove them. If you ever become aware of a user under the age of 13 is using our Services, contact us with this form: <a href="/contact">contact form</a>.</p>
+    <p>Grumble is meant for people over the age of 13. We do not knowingly collect personal information from children under the age of 13. If we become aware that a person under the age of 13 is using our Services, we will take steps to remove them. If you ever become aware of a user under the age of 13 is using our Services, contact us with this form: <a href="/contact">contact form</a>.</p>
 
     <h2>Changes to this Policy</h2>
     <p>Grumble reserves the right to change or modify any of the privacy policies contained in this page at any time. We will notify you through the email you have provided when our policies change. By continuing to use Grumble after a revision has been made, you agree to be bound by the revised Privacy Policy.</p>
 
-	<p><strong>Date of Last Update.</strong><br />This agreement was last updated on September 19, 2012.</p>
+	<p><strong>Date of Last Update.</strong><br />This agreement was last updated on January 23, 2013.</p>
 </div>
 
 </div>
