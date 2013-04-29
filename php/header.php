@@ -29,7 +29,8 @@ $mobile = isMobile();
 <?php 
 //set timezone
 if(!isset($_SESSION["time"]) && !isset($_SESSION["timezone"])) { 
-	$_SESSION["time"] == "America/Chicago";
+	$_SESSION["time"] = "America/Chicago";
+	setTimezone();
 }
 ?>
 <?php

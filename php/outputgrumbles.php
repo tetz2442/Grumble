@@ -2,6 +2,7 @@
 function outputGrumbles($grumble, $home = false) {
 	global $conn;
 	if($grumble) {
+		setTimezone();
 		$sql = "SELECT cg.category_name, cg.category_url, scg.sub_category_id, scg.sub_category_name, scg.sub_category_description, scg.sub_category_url, " .
 			"(COUNT(DISTINCT sg.status_id) + COUNT(DISTINCT ugl.grumble_like_id)) AS grumble_number, " . 
 			"DATE_FORMAT(scg.sub_category_created, '%b %e, %Y %l:%i %p') AS sub_category_created " . 
