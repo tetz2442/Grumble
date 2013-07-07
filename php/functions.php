@@ -331,11 +331,11 @@ function sendEmail($email, $sendfrom, $type, $parameters) {
 	}
 	
 	if($send) {
-		$from = "Grumble <" . $sendfrom . ">"; 
+		$from = "Grumble <webmaster@jontetzlaff.com>"; 
 		$to = "Grumbler <" . $email . ">"; 
 		$host = $_SERVER["HTTP_HOST"]; 
-		$username = "grumble1"; 
-		$password = "Clayweb2442!!"; 
+		$username = "tetz2442"; 
+		$password = "Jonnyweb2442!"; 
 		$headers = array ('From' => $from, 
 		'To' => $to, 
 		'Subject' => $subject); 

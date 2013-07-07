@@ -141,7 +141,7 @@ $(document).ready(function() {
 	});
 	
 	$("#terms").change(function() {
-		if($("#terms").attr("checked")) {
+		if($("#terms").is(":checked")) {
 			$("#termsError").html("").removeClass("error");
 		}
 		else {
@@ -345,7 +345,7 @@ function checkForm() {
 		}
 		
 		//checkbox terms
-		if($("#terms").attr("checked")) {
+		if($("#terms").is(":checked")) {
 			$("#termsError").html("").removeClass("error");
 		}
 		else {
