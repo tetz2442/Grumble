@@ -9,7 +9,6 @@
 			if(isset($_POST["email"]) && strlen($_POST["email"]) > 0 && isset($_POST["password"]) && strlen($_POST["password"]) > 0 && isset($_POST["referrer"]) && (!empty($_POST['token']) || $_POST['token'] == $_SESSION['token'] )) {
 				// Unset the token, so that it cannot be used again.
 				unset($_SESSION['token']);
-				
 				$email = escapeAndStrip(strtolower($_POST["email"]));
 				$password = escapeAndStrip($_POST["password"]);
 					
